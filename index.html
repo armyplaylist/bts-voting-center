@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#24133d">
-<meta name="description" content="BTS Voting Center: votaciones activas, próximos eventos, fechas límite, rankings y enlaces oficiales para BTS y sus siete integrantes.">
+<meta name="description" content="BTS Voting Center: votaciones grupales importantes de BTS, fechas límite, horarios y enlaces oficiales.">
 <title>BTS VOTING CENTER 💜</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -78,15 +78,12 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <div class="era">❤️ ARIRANG ERA · 2026 💜</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
  <p>Un solo lugar para encontrar votaciones, fechas límite y rankings de BTS. Cada voto cuenta.</p>
- <div class="hero-stats"><div class="stat">💜 BTS GROUP</div><div class="stat">7 MEMBERS</div><div class="stat">🗳️ VOTE TOGETHER</div></div>
+ <div class="hero-stats"><div class="stat">💜 BTS GROUP</div><div class="stat">GROUP VOTING</div><div class="stat">🗳️ VOTE TOGETHER</div></div>
 </header>
-<nav aria-label="Navegación"><a href="#active">Activas</a><a href="#upcoming">Próximas</a><a href="#rankings">Rankings</a><a href="#members">Miembros</a><a href="#world-clock">Horarios</a></nav>
+<nav aria-label="Navegación"><a href="#active">Activas</a><a href="#upcoming">Próximas</a><a href="#rankings">Rankings</a><a href="#world-clock">Horarios</a></nav>
 
 <section class="panel" id="active">
  <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Votaciones abiertas verificadas al 2 de noviembre de 2026.</p></div><span class="pill live">● EN CURSO</span></div>
- <div class="filters" id="filters">
-  <button class="filter active" data-filter="all">Todas</button><button class="filter" data-filter="group">BTS grupal</button><button class="filter" data-filter="member">Solistas</button>
- </div>
  <div class="cards" id="voteCards">
   <article class="vote-card" data-kind="group">
  <div class="card-top"><span class="pill live">MAMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
@@ -146,7 +143,6 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <div class="section-head"><div><h2>🗓️ UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
  <div class="upcoming">
   <div class="upcoming-item"><h3>🏆 41st Golden Disc Awards</h3><p>Ventana de votación prevista para diciembre de 2026. Fechas y categorías por confirmar.</p></div>
-  <div class="upcoming-item"><h3>✨ Nuevas votaciones de miembros</h3><p>Sección preparada para añadir campañas individuales de RM, Jin, SUGA, j-hope, Jimin, V y Jung Kook cuando haya una votación activa verificada.</p></div>
  </div>
 </section>
 
@@ -160,20 +156,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <p class="note">Los rankings de MAMA y MMA provienen de reportes comunitarios con fecha, no de una API pública oficial. La posición puede cambiar. AAA muestra su propio ranking en vivo; entra al enlace para ver el dato actualizado.</p>
 </section>
 
-<section class="panel" id="members">
- <div class="section-head"><div><h2>💜 BTS & THE 7 MEMBERS</h2><p>Filtra las votaciones por BTS grupal o por integrante.</p></div></div>
- <div class="member-grid" id="memberGrid">
-  <button class="member active" data-member="BTS"><span style="font-size:1.2rem">💜 BTS</span><small>Group</small></button>
-  <button class="member" data-member="RM"><img loading="lazy" src="https://phinf.wevpstatic.net/MjAyNjAzMTNfNDUg/MDAxNzczMzc0NDAxMzcy.5fvt1-HiKhlB68QmY5QTWaJqqR13uLYtogENGCs6hoQg.-uLELHKXg26v5SU5xd0CPkDi_vd1WMDtV5czzVDYCykg.JPEG/Weverse_2cc12.jpg?type=w670" alt="RM"><span>RM</span><small>Leader</small></button>
-  <button class="member" data-member="Jin"><img loading="lazy" src="https://wimg.sedaily.com/news/cms/2026/03/21/news-p.v1.20260321.ad7b200f8b23423ca506ee6be51247b5_P1.jpg" alt="Jin"><span>JIN</span><small>Member</small></button>
-  <button class="member" data-member="SUGA"><img loading="lazy" src="https://wimg.sedaily.com/news/cms/2026/03/20/news-p.v1.20260320.b4e69168ea3341d58797ff7e8e3c0e2f_P1.jpg" alt="SUGA"><span>SUGA</span><small>Member</small></button>
-  <button class="member" data-member="j-hope"><img loading="lazy" src="https://wimg.sedaily.com/news/cms/2026/04/09/news-p.v1.20260321.4bdbfc9d9b9543ab998e3ef443b4df79_P1.jpg" alt="j-hope"><span>J-HOPE</span><small>Member</small></button>
-  <button class="member" data-member="Jimin"><img loading="lazy" src="https://pbs.twimg.com/media/G-JASXBX0AA686a.jpg" alt="Jimin"><span>JIMIN</span><small>Member</small></button>
-  <button class="member" data-member="V"><img loading="lazy" src="https://www.allkpop.com/upload/2025/12/content/241228/1766597324-snapinsta.jpg" alt="V"><span>V</span><small>Member</small></button>
-  <button class="member" data-member="Jung Kook"><img loading="lazy" src="https://wimg.sedaily.com/news/cms/2026/04/09/news-p.v1.20260321.fea3baf0a59b424485cb37d148280f0b_P1.jpg" alt="Jung Kook"><span>JUNG KOOK</span><small>Golden maknae</small></button>
- </div>
- <p class="note" id="memberNote">Mostrando votaciones grupales de BTS. Selecciona un integrante para consultar campañas individuales verificadas.</p>
-</section>
+
 
 <section class="panel" id="world-clock">
  <div class="section-head"><div><h2>🌍 BUSCAR HORARIO KST</h2><p>Selecciona tu zona horaria para convertir el reinicio y los horarios de Corea.</p></div><span class="pill">TU HORA LOCAL</span></div>
@@ -231,7 +214,6 @@ tzSelect.addEventListener('change',renderWorldClock);renderWorldClock();setInter
 const pad=n=>String(n).padStart(2,'0');
 function updateTimers(){document.querySelectorAll('[data-date]').forEach(el=>{const target=new Date(el.dataset.date).getTime(),now=Date.now(),diff=target-now;if(diff<=0){el.textContent='Votación cerrada o en actualización';return}const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);let alertText='',alertClass='';if(diff<=3600000){alertText='⚠️ ¡ÚLTIMA HORA!';alertClass='urgency-1'}else if(diff<=12*3600000){alertText='🔥 MENOS DE 12 H';alertClass='urgency-12'}else if(diff<=24*3600000){alertText='⏳ MENOS DE 24 H';alertClass='urgency-24'}el.innerHTML='<strong>'+d+'d '+pad(h)+'h '+pad(m)+'m '+pad(s)+'s</strong> restantes';if(alertText){const badge=document.createElement('span');badge.className='urgency '+alertClass;badge.textContent=alertText;el.append(badge);}});}
 updateTimers();setInterval(updateTimers,1000);
-const filterButtons=document.querySelectorAll('[data-filter]');filterButtons.forEach(btn=>btn.addEventListener('click',()=>{filterButtons.forEach(b=>b.classList.toggle('active',b===btn));const f=btn.dataset.filter;document.querySelectorAll('.vote-card').forEach(card=>card.hidden=f==='member'?true:f==='group'?card.dataset.kind!=='group':false);if(f==='member')document.getElementById('memberNote').textContent='No hay votaciones individuales verificadas activas en este momento. La sección está lista para añadir campañas de RM, Jin, SUGA, j-hope, Jimin, V y Jung Kook cuando se confirmen.';else document.getElementById('memberNote').textContent='Mostrando votaciones grupales de BTS. Selecciona un integrante para consultar campañas individuales verificadas.';}));
-document.querySelectorAll('[data-member]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-member]').forEach(b=>b.classList.toggle('active',b===btn));const who=btn.dataset.member;document.getElementById('memberNote').textContent=who==='BTS'?'Mostrando votaciones grupales de BTS.': 'No hay votaciones individuales verificadas activas para '+who+' en este momento. Esta sección se actualizará cuando se confirme una campaña.';filterButtons.forEach(b=>b.classList.toggle('active',b.dataset.filter===(who==='BTS'?'group':'member')));document.querySelectorAll('.vote-card').forEach(card=>card.hidden=who!=='BTS');}));
+// Todas las fichas visibles corresponden a votaciones grupales importantes de BTS.
 </script>
 </body></html>
