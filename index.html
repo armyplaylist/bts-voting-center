@@ -772,12 +772,36 @@ function updateVoteCountdowns(){
 // Alterna copies para que cada apertura del composer de X tenga una frase distinta.
 const xCopyOptions={
  mama:[
-  'ARMY, let’s make our voices count for BTS! #2026MAMAVOTE #BTS',
-  'Sending all my support to BTS at MAMA 2026 💜 #2026MAMAVOTE #BTS',
-  'BTS deserves all the love. Let’s show up for them! #2026MAMAVOTE #BTS',
-  'One more way to support BTS today 💜 #2026MAMAVOTE #BTS',
-  ' 함께 BTS! Let’s keep cheering for our seven. #2026MAMAVOTE #BTS',
-  'My support is with BTS at the 2026 MAMA Awards! #2026MAMAVOTE #BTS'
+  '#BTS deserves recognition for the music and work behind this year. #2026MAMAVOTE',
+  '#BTS at the 2026 MAMA Awards. Supporting their work and music. #2026MAMAVOTE',
+  '#BTS has given us so much through their music. Voting is one way to show support. #2026MAMAVOTE',
+  '#BTS — proud to support them at this year’s MAMA Awards. #2026MAMAVOTE',
+  '#BTS continues to set the standard. Cast your vote for them. #2026MAMAVOTE',
+  '#BTS and their music deserve to be celebrated. #2026MAMAVOTE',
+  '#BTS has earned every bit of recognition. Let’s support them at MAMA. #2026MAMAVOTE',
+  '#BTS remains my choice. Voting for them at the 2026 MAMA Awards. #2026MAMAVOTE',
+  '#BTS: music that speaks for itself. Supporting them at MAMA 2026. #2026MAMAVOTE',
+  '#BTS deserves a strong show of support from ARMY. #2026MAMAVOTE',
+  '#BTS has made an impact that goes beyond music. My vote is for them. #2026MAMAVOTE',
+  '#BTS at MAMA 2026. Taking a moment to vote and show my support. #2026MAMAVOTE',
+  '#BTS built a legacy through their music and dedication. Voting for them. #2026MAMAVOTE',
+  '#BTS is the artist I’m supporting at the 2026 MAMA Awards. #2026MAMAVOTE',
+  '#BTS deserves to be part of this year’s celebration. #2026MAMAVOTE',
+  '#BTS, always worth showing up for. My vote goes to them. #2026MAMAVOTE',
+  '#BTS has soundtracked so many moments. Supporting them at MAMA. #2026MAMAVOTE',
+  '#BTS deserves recognition for their artistry and consistency. #2026MAMAVOTE',
+  '#BTS is my pick for the 2026 MAMA Awards. Make your vote count. #2026MAMAVOTE',
+  '#BTS and the music they create continue to inspire. Voting for them. #2026MAMAVOTE',
+  '#BTS has worked hard for every milestone. Supporting them with my vote. #2026MAMAVOTE',
+  '#BTS at MAMA: showing support through one simple vote. #2026MAMAVOTE',
+  '#BTS deserves to be celebrated on this stage. #2026MAMAVOTE',
+  '#BTS remains an important part of my music world. Voting for them. #2026MAMAVOTE',
+  '#BTS: seven artists, a lasting impact. Supporting them at MAMA 2026. #2026MAMAVOTE',
+  '#BTS deserves recognition from listeners around the world. #2026MAMAVOTE',
+  '#BTS is who I’m voting for this MAMA season. #2026MAMAVOTE',
+  '#BTS has never stopped giving their best. Here’s my vote for them. #2026MAMAVOTE',
+  '#BTS and their artistry deserve the spotlight at MAMA 2026. #2026MAMAVOTE',
+  '#BTS gets my vote. Supporting them at the 2026 MAMA Awards. #2026MAMAVOTE'
  ],
  aria:[
   'ARMY, let’s make some noise for BTS! #ARIASBTS',
@@ -791,10 +815,9 @@ const xCopyOptions={
 document.querySelectorAll('a[data-x-copy]').forEach(link=>{
  link.addEventListener('click',()=>{
   const options=xCopyOptions[link.dataset.xCopy];if(!options?.length)return;
-  const previous=link.dataset.lastCopy||'';
-  const choices=options.filter(copy=>copy!==previous);
-  const copy=choices[Math.floor(Math.random()*choices.length)];
-  link.dataset.lastCopy=copy;
+  const index=Number(link.dataset.copyIndex||0);
+  const copy=options[index % options.length];
+  link.dataset.copyIndex=String((index+1) % options.length);
   link.href='https://twitter.com/intent/tweet?text='+encodeURIComponent(copy);
  });
 });
