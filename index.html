@@ -176,6 +176,18 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
 .vote-card .vote-title{margin:0;flex:1 1 230px;color:#24152f;font-family:"Space Grotesk",sans-serif;font-size:clamp(1.22rem,2.5vw,1.65rem);font-weight:700;line-height:1.12;letter-spacing:-.045em}
 .vote-card .vote-title span{display:inline;color:#6840a0;font-weight:700}
 .vote-card .card-top>.pill{flex:0 0 auto}
+
+/* Selector de idioma: idiomas disponibles en Google Translate */
+.language-switch{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid #e3d5f3;border-radius:13px;background:#fff;color:#67458f;min-height:39px}
+.language-globe{font-size:1.05rem;line-height:1}
+#google_translate_element{display:inline-flex;align-items:center;min-width:90px}
+#google_translate_element .goog-te-gadget{font-family:inherit!important;color:#67458f!important;font-size:.76rem!important;font-weight:900!important}
+#google_translate_element .goog-te-gadget span{display:none!important}
+#google_translate_element .goog-te-combo{max-width:180px;margin:0!important;padding:5px 22px 5px 5px;border:0;border-radius:8px;background:#fff;color:#67458f;font:900 .76rem Nunito,system-ui,sans-serif;outline:none;cursor:pointer}
+.goog-te-banner-frame,.goog-te-balloon-frame{display:none!important}
+body{top:0!important}
+.goog-text-highlight{background:transparent!important;box-shadow:none!important}
+@media(max-width:520px){.language-switch{order:-1}.language-switch #google_translate_element .goog-te-combo{max-width:145px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -195,7 +207,7 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
  </div>
  <div class="start-tools"><span>¿Quieres compartir este centro con otra ARMY?</span><button class="btn secondary" id="shareCenter" type="button">↗ COMPARTIR BTS VOTING CENTER</button></div>
 </section>
-<nav aria-label="Navegación"><a href="#start-here">Empieza aquí</a><a href="#active">Votaciones</a><a href="#guide">Cómo apoyar</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes oficiales</a><a href="#country-time">Mi hora</a></nav>
+<nav aria-label="Navegación"><div class="language-switch" title="Cambiar idioma"><span class="language-globe" aria-hidden="true">🌐</span><div id="google_translate_element"><span class="language-loading">Idioma</span></div></div><a href="#start-here">Empieza aquí</a><a href="#active">Votaciones</a><a href="#guide">Cómo apoyar</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes oficiales</a><a href="#country-time">Mi hora</a></nav>
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2>🌍 ¿DE QUÉ PAÍS ERES?</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
   <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
   <option value="America/Los_Angeles">🇺🇸 Estados Unidos · Los Ángeles</option><option value="America/Denver">🇺🇸 Estados Unidos · Denver</option><option value="America/Chicago">🇺🇸 Estados Unidos · Chicago</option><option value="America/New_York">🇺🇸 Estados Unidos · Nueva York</option><option value="America/Anchorage">🇺🇸 Estados Unidos · Alaska</option><option value="Pacific/Honolulu">🇺🇸 Estados Unidos · Hawái</option><option value="America/Toronto">🇨🇦 Canadá · Toronto</option><option value="America/Vancouver">🇨🇦 Canadá · Vancouver</option>
@@ -404,6 +416,12 @@ timeFormatSelect.addEventListener('change',updateLocalTimes);
 addCalendarReminders();
 updateLocalTimes();
 setInterval(updateVoteCountdowns,1000);
+
+function googleTranslateElementInit(){
+ if(!window.google?.translate?.TranslateElement)return;
+ new google.translate.TranslateElement({pageLanguage:'es',autoDisplay:false},'google_translate_element');
+}
 </script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 </body>
 </html>
