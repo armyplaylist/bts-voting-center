@@ -317,31 +317,31 @@ footer,.note{color:#887b90}
 .vote-card:before,.vote-card:after{content:none!important;display:none!important}
 .vote-card{overflow:visible;position:relative;margin-top:20px;margin-bottom:18px}
 .cards{row-gap:30px}
-.bt21-friend{position:absolute;z-index:4;width:clamp(46px,7vw,76px);height:auto;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 4px #55415a22)}
-.bt21-friend.friend-top{right:12px;top:-35px;transform:rotate(8deg)}
-.bt21-friend.friend-bottom{left:12px;bottom:-34px;transform:rotate(-8deg)}
-.vote-card:nth-child(even) .friend-top{right:auto;left:14px;transform:rotate(-8deg)}
-.vote-card:nth-child(even) .friend-bottom{left:auto;right:12px;transform:rotate(8deg)}
-@media(max-width:640px){.bt21-friend{width:53px}.vote-card{margin-top:17px;margin-bottom:17px}}
+.bt21-friend{position:absolute;z-index:4;width:clamp(40px,6vw,58px);height:auto;max-height:58px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 4px #55415a22)}
+.bt21-friend.friend-top{right:12px;top:-25px;transform:rotate(7deg)}
+.bt21-friend.friend-bottom{left:12px;bottom:-25px;transform:rotate(-7deg)}
+.vote-card:nth-child(even) .friend-top{right:auto;left:12px;transform:rotate(-7deg)}
+.vote-card:nth-child(even) .friend-bottom{left:auto;right:12px;transform:rotate(7deg)}
+@media(max-width:640px){.bt21-friend{width:42px;max-height:44px}.vote-card{margin-top:18px;margin-bottom:18px}.cards{row-gap:28px}}
 
 
-/* Decoración BTS/TinyTAN individual + movimiento delicado */
-.tinytan-deco{position:absolute;right:12px;top:54px;width:clamp(48px,8vw,76px);height:auto;max-height:92px;object-fit:contain;z-index:2;pointer-events:none;filter:drop-shadow(0 5px 7px #39264f22);animation:tinyFloat 4.2s ease-in-out infinite}
+
+
 .vote-card{isolation:isolate;transform:translateY(0);transition:transform .32s cubic-bezier(.2,.75,.25,1),box-shadow .32s,border-color .32s}
 .vote-card:hover{transform:translateY(-6px);box-shadow:0 16px 30px #6840a025;border-color:#d6c1e9}
 .vote-card:focus-within{border-color:#a987cc;box-shadow:0 0 0 3px #a987cc22,0 12px 26px #6840a018}
 .vote-card:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(115deg,transparent 15%,#ffffff8a 48%,transparent 72%);transform:translateX(-120%);z-index:0}
 .vote-card:hover:after{opacity:1;animation:cardShine .8s ease}
 .vote-card>*{position:relative;z-index:1}
-.vote-card>.tinytan-deco{position:absolute;z-index:3}
-.vote-card:nth-child(2n) .tinytan-deco{animation-delay:-1.4s}
-.vote-card:nth-child(3n) .tinytan-deco{animation-delay:-2.5s}
-@keyframes tinyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+.vote-card>
+.vote-card:nth-child(2n) 
+.vote-card:nth-child(3n) 
+50%{transform:translateY(-7px) rotate(3deg)}}
 @keyframes cardShine{to{transform:translateX(120%)}}
 @keyframes cardEnter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .cards .vote-card{animation:cardEnter .55s both}
 .cards .vote-card:nth-child(2){animation-delay:.06s}.cards .vote-card:nth-child(3){animation-delay:.12s}.cards .vote-card:nth-child(4){animation-delay:.18s}.cards .vote-card:nth-child(5){animation-delay:.24s}.cards .vote-card:nth-child(6){animation-delay:.30s}
-@media(prefers-reduced-motion:reduce){.tinytan-deco,.cards .vote-card{animation:none!important}.vote-card{transition:none!important}.vote-card:hover{transform:none}.vote-card:hover:after{animation:none}}
+@media(prefers-reduced-motion:reduce){.cards .vote-card{animation:none!important}.vote-card{transition:none!important}.vote-card:hover{transform:none}.vote-card:hover:after{animation:none}}
 
 </style>
 </head>
@@ -377,7 +377,7 @@ footer,.note{color:#887b90}
   <article class="vote-card" data-kind="group">
   <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/koya.gif" alt="KOYA, personaje oficial BT21" loading="lazy">
   <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/rj.gif" alt="RJ, personaje oficial BT21" loading="lazy">
- <img class="tinytan-deco" src="https://www.bandai.co.jp/candy/coonuts/tinytan/01.png" alt="TinyTAN oficial · personaje individual 1" loading="lazy" decoding="async"><div class="card-top"><h3 class="vote-title">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 / #3 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
+ <div class="card-top"><h3 class="vote-title">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 / #3 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
  <div class="countdown vote-countdown" data-countdown="mama">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
  <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
@@ -386,7 +386,7 @@ footer,.note{color:#887b90}
   <article class="vote-card" data-kind="group">
   <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/shooky.gif" alt="SHOOKY, personaje oficial BT21" loading="lazy">
   <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/mang_new1.gif" alt="MANG, personaje oficial BT21" loading="lazy">
- <img class="tinytan-deco" src="https://www.bandai.co.jp/candy/coonuts/tinytan/02.png" alt="TinyTAN oficial · personaje individual 2" loading="lazy" decoding="async"><div class="card-top"><h3 class="vote-title">ARIA Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
+ <div class="card-top"><h3 class="vote-title">ARIA Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
  <div class="countdown vote-countdown" data-countdown="aria">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
  <h4>Cómo votar</h4><p class="field-value">La participación para BTS es exclusivamente a través de X: publica desde una cuenta pública o comparte contenido con el hashtag oficial <b>#ARIASBTS</b>. No hay votación en la web de ARIA ni en Spotify.</p>
@@ -395,7 +395,7 @@ footer,.note{color:#887b90}
   <article class="vote-card" data-kind="group">
   <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/chimmy.gif" alt="CHIMMY, personaje oficial BT21" loading="lazy">
   <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/tata.gif" alt="TATA, personaje oficial BT21" loading="lazy">
- <img class="tinytan-deco" src="https://www.bandai.co.jp/candy/coonuts/tinytan/03.png" alt="TinyTAN oficial · personaje individual 3" loading="lazy" decoding="async"><div class="card-top"><h3 class="vote-title">Melon Music Awards <span>(MMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
+ <div class="card-top"><h3 class="vote-title">Melon Music Awards <span>(MMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
  <div class="countdown vote-countdown" data-countdown="mma">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Global TOP10 · BTS</p>
  <h4>Cómo votar</h4><p class="field-value">Abre Berriz, únete a K-Pop Square, entra a MMA2026 Global TOP10, selecciona BTS y confirma tu voto.</p>
@@ -404,7 +404,7 @@ footer,.note{color:#887b90}
   <article class="vote-card" data-kind="group">
   <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/cooky.gif" alt="COOKY, personaje oficial BT21" loading="lazy">
   <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/van.gif" alt="VAN, personaje oficial BT21" loading="lazy">
- <img class="tinytan-deco" src="https://www.bandai.co.jp/candy/coonuts/tinytan/04.png" alt="TinyTAN oficial · personaje individual 4" loading="lazy" decoding="async"><div class="card-top"><h3 class="vote-title">Nickelodeon Kids' Choice Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="kca"><strong>Cierre:</strong> 13 nov; hora local indicada por la boleta oficial según tu región. Sin reinicio diario.</div>
+ <div class="card-top"><h3 class="vote-title">Nickelodeon Kids' Choice Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="kca"><strong>Cierre:</strong> 13 nov; hora local indicada por la boleta oficial según tu región. Sin reinicio diario.</div>
  <div class="countdown vote-countdown" data-countdown="kca">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Favorite Music Group or Duo · BTS; Favorite Album · ARIRANG; Favorite Song · SWIM</p>
  <h4>Cómo votar</h4><p class="field-value">Entra a la boleta, recorre y vota en las 36 categorías. No necesitas registrar una cuenta. Los votos son ilimitados.</p>
@@ -413,7 +413,7 @@ footer,.note{color:#887b90}
   <article class="vote-card" data-kind="group">
   <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/koya.gif" alt="KOYA, personaje oficial BT21" loading="lazy">
   <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/chimmy.gif" alt="CHIMMY, personaje oficial BT21" loading="lazy">
- <img class="tinytan-deco" src="https://www.bandai.co.jp/candy/coonuts/tinytan/05.png" alt="TinyTAN oficial · personaje individual 5" loading="lazy" decoding="async"><div class="card-top"><h3 class="vote-title">Asia Artist Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · ranking oficial consultado</span></div><div class="local-vote-time" data-vote-time="aaa"><strong>Cierre:</strong> 4 nov; hora exacta no publicada por la organización.</div>
+ <div class="card-top"><h3 class="vote-title">Asia Artist Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · ranking oficial consultado</span></div><div class="local-vote-time" data-vote-time="aaa"><strong>Cierre:</strong> 4 nov; hora exacta no publicada por la organización.</div>
  <div class="countdown vote-countdown" data-countdown="aaa">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">AAA Popularity Award · Grupo masculino · BTS</p>
  <h4>Cómo votar</h4><p class="field-value">Abre la página de votación, selecciona la categoría de grupo masculino y vota por BTS.</p>
@@ -422,7 +422,7 @@ footer,.note{color:#887b90}
   <article class="vote-card" data-kind="group">
   <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/rj.gif" alt="RJ, personaje oficial BT21" loading="lazy">
   <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/cooky.gif" alt="COOKY, personaje oficial BT21" loading="lazy">
- <img class="tinytan-deco" src="https://www.bandai.co.jp/candy/coonuts/tinytan/06.png" alt="TinyTAN oficial · personaje individual 6" loading="lazy" decoding="async"><div class="card-top"><h3 class="vote-title">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
+ <div class="card-top"><h3 class="vote-title">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
  <div class="countdown vote-countdown" data-countdown="gda">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Golden Disc CHOEAEDOL Popularity Award · Nominaciones de BTS: pendientes de anuncio a principios de diciembre.</p>
  <h4>Cómo votar</h4><p class="field-value">Por ahora, recolecta corazones en CHOEAEDOL: inicia sesión diariamente, reclama asistencia/recompensas, abre Heart Box en publicaciones, mira anuncios y completa misiones gratuitas. Los Daily Hearts caducan a las 23:30 KST; los Ever Hearts se conservan. Cuando abra la votación, entra a Golden Disc → Popularity Award, selecciona BTS si aparece entre los nominados y usa tus corazones en BTS como grupo; los corazones enviados a miembros individuales no cuentan para el total grupal.</p>
