@@ -403,7 +403,8 @@ document.querySelectorAll('a[data-x-copy]').forEach(link=>{
  });
 });
 document.getElementById('shareCenter')?.addEventListener('click',async()=>{
- const data={title:'BTS VOTING CENTER',text:'Un solo lugar para encontrar votaciones, fechas e instrucciones para apoyar a BTS.',url:location.href};
+ const cleanUrl=location.origin+location.pathname;
+ const data={title:'BTS VOTING CENTER',text:'Un solo lugar para encontrar votaciones, fechas e instrucciones para apoyar a BTS.',url:cleanUrl};
  const button=document.getElementById('shareCenter');
  try{
   if(navigator.share){await navigator.share(data);}
