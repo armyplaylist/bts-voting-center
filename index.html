@@ -293,18 +293,24 @@ const voteSchedule={
  aaa:{date:'2026-11-04',label:'Cierre · hora oficial pendiente'},
  gda:{date:'2027-01-03',zone:'Asia/Seoul',label:'Fin previsto · hora oficial pendiente'}
 };
-const voteNames={mama:'MAMA 2026 · Cierre de votación BTS',aria:'ARIA Awards 2026 · Cierre de votación BTS',mma:'MMA 2026 · Fecha de cierre BTS',kca:"Kids' Choice Awards 2026 · Fecha de cierre BTS",aaa:'Asia Artist Awards 2026 · Fecha de cierre BTS',gda:'Golden Disc Awards 2027 · Fin previsto de votación BTS'};
-function calendarStamp(date){return date.toISOString().replace(/[-:]/g,'').replace(/\\.\\d{3}/,'');}
+const dailyCalendarReminders={
+ mama:{title:'MAMA 2026 · Reinicio diario de votación BTS',time:'000000',zone:'Asia/Seoul',description:'Recordatorio diario: se reinicia la oportunidad de votar por BTS en Mnet Plus. Entra a la plataforma oficial y confirma las reglas vigentes.'},
+ mma:{title:'MMA 2026 · Reinicio diario de votación BTS',time:'000000',zone:'Asia/Seoul',description:'Recordatorio diario: se reinicia la votación de BTS en Berriz. Entra a la plataforma oficial y confirma las reglas vigentes.'},
+ gda:{title:'GDA 2027 · Daily Hearts por caducar',time:'233000',zone:'Asia/Seoul',description:'Recordatorio diario: los Daily Hearts de CHOEAEDOL caducan a las 23:30 KST. Reclama y utiliza tus corazones antes de que caduquen. Los Ever Hearts no caducan.'}
+};
 function addCalendarReminders(){
- document.querySelectorAll('[data-countdown]').forEach(counter=>{
-  const key=counter.dataset.countdown,s=voteSchedule[key],actions=counter.closest('.vote-card')?.querySelector('.actions');
-  if(!s||!actions||actions.querySelector('[data-calendar="'+key+'"]'))return;
-  let dates;
-  if(s.instant){const start=new Date(s.instant),end=new Date(start.getTime()+30*60000);dates=calendarStamp(start)+'/'+calendarStamp(end);}
-  else{const start=s.date.replace(/-/g,''),next=new Date(s.date+'T12:00:00Z');next.setUTCDate(next.getUTCDate()+1);const end=next.toISOString().slice(0,10).replace(/-/g,'');dates=start+'/'+end;}
-  const details='Recordatorio de BTS VOTING CENTER. Revisa la página oficial para confirmar horarios y reglas. '+(s.instant?'Cierre estimado con hora publicada.':'La hora exacta no está publicada; evento de día completo como recordatorio.');
-  const url='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(voteNames[key])+'&dates='+dates+'&details='+encodeURIComponent(details);
-  const a=document.createElement('a');a.className='btn secondary';a.href=url;a.target='_blank';a.rel='noopener';a.dataset.calendar=key;a.textContent='＋ GOOGLE CALENDAR';actions.appendChild(a);
+ const today=new Date();
+ const date=today.getUTCFullYear()+pad(today.getUTCMonth()+1)+pad(today.getUTCDate());
+ Object.entries(dailyCalendarReminders).forEach(([key,reminder])=>{
+  const actions=document.querySelector('[data-countdown="'+key+'"]')?.closest('.vote-card')?.querySelector('.actions');
+  if(!actions||actions.querySelector('[data-calendar="'+key+'"]'))return;
+  const hour=Number(reminder.time.slice(0,2)),minute=Number(reminder.time.slice(2,4));
+  const endHour=minute===59?hour+1:hour,endMinute=minute===59?0:minute+1;
+  const stamp=(h,m)=>date+'T'+pad(h)+pad(m)+'00';
+  const dates=stamp(hour,minute)+'/'+stamp(endHour,endMinute);
+  const recurrence='RRULE:FREQ=DAILY';
+  const url='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(reminder.title)+'&dates='+dates+'&ctz='+encodeURIComponent(reminder.zone)+'&recur='+encodeURIComponent(recurrence)+'&details='+encodeURIComponent(reminder.description);
+  const a=document.createElement('a');a.className='btn secondary';a.href=url;a.target='_blank';a.rel='noopener';a.dataset.calendar=key;a.textContent=key==='gda'?'＋ DAILY HEARTS · CALENDAR':'＋ REINICIO DIARIO · CALENDAR';actions.appendChild(a);
  });
 }
 function localDateLabel(iso,tz){
