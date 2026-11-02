@@ -248,7 +248,6 @@ footer,.note{color:#b9abc9}
 }
 
 
-/* BT21 FRIENDS — cute, polished voting hub */
 :root{--bg:#fbf7f2;--ink:#352b43;--muted:#81758d;--purple:#8060ad;--purple2:#b99bdc;--red:#df6577;--red2:#f19aaa;--glass:#fffdfb;--line:#eee5f1;--shadow:0 12px 30px #59416b12}
 html{background:#fbf7f2}
 body{color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;background:radial-gradient(circle at 4% 4%,#f8dce4 0,transparent 23rem),radial-gradient(circle at 96% 18%,#e8def8 0,transparent 25rem),radial-gradient(circle at 60% 100%,#e2f1e8 0,transparent 28rem),#fbf7f2}
@@ -1046,36 +1045,19 @@ body.dark-mode .vote-card.is-completed{background:linear-gradient(145deg,#2a3b31
 @media(prefers-reduced-motion:reduce){.complete-toggle{transition:none}}
 
 
-/* BTS identity + BT21 decoration */
-.hero-brand{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto 6px;position:relative;z-index:2}
-.bts-mark{width:42px;height:48px;flex:0 0 auto}
-.hero-brand-label{font:800 .72rem "Space Grotesk",sans-serif;letter-spacing:.22em;color:#8061ad}
-body.dark-mode .hero-brand-label{color:#d0b5f0}
-.bt21-decor{display:flex;align-items:center;justify-content:center;gap:18px;margin:12px auto 0;max-width:430px}
-.bt21-decor img{display:block;object-fit:contain;max-height:105px;max-width:48%;filter:drop-shadow(0 5px 8px #59416b18)}
-#start-here.panel{padding:12px 4px 8px;border:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important}
-#start-here .section-head{justify-content:center;text-align:center;margin:0}
-#start-here .section-head h2{margin:0}
-#start-here .section-head p{margin:7px auto 0;max-width:650px}
-#start-here .section-head .pill,#start-here .start-grid,#start-here .start-tools{display:none!important}
-body.dark-mode #start-here.panel{background:transparent!important;border:0!important;box-shadow:none!important}
-@media(max-width:600px){.hero-brand{gap:10px}.bts-mark{width:34px;height:40px}.bt21-decor img{max-height:82px}.bt21-decor{gap:8px}}
-/* BT21 sticker wallpaper */
+
 body{position:relative;isolation:isolate}
-body>.bt21-stickers{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-body>.bt21-stickers img{position:absolute;width:clamp(32px,4.2vw,56px);height:auto;max-height:64px;object-fit:contain;opacity:.78;pointer-events:none;user-select:none}
-body>.wrap{position:relative;z-index:1}
-.bt21-stickers .s1{top:260px;left:2.5%}.bt21-stickers .s2{top:710px;right:2.8%}.bt21-stickers .s3{top:1180px;left:1.8%}.bt21-stickers .s4{top:1640px;right:2%}.bt21-stickers .s5{top:2130px;left:3%}.bt21-stickers .s6{top:2600px;right:2.4%}.bt21-stickers .s7{top:3090px;left:2%}.bt21-stickers .s8{top:3590px;right:3%}.bt21-stickers .s9{top:4080px;left:2.8%}.bt21-stickers .s10{top:4570px;right:2%}.bt21-stickers .s11{top:5060px;left:2%}.bt21-stickers .s12{top:5550px;right:2.8%}.bt21-stickers .s13{top:6040px;left:3%}.bt21-stickers .s14{top:6530px;right:2%}.bt21-stickers .s15{top:7020px;left:2.4%}.bt21-stickers .s16{top:7510px;right:3%}
+body>body>body>.wrap{position:relative;z-index:1}
+
 .hero{overflow:visible!important;text-align:center!important;padding:64px 20px 54px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--ink)!important}
 .hero:before,.hero:after{display:none!important}.hero-brand{margin-bottom:24px!important}.bts-mark{width:54px!important;height:62px!important}.hero-brand-label{font-size:.68rem!important;letter-spacing:.2em}.hero .era{display:none!important}
 .hero h1{font-size:clamp(2.8rem,9vw,6.2rem)!important;font-weight:900!important;line-height:.98!important;letter-spacing:-.06em!important;margin:0 auto 18px!important;color:var(--ink)!important}
 .hero h1 span{display:block!important;font-size:.46em!important;letter-spacing:.16em!important;margin-top:14px!important;color:#8061ad!important}
 .hero p{font-size:clamp(.9rem,2vw,1.08rem)!important;font-weight:400!important;line-height:1.65!important;max-width:600px!important;color:var(--muted)!important;margin:0 auto 26px!important}
-.hero-stats{margin-top:18px!important}body.dark-mode .hero h1 span{color:#cbb1ed!important}body.dark-mode .hero p{color:#d8cce5!important}.bt21-decor{display:none!important}
-@media(max-width:600px){.hero{padding:48px 12px 40px!important}.hero h1{font-size:clamp(2.45rem,12vw,4rem)!important}.hero-brand{margin-bottom:20px!important}.bt21-stickers img{width:34px!important;opacity:.74!important}}
+.hero-stats{margin-top:18px!important}body.dark-mode .hero h1 span{color:#cbb1ed!important}body.dark-mode .hero p{color:#d8cce5!important}@media(max-width:600px){.hero{padding:48px 12px 40px!important}.hero h1{font-size:clamp(2.45rem,12vw,4rem)!important}.hero-brand{margin-bottom:20px!important}}
 </style>
 </head>
-<body><div class="bt21-stickers" aria-hidden="true"><img class="s1" src="https://cdn-bt21.line-scdn.net/img/character/bt21/koya.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s2" src="https://cdn-bt21.line-scdn.net/img/character/bt21/rj.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s3" src="https://cdn-bt21.line-scdn.net/img/character/bt21/shooky.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s4" src="https://cdn-bt21.line-scdn.net/img/character/bt21/mang_new1.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s5" src="https://cdn-bt21.line-scdn.net/img/character/bt21/chimmy.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s6" src="https://cdn-bt21.line-scdn.net/img/character/bt21/tata.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s7" src="https://cdn-bt21.line-scdn.net/img/character/bt21/cooky.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s8" src="https://cdn-bt21.line-scdn.net/img/character/bt21/van.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s9" src="https://cdn-bt21.line-scdn.net/img/character/bt21/koya.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s10" src="https://cdn-bt21.line-scdn.net/img/character/bt21/rj.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s11" src="https://cdn-bt21.line-scdn.net/img/character/bt21/shooky.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s12" src="https://cdn-bt21.line-scdn.net/img/character/bt21/mang_new1.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s13" src="https://cdn-bt21.line-scdn.net/img/character/bt21/chimmy.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s14" src="https://cdn-bt21.line-scdn.net/img/character/bt21/tata.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s15" src="https://cdn-bt21.line-scdn.net/img/character/bt21/cooky.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"><img class="s16" src="https://cdn-bt21.line-scdn.net/img/character/bt21/van.gif" alt="" aria-hidden="true" loading="lazy" draggable="false"></div><main class="wrap">
+<body><main class="wrap">
 <header class="hero">
  <div class="hero-brand" aria-label="BTS">
  <svg class="bts-mark" viewBox="0 0 64 72" role="img" aria-label="BTS logo" xmlns="http://www.w3.org/2000/svg"><path d="M8 5h19v62H8zM37 5h19v62H37z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/><path d="M8 5l19 10M56 5L37 15" fill="none" stroke="currentColor" stroke-width="4"/></svg>
