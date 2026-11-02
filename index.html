@@ -35,6 +35,10 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
 @media(max-width:420px){.ranking-grid{grid-template-columns:1fr 1fr}.wrap{width:calc(100% - 20px)}.hero{padding:28px 14px 24px}.stat{font-size:.72rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 
+/* Fichas detalladas de reglas y métodos de voto */
+.rule-box{padding:13px 14px;border:1px solid #e5d8f3;border-radius:15px;background:#fbf8ff;color:#6e5d81;font-size:.8rem;line-height:1.5}
+.rule-box h4{margin:0 0 7px;color:#55377c;font-size:.9rem}
+.rule-box ol{margin:0 0 8px;padding-left:20px}.rule-box li{margin:4px 0}.rule-box p{margin:7px 0 0}.rule-box.x-rule{background:#fff7f8;border-color:#f1d5dc}.rule-box.x-rule h4{color:#9a2b43}
 /* World clock, daily reset guide and member portraits */
 .member-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
 .member{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:8px;overflow:hidden;text-align:center;border-radius:20px;background:linear-gradient(145deg,#fff,#f1e7ff);box-shadow:0 8px 20px #54377b15;transition:transform .2s,box-shadow .2s}
@@ -83,22 +87,27 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
   <article class="vote-card" data-kind="group">
    <div class="card-top"><span class="pill live">MAMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
    <h3>Fans' Choice · 2.ª ronda</h3><div class="meta">Fans' Choice (Bonsang) + VISA Fans' Choice (Daesang)</div>
-   <p class="description">Votación final en Mnet Plus. La ronda 2 está abierta hasta el 8 de noviembre; revisa las reglas y categorías dentro de la plataforma.</p>
-   <div class="deadline">⏰ Cierra: 8 nov · 23:59 KST</div><div class="countdown" data-date="2026-11-08T23:59:00+09:00">Calculando cuenta regresiva…</div>
-   <div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">VOTAR EN MNET+</a><a class="btn secondary" href="https://www.mnetplus.world/" target="_blank" rel="noopener">App / plataforma</a></div>
+   <p class="description">La votación de Fans’ Choice se realiza por dos vías: Mnet Plus (90%) y X (10%). Importante: el voto de Mnet Plus se emite en la APP; el enlace web solo sirve para abrir la información/evento y no sustituye el voto dentro de la app.</p>
+   <div class="deadline">⏰ Ronda 2: 28 oct · 18:00 — 8 nov · 23:59 KST</div><div class="countdown" data-date="2026-11-08T23:59:00+09:00">Calculando cuenta regresiva…</div>
+   <div class="rule-box"><h4>📱 Cómo votar en Mnet Plus</h4><ol><li>Abre la app Mnet Plus e inicia sesión.</li><li>Entra a 2026 MAMA AWARDS → FANS’ CHOICE.</li><li>Selecciona a BTS en la categoría masculina y completa las selecciones que solicite la pantalla, incluida la categoría VISA Fans’ Choice of the Year si aparece.</li><li>Confirma el envío y revisa que aparezca el comprobante de voto.</li></ol><p><b>Límite:</b> 1 participación diaria por ID y dispositivo. El día se cuenta en KST (Corea). Los votos obtenidos mediante accesos o métodos anormales pueden invalidarse.</p></div>
+   <div class="rule-box x-rule"><h4>𝕏 Cómo votar en X</h4><ol><li>Usa una cuenta pública.</li><li>Publica un post nuevo con <b>#2026MAMAVOTE #BTS</b> (solo el hashtag de un artista por publicación).</li><li>Hazlo una vez al día; si publicas varios votos en el mismo día KST, solo cuenta el primero.</li><li>Los reposts de publicaciones válidas también se contabilizan según la guía de votación.</li></ol><p><b>Peso:</b> X representa el 10% de Fans’ Choice. No mezcles hashtags de otros nominados en el mismo post.</p></div>
+   <div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">ABRIR EVENTO MNET+</a><a class="btn secondary" href="https://x.com/hashtag/2026MAMAVOTE" target="_blank" rel="noopener">VER VOTOS EN X</a></div>
   </article>
   <article class="vote-card" data-kind="group">
    <div class="card-top"><span class="pill live">ARIA AWARDS 2026</span><span class="pill">BTS · GRUPAL</span></div>
    <h3>Most Popular International Artist</h3><div class="meta">Nominación: BTS · ARIRANG</div>
-   <p class="description">La página oficial confirma que puedes votar una vez al día en esta categoría pública.</p>
-   <div class="deadline">⏰ Cierra: 9 nov · 23:59 AEDT</div><div class="countdown" data-date="2026-11-09T23:59:00+11:00">Calculando cuenta regresiva…</div>
-   <div class="actions"><a class="btn" href="https://www.aria.com.au/vote" target="_blank" rel="noopener">VOTAR EN ARIA</a></div>
+   <p class="description">BTS está nominado con ARIRANG. Hay dos formas distintas de apoyar: el voto oficial de ARIA (web/Spotify, con límite diario) y una campaña internacional de fanbases en X con #ARIASBTS. No son el mismo sistema.</p>
+   <div class="deadline">⏰ Voto oficial ARIA: 9 nov · 23:59 AEDT</div><div class="countdown" data-date="2026-11-09T23:59:00+11:00">Calculando cuenta regresiva…</div>
+   <div class="rule-box"><h4>🌐 Voto oficial de ARIA (web)</h4><ol><li>Abre la página oficial de votación.</li><li>Busca “Most Popular International Artist”.</li><li>Selecciona BTS — ARIRANG y envía el voto.</li><li>La página oficial permite 1 voto al día hasta el cierre.</li></ol><p>La página oficial también indica votación desde la app móvil de Spotify; abre Spotify en el móvil y busca la experiencia de votación ARIA.</p></div>
+   <div class="rule-box x-rule"><h4>𝕏 Campaña internacional de fanbases</h4><ol><li>Usa una cuenta pública de X.</li><li>Publica o comparte contenido con <b>#ARIASBTS</b>.</li><li>Las guías de fanbases indican votación ilimitada y que los reposts cuentan.</li></ol><p><b>Nota importante:</b> #ARIASBTS es una campaña organizada por fanbases para impulsar a BTS; no aparece como método de voto oficial en las reglas de la web de ARIA. No la confundas con el voto oficial diario.</p></div>
+   <div class="actions"><a class="btn" href="https://www.aria.com.au/vote" target="_blank" rel="noopener">VOTO OFICIAL ARIA</a><a class="btn secondary" href="https://x.com/hashtag/ARIASBTS" target="_blank" rel="noopener">ABRIR #ARIASBTS EN X</a></div>
   </article>
   <article class="vote-card" data-kind="group">
    <div class="card-top"><span class="pill live">MMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
    <h3>Global TOP10</h3><div class="meta">Votación internacional · Berriz</div>
-   <p class="description">Únete a la comunidad K-Pop Square en Berriz, selecciona BTS y envía un voto diario por cuenta.</p>
-   <div class="deadline">⏰ Cierra: 13 nov · 23:59 KST</div><div class="countdown" data-date="2026-11-13T23:59:00+09:00">Calculando cuenta regresiva…</div>
+   <p class="description">El voto internacional se realiza en Berriz. La puntuación final de Global TOP10 combina 60% Global-K Chart, 20% jurado y 20% voto de fans; el voto de fans se reparte entre Melon (Corea) y Berriz (internacional).</p>
+   <div class="deadline">⏰ Del 30 oct al 13 nov 2026 · KST (hora exacta de cierre no publicada en el anuncio consultado)</div>
+   <div class="rule-box"><h4>📱 Cómo votar en Berriz</h4><ol><li>Entra en Berriz e inicia sesión.</li><li>Únete a la comunidad K-pop Square.</li><li>Abre la votación MMA2026 Global TOP10.</li><li>Selecciona BTS y confirma el voto.</li><li>Regresa cada día para emitir tu voto diario.</li></ol><p><b>Límite:</b> 1 voto diario por persona/cuenta. El anuncio oficial no especifica la hora exacta del reinicio; sigue el contador o el botón de la plataforma.</p></div>
    <div class="actions"><a class="btn" href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">VOTAR EN BERRIZ</a></div>
   </article>
   <article class="vote-card" data-kind="group">
@@ -116,7 +125,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
    <div class="actions"><a class="btn" href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener">VOTAR / VER RANKING</a></div>
   </article>
  </div>
- <p class="note">Las fechas están en la zona horaria indicada por cada organizador. Los enlaces llevan a las plataformas oficiales de votación. Los horarios regionales pueden variar; revisa siempre las reglas antes de votar.</p>
+ <p class="note">Diferencia siempre el voto oficial del premio y las campañas de apoyo de fanbases en X. Si el organizador no publica una hora de reinicio o cierre, la página lo indica como “no publicado” en lugar de inventarla. Las reglas pueden actualizarse: revisa el aviso vigente antes de enviar cada voto.</p>
 </section>
 
 <section class="panel" id="upcoming">
@@ -171,7 +180,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <div class="time-list">
   <div class="time-row"><div><strong>MAMA 2026 · Mnet Plus</strong><small>1 ronda diaria; el día de votación se cuenta en hora de Corea (KST).</small></div><div class="local">00:00 KST<br><small>reinicio diario</small></div></div>
   <div class="time-row"><div><strong>MMA 2026 · Berriz</strong><small>1 voto al día. La plataforma no publica en su aviso una hora universal exacta de reinicio; comprueba el botón de voto de la app.</small></div><div class="local">No publicado<br><small>no asumir medianoche</small></div></div>
-  <div class="time-row"><div><strong>ARIA Awards</strong><small>1 voto al día. La página oficial no especifica la hora de reinicio diario.</small></div><div class="local">No publicado<br><small>no asumir medianoche</small></div></div>
+  <div class="time-row"><div><strong>ARIA Awards · web / Spotify</strong><small>1 voto diario en el sistema oficial. La campaña #ARIASBTS en X es una acción de fanbases independiente.</small></div><div class="local">No publicado<br><small>no asumir medianoche</small></div></div>
   <div class="time-row"><div><strong>Kids' Choice Awards</strong><small>Permite votar más de una vez; límites y actividades pueden variar por región. No es un reinicio diario fijo.</small></div><div class="local">Sin reinicio diario<br><small>según reglas regionales</small></div></div>
  </div>
  <p class="note">La lista incluye países y ciudades representativos y se completa con todas las zonas horarias IANA que admita tu navegador; si tu país tiene varias zonas horarias, selecciona la ciudad o región más cercana. La hora se calcula en tu navegador y ajusta automáticamente el horario de verano cuando corresponde. Los reinicios no publicados oficialmente se muestran como “No publicado” para evitar horarios inventados.</p>
@@ -185,9 +194,9 @@ const tzSelect=document.getElementById('timezoneSelect');
 const fmt=(date,tz,opts)=>new Intl.DateTimeFormat('es-MX',{timeZone:tz,...opts}).format(date);
 if(Intl.supportedValuesOf){const known=new Set(Array.from(tzSelect.options).map(o=>o.value));const group=document.createElement('optgroup');group.label='Otras zonas horarias · catálogo mundial';Intl.supportedValuesOf('timeZone').forEach(zone=>{if(!known.has(zone)){const opt=document.createElement('option');opt.value=zone;opt.textContent=zone.replaceAll('_',' ').replaceAll('/',' · ');group.append(opt);}});tzSelect.append(group);}
 const deadlines=[
- {name:'MAMA 2026 · 2.ª ronda',date:'2026-11-08T23:59:00+09:00',zone:'Asia/Seoul',source:'Cierre oficial anunciado: 23:59 KST.'},
- {name:'ARIA Awards 2026',date:'2026-11-09T23:59:00+11:00',zone:'Australia/Sydney',source:'Cierre oficial: 23:59 AEDT.'},
- {name:'MMA 2026 · Global TOP10',date:'2026-11-13T23:59:00+09:00',zone:'Asia/Seoul',source:'Aviso Berriz: 23:59 KST.'},
+ {name:'MAMA 2026 · 2.ª ronda',date:'2026-11-08T23:59:00+09:00',zone:'Asia/Seoul',source:'Cierre de ronda 2: 23:59 KST.'},
+ {name:'ARIA Awards 2026 · voto oficial',date:'2026-11-09T23:59:00+11:00',zone:'Australia/Sydney',source:'Cierre oficial: 23:59 AEDT. #ARIASBTS es campaña de fans.'},
+ {name:'MMA 2026 · Global TOP10',date:null,zone:null,source:'Cierra el 13 de noviembre KST; hora exacta no indicada en el anuncio oficial.'},
  {name:"Kids’ Choice Awards 2026",date:null,zone:null,source:'Cierra el 13 de noviembre; hora exacta depende de región/actividad.'},
  {name:'AAA Popularity Award',date:null,zone:null,source:'Cierre anunciado el 4 de noviembre; la página consultada no especifica hora.'}
 ];
