@@ -342,8 +342,8 @@ footer,.note{color:#887b90}
 .vote-card:hover:after{opacity:1;animation:cardShine .8s ease}
 .vote-card>*{position:relative;z-index:1}
 .vote-card>.bt21-friend{position:absolute;z-index:2;display:block}
-/* Integra MANG con el fondo y elimina visualmente el recuadro blanco del GIF */
-.vote-card>.bt21-friend[src*="mang_new1"]{mix-blend-mode:multiply;background:transparent}
+/* MANG usa PNG con fondo transparente para evitar el recuadro blanco */
+.vote-card>.bt21-friend[src*="194876-middle.png"]{mix-blend-mode:normal;background:transparent;object-fit:contain}
 .vote-card>
 .vote-card:nth-child(2n) 
 .vote-card:nth-child(3n) 
@@ -435,7 +435,7 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
 </article>
   <article class="vote-card" data-kind="group">
   <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/shooky.gif" alt="SHOOKY, personaje oficial BT21" loading="lazy">
-  <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/mang_new1.gif" alt="MANG, personaje oficial BT21" loading="lazy">
+  <img class="bt21-friend friend-bottom" src="https://image.pngaaa.com/876/194876-middle.png" alt="MANG, personaje oficial BT21" loading="lazy">
  <div class="card-top"><h3 class="vote-title">ARIA Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
  <div class="countdown vote-countdown" data-countdown="aria">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
