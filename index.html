@@ -674,22 +674,11 @@ a{transition:color .18s ease,border-color .18s ease}
 }
 
 
-/* Official award marks inside each voting card */
-.vote-logo-wrap{
- display:flex;align-items:center;justify-content:center;
- width:100%;height:94px;padding:10px 14px;overflow:hidden;
- border:1px solid #e9e0ef;border-radius:16px;
- background:linear-gradient(135deg,#ffffffed,#f3edf8d9);
- box-shadow:inset 0 1px 0 #fff,0 5px 15px #59436b0b;
-}
-.vote-logo{display:block;max-width:100%;max-height:72px;width:auto;height:auto;object-fit:contain}
-.logo-mama{max-width:92px;max-height:78px}
-.logo-aria{max-width:175px;max-height:65px}
-.logo-mma{max-width:190px;max-height:72px}
-.logo-kca{max-width:78px;max-height:78px}
-.logo-aaa{max-width:145px;max-height:75px}
-.logo-gda{max-width:85px;max-height:78px}
-@media(max-width:720px){.vote-logo-wrap{height:86px}.vote-logo{max-height:66px}}
+/* Logotipos compactos junto al nombre de cada votación */
+.vote-card .card-top{align-items:center}
+.vote-title{display:flex;align-items:center;gap:9px;min-width:0}
+.vote-logo-inline{display:inline-block;flex:0 0 34px;width:34px;height:34px;max-width:34px;max-height:34px;object-fit:contain;padding:3px;border:1px solid #e9e0ef;border-radius:8px;background:#fff;vertical-align:middle}
+@media(max-width:420px){.vote-logo-inline{flex-basis:30px;width:30px;height:30px;max-width:30px;max-height:30px}.vote-title{gap:7px}}
 
 </style>
 </head>
@@ -723,48 +712,42 @@ a{transition:color .18s ease,border-color .18s ease}
  <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
  <div class="cards" id="voteCards">
   <article class="vote-card" data-kind="group">
- <div class="vote-logo-wrap" data-vote-logo="mama"><img class="vote-logo logo-mama" src="https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg" alt="Logotipo de MAMA Awards" loading="lazy" decoding="async"></div>
- <div class="vote-logo-wrap" data-vote-logo="aria"><img class="vote-logo logo-aria" src="https://images.squarespace-cdn.com/content/v1/6522859ed74b6e6f6d350faf/1ea4ee1b-9617-4d21-8235-be6acab6d157/aria.png" alt="Logotipo de ARIA Awards" loading="lazy" decoding="async"></div>
- <div class="vote-logo-wrap" data-vote-logo="mma"><img class="vote-logo logo-mma" src="https://t1.kakaocdn.net/kakaoent_com/admin/editor/edb7a1b5019700001.png" alt="Logotipo de Melon Music Awards" loading="lazy" decoding="async"></div>
- <div class="vote-logo-wrap" data-vote-logo="kca"><img class="vote-logo logo-kca" src="https://i0.wp.com/alexisjoyvipaccess.com/wp-content/uploads/2025/05/KCA25_Logo_2025.jpg?ssl=1" alt="Logotipo de Nickelodeon Kids’ Choice Awards" loading="lazy" decoding="async"></div>
- <div class="vote-logo-wrap" data-vote-logo="aaa"><img class="vote-logo logo-aaa" src="https://media.nownews.com/nn_media/thumbnail/2026/05/1778832777652-d5ea2437c1db4e37965c3ee01196b765-825x481.webp?unShow=false" alt="Logotipo de Asia Artist Awards" loading="lazy" decoding="async"></div>
- <div class="vote-logo-wrap" data-vote-logo="gda"><img class="vote-logo logo-gda" src="https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png" alt="Logotipo de Golden Disc Awards" loading="lazy" decoding="async"></div>
- <div class="card-top"><h3 class="vote-title">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 / #3 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mama" src="https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg" alt="Logotipo de MAMA Awards" loading="lazy" decoding="async">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 / #3 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
  <div class="countdown vote-countdown" data-countdown="mama">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
  <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" data-x-copy="mama" href="https://twitter.com/intent/tweet?text=I%27m%20voting%20for%20BTS%20at%20%232026MAMAVOTE%20%23BTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><h3 class="vote-title">ARIA Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-aria" src="https://images.squarespace-cdn.com/content/v1/6522859ed74b6e6f6d350faf/1ea4ee1b-9617-4d21-8235-be6acab6d157/aria.png" alt="Logotipo de ARIA Awards" loading="lazy" decoding="async">ARIA Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
  <div class="countdown vote-countdown" data-countdown="aria">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
  <h4>Cómo votar</h4><p class="field-value">La participación para BTS es exclusivamente a través de X: publica desde una cuenta pública o comparte contenido con el hashtag oficial <b>#ARIASBTS</b>. No hay votación en la web de ARIA ni en Spotify.</p>
  <h4>Participación oficial</h4><div class="actions"><a class="btn" data-x-copy="aria" href="https://twitter.com/intent/tweet?text=I%27m%20supporting%20BTS%20at%20the%20ARIA%20Awards!%20%23ARIASBTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><h3 class="vote-title">Melon Music Awards <span>(MMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mma" src="https://t1.kakaocdn.net/kakaoent_com/admin/editor/edb7a1b5019700001.png" alt="Logotipo de Melon Music Awards" loading="lazy" decoding="async">Melon Music Awards <span>(MMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
  <div class="countdown vote-countdown" data-countdown="mma">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Global TOP10 · BTS</p>
  <h4>Cómo votar</h4><p class="field-value">Abre Berriz, únete a K-Pop Square, entra a MMA2026 Global TOP10, selecciona BTS y confirma tu voto.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">VOTAR EN BERRIZ</a><a class="btn secondary" href="https://berriz.in/" target="_blank" rel="noopener">APP / WEB BERRIZ</a></div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><h3 class="vote-title">Nickelodeon Kids' Choice Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="kca"><strong>Cierre:</strong> 13 nov; hora local indicada por la boleta oficial según tu región. Sin reinicio diario.</div>
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-kca" src="https://i0.wp.com/alexisjoyvipaccess.com/wp-content/uploads/2025/05/KCA25_Logo_2025.jpg?ssl=1" alt="Logotipo de Nickelodeon Kids’ Choice Awards" loading="lazy" decoding="async">Nickelodeon Kids' Choice Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="kca"><strong>Cierre:</strong> 13 nov; hora local indicada por la boleta oficial según tu región. Sin reinicio diario.</div>
  <div class="countdown vote-countdown" data-countdown="kca">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Favorite Music Group or Duo · BTS; Favorite Album · ARIRANG; Favorite Song · SWIM</p>
  <h4>Cómo votar</h4><p class="field-value">Entra a la boleta, recorre y vota en las 36 categorías. No necesitas registrar una cuenta. Los votos son ilimitados.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://kca.nick.tv/vote/favorite-music-group-or-duo" target="_blank" rel="noopener">WEB KCA · VOTAR</a></div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><h3 class="vote-title">Asia Artist Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · ranking oficial consultado</span></div><div class="local-vote-time" data-vote-time="aaa"><strong>Cierre:</strong> 4 nov; hora exacta no publicada por la organización.</div>
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-aaa" src="https://media.nownews.com/nn_media/thumbnail/2026/05/1778832777652-d5ea2437c1db4e37965c3ee01196b765-825x481.webp?unShow=false" alt="Logotipo de Asia Artist Awards" loading="lazy" decoding="async">Asia Artist Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · ranking oficial consultado</span></div><div class="local-vote-time" data-vote-time="aaa"><strong>Cierre:</strong> 4 nov; hora exacta no publicada por la organización.</div>
  <div class="countdown vote-countdown" data-countdown="aaa">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">AAA Popularity Award · Grupo masculino · BTS</p>
  <h4>Cómo votar</h4><p class="field-value">Abre la página de votación, selecciona la categoría de grupo masculino y vota por BTS.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener">WEB AAA · VOTAR</a></div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><h3 class="vote-title">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-gda" src="https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png" alt="Logotipo de Golden Disc Awards" loading="lazy" decoding="async">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
  <div class="countdown vote-countdown" data-countdown="gda">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Golden Disc CHOEAEDOL Popularity Award · Nominaciones de BTS: pendientes de anuncio a principios de diciembre.</p>
  <h4>Cómo votar</h4><p class="field-value">Por ahora, recolecta corazones en CHOEAEDOL: inicia sesión diariamente, reclama asistencia/recompensas, abre Heart Box en publicaciones, mira anuncios y completa misiones gratuitas. Los Daily Hearts caducan a las 23:30 KST; los Ever Hearts se conservan. Cuando abra la votación, entra a Golden Disc → Popularity Award, selecciona BTS si aparece entre los nominados y usa tus corazones en BTS como grupo; los corazones enviados a miembros individuales no cuentan para el total grupal.</p>
