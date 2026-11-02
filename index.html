@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#24133d">
+<meta name="theme-color" content="#8bd8d4">
 <meta name="description" content="BTS Voting Center: votaciones grupales importantes de BTS, fechas límite, horarios y enlaces oficiales.">
 <title>BTS VOTING CENTER 💜</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -372,13 +372,132 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
 .btn:active,button:active,.kst-button:active,.reset-toggle:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #241b2b!important}
 @media(prefers-reduced-motion:reduce){.btn,button,.kst-button,.reset-toggle{transition:none}}
 
+
+/* BTS ISLAND — tropical game-inspired visual redesign */
+:root{
+ --bg:#dff5f3;--ink:#254c54;--muted:#64858a;--purple:#8064b4;--purple2:#b8a2dc;
+ --red:#ee7885;--red2:#f6a6a0;--glass:#fffdf0e8;--line:#ffffff;
+ --shadow:0 10px 24px #28616b20;
+}
+html{background:#dff5f3}
+body{
+ color:#254c54;
+ font-family:"DM Sans",system-ui,sans-serif;
+ background:
+  radial-gradient(ellipse at 10% 5%,#fff4c9 0,transparent 20rem),
+  radial-gradient(ellipse at 92% 14%,#a9e5ed 0,transparent 25rem),
+  radial-gradient(ellipse at 50% 55%,#b9e9d5 0,transparent 32rem),
+  linear-gradient(180deg,#bdebf0 0%,#e5f7e9 42%,#f9edcf 100%);
+ background-attachment:fixed;
+}
+.wrap{width:min(1120px,calc(100% - 28px));padding-top:24px}
+.hero{
+ overflow:hidden;isolation:isolate;text-align:center;position:relative;
+ padding:clamp(38px,6vw,66px) 22px 42px;
+ border:4px solid #fff;border-radius:34px;color:#fff;
+ background:
+  radial-gradient(ellipse at 18% 100%,#5dbb9b 0 16%,transparent 16.5%),
+  radial-gradient(ellipse at 82% 100%,#55b7a0 0 20%,transparent 20.5%),
+  linear-gradient(180deg,#72cfe0 0%,#9ce0e3 48%,#65c3a2 49%,#3eaa8c 100%);
+ box-shadow:0 12px 0 #3a8e82,0 18px 32px #28616b25;
+}
+.hero:before{
+ content:"☀";display:block;position:absolute;z-index:-1;right:7%;top:8%;
+ width:auto;height:auto;background:none;filter:none;color:#fff1a8;
+ font-size:clamp(3.5rem,9vw,6rem);opacity:.95;
+}
+.hero:after{
+ content:"✦  ·  ✧  ·  ✦";display:block;position:absolute;left:5%;bottom:13%;
+ width:auto;height:auto;background:none;border:0;filter:none;color:#fff8d4;
+ font-size:1.35rem;letter-spacing:.5em;
+}
+.era{
+ background:#fff5d9;border:2px solid #fff;color:#527e77;
+ border-radius:999px;padding:8px 15px;font-family:"Space Grotesk",sans-serif;
+ letter-spacing:.1em;box-shadow:0 4px 0 #d9c58d;
+}
+h1{font-family:"Space Grotesk",sans-serif;color:#fff;font-size:clamp(2.5rem,7vw,5rem);letter-spacing:-.065em;text-shadow:0 3px 0 #438d87,0 6px 14px #28616b35}
+h1 span{color:#fff3b9;letter-spacing:.15em}
+.hero p{max-width:600px;color:#f5ffed;font-weight:700;text-shadow:0 1px 3px #28616b55}
+.hero-stats{justify-content:center}
+.stat{background:#fff5d9;border:2px solid #fff;border-radius:999px;color:#4d7975;box-shadow:0 4px 0 #d8c68e;font-family:"Space Grotesk",sans-serif}
+nav{
+ position:sticky;top:8px;z-index:10;padding:9px;border:2px solid #fff;
+ border-radius:20px;background:#fff8e8eF;box-shadow:0 6px 0 #a9d5c8,0 10px 22px #28616b16;
+ backdrop-filter:blur(12px)
+}
+nav a{border-radius:999px;color:#4e7777;font-family:"Space Grotesk",sans-serif}
+nav a:hover{background:#d8f2e4;color:#347f70}
+.panel{
+ border:3px solid #fff;border-radius:25px;background:#fff9e9ed;
+ box-shadow:0 7px 0 #b7d9c8,0 12px 25px #28616b13;backdrop-filter:blur(8px)
+}
+.section-head h2{font-family:"Space Grotesk",sans-serif;color:#397b70;letter-spacing:-.035em}
+.section-head p{color:#6d8984}
+.pill{border-radius:999px;background:#e0f4e7;color:#397b70}
+.pill.live{background:#ffe1e3;color:#ad5264}
+.pill.soon{background:#fff0bd;color:#96712f}
+.vote-card{
+ overflow:hidden;border:2px solid #fff;border-radius:20px;
+ background:linear-gradient(145deg,#fffdf4,#effaf0);
+ box-shadow:0 5px 0 #c2dfce,0 9px 18px #28616b12;
+}
+.vote-card:before{width:7px;background:linear-gradient(180deg,#f5a3a0,#a6d9c2,#a8c7ed)}
+.vote-card h3{color:#39766e;font-family:"Space Grotesk",sans-serif}
+.vote-card .meta,.vote-card .field-value{color:#6c8982}
+.vote-card .description{color:#587b75}
+.ranking-line{background:#e7f5e9;border:1px solid #d4ebd9;border-radius:12px;color:#4d7970}
+.ranking-line b{color:#d35f70}
+.local-vote-time{background:#fff0df;border:1px solid #f5dfbf;border-left:4px solid #e9a36f;border-radius:12px;color:#85634f}
+.local-vote-time strong{color:#b66d50}
+.vote-countdown{border:1px solid #d8e9db;border-left:4px solid #8c75bb;border-radius:12px;background:linear-gradient(100deg,#f1f0ff,#fff9e7);color:#4f5978}
+.vote-countdown strong,.countdown strong{color:#d35f70}
+.actions{gap:10px}
+.btn,button,.kst-button,.reset-toggle,.filter,.start-action{
+ border:2px solid #fff!important;border-radius:14px!important;
+ font-family:"DM Sans",sans-serif!important;font-weight:900!important;
+ box-shadow:0 4px 0 #367c75!important;transition:transform .16s ease,filter .16s ease,box-shadow .16s ease;
+}
+.btn{background:linear-gradient(180deg,#f8b3a9,#ed8c91)!important;color:#633f52!important}
+.btn.secondary{background:linear-gradient(180deg,#d7c9f3,#b7a2df)!important;color:#4f416e!important}
+.btn:hover,button:hover,.kst-button:hover,.reset-toggle:hover{filter:brightness(1.05);transform:translateY(-2px);box-shadow:0 6px 0 #367c75!important}
+.btn:active,button:active,.kst-button:active,.reset-toggle:active{transform:translateY(2px);box-shadow:0 2px 0 #367c75!important}
+.filter{background:#fff7d9!important;border-color:#fff!important;color:#557b70!important;box-shadow:0 3px 0 #b7d9c8!important}
+.filter.active{background:#9fdac1!important;color:#285d55!important;border-color:#fff!important}
+.start-action{background:linear-gradient(120deg,#fffdf2,#e8f7e9)!important;border-color:#fff!important;border-radius:17px!important;box-shadow:0 4px 0 #b7d9c8!important}
+.start-action:hover{transform:translateY(-2px);background:#fff!important}
+.start-number{background:#ccefe0!important;color:#36796c!important;border-radius:12px!important}
+.start-action.primary-action{background:linear-gradient(120deg,#fff0e8,#ffe2e5)!important}
+.start-action.primary-action .start-number{background:#f3a3a0!important;color:#fff!important}
+.rank,.upcoming-item,.clock-box{
+ border:2px solid #fff;border-radius:18px;background:linear-gradient(145deg,#fffdf3,#eaf8ec);
+ box-shadow:0 4px 0 #c2dfce;
+}
+.rank .place{color:#e4777e}
+.rank a{color:#8064b4}
+.member{border:2px solid #fff!important;border-radius:18px!important;background:#fff9e9!important;box-shadow:0 4px 0 #c2dfce!important}
+.member:hover,.member.active{background:#e6f6e9!important;border-color:#fff!important;transform:translateY(-2px)!important}
+.member img{border-radius:13px}
+.note{border-left:4px solid #8c75bb;border-radius:12px;background:#f0f5e8;color:#648078}
+.time-select,input,select{border:2px solid #d7e9dc!important;border-radius:12px!important;background:#fffdf5!important;color:#426f68!important}
+.time-row{border-radius:13px;background:#f0f8ed}
+.time-row .local{color:#8064b4}
+.footer{color:#648078}
+@media(max-width:640px){
+ .hero{border-radius:25px;padding:34px 16px 42px}
+ .panel{border-radius:19px}
+ .vote-card{border-radius:16px}
+ nav{top:5px}
+}
+@media(prefers-reduced-motion:reduce){.btn,button,.kst-button,.reset-toggle,.start-action{transition:none}}
+
 </style>
 </head>
 <body><main class="wrap">
 <header class="hero">
- <div class="era">❤️ ARIRANG ERA · 2026 💜</div>
+ <div class="era">🏝️ BTS ISLAND · ARIRANG ERA 2026 💜</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
- <p>Un solo lugar para encontrar votaciones, fechas límite y rankings de BTS. Cada voto cuenta.</p>
+ <p>¡Bienvenida a nuestra isla ARMY! Explora las votaciones, reúne corazones y apoya a BTS en cada misión.</p>
  <div class="hero-stats"><div class="stat">💜 BTS GROUP</div><div class="stat">GROUP VOTING</div><div class="stat">🗳️ VOTE TOGETHER</div></div>
 </header>
 <section class="panel start-panel" id="start-here">
