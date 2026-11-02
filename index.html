@@ -239,6 +239,57 @@ footer,.note{color:#b9abc9}
  .panel{border-radius:17px}
 }
 
+
+/* BT21 FRIENDS — cute, polished voting hub */
+:root{--bg:#fbf7f2;--ink:#352b43;--muted:#81758d;--purple:#8060ad;--purple2:#b99bdc;--red:#df6577;--red2:#f19aaa;--glass:#fffdfb;--line:#eee5f1;--shadow:0 12px 30px #59416b12}
+html{background:#fbf7f2}
+body{color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;background:radial-gradient(circle at 4% 4%,#f8dce4 0,transparent 23rem),radial-gradient(circle at 96% 18%,#e8def8 0,transparent 25rem),radial-gradient(circle at 60% 100%,#e2f1e8 0,transparent 28rem),#fbf7f2}
+.wrap{width:min(1140px,calc(100% - 28px));padding-top:22px}
+.hero{isolation:isolate;text-align:center;padding:clamp(34px,6vw,58px) 22px 36px;border:1px solid #fff;border-radius:30px;color:#443451;background:linear-gradient(135deg,#fff8f5 0%,#f3eafb 55%,#eaf5ef 100%);box-shadow:0 18px 45px #604a7020}
+.hero:before{width:210px;height:210px;right:-75px;top:-95px;background:#f4b9c8aa;filter:blur(4px)}
+.hero:after{content:"KOYA  ·  RJ  ·  SHOOKY  ·  MANG  ·  CHIMMY  ·  TATA  ·  COOKY  ·  VAN";position:absolute;z-index:-1;left:0;right:0;bottom:10px;width:max-content;max-width:100%;margin:auto;padding:7px 13px;border:1px solid #ffffffb8;border-radius:99px;background:#ffffff91;color:#806b91;font-size:clamp(.52rem,1.5vw,.68rem);font-weight:900;letter-spacing:.12em;filter:none;white-space:normal}
+.era{background:#fff;border:1px solid #eadcf1;color:#a04f72;letter-spacing:.1em}
+h1{font-family:"Space Grotesk",sans-serif;color:#443451;font-size:clamp(2.5rem,7vw,5rem);letter-spacing:-.06em}
+h1 span{color:#8964b2;letter-spacing:.12em}
+.hero p{color:#766982;font-weight:600}
+.hero-stats{margin-top:24px}
+.stat{background:#ffffffc9;border:1px solid #fff;color:#725d83;box-shadow:0 4px 12px #6d547510}
+nav{top:7px;border:1px solid #eee4f0;border-radius:18px;background:#fffdf2eF;box-shadow:0 8px 24px #59416b12;backdrop-filter:blur(16px)}
+nav a{color:#78658b}
+nav a:hover{background:#f1e8f8;color:#624483}
+.panel{border:1px solid #eee5ef;border-radius:24px;background:#fffdfbde;backdrop-filter:blur(10px);box-shadow:0 12px 30px #59416b10}
+.section-head h2{font-family:"Space Grotesk",sans-serif;color:#493953;letter-spacing:-.025em}
+.section-head p{color:#8a7d91}
+.pill{background:#f0e8f7;color:#765a94}
+.pill.live{background:#fde8eb;color:#b34e64}
+.pill.soon{background:#eaf3ed;color:#527b65}
+.filters .filter{background:#fff;border-color:#e7d9ed;color:#78658b}
+.filters .filter.active{background:#8765ad;border-color:#8765ad;color:white;box-shadow:0 4px 12px #8765ad30}
+.vote-card{border:1px solid #f0e8ef;border-radius:20px;background:linear-gradient(145deg,#fff,#fff8f7);box-shadow:0 8px 22px #6c526710}
+.vote-card:before{width:5px;background:linear-gradient(180deg,#ed8998,#ad8bd1)}
+.vote-card h3{color:#493953}
+.vote-card .meta{color:#93859a}
+.vote-card .description{color:#716579}
+.ranking-line{background:#f3edf8;color:#745b8c}
+.ranking-line b{color:#bd536b}
+.local-vote-time{background:#fff0f1;border-color:#f3d9df;color:#8a4b5d}
+.local-vote-time strong{color:#b44760}
+.start-action{border-color:#eee3ef!important;background:#fff!important;color:#493953!important;border-radius:17px!important}
+.start-action:hover{background:#faf4fc!important}
+.start-number{background:#f0e7f7!important;color:#805ca6!important}
+.btn.primary,.primary-action{background:#8765ad!important;color:#fff!important}
+input,select,.time-select{background:#fff!important;color:#493953!important;border:1px solid #e5d9e9!important}
+option{background:#fff;color:#493953}
+a{color:#8060ad}
+footer,.note{color:#887b90}
+@media(max-width:640px){
+ .hero{padding:30px 17px 48px;border-radius:23px}
+ nav{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+ nav::-webkit-scrollbar{display:none}
+ .cards{grid-template-columns:1fr}
+ .panel{border-radius:19px}
+}
+
 </style>
 </head>
 <body><main class="wrap">
