@@ -136,6 +136,16 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <h4>Horario de finalización</h4><p class="field-value">4 de noviembre de 2026 · hora no publicada</p>
  <h4>Cuenta regresiva</h4><div class="countdown">Hora exacta de finalización no publicada.</div>
 </article>
+  <article class="vote-card" data-kind="group">
+ <div class="card-top"><span class="pill soon">GDA 2027 · PREPARACIÓN</span><span class="pill">BTS · GRUPAL</span></div>
+ <h3>Nombre de la premiación</h3><p class="field-value">41st Golden Disc Awards (GDA 2027)</p>
+ <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Golden Disc CHOEAEDOL Popularity Award · Nominaciones de BTS: pendientes de anuncio a principios de diciembre.</p>
+ <h4>Horario de reinicio</h4><p class="field-value">Corazones diarios CHOEAEDOL: caducan a las 23:30 KST. Los Ever Hearts no caducan.</p><button class="btn secondary kst-button reset-toggle" type="button" data-reset-toggle data-reset-hour="23:30" aria-expanded="false">VER MI HORARIO LOCAL</button><p class="reset-result" data-reset-result hidden></p>
+ <h4>Cómo votar</h4><p class="field-value">Por ahora, recolecta corazones en la app CHOEAEDOL. Cuando abra la votación, entra a Golden Disc, elige la categoría de Popularity Award, selecciona BTS si aparece entre los nominados y usa tus corazones. Los corazones enviados a miembros individuales no cuentan para la categoría grupal.</p>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">APP CHOEAEDOL · ANDROID</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">APP CHOEAEDOL · iOS</a><a class="btn secondary" href="https://www.myloveidol.com/goldendisc/es/" target="_blank" rel="noopener">INFO OFICIAL GDA</a></div>
+ <h4>Horario de finalización</h4><p class="field-value">Votación prevista: 3 de enero de 2027 · hora exacta por confirmar · KST.</p>
+ <h4>Cuenta regresiva</h4><div class="countdown">Se activará cuando CHOEAEDOL confirme la hora exacta de cierre.</div>
+</article>
  </div>
  <p class="note">Diferencia siempre el voto oficial del premio y las campañas de apoyo de fanbases en X. Si el organizador no publica una hora de reinicio o cierre, la página lo indica como “no publicado” en lugar de inventarla. Las reglas pueden actualizarse: revisa el aviso vigente antes de enviar cada voto.</p>
 </section>
@@ -143,7 +153,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
 <section class="panel" id="upcoming">
  <div class="section-head"><div><h2>🗓️ UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
  <div class="upcoming">
-  <div class="upcoming-item"><h3>🏆 41st Golden Disc Awards</h3><p>Ventana de votación prevista para diciembre de 2026. Fechas y categorías por confirmar.</p></div>
+  <div class="upcoming-item"><h3>🏆 41st Golden Disc Awards</h3><p>Preparación de corazones en CHOEAEDOL. Votación de Popularity Awards prevista del 8 de diciembre de 2026 al 3 de enero de 2027; nominaciones de BTS pendientes.</p></div>
  </div>
 </section>
 
@@ -213,8 +223,8 @@ function renderWorldClock(){
 }
 tzSelect.addEventListener('change',renderWorldClock);renderWorldClock();setInterval(renderWorldClock,1000);
 // Botones independientes: solo aparecen en premios con reinicio diario KST confirmado.
-function nextKstMidnight(){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));return new Date(Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day)+1)-9*60*60*1000);}
-function updateCardResetTimes(){const tz=tzSelect.value;document.querySelectorAll('[data-reset-result]').forEach(el=>{const d=nextKstMidnight();el.textContent='Próximo reinicio: '+fmt(d,tz,{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit',hour12:false})+' · '+fmt(d,tz,{timeZoneName:'short'})+' (tu zona).';});}
+function nextKstReset(hour=0,minute=0){const now=Date.now();const kst=new Date(now+9*60*60*1000);let target=Date.UTC(kst.getUTCFullYear(),kst.getUTCMonth(),kst.getUTCDate(),hour,minute)-9*60*60*1000;if(target<=now)target+=86400000;return new Date(target);}
+function updateCardResetTimes(){const tz=tzSelect.value;document.querySelectorAll('[data-reset-result]').forEach(el=>{const btn=el.parentElement.querySelector('[data-reset-toggle]');const [hour,minute]=(btn?.dataset.resetHour||'00:00').split(':').map(Number);const d=nextKstReset(hour,minute);el.textContent='Próximo horario KST: '+fmt(d,tz,{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit',hour12:false})+' · '+fmt(d,tz,{timeZoneName:'short'})+' (tu zona).';});}
 document.querySelectorAll('[data-reset-toggle]').forEach(btn=>btn.addEventListener('click',()=>{const result=btn.parentElement.querySelector('[data-reset-result]');const open=btn.getAttribute('aria-expanded')!=='true';btn.setAttribute('aria-expanded',String(open));result.hidden=!open;if(open)updateCardResetTimes();}));
 tzSelect.addEventListener('change',updateCardResetTimes);
 
