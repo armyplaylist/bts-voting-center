@@ -673,6 +673,24 @@ a{transition:color .18s ease,border-color .18s ease}
  nav{border-radius:16px}
 }
 
+
+/* Official award marks inside each voting card */
+.vote-logo-wrap{
+ display:flex;align-items:center;justify-content:center;
+ width:100%;height:94px;padding:10px 14px;overflow:hidden;
+ border:1px solid #e9e0ef;border-radius:16px;
+ background:linear-gradient(135deg,#ffffffed,#f3edf8d9);
+ box-shadow:inset 0 1px 0 #fff,0 5px 15px #59436b0b;
+}
+.vote-logo{display:block;max-width:100%;max-height:72px;width:auto;height:auto;object-fit:contain}
+.logo-mama{max-width:92px;max-height:78px}
+.logo-aria{max-width:175px;max-height:65px}
+.logo-mma{max-width:190px;max-height:72px}
+.logo-kca{max-width:78px;max-height:78px}
+.logo-aaa{max-width:145px;max-height:75px}
+.logo-gda{max-width:85px;max-height:78px}
+@media(max-width:720px){.vote-logo-wrap{height:86px}.vote-logo{max-height:66px}}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -705,6 +723,12 @@ a{transition:color .18s ease,border-color .18s ease}
  <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
  <div class="cards" id="voteCards">
   <article class="vote-card" data-kind="group">
+ <div class="vote-logo-wrap" data-vote-logo="mama"><img class="vote-logo logo-mama" src="https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg" alt="Logotipo de MAMA Awards" loading="lazy" decoding="async"></div>
+ <div class="vote-logo-wrap" data-vote-logo="aria"><img class="vote-logo logo-aria" src="https://images.squarespace-cdn.com/content/v1/6522859ed74b6e6f6d350faf/1ea4ee1b-9617-4d21-8235-be6acab6d157/aria.png" alt="Logotipo de ARIA Awards" loading="lazy" decoding="async"></div>
+ <div class="vote-logo-wrap" data-vote-logo="mma"><img class="vote-logo logo-mma" src="https://t1.kakaocdn.net/kakaoent_com/admin/editor/edb7a1b5019700001.png" alt="Logotipo de Melon Music Awards" loading="lazy" decoding="async"></div>
+ <div class="vote-logo-wrap" data-vote-logo="kca"><img class="vote-logo logo-kca" src="https://i0.wp.com/alexisjoyvipaccess.com/wp-content/uploads/2025/05/KCA25_Logo_2025.jpg?ssl=1" alt="Logotipo de Nickelodeon Kids’ Choice Awards" loading="lazy" decoding="async"></div>
+ <div class="vote-logo-wrap" data-vote-logo="aaa"><img class="vote-logo logo-aaa" src="https://media.nownews.com/nn_media/thumbnail/2026/05/1778832777652-d5ea2437c1db4e37965c3ee01196b765-825x481.webp?unShow=false" alt="Logotipo de Asia Artist Awards" loading="lazy" decoding="async"></div>
+ <div class="vote-logo-wrap" data-vote-logo="gda"><img class="vote-logo logo-gda" src="https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png" alt="Logotipo de Golden Disc Awards" loading="lazy" decoding="async"></div>
  <div class="card-top"><h3 class="vote-title">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 / #3 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
  <div class="countdown vote-countdown" data-countdown="mama">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
