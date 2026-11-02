@@ -814,12 +814,26 @@ const xCopyOptions={
   'Seven voices, one love. Supporting BTS! #ARIASBTS'
  ]
 };
+function shuffledIndexes(length){
+ const indexes=Array.from({length},(_,i)=>i);
+ for(let i=indexes.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [indexes[i],indexes[j]]=[indexes[j],indexes[i]];
+ }
+ return indexes;
+}
 document.querySelectorAll('a[data-x-copy]').forEach(link=>{
  link.addEventListener('click',()=>{
   const options=xCopyOptions[link.dataset.xCopy];if(!options?.length)return;
-  const index=Number(link.dataset.copyIndex||0);
-  const copy=options[index % options.length];
-  link.dataset.copyIndex=String((index+1) % options.length);
+  let order=link.dataset.copyOrder?link.dataset.copyOrder.split(',').map(Number):[];
+  let position=Number(link.dataset.copyPosition||0);
+  if(!order.length||position>=order.length){
+   order=shuffledIndexes(options.length);
+   position=0;
+  }
+  const copy=options[order[position]];
+  link.dataset.copyOrder=order.join(',');
+  link.dataset.copyPosition=String(position+1);
   link.href='https://twitter.com/intent/tweet?text='+encodeURIComponent(copy);
  });
 });
