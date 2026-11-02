@@ -957,6 +957,32 @@ a{color:#8061ad}
 nav a{color:#725b8c!important}
 nav a:hover,nav a.active{background:#e5d8f7!important;color:#563b78!important}
 
+
+/* DARK MODE */
+.theme-toggle{display:inline-flex;margin:18px auto 0;padding:10px 16px;border:1px solid #cbb5e8;border-radius:999px;background:#f4edff;color:#594273;font:900 .8rem Nunito,system-ui,sans-serif;cursor:pointer}
+body.dark-mode{--bg:#171321;--ink:#eee6fa;--muted:#b8a9ca;--purple:#b99add;--purple2:#d0b9ef;--glass:#292238ed;--line:#493b5c;--shadow:0 14px 35px #08061066;color:#eee6fa;background:radial-gradient(circle at 8% 5%,#38284f,transparent 25rem),linear-gradient(145deg,#171321,#211a30 55%,#191525)}
+body.dark-mode .hero{background:linear-gradient(145deg,#21182f,#302044 58%,#42243d);color:#f5edff;box-shadow:none}
+body.dark-mode .hero h1,body.dark-mode .hero h1 span{color:#f0e5ff}body.dark-mode .hero p{color:#d4c5e5}
+body.dark-mode .era{color:#f0dcff;background:#ffffff12;border-color:#806b98}body.dark-mode .stat{background:#ffffff10;border-color:#675477;color:#e9ddf7}
+body.dark-mode nav{background:#292238ed;border-color:#493b5c;box-shadow:none}body.dark-mode nav a{color:#d3c2e8!important}body.dark-mode nav a:hover,body.dark-mode nav a.active{background:#49365f!important;color:#fff!important}
+body.dark-mode .panel,body.dark-mode .footer{background:#292238e8;border-color:#493b5c;color:#eee6fa}
+body.dark-mode .section-head h2,body.dark-mode .panel h2,body.dark-mode .vote-title,body.dark-mode .guide-step h3,body.dark-mode .rank h3,body.dark-mode .upcoming-item h3,body.dark-mode .clock-box h3{color:#e6d7f8}
+body.dark-mode .section-head p,body.dark-mode .panel p,body.dark-mode .vote-card .meta,body.dark-mode .vote-card .field-value,body.dark-mode .guide-step p,body.dark-mode .rank p,body.dark-mode .upcoming-item p{color:#c0b2d1}
+body.dark-mode .pill{background:#403451;border-color:#655078;color:#e2d1f5}body.dark-mode .pill.live{background:#503044;color:#ffd5df}
+body.dark-mode #start-here .start-action,body.dark-mode #start-here .start-action:nth-child(n){background:linear-gradient(135deg,#39304a,#30263f)!important;border-color:#59476c!important;color:#f0e6fb!important;box-shadow:0 6px 0 #211a2e!important}
+body.dark-mode .start-action strong,body.dark-mode .start-action small{color:#eee3fa!important}body.dark-mode .start-number,body.dark-mode .primary-action .start-number{background:#665080!important;color:#fff!important}
+body.dark-mode #start-here #shareCenter{background:linear-gradient(135deg,#665080,#503c69)!important;border-color:#80699b!important;color:#fff!important;box-shadow:0 5px 0 #30243e!important}
+body.dark-mode .vote-card,body.dark-mode .rank,body.dark-mode .upcoming-item,body.dark-mode .clock-box,body.dark-mode .guide-step,body.dark-mode .source-grid a,body.dark-mode .member{background:linear-gradient(145deg,#30283e,#282135)!important;border-color:#4a3c5d!important;color:#eee6fa;box-shadow:none}
+body.dark-mode .vote-card:before{background:linear-gradient(#c5a7e8,#8061a7)}body.dark-mode .vote-title span,body.dark-mode .source-grid small,body.dark-mode .member small{color:#b8a8ca}
+body.dark-mode .vote-logo-inline{background:#fff;border-color:#594b68}
+body.dark-mode .ranking-line,body.dark-mode .local-vote-time,body.dark-mode .vote-countdown,body.dark-mode .rule-box,body.dark-mode .note,body.dark-mode .reset-result,body.dark-mode .time-row{background:#352b44!important;border-color:#59476b!important;color:#e4d7f1!important}
+body.dark-mode .ranking-line b,body.dark-mode .vote-countdown strong,body.dark-mode .vote-card h4,body.dark-mode .rank .place,body.dark-mode .clock-time{color:#d0b5f0}
+body.dark-mode .btn{background:#8061a7;color:#fff;box-shadow:0 4px 0 #49365f}body.dark-mode .btn.secondary{background:#40334f;color:#eadcf8;box-shadow:0 4px 0 #211a2e}
+body.dark-mode .filter,body.dark-mode .time-select{background:#30283e;border-color:#59476b;color:#eee6fa;color-scheme:dark}body.dark-mode .filter.active{background:#8061a7;color:#fff}
+body.dark-mode .member:hover,body.dark-mode .member.active{background:#49365f!important;color:#fff;border-color:#9b7abd}body.dark-mode .time-row .local,body.dark-mode a{color:#d0b5f0}
+body.dark-mode .theme-toggle{background:#40334f;border-color:#80699b;color:#f0e5ff}body.dark-mode .empty{background:#30283e;color:#c0b2d1}
+*{text-shadow:none!important}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -964,6 +990,7 @@ nav a:hover,nav a.active{background:#e5d8f7!important;color:#563b78!important}
  <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
  <p>Sumérgete en las votaciones, sigue cada fecha límite y nada junto a ARMY para apoyar a BTS.</p>
+ <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">🌙 MODO OSCURO</button>
  <div class="hero-stats"><div class="stat">💜 BTS GROUP</div><div class="stat">GROUP VOTING</div><div class="stat">🗳️ VOTE TOGETHER</div></div>
 </header>
 <section class="panel start-panel" id="start-here">
@@ -1068,6 +1095,13 @@ nav a:hover,nav a.active{background:#e5d8f7!important;color:#563b78!important}
 </main>
 <script>
 const tzSelect=document.getElementById('timezoneSelect');
+
+const themeToggle=document.getElementById('themeToggle');
+function applyTheme(dark){document.body.classList.toggle('dark-mode',dark);if(themeToggle){themeToggle.textContent=dark?'☀️ MODO CLARO':'🌙 MODO OSCURO';themeToggle.setAttribute('aria-pressed',String(dark));}document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#171321':'#f3edff');}
+let savedTheme=null;try{savedTheme=localStorage.getItem('bts-voting-theme');}catch(e){}
+applyTheme(savedTheme==='dark');
+themeToggle?.addEventListener('click',()=>{const dark=!document.body.classList.contains('dark-mode');applyTheme(dark);try{localStorage.setItem('bts-voting-theme',dark?'dark':'light');}catch(e){}});
+
 // Destello breve en cada botón al hacer click o tocar.
 document.addEventListener('click',event=>{
  const target=event.target.closest('button,.btn,.kst-button,.reset-toggle');
