@@ -4,6 +4,11 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#8bd8d4">
 <meta name="description" content="BTS Voting Center: votaciones grupales importantes de BTS, fechas límite, horarios y enlaces oficiales.">
+<link rel="canonical" href="https://armyplaylist.github.io/bts-voting-center/">
+<meta property="og:url" content="https://armyplaylist.github.io/bts-voting-center/">
+<meta property="og:title" content="BTS VOTING CENTER 💜">
+<meta property="og:description" content="Centro de votaciones ARMY: fechas, reinicios y enlaces oficiales para apoyar a BTS.">
+<meta name="twitter:card" content="summary">
 <title>BTS VOTING CENTER 💜</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -1350,7 +1355,7 @@ document.querySelectorAll('a[data-x-copy]').forEach(link=>{
   link.href='https://twitter.com/intent/tweet?text='+encodeURIComponent(copy);
  });
 });
-const votingCenterUrl='https://armyplaylist.github.io/bts-voting-center/';
+const votingCenterUrl=new URL('/bts-voting-center/','https://armyplaylist.github.io').href;
 document.getElementById('shareCenter')?.addEventListener('click',async()=>{
  const data={title:'BTS VOTING CENTER',text:'💜 ARMY, aquí puedes encontrar las votaciones, fechas e instrucciones para apoyar a BTS. ¡Compártelo con más ARMY!',url:votingCenterUrl};
  const button=document.getElementById('shareCenter');
