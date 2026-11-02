@@ -1059,11 +1059,7 @@ body>body>body>.wrap{position:relative;z-index:1}
 </head>
 <body><main class="wrap">
 <header class="hero">
- <div class="hero-brand" aria-label="BTS">
- <svg class="bts-mark" viewBox="0 0 64 72" role="img" aria-label="BTS logo" xmlns="http://www.w3.org/2000/svg"><path d="M8 5h19v62H8zM37 5h19v62H37z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/><path d="M8 5l19 10M56 5L37 15" fill="none" stroke="currentColor" stroke-width="4"/></svg>
- <span class="hero-brand-label">BANGTAN SONYEONDAN</span>
-</div>
- <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
+  <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
  <p>Sumérgete en las votaciones, sigue cada fecha límite y nada junto a ARMY para apoyar a BTS.</p>
  <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">🌙 MODO OSCURO</button>
@@ -1096,6 +1092,7 @@ body>body>body>.wrap{position:relative;z-index:1}
  <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mama" src="https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg" alt="Logotipo de MAMA Awards" loading="lazy" decoding="async">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
  <button class="complete-toggle" type="button" data-complete-vote="mama" aria-pressed="false">□ MARCAR COMO COMPLETADA</button><div class="ranking-line"><b>🏆 RANKING</b><span>#1 / #3 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
  <div class="countdown vote-countdown" data-countdown="mama">Calculando cuenta regresiva…</div>
+  <div class="vote-countdown reset-countdown" data-reset-countdown="korea-midnight"><strong>Reinicio de votos:</strong> calculando…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
  <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" data-x-copy="mama" href="https://twitter.com/intent/tweet?text=I%27m%20voting%20for%20BTS%20at%20%232026MAMAVOTE%20%23BTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
@@ -1112,6 +1109,7 @@ body>body>body>.wrap{position:relative;z-index:1}
  <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mma" src="https://t1.kakaocdn.net/kakaoent_com/admin/editor/edb7a1b5019700001.png" alt="Logotipo de Melon Music Awards" loading="lazy" decoding="async">Melon Music Awards <span>(MMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
  <button class="complete-toggle" type="button" data-complete-vote="mma" aria-pressed="false">□ MARCAR COMO COMPLETADA</button><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
  <div class="countdown vote-countdown" data-countdown="mma">Calculando cuenta regresiva…</div>
+  <div class="vote-countdown reset-countdown" data-reset-countdown="korea-midnight"><strong>Reinicio de votos:</strong> calculando…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Global TOP10 · BTS</p>
  <h4>Cómo votar</h4><p class="field-value">Abre Berriz, únete a K-Pop Square, entra a MMA2026 Global TOP10, selecciona BTS y confirma tu voto.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">VOTAR EN BERRIZ</a><a class="btn secondary" href="https://berriz.in/" target="_blank" rel="noopener">APP / WEB BERRIZ</a></div>
@@ -1261,6 +1259,17 @@ function updateLocalTimes(){
  });
  updateVoteCountdowns();
 }
+function updateResetCountdowns(){
+ const now=new Date();
+ const kstDate=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
+ let nextReset=new Date(kstDate+'T00:00:00+09:00');
+ if(nextReset<=now)nextReset=new Date(nextReset.getTime()+86400000);
+ const diff=nextReset.getTime()-now.getTime();
+ const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
+ document.querySelectorAll('[data-reset-countdown="korea-midnight"]').forEach(el=>{
+  el.innerHTML='<strong>Reinicio de votos (00:00 KST):</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s';
+ });
+}
 function updateVoteCountdowns(){
  const now=new Date();
  document.querySelectorAll('[data-countdown]').forEach(el=>{
@@ -1364,7 +1373,8 @@ tzSelect.addEventListener('change',()=>{updateLocalTimes();addCalendarReminders(
 timeFormatSelect.addEventListener('change',updateLocalTimes);
 addCalendarReminders();
 updateLocalTimes();
-setInterval(updateVoteCountdowns,1000);
+setInterval(()=>{updateVoteCountdowns();updateResetCountdowns();},1000);
+updateResetCountdowns();
 
 
 
