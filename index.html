@@ -495,13 +495,89 @@ nav a:hover{background:#d8f2e4;color:#347f70}
 /* Inicio limpio: sin estrellas ni iconos decorativos */
 .hero:before,.hero:after{content:none!important;display:none!important}
 
+
+/* SWIM mood — deep ocean, sunlight through water and flowing glass */
+:root{
+ --bg:#d9f3f5;--ink:#153f59;--muted:#5c8796;--purple:#477fae;--purple2:#91c9d4;
+ --red:#f08c91;--red2:#f6b4a7;--glass:#f4ffffe8;--line:#ffffff;
+ --shadow:0 14px 32px #124b6820;
+}
+html{background:#d9f3f5}
+body{
+ color:#153f59;
+ background:
+  radial-gradient(ellipse at 12% 3%,#fff4d5 0,transparent 18rem),
+  radial-gradient(ellipse at 88% 12%,#91dce7 0,transparent 23rem),
+  radial-gradient(ellipse at 48% 80%,#b1e8df 0,transparent 30rem),
+  linear-gradient(180deg,#a9e2ec 0%,#d8f4ef 48%,#eaf8f2 100%);
+ background-attachment:fixed;
+}
+.hero{
+ border:2px solid #f5ffff;border-radius:30px;
+ background:
+  radial-gradient(ellipse at 12% 105%,#5bc1c3 0 16%,transparent 16.5%),
+  radial-gradient(ellipse at 88% 108%,#4bacc5 0 22%,transparent 22.5%),
+  linear-gradient(155deg,#164b70 0%,#237ca0 48%,#48b9c0 100%);
+ box-shadow:0 8px 0 #246d87,0 18px 38px #174b682c;
+}
+.hero:before,.hero:after{content:none!important;display:none!important}
+.era{
+ color:#15536c;background:#e8fbf7;border:1px solid #fff;
+ box-shadow:0 3px 0 #8acbd0;
+}
+h1{color:#f5ffff;text-shadow:0 3px 0 #155675,0 8px 20px #103b5a55}
+h1 span{color:#bff4e8}
+.hero p{color:#e5fbf8;text-shadow:0 1px 4px #0b3a5366}
+.stat{background:#e8fbf7;color:#245d70;border:1px solid #fff;box-shadow:0 3px 0 #8acbd0}
+nav{background:#efffffed;border:1px solid #fff;box-shadow:0 5px 0 #9dd9d7,0 10px 24px #174b6817}
+nav a{color:#28647a}
+nav a:hover{background:#c9f0eb;color:#124e6c}
+.panel{background:#f5ffffe8;border:1px solid #fff;box-shadow:0 7px 0 #a6d9d5,0 13px 28px #174b6814}
+.section-head h2{color:#1d6981}
+.section-head p{color:#628b94}
+.pill{background:#d9f4ed;color:#26766e}
+.pill.live{background:#ffe1df;color:#ad5660}
+.pill.soon{background:#fff1c9;color:#8c7139}
+.vote-card{
+ border:1px solid #fff;border-radius:22px;
+ background:linear-gradient(145deg,#faffff 0%,#e9f9f7 55%,#e4f3fb 100%);
+ box-shadow:0 5px 0 #a9d8d7,0 11px 24px #174b6814;
+}
+.vote-card:before{background:linear-gradient(180deg,#69d0cf,#6ba6d0,#a7dcd1)}
+.vote-card h3{color:#205e78}
+.vote-card .meta,.vote-card .description{color:#62818c}
+.ranking-line{background:linear-gradient(100deg,#e1f7f1,#e4f1fc);border:1px solid #ccebe7;color:#316c7c}
+.ranking-line b{color:#d56e79}
+.local-vote-time{background:#fff4e7;border:1px solid #f5dfc6;border-left:4px solid #e6a77c;color:#82654f}
+.local-vote-time strong{color:#b96e57}
+.countdown{color:#286d86}.countdown strong{color:#d76f7b}
+.btn,button,.kst-button,.reset-toggle,.filter,.start-action{
+ border:1px solid #fff!important;border-radius:999px!important;
+ font-family:"DM Sans",sans-serif!important;
+ box-shadow:0 4px 0 #276f86!important;
+}
+.btn{background:linear-gradient(110deg,#a7e9df,#65c5d0)!important;color:#164f68!important}
+.btn.secondary{background:linear-gradient(110deg,#e7f7ff,#c5dff1)!important;color:#315f80!important}
+.btn:hover,button:hover,.kst-button:hover,.reset-toggle:hover{filter:brightness(1.04);transform:translateY(-2px);box-shadow:0 6px 0 #276f86!important}
+.btn:active,button:active,.kst-button:active,.reset-toggle:active{transform:translateY(2px);box-shadow:0 2px 0 #276f86!important}
+.filter{background:#f1ffff!important;color:#326c7d!important;box-shadow:0 3px 0 #a9d8d7!important}
+.filter.active{background:#7bd0ca!important;color:#124e62!important}
+.start-action{background:linear-gradient(110deg,#f7ffff,#e4f7f3)!important;box-shadow:0 4px 0 #a9d8d7!important}
+.start-number{background:#c9f0e7!important;color:#246c72!important}
+.rank,.upcoming-item,.clock-box{border:1px solid #fff;border-radius:18px;background:linear-gradient(145deg,#faffff,#e8f7f5);box-shadow:0 4px 0 #b3ded9}
+.note{background:#eaf8f5;border-left:4px solid #6bbfc1;color:#557c82}
+input,select,.time-select{background:#faffff!important;border:1px solid #c7e6e5!important;color:#245d70!important;border-radius:12px!important}
+a{color:#347e9b}
+footer,.note{color:#64858b}
+@media(max-width:640px){.hero{border-radius:24px}.panel{border-radius:19px}}
+
 </style>
 </head>
 <body><main class="wrap">
 <header class="hero">
  <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
- <p>¡Bienvenida a nuestra isla ARMY! Explora las votaciones, reúne corazones y apoya a BTS en cada misión.</p>
+ <p>Sumérgete en las votaciones, sigue cada fecha límite y nada junto a ARMY para apoyar a BTS.</p>
  <div class="hero-stats"><div class="stat">💜 BTS GROUP</div><div class="stat">GROUP VOTING</div><div class="stat">🗳️ VOTE TOGETHER</div></div>
 </header>
 <section class="panel start-panel" id="start-here">
