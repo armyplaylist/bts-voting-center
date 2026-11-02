@@ -317,12 +317,12 @@ footer,.note{color:#887b90}
 .vote-card:before,.vote-card:after{content:none!important;display:none!important}
 .vote-card{overflow:visible;position:relative;margin-top:20px;margin-bottom:18px}
 .cards{row-gap:30px}
-.bt21-friend{position:absolute;z-index:4;width:clamp(40px,6vw,58px);height:auto;max-height:58px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 4px #55415a22)}
-.bt21-friend.friend-top{right:12px;top:-25px;transform:rotate(7deg)}
-.bt21-friend.friend-bottom{left:12px;bottom:-25px;transform:rotate(-7deg)}
-.vote-card:nth-child(even) .friend-top{right:auto;left:12px;transform:rotate(-7deg)}
-.vote-card:nth-child(even) .friend-bottom{left:auto;right:12px;transform:rotate(7deg)}
-@media(max-width:640px){.bt21-friend{width:42px;max-height:44px}.vote-card{margin-top:18px;margin-bottom:18px}.cards{row-gap:28px}}
+.bt21-friend{position:absolute;z-index:2;width:clamp(38px,5.5vw,50px);height:auto;max-height:50px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 5px #39264f26)}
+.bt21-friend.friend-top{right:14px;top:-20px;transform:rotate(7deg)}
+.bt21-friend.friend-bottom{left:14px;bottom:-20px;transform:rotate(-7deg)}
+.vote-card:nth-child(even) .friend-top{right:auto;left:14px;transform:rotate(-7deg)}
+.vote-card:nth-child(even) .friend-bottom{left:auto;right:14px;transform:rotate(7deg)}
+@media(max-width:640px){.bt21-friend{width:34px;max-height:36px}.bt21-friend.friend-top{top:-16px}.bt21-friend.friend-bottom{bottom:-16px}.vote-card{margin-top:16px;margin-bottom:16px}.cards{row-gap:25px}}
 
 
 
@@ -333,6 +333,7 @@ footer,.note{color:#887b90}
 .vote-card:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(115deg,transparent 15%,#ffffff8a 48%,transparent 72%);transform:translateX(-120%);z-index:0}
 .vote-card:hover:after{opacity:1;animation:cardShine .8s ease}
 .vote-card>*{position:relative;z-index:1}
+.vote-card>.bt21-friend{position:absolute;z-index:2;display:block}
 .vote-card>
 .vote-card:nth-child(2n) 
 .vote-card:nth-child(3n) 
