@@ -19,7 +19,7 @@ h1 span{display:block;color:#e5d3ff;font-size:.58em;letter-spacing:.13em;margin-
 .hero p{position:relative;margin:13px auto 0;max-width:560px;color:#e9def7;font-weight:700}
 .hero-stats{position:relative;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}.stat{padding:9px 14px;border-radius:14px;background:#ffffff15;border:1px solid #ffffff24;font-size:.8rem;font-weight:900}
 nav{position:sticky;top:8px;z-index:10;display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:15px auto 20px;padding:9px;border:1px solid #ffffffd9;border-radius:20px;background:#fdfaffd9;backdrop-filter:blur(16px);box-shadow:0 8px 24px #49336516}
-nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;font-weight:900;color:#70588e}nav a:hover{background:#eee4ff;color:#4d2e78}
+nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;font-weight:900;color:#70588e}nav a:hover{background:#eee4ff;color:#4d2e78}.ranking-line{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:9px 11px;border-radius:12px;background:#f2eaff;color:#68478f;font-size:.76rem;font-weight:800}.ranking-line b{color:#a32945}.local-vote-time{padding:10px 12px;border-radius:12px;background:#fff0f2;border:1px solid #f1d6dc;color:#7e3449;font-size:.78rem;line-height:1.55;font-weight:800}.local-vote-time strong{color:#9a243e}
 .panel{margin:18px 0;padding:clamp(17px,3.5vw,26px);border:1px solid var(--line);border-radius:27px;background:var(--glass);backdrop-filter:blur(13px);box-shadow:var(--shadow)}
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:16px}.section-head h2{margin:0;font-size:1.35rem;font-weight:900}.section-head p{margin:4px 0 0;color:var(--muted);font-size:.83rem;font-weight:700}
 .pill{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:6px 10px;background:#eee5fb;color:#684b91;font-size:.7rem;font-weight:900;letter-spacing:.04em}.pill.live{background:#fbe0e5;color:#a51e38}.pill.soon{background:#eee7ff;color:#69469a}
@@ -81,70 +81,65 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <p>Un solo lugar para encontrar votaciones, fechas límite y rankings de BTS. Cada voto cuenta.</p>
  <div class="hero-stats"><div class="stat">💜 BTS GROUP</div><div class="stat">GROUP VOTING</div><div class="stat">🗳️ VOTE TOGETHER</div></div>
 </header>
-<nav aria-label="Navegación"><a href="#active">Activas</a><a href="#upcoming">Próximas</a><a href="#rankings">Rankings</a><a href="#world-clock">Horarios</a></nav>
+<nav aria-label="Navegación"><a href="#active">Activas</a><a href="#upcoming">Próximas</a><a href="#country-time">Mi país</a></nav>
+<section class="panel country-panel" id="country-time"><div class="section-head"><div><h2>🌍 ¿DE QUÉ PAÍS ERES?</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
+  <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
+  <option value="America/Los_Angeles">🇺🇸 Estados Unidos · Los Ángeles</option><option value="America/Denver">🇺🇸 Estados Unidos · Denver</option><option value="America/Chicago">🇺🇸 Estados Unidos · Chicago</option><option value="America/New_York">🇺🇸 Estados Unidos · Nueva York</option><option value="America/Anchorage">🇺🇸 Estados Unidos · Alaska</option><option value="Pacific/Honolulu">🇺🇸 Estados Unidos · Hawái</option><option value="America/Toronto">🇨🇦 Canadá · Toronto</option><option value="America/Vancouver">🇨🇦 Canadá · Vancouver</option>
+  <option value="America/Guatemala">🇬🇹 Guatemala</option><option value="America/Belize">🇧🇿 Belice</option><option value="America/Tegucigalpa">🇭🇳 Honduras</option><option value="America/El_Salvador">🇸🇻 El Salvador</option><option value="America/Managua">🇳🇮 Nicaragua</option><option value="America/Costa_Rica">🇨🇷 Costa Rica</option><option value="America/Panama">🇵🇦 Panamá</option><option value="America/Bogota">🇨🇴 Colombia</option><option value="America/Lima">🇵🇪 Perú</option><option value="America/Guayaquil">🇪🇨 Ecuador</option><option value="America/Caracas">🇻🇪 Venezuela</option><option value="America/La_Paz">🇧🇴 Bolivia</option><option value="America/Santiago">🇨🇱 Chile · Santiago</option><option value="America/Argentina/Buenos_Aires">🇦🇷 Argentina</option><option value="America/Montevideo">🇺🇾 Uruguay</option><option value="America/Sao_Paulo">🇧🇷 Brasil · São Paulo</option><option value="America/Asuncion">🇵🇾 Paraguay</option><option value="America/Puerto_Rico">🇵🇷 Puerto Rico</option><option value="America/Santo_Domingo">🇩🇴 República Dominicana</option><option value="America/Havana">🇨🇺 Cuba</option>
+  <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
+ </select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
+
 
 <section class="panel" id="active">
- <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Votaciones abiertas verificadas al 2 de noviembre de 2026.</p></div><span class="pill live">● EN CURSO</span></div>
+ <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
  <div class="cards" id="voteCards">
   <article class="vote-card" data-kind="group">
- <div class="card-top"><span class="pill live">MAMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
+ <div class="card-top"><span class="pill live">MAMA 2026</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 / #3 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
  <h3>Nombre de la premiación</h3><p class="field-value">Mnet Asian Music Awards (MAMA) 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
  <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · reinicio diario en Mnet Plus y X.</p><button class="btn secondary kst-button reset-toggle" type="button" data-reset-toggle aria-expanded="false">VER MI HORARIO LOCAL</button><p class="reset-result" data-reset-result hidden></p>
  <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" href="https://x.com/hashtag/2026MAMAVOTE" target="_blank" rel="noopener">VOTAR EN X</a></div>
- <h4>Horario de finalización</h4><p class="field-value">8 de noviembre de 2026 · 23:59 KST</p>
- <h4>Cuenta regresiva</h4><div class="countdown" data-date="2026-11-08T23:59:00+09:00">Calculando cuenta regresiva…</div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><span class="pill live">ARIA AWARDS 2026</span><span class="pill">BTS · GRUPAL</span></div>
+ <div class="card-top"><span class="pill live">ARIA AWARDS 2026</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
  <h3>Nombre de la premiación</h3><p class="field-value">ARIA Awards 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
  <h4>Horario de reinicio</h4><p class="field-value">No publicado para el voto oficial diario. Campaña #ARIASBTS en X.</p>
  <h4>Cómo votar</h4><p class="field-value">Voto oficial: entra a la web de ARIA o a la experiencia de votación en Spotify y selecciona BTS — ARIRANG. X: publica o comparte con <b>#ARIASBTS</b>.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.aria.com.au/vote" target="_blank" rel="noopener">WEB ARIA</a><a class="btn secondary" href="https://x.com/hashtag/ARIASBTS" target="_blank" rel="noopener">VOTAR EN X</a></div>
- <h4>Horario de finalización</h4><p class="field-value">9 de noviembre de 2026 · 23:59 AEDT</p>
- <h4>Cuenta regresiva</h4><div class="countdown" data-date="2026-11-09T23:59:00+11:00">Calculando cuenta regresiva…</div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><span class="pill live">MMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
+ <div class="card-top"><span class="pill live">MMA 2026</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
  <h3>Nombre de la premiación</h3><p class="field-value">Melon Music Awards (MMA) 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Global TOP10 · BTS</p>
  <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · 1 voto diario.</p><button class="btn secondary kst-button reset-toggle" type="button" data-reset-toggle aria-expanded="false">VER MI HORARIO LOCAL</button><p class="reset-result" data-reset-result hidden></p>
  <h4>Cómo votar</h4><p class="field-value">Abre Berriz, únete a K-Pop Square, entra a MMA2026 Global TOP10, selecciona BTS y confirma tu voto.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">VOTAR EN BERRIZ</a><a class="btn secondary" href="https://berriz.in/" target="_blank" rel="noopener">APP / WEB BERRIZ</a></div>
- <h4>Horario de finalización</h4><p class="field-value">13 de noviembre de 2026 · hora exacta no publicada · KST</p>
- <h4>Cuenta regresiva</h4><div class="countdown">No disponible · hora exacta de cierre no publicada.</div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><span class="pill live">KIDS' CHOICE 2026</span><span class="pill">BTS · GRUPAL</span></div>
+ <div class="card-top"><span class="pill live">KIDS' CHOICE 2026</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="kca"><strong>Cierre:</strong> 13 nov; hora local indicada por la boleta oficial según tu región. Sin reinicio diario.</div>
  <h3>Nombre de la premiación</h3><p class="field-value">Kids' Choice Awards 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Favorite Music Group or Duo · BTS; Favorite Album · ARIRANG; Favorite Song · SWIM</p>
  <h4>Horario de reinicio</h4><p class="field-value">No aplica · votos ilimitados, sin registro de cuenta.</p>
  <h4>Cómo votar</h4><p class="field-value">Entra a la boleta, recorre y vota en las 36 categorías. No necesitas registrar una cuenta. Los votos son ilimitados.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://kca.nick.tv/vote/favorite-music-group-or-duo" target="_blank" rel="noopener">WEB KCA · VOTAR</a></div>
- <h4>Horario de finalización</h4><p class="field-value">13 de noviembre de 2026 · hora según el sitio oficial</p>
- <h4>Cuenta regresiva</h4><div class="countdown">No disponible · el sitio muestra el horario de cierre según la región.</div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><span class="pill live">ASIA ARTIST AWARDS</span><span class="pill">BTS · GRUPAL</span></div>
+ <div class="card-top"><span class="pill live">ASIA ARTIST AWARDS</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · ranking oficial consultado</span></div><div class="local-vote-time" data-vote-time="aaa"><strong>Cierre:</strong> 4 nov; hora exacta no publicada por la organización.</div>
  <h3>Nombre de la premiación</h3><p class="field-value">Asia Artist Awards 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">AAA Popularity Award · Grupo masculino · BTS</p>
  <h4>Horario de reinicio</h4><p class="field-value">No publicado.</p>
  <h4>Cómo votar</h4><p class="field-value">Abre la página de votación, selecciona la categoría de grupo masculino y vota por BTS.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener">WEB AAA · VOTAR</a></div>
- <h4>Horario de finalización</h4><p class="field-value">4 de noviembre de 2026 · hora no publicada</p>
- <h4>Cuenta regresiva</h4><div class="countdown">Hora exacta de finalización no publicada.</div>
 </article>
   <article class="vote-card" data-kind="group">
- <div class="card-top"><span class="pill soon">GDA 2027 · PREPARACIÓN</span><span class="pill">BTS · GRUPAL</span></div>
+ <div class="card-top"><span class="pill soon">GDA 2027 · PREPARACIÓN</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
  <h3>Nombre de la premiación</h3><p class="field-value">41st Golden Disc Awards (GDA 2027)</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Golden Disc CHOEAEDOL Popularity Award · Nominaciones de BTS: pendientes de anuncio a principios de diciembre.</p>
  <h4>Horario de reinicio</h4><p class="field-value">Corazones diarios CHOEAEDOL: caducan a las 23:30 KST. Los Ever Hearts no caducan.</p><button class="btn secondary kst-button reset-toggle" type="button" data-reset-toggle data-reset-hour="23:30" aria-expanded="false">VER MI HORARIO LOCAL</button><p class="reset-result" data-reset-result hidden></p>
  <h4>Cómo votar</h4><p class="field-value">Por ahora, recolecta corazones en CHOEAEDOL: inicia sesión diariamente, reclama asistencia/recompensas, abre Heart Box en publicaciones, mira anuncios y completa misiones gratuitas. Los Daily Hearts caducan a las 23:30 KST; los Ever Hearts se conservan. Cuando abra la votación, entra a Golden Disc → Popularity Award, selecciona BTS si aparece entre los nominados y usa tus corazones en BTS como grupo; los corazones enviados a miembros individuales no cuentan para el total grupal.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">APP CHOEAEDOL · ANDROID</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">APP CHOEAEDOL · iOS</a><a class="btn secondary" href="https://www.myloveidol.com/goldendisc/es/" target="_blank" rel="noopener">INFO OFICIAL GDA</a></div>
- <h4>Horario de finalización</h4><p class="field-value">Votación prevista: 3 de enero de 2027 · hora exacta por confirmar · KST.</p>
- <h4>Cuenta regresiva</h4><div class="countdown">Se activará cuando CHOEAEDOL confirme la hora exacta de cierre.</div>
 </article>
  </div>
  <p class="note">Diferencia siempre el voto oficial del premio y las campañas de apoyo de fanbases en X. Si el organizador no publica una hora de reinicio o cierre, la página lo indica como “no publicado” en lugar de inventarla. Las reglas pueden actualizarse: revisa el aviso vigente antes de enviar cada voto.</p>
@@ -157,42 +152,11 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  </div>
 </section>
 
-<section class="panel" id="rankings">
- <div class="section-head"><div><h2>🏆 RANKINGS & POSITIONS</h2><p>Capturas de posiciones publicadas; no son un marcador automático.</p></div><span class="pill">ÚLTIMAS REFERENCIAS</span></div>
- <div class="ranking-grid">
-  <article class="rank"><div class="place">#1</div><h3>AAA Popularity Award</h3><p>BTS figura en primer lugar en la categoría Grupo masculino, según el ranking publicado en la página oficial consultada.</p><a href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener">Ver ranking oficial ↗</a></article>
-  <article class="rank"><div class="place">#1 / #3</div><h3>MAMA 2026</h3><p>Fans' Choice (Bonsang) #1 y VISA Fans' Choice (Daesang) #3, reporte comunitario del 1 nov 2026.</p><a href="https://teapaw.org/btsvotingunite" target="_blank" rel="noopener">Fuente: BTS Voting Unite ↗</a></article>
-  <article class="rank"><div class="place">#1</div><h3>MMA 2026 · Global TOP10</h3><p>Posición compartida por equipo de votación el 30 oct 2026; verificar la posición más reciente en Berriz.</p><a href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">Ver votación ↗</a></article>
- </div>
- <p class="note">Los rankings de MAMA y MMA provienen de reportes comunitarios con fecha, no de una API pública oficial. La posición puede cambiar. AAA muestra su propio ranking en vivo; entra al enlace para ver el dato actualizado.</p>
-</section>
 
 
 
-<section class="panel" id="world-clock">
- <div class="section-head"><div><h2>🌍 BUSCAR HORARIO KST</h2><p>Selecciona tu zona horaria para convertir el reinicio y los horarios de Corea.</p></div><span class="pill">TU HORA LOCAL</span></div>
- <label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">Selecciona tu país o zona horaria</label>
- <select class="time-select" id="timezoneSelect">
-  <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
-  <option value="America/Los_Angeles">🇺🇸 Estados Unidos · Los Ángeles</option><option value="America/Denver">🇺🇸 Estados Unidos · Denver</option><option value="America/Chicago">🇺🇸 Estados Unidos · Chicago</option><option value="America/New_York">🇺🇸 Estados Unidos · Nueva York</option><option value="America/Anchorage">🇺🇸 Estados Unidos · Alaska</option><option value="Pacific/Honolulu">🇺🇸 Estados Unidos · Hawái</option><option value="America/Toronto">🇨🇦 Canadá · Toronto</option><option value="America/Vancouver">🇨🇦 Canadá · Vancouver</option>
-  <option value="America/Guatemala">🇬🇹 Guatemala</option><option value="America/Belize">🇧🇿 Belice</option><option value="America/Tegucigalpa">🇭🇳 Honduras</option><option value="America/El_Salvador">🇸🇻 El Salvador</option><option value="America/Managua">🇳🇮 Nicaragua</option><option value="America/Costa_Rica">🇨🇷 Costa Rica</option><option value="America/Panama">🇵🇦 Panamá</option><option value="America/Bogota">🇨🇴 Colombia</option><option value="America/Lima">🇵🇪 Perú</option><option value="America/Guayaquil">🇪🇨 Ecuador</option><option value="America/Caracas">🇻🇪 Venezuela</option><option value="America/La_Paz">🇧🇴 Bolivia</option><option value="America/Santiago">🇨🇱 Chile · Santiago</option><option value="America/Argentina/Buenos_Aires">🇦🇷 Argentina</option><option value="America/Montevideo">🇺🇾 Uruguay</option><option value="America/Sao_Paulo">🇧🇷 Brasil · São Paulo</option><option value="America/Asuncion">🇵🇾 Paraguay</option><option value="America/Puerto_Rico">🇵🇷 Puerto Rico</option><option value="America/Santo_Domingo">🇩🇴 República Dominicana</option><option value="America/Havana">🇨🇺 Cuba</option>
-  <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
- </select>
- <div class="world-clock" style="margin-top:13px">
-  <div class="clock-box"><h3>🕒 Hora actual en tu zona</h3><div class="clock-time" id="localNow">--:--:--</div><div class="clock-detail" id="localDate">Selecciona una zona horaria.</div></div>
-  <div class="clock-box"><h3>💜 Reinicio KST</h3><div class="clock-time" id="mamaReset">--:--</div><div class="clock-detail" id="mamaResetDate">00:00 KST · cambia de día según Corea.</div></div>
- </div>
- <div class="section-head" style="margin:20px 0 8px"><div><h3 style="margin:0;font-size:1rem">⏳ Finalizaciones en tu horario</h3><p>Conversión automática desde la zona horaria oficial del evento.</p></div></div>
- <div class="time-list" id="deadlineList"></div>
- <div class="section-head" style="margin:20px 0 8px"><div><h3 style="margin:0;font-size:1rem">🔄 Reglas de reinicio por plataforma</h3><p>No todos los concursos publican una hora exacta de reinicio.</p></div></div>
- <div class="time-list">
-  <div class="time-row"><div><strong>MAMA 2026 · Mnet Plus</strong><small>1 ronda diaria; el día de votación se cuenta en hora de Corea (KST).</small></div><div class="local">00:00 KST<br><small>reinicio diario</small></div></div>
-  <div class="time-row"><div><strong>MMA 2026 · Berriz</strong><small>1 voto al día. La plataforma no publica en su aviso una hora universal exacta de reinicio; comprueba el botón de voto de la app.</small></div><div class="local">No publicado<br><small>no asumir medianoche</small></div></div>
-  <div class="time-row"><div><strong>ARIA Awards · web / Spotify</strong><small>1 voto diario en el sistema oficial. La campaña #ARIASBTS en X es una acción de fanbases independiente.</small></div><div class="local">No publicado<br><small>no asumir medianoche</small></div></div>
-  <div class="time-row"><div><strong>Kids' Choice Awards</strong><small>Permite votar más de una vez; límites y actividades pueden variar por región. No es un reinicio diario fijo.</small></div><div class="local">Sin reinicio diario<br><small>según reglas regionales</small></div></div>
- </div>
- <p class="note">La lista incluye países y ciudades representativos y se completa con todas las zonas horarias IANA que admita tu navegador; si tu país tiene varias zonas horarias, selecciona la ciudad o región más cercana. La hora se calcula en tu navegador y ajusta automáticamente el horario de verano cuando corresponde. Los reinicios no publicados oficialmente se muestran como “No publicado” para evitar horarios inventados.</p>
-</section>
+
+
 
 <footer class="footer">BTS VOTING CENTER · Fan-made, no afiliado a BIGHIT MUSIC, HYBE ni a las premiaciones.<br>Información revisada: 2 nov 2026 · <a href="https://linktr.ee/btsxarmyvotingteam" target="_blank" rel="noopener">ARMY Voting Team</a> · <a href="https://btsvotingunite.carrd.co/" target="_blank" rel="noopener">BTS Voting Unite</a></footer>
 </main>
@@ -200,28 +164,30 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
 
 const tzSelect=document.getElementById('timezoneSelect');
 const fmt=(date,tz,opts)=>new Intl.DateTimeFormat('es-MX',{timeZone:tz,...opts}).format(date);
-if(Intl.supportedValuesOf){const known=new Set(Array.from(tzSelect.options).map(o=>o.value));const group=document.createElement('optgroup');group.label='Otras zonas horarias · catálogo mundial';Intl.supportedValuesOf('timeZone').forEach(zone=>{if(!known.has(zone)){const opt=document.createElement('option');opt.value=zone;opt.textContent=zone.replaceAll('_',' ').replaceAll('/',' · ');group.append(opt);}});tzSelect.append(group);}
-const deadlines=[
- {name:'MAMA 2026 · 2.ª ronda',date:'2026-11-08T23:59:00+09:00',zone:'Asia/Seoul',source:'Guía de fanbase: 8 nov 23:59 KST; Soompi reporta 18 nov. Confirma en la app.'},
- {name:'ARIA Awards 2026 · voto oficial',date:'2026-11-09T23:59:00+11:00',zone:'Australia/Sydney',source:'Cierre oficial: 23:59 AEDT. #ARIASBTS es campaña de fans.'},
- {name:'MMA 2026 · Global TOP10',date:null,zone:null,source:'Cierra el 13 de noviembre KST; hora exacta no indicada en el anuncio oficial.'},
- {name:"Kids’ Choice Awards 2026",date:null,zone:null,source:'Cierra el 13 de noviembre; hora exacta depende de región/actividad.'},
- {name:'AAA Popularity Award',date:null,zone:null,source:'Cierre anunciado el 4 de noviembre; la página consultada no especifica hora.'}
-];
-function renderWorldClock(){
+const voteTimes={
+ mama:'<strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).',
+ aria:'<strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.',
+ mma:'<strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.',
+ kca:'<strong>Cierre:</strong> 13 nov; la boleta oficial muestra la hora local según tu región. Sin reinicio diario.',
+ aaa:'<strong>Cierre:</strong> 4 nov; hora exacta no publicada por la organización.',
+ gda:'<strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.'
+};
+function updateLocalTimes(){
  const tz=tzSelect.value,now=new Date();
  document.getElementById('localNow').textContent=fmt(now,tz,{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
- document.getElementById('localDate').textContent=fmt(now,tz,{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZoneName:'long'});
- const kstNow=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Seoul'}));
- const nextKst=new Date(kstNow);nextKst.setHours(24,0,0,0);
- const delta=nextKst-kstNow;
- const resetLocal=new Date(now.getTime()+delta);
- document.getElementById('mamaReset').textContent=fmt(resetLocal,tz,{hour:'2-digit',minute:'2-digit',hour12:false});
- document.getElementById('mamaResetDate').textContent='Próximo 00:00 KST · '+fmt(resetLocal,tz,{weekday:'short',day:'numeric',month:'short'})+' en tu zona.';
- const list=document.getElementById('deadlineList');list.innerHTML='';
- deadlines.forEach(item=>{const row=document.createElement('div');row.className='time-row';const left=document.createElement('div');const strong=document.createElement('strong');strong.textContent=item.name;const small=document.createElement('small');small.textContent=item.source;left.append(strong,small);const right=document.createElement('div');right.className='local';if(item.date){const d=new Date(item.date);right.textContent=fmt(d,tz,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});const sub=document.createElement('small');sub.textContent=fmt(d,tz,{timeZoneName:'short'});right.append(document.createElement('br'),sub);}else{right.textContent='Hora no confirmada';}row.append(left,right);list.append(row);});
+ document.getElementById('localDate').textContent=fmt(now,tz,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ const conversions={
+ mama:' <span>Tu hora para el reinicio de 00:00 KST: '+fmt(new Date('2026-11-01T15:00:00Z'),tz,{hour:'2-digit',minute:'2-digit',hour12:false})+'.</span> Cierre estimado: '+fmt(new Date('2026-11-08T14:59:00Z'),tz,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false})+'.',
+ aria:' Hora local del cierre: '+fmt(new Date('2026-11-09T12:59:00Z'),tz,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false})+'.',
+ mma:' Tu ventana local: '+fmt(new Date('2026-11-01T15:00:00Z'),tz,{hour:'2-digit',minute:'2-digit',hour12:false})+'–'+fmt(new Date('2026-11-02T14:59:00Z'),tz,{hour:'2-digit',minute:'2-digit',hour12:false})+'.',
+ kca:' La hora exacta depende de la región mostrada en la boleta oficial.',
+ aaa:' No es posible convertir un cierre sin hora confirmada.',
+ gda:' Tu hora de caducidad Daily Hearts: '+fmt(new Date('2026-11-02T14:30:00Z'),tz,{hour:'2-digit',minute:'2-digit',hour12:false})+'.'
+ };
+ document.querySelectorAll('[data-vote-time]').forEach(el=>{el.innerHTML=voteTimes[el.dataset.voteTime]+conversions[el.dataset.voteTime];});
 }
-tzSelect.addEventListener('change',renderWorldClock);renderWorldClock();setInterval(renderWorldClock,1000);
+tzSelect.addEventListener('change',()=>{updateLocalTimes();if(typeof updateCardResetTimes==='function')updateCardResetTimes();});
+updateLocalTimes();setInterval(()=>{document.getElementById('localNow').textContent=fmt(new Date(),tzSelect.value,{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});},1000);
 // Botones independientes: solo aparecen en premios con reinicio diario KST confirmado.
 function nextKstReset(hour=0,minute=0){const now=Date.now();const kst=new Date(now+9*60*60*1000);let target=Date.UTC(kst.getUTCFullYear(),kst.getUTCMonth(),kst.getUTCDate(),hour,minute)-9*60*60*1000;if(target<=now)target+=86400000;return new Date(target);}
 function updateCardResetTimes(){const tz=tzSelect.value;document.querySelectorAll('[data-reset-result]').forEach(el=>{const btn=el.parentElement.querySelector('[data-reset-toggle]');const [hour,minute]=(btn?.dataset.resetHour||'00:00').split(':').map(Number);const d=nextKstReset(hour,minute);el.textContent='Próximo horario KST: '+fmt(d,tz,{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit',hour12:false})+' · '+fmt(d,tz,{timeZoneName:'short'})+' (tu zona).';});}
