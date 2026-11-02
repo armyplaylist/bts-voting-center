@@ -299,51 +299,6 @@ footer,.note{color:#887b90}
 }
 
 
-/* BT21 decorative friends — playful details, clean information layout */
-.hero:after{content:none}
-.vote-card{overflow:visible;position:relative;margin-top:10px;margin-bottom:9px}
-.cards{row-gap:28px}
-.vote-card:after,.vote-card:before{z-index:3;pointer-events:none;filter:drop-shadow(0 3px 2px #57445a20);animation:bt21-bob 3.8s ease-in-out infinite}
-.vote-card:after{content:"🐨";position:absolute;right:15px;top:-23px;font-size:31px;line-height:1;transform:rotate(9deg)}
-.vote-card:before{content:"🐰";position:absolute;left:14px;bottom:-21px;width:auto;height:auto;background:none;font-size:28px;line-height:1;transform:rotate(-10deg);animation-delay:-1.3s}
-.vote-card:nth-child(2):after{content:"🦙";animation-delay:-.8s}
-.vote-card:nth-child(2):before{content:"🐶";animation-delay:-2s}
-.vote-card:nth-child(3):after{content:"🍪";animation-delay:-1.7s}
-.vote-card:nth-child(3):before{content:"🐴";animation-delay:-.4s}
-.vote-card:nth-child(4):after{content:"🐶";animation-delay:-2.2s}
-.vote-card:nth-child(4):before{content:"🐨";animation-delay:-1s}
-.vote-card:nth-child(5):after{content:"👽";animation-delay:-.6s}
-.vote-card:nth-child(5):before{content:"🍪";animation-delay:-2.4s}
-.vote-card:nth-child(6):after{content:"🐰";animation-delay:-1.1s}
-.vote-card:nth-child(6):before{content:"🦙";animation-delay:-.3s}
-@keyframes bt21-bob{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -5px;rotate:4deg}}
-@media(prefers-reduced-motion:reduce){.vote-card:after,.vote-card:before{animation:none}}
-@media(max-width:640px){.cards{row-gap:25px}.vote-card:after{right:13px;font-size:28px}.vote-card:before{font-size:25px}}
-
-
-/* Official BT21 character art from BT21's official character CDN */
-.vote-card:before,.vote-card:after{content:none!important;display:none!important}
-.vote-card{overflow:visible;position:relative;margin-top:20px;margin-bottom:18px}
-.cards{row-gap:30px}
-.bt21-friend{position:absolute;z-index:2;width:clamp(38px,5.5vw,50px);height:auto;max-height:50px;object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 5px #39264f26)}
-.bt21-friend.friend-top{right:14px;top:-20px;transform:rotate(7deg)}
-.bt21-friend.friend-bottom{left:14px;bottom:-20px;transform:rotate(-7deg)}
-.vote-card:nth-child(even) .friend-top{right:auto;left:14px;transform:rotate(-7deg)}
-.vote-card:nth-child(even) .friend-bottom{left:auto;right:14px;transform:rotate(7deg)}
-@media(max-width:640px){.bt21-friend{width:34px;max-height:36px}.bt21-friend.friend-top{top:-16px}.bt21-friend.friend-bottom{bottom:-16px}.vote-card{margin-top:16px;margin-bottom:16px}.cards{row-gap:25px}}
-
-
-
-
-.vote-card{isolation:isolate;transform:translateY(0);transition:transform .32s cubic-bezier(.2,.75,.25,1),box-shadow .32s,border-color .32s}
-.vote-card:hover{transform:translateY(-6px);box-shadow:0 16px 30px #6840a025;border-color:#d6c1e9}
-.vote-card:focus-within{border-color:#a987cc;box-shadow:0 0 0 3px #a987cc22,0 12px 26px #6840a018}
-.vote-card:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(115deg,transparent 15%,#ffffff8a 48%,transparent 72%);transform:translateX(-120%);z-index:0}
-.vote-card:hover:after{opacity:1;animation:cardShine .8s ease}
-.vote-card>*{position:relative;z-index:1}
-.vote-card>.bt21-friend{position:absolute;z-index:2;display:block}
-/* MANG usa PNG con fondo transparente para evitar el recuadro blanco */
-.vote-card>.bt21-friend[src*="194876-middle.png"]{mix-blend-mode:normal;background:transparent;object-fit:contain}
 .vote-card>
 .vote-card:nth-child(2n) 
 .vote-card:nth-child(3n) 
@@ -393,6 +348,30 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
 .rank .place{color:#c33e69}
 @media(prefers-reduced-motion:no-preference){.vote-card,.start-action,.btn{transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}.vote-card:hover{box-shadow:0 14px 28px #80516b24}}
 
+
+/* Botones inspirados en las franjas pastel de la referencia, sin personajes */
+.btn,button,.kst-button,.reset-toggle{
+ border:2px solid #241b2b!important;
+ border-radius:9px!important;
+ color:#241b2b!important;
+ font-family:"DM Sans",sans-serif!important;
+ font-weight:800!important;
+ letter-spacing:.015em;
+ box-shadow:3px 3px 0 #241b2b!important;
+ transition:transform .16s ease,box-shadow .16s ease,filter .16s ease;
+}
+.btn,.actions .btn:nth-child(7n+1),button:nth-of-type(7n+1){background:#9ee7f5!important}
+.actions .btn:nth-child(7n+2),button:nth-of-type(7n+2){background:#ed7777!important}
+.actions .btn:nth-child(7n+3),button:nth-of-type(7n+3){background:#f6a98e!important}
+.actions .btn:nth-child(7n+4),button:nth-of-type(7n+4){background:#b994f3!important}
+.actions .btn:nth-child(7n+5),button:nth-of-type(7n+5){background:#f0df55!important}
+.actions .btn:nth-child(7n+6),button:nth-of-type(7n+6){background:#4f76d9!important;color:#fff!important}
+.actions .btn:nth-child(7n+7),button:nth-of-type(7n+7){background:#efaacb!important}
+.btn.secondary{color:#241b2b!important}
+.btn:hover,button:hover,.kst-button:hover,.reset-toggle:hover{filter:saturate(1.08);transform:translate(-1px,-1px);box-shadow:4px 4px 0 #241b2b!important}
+.btn:active,button:active,.kst-button:active,.reset-toggle:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #241b2b!important}
+@media(prefers-reduced-motion:reduce){.btn,button,.kst-button,.reset-toggle{transition:none}}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -425,8 +404,6 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
  <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
  <div class="cards" id="voteCards">
   <article class="vote-card" data-kind="group">
-  <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/koya.gif" alt="KOYA, personaje oficial BT21" loading="lazy">
-  <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/rj.gif" alt="RJ, personaje oficial BT21" loading="lazy">
  <div class="card-top"><h3 class="vote-title">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 / #3 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
  <div class="countdown vote-countdown" data-countdown="mama">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
@@ -434,8 +411,6 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" data-x-copy="mama" href="https://twitter.com/intent/tweet?text=I%27m%20voting%20for%20BTS%20at%20%232026MAMAVOTE%20%23BTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
 </article>
   <article class="vote-card" data-kind="group">
-  <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/shooky.gif" alt="SHOOKY, personaje oficial BT21" loading="lazy">
-  <img class="bt21-friend friend-bottom" src="https://image.pngaaa.com/876/194876-middle.png" alt="MANG, personaje oficial BT21" loading="lazy">
  <div class="card-top"><h3 class="vote-title">ARIA Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
  <div class="countdown vote-countdown" data-countdown="aria">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
@@ -443,8 +418,6 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
  <h4>Participación oficial</h4><div class="actions"><a class="btn" data-x-copy="aria" href="https://twitter.com/intent/tweet?text=I%27m%20supporting%20BTS%20at%20the%20ARIA%20Awards!%20%23ARIASBTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
 </article>
   <article class="vote-card" data-kind="group">
-  <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/chimmy.gif" alt="CHIMMY, personaje oficial BT21" loading="lazy">
-  <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/tata.gif" alt="TATA, personaje oficial BT21" loading="lazy">
  <div class="card-top"><h3 class="vote-title">Melon Music Awards <span>(MMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
  <div class="countdown vote-countdown" data-countdown="mma">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Global TOP10 · BTS</p>
@@ -452,8 +425,6 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">VOTAR EN BERRIZ</a><a class="btn secondary" href="https://berriz.in/" target="_blank" rel="noopener">APP / WEB BERRIZ</a></div>
 </article>
   <article class="vote-card" data-kind="group">
-  <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/cooky.gif" alt="COOKY, personaje oficial BT21" loading="lazy">
-  <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/van.gif" alt="VAN, personaje oficial BT21" loading="lazy">
  <div class="card-top"><h3 class="vote-title">Nickelodeon Kids' Choice Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="kca"><strong>Cierre:</strong> 13 nov; hora local indicada por la boleta oficial según tu región. Sin reinicio diario.</div>
  <div class="countdown vote-countdown" data-countdown="kca">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Favorite Music Group or Duo · BTS; Favorite Album · ARIRANG; Favorite Song · SWIM</p>
@@ -461,8 +432,6 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://kca.nick.tv/vote/favorite-music-group-or-duo" target="_blank" rel="noopener">WEB KCA · VOTAR</a></div>
 </article>
   <article class="vote-card" data-kind="group">
-  <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/koya.gif" alt="KOYA, personaje oficial BT21" loading="lazy">
-  <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/chimmy.gif" alt="CHIMMY, personaje oficial BT21" loading="lazy">
  <div class="card-top"><h3 class="vote-title">Asia Artist Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · ranking oficial consultado</span></div><div class="local-vote-time" data-vote-time="aaa"><strong>Cierre:</strong> 4 nov; hora exacta no publicada por la organización.</div>
  <div class="countdown vote-countdown" data-countdown="aaa">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">AAA Popularity Award · Grupo masculino · BTS</p>
@@ -470,8 +439,6 @@ nav a:hover{background:linear-gradient(110deg,#ffe0e9,#eee3ff);color:#4b285f}
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener">WEB AAA · VOTAR</a></div>
 </article>
   <article class="vote-card" data-kind="group">
-  <img class="bt21-friend friend-top" src="https://cdn-bt21.line-scdn.net/img/character/bt21/rj.gif" alt="RJ, personaje oficial BT21" loading="lazy">
-  <img class="bt21-friend friend-bottom" src="https://cdn-bt21.line-scdn.net/img/character/bt21/cooky.gif" alt="COOKY, personaje oficial BT21" loading="lazy">
  <div class="card-top"><h3 class="vote-title">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
  <div class="countdown vote-countdown" data-countdown="gda">Calculando cuenta regresiva…</div>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Golden Disc CHOEAEDOL Popularity Award · Nominaciones de BTS: pendientes de anuncio a principios de diciembre.</p>
