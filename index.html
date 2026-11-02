@@ -209,7 +209,7 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
  <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · reinicio diario en Mnet Plus y X.</p>
  <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
- <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" href="https://twitter.com/intent/tweet?text=I%27m%20voting%20for%20BTS%20at%20%232026MAMAVOTE%20%23BTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" data-x-copy="mama" href="https://twitter.com/intent/tweet?text=I%27m%20voting%20for%20BTS%20at%20%232026MAMAVOTE%20%23BTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
 </article>
   <article class="vote-card" data-kind="group">
  <div class="card-top"><span class="pill live">ARIA AWARDS 2026</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
@@ -218,7 +218,7 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
  <h4>Horario de reinicio</h4><p class="field-value">No publicado para el voto oficial diario. Campaña #ARIASBTS en X.</p>
  <h4>Cómo votar</h4><p class="field-value">La participación para BTS es exclusivamente a través de X: publica desde una cuenta pública o comparte contenido con el hashtag oficial <b>#ARIASBTS</b>. No hay votación en la web de ARIA ni en Spotify.</p>
- <h4>Participación oficial</h4><div class="actions"><a class="btn" href="https://twitter.com/intent/tweet?text=I%27m%20supporting%20BTS%20at%20the%20ARIA%20Awards!%20%23ARIASBTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
+ <h4>Participación oficial</h4><div class="actions"><a class="btn" data-x-copy="aria" href="https://twitter.com/intent/tweet?text=I%27m%20supporting%20BTS%20at%20the%20ARIA%20Awards!%20%23ARIASBTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
 </article>
   <article class="vote-card" data-kind="group">
  <div class="card-top"><span class="pill live">MMA 2026</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
@@ -349,6 +349,35 @@ function updateVoteCountdowns(){
   el.innerHTML='<strong>Cuenta regresiva:</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s'+(s.instant?'':' <span>hasta la fecha indicada; hora oficial pendiente.</span>');
  });
 }
+// Alterna copies para que cada apertura del composer de X tenga una frase distinta.
+const xCopyOptions={
+ mama:[
+  'ARMY, let’s make our voices count for BTS! #2026MAMAVOTE #BTS',
+  'Sending all my support to BTS at MAMA 2026 💜 #2026MAMAVOTE #BTS',
+  'BTS deserves all the love. Let’s show up for them! #2026MAMAVOTE #BTS',
+  'One more way to support BTS today 💜 #2026MAMAVOTE #BTS',
+  ' 함께 BTS! Let’s keep cheering for our seven. #2026MAMAVOTE #BTS',
+  'My support is with BTS at the 2026 MAMA Awards! #2026MAMAVOTE #BTS'
+ ],
+ aria:[
+  'ARMY, let’s make some noise for BTS! #ARIASBTS',
+  'All my love and support for BTS at the ARIA Awards 💜 #ARIASBTS',
+  'Let’s show the ARIA Awards how much BTS means to us! #ARIASBTS',
+  'Cheering for BTS, always. #ARIASBTS',
+  'Sending support to BTS from wherever you are 💜 #ARIASBTS',
+  'Seven voices, one love. Supporting BTS! #ARIASBTS'
+ ]
+};
+document.querySelectorAll('a[data-x-copy]').forEach(link=>{
+ link.addEventListener('click',()=>{
+  const options=xCopyOptions[link.dataset.xCopy];if(!options?.length)return;
+  const previous=link.dataset.lastCopy||'';
+  const choices=options.filter(copy=>copy!==previous);
+  const copy=choices[Math.floor(Math.random()*choices.length)];
+  link.dataset.lastCopy=copy;
+  link.href='https://twitter.com/intent/tweet?text='+encodeURIComponent(copy);
+ });
+});
 document.getElementById('shareCenter')?.addEventListener('click',async()=>{
  const data={title:'BTS VOTING CENTER',text:'Un solo lugar para encontrar votaciones, fechas e instrucciones para apoyar a BTS.',url:location.href};
  const button=document.getElementById('shareCenter');
