@@ -72,6 +72,59 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
 @keyframes urgentPulse{50%{transform:scale(1.04);filter:brightness(1.08)}}
 @media(prefers-reduced-motion:reduce){.urgency-1{animation:none}}
 
+
+/* Rediseño editorial: menos efectos, más claridad y personalidad */
+:root{--bg:#f6f3f1;--ink:#211b25;--muted:#766e78;--purple:#49305f;--purple2:#755b89;--red:#b72d43;--red2:#d45b6b;--glass:#fff;--line:#e8e1e4;--shadow:0 5px 18px #251a2410}
+body{background:#f6f3f1;color:#211b25;font-family:Arial,Helvetica,sans-serif}
+.wrap{width:min(1080px,calc(100% - 32px));padding-top:22px}
+.hero{border-radius:5px;text-align:left;padding:35px clamp(22px,5vw,58px);background:#2a1c35;box-shadow:none}
+.hero:before,.hero:after{display:none}
+.era{border:0;border-left:3px solid #c44a5d;border-radius:0;background:none;padding:2px 0 2px 10px;color:#f1c6ce;letter-spacing:.12em}
+h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(2.5rem,7vw,4.8rem);letter-spacing:-.065em;margin:18px 0 8px}
+h1 span{color:#d8c5e7;letter-spacing:.16em;font-size:.42em;margin-top:12px}
+.hero p{margin:12px 0 0;color:#d9d0dc;font-weight:400;max-width:510px}
+.hero-stats{justify-content:flex-start;margin-top:24px}
+.stat{border:1px solid #ffffff30;border-radius:3px;background:transparent;padding:8px 11px;font-size:.7rem;letter-spacing:.07em}
+nav{position:relative;top:auto;justify-content:flex-start;margin:13px 0 22px;padding:0;border:0;border-bottom:1px solid #ded6da;border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;gap:22px}
+nav a{padding:12px 2px;border-radius:0;color:#665b69;font-size:.78rem;letter-spacing:.04em}
+nav a:hover{background:none;color:#a22b42}
+.panel{margin:18px 0;padding:clamp(17px,3vw,25px);border:1px solid #e6dfe2;border-radius:5px;background:#fff;backdrop-filter:none;box-shadow:none}
+.section-head{margin-bottom:18px}
+.section-head h2{font-size:1.12rem;letter-spacing:.015em}
+.section-head p{font-weight:400;color:#766e78}
+.pill{border-radius:3px;padding:5px 8px;background:#eee9f0;color:#594766;font-size:.65rem;letter-spacing:.06em}
+.pill.live{background:#f7e9eb;color:#9d293d}
+.pill.soon{background:#eee9f0;color:#594766}
+.time-select{border:1px solid #d9d0d5;border-radius:4px;background:#fff;font-family:Arial,Helvetica,sans-serif}
+.note{border-left:3px solid #b72d43;border-radius:0;background:#f8f5f5;color:#6f6670;font-weight:400}
+.cards{gap:14px}
+.vote-card{padding:18px 18px 17px 21px;border:1px solid #e7e0e3;border-radius:4px;background:#fff;box-shadow:none;gap:11px}
+.vote-card:before{width:3px;background:#b72d43}
+.vote-card h3{font-size:1.12rem;letter-spacing:-.02em}
+.vote-card .meta,.vote-card .field-value{color:#6f6670;font-weight:400}
+.ranking-line{border-radius:3px;background:#f3eff4;color:#5c4967;font-weight:700}
+.ranking-line b{color:#a42b41}
+.local-vote-time{border:0;border-left:3px solid #b72d43;border-radius:0;background:#faf3f4;color:#65434b;font-weight:600}
+.vote-card h4{margin:10px 0 3px;color:#594365;font-size:.78rem;letter-spacing:.045em;text-transform:uppercase}
+.actions{gap:9px}
+.btn{border-radius:3px;background:#49305f;box-shadow:none;font-family:Arial,Helvetica,sans-serif;font-weight:700;letter-spacing:.02em}
+.btn:hover{background:#604477}
+.btn.secondary{background:#f5ecee;color:#922c40;box-shadow:none}
+.filter{border-radius:3px;font-family:Arial,Helvetica,sans-serif}
+.filter.active{box-shadow:none;background:#49305f}
+.ranking-grid{gap:10px}
+.rank{border:1px solid #e7e0e3;border-radius:4px;background:#fff;box-shadow:none}
+.rank .place{color:#b72d43}
+.upcoming-item{border:1px solid #e7e0e3;border-radius:4px;background:#faf8f8}
+.member{border:1px solid #e5dce2;border-radius:4px;background:#fff;box-shadow:none}
+.member:hover,.member.active{border-color:#b72d43;background:#faf3f4;box-shadow:none;transform:none}
+.member img{border-radius:2px}
+.clock-box{border:1px solid #e7e0e3;border-radius:4px;background:#fff}
+.time-row{border-radius:3px;background:#f8f6f6}
+.time-row .local{color:#49305f}
+.footer{color:#827982}
+@media(max-width:720px){.hero{padding:29px 21px}.hero-stats{gap:7px}.stat{font-size:.64rem}.panel{padding:16px}.vote-card{padding:16px 14px 15px 18px}}
+
 </style>
 </head>
 <body><main class="wrap">
