@@ -39,6 +39,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
 .vote-card h4{margin:14px 0 4px;color:#63418c;font-size:.84rem;font-weight:900}
 .vote-card .field-value{margin:0;color:var(--muted);font-size:.84rem;line-height:1.5}
 .vote-card .kst-button{display:inline-flex;margin-top:8px;font-size:.7rem}
+.reset-result{margin:8px 0 0;padding:9px 11px;border-radius:12px;background:#f1eaff;color:#55377c;font-size:.82rem;font-weight:900}.reset-toggle[aria-expanded="true"]{background:#7048ad;color:#fff}
 /* Fichas detalladas de reglas y métodos de voto */
 .rule-box{padding:13px 14px;border:1px solid #e5d8f3;border-radius:15px;background:#fbf8ff;color:#6e5d81;font-size:.8rem;line-height:1.5}
 .rule-box h4{margin:0 0 7px;color:#55377c;font-size:.9rem}
@@ -89,7 +90,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <div class="card-top"><span class="pill live">MAMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
  <h3>Nombre de la premiación</h3><p class="field-value">Mnet Asian Music Awards (MAMA) 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
- <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · reinicio diario en Mnet Plus y X.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · reinicio diario en Mnet Plus y X.</p><button class="btn secondary kst-button reset-toggle" type="button" data-reset-toggle aria-expanded="false">VER MI HORARIO LOCAL</button><p class="reset-result" data-reset-result hidden></p>
  <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" href="https://x.com/hashtag/2026MAMAVOTE" target="_blank" rel="noopener">VOTAR EN X</a></div>
  <h4>Horario de finalización</h4><p class="field-value">8 de noviembre de 2026 · 23:59 KST</p>
@@ -99,7 +100,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <div class="card-top"><span class="pill live">ARIA AWARDS 2026</span><span class="pill">BTS · GRUPAL</span></div>
  <h3>Nombre de la premiación</h3><p class="field-value">ARIA Awards 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
- <h4>Horario de reinicio</h4><p class="field-value">No publicado para el voto oficial diario. Campaña #ARIASBTS en X.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Horario de reinicio</h4><p class="field-value">No publicado para el voto oficial diario. Campaña #ARIASBTS en X.</p>
  <h4>Cómo votar</h4><p class="field-value">Voto oficial: entra a la web de ARIA o a la experiencia de votación en Spotify y selecciona BTS — ARIRANG. X: publica o comparte con <b>#ARIASBTS</b>.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.aria.com.au/vote" target="_blank" rel="noopener">WEB ARIA</a><a class="btn secondary" href="https://x.com/hashtag/ARIASBTS" target="_blank" rel="noopener">VOTAR EN X</a></div>
  <h4>Horario de finalización</h4><p class="field-value">9 de noviembre de 2026 · 23:59 AEDT</p>
@@ -109,7 +110,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <div class="card-top"><span class="pill live">MMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
  <h3>Nombre de la premiación</h3><p class="field-value">Melon Music Awards (MMA) 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Global TOP10 · BTS</p>
- <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · 1 voto diario.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · 1 voto diario.</p><button class="btn secondary kst-button reset-toggle" type="button" data-reset-toggle aria-expanded="false">VER MI HORARIO LOCAL</button><p class="reset-result" data-reset-result hidden></p>
  <h4>Cómo votar</h4><p class="field-value">Abre Berriz, únete a K-Pop Square, entra a MMA2026 Global TOP10, selecciona BTS y confirma tu voto.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">VOTAR EN BERRIZ</a><a class="btn secondary" href="https://berriz.in/" target="_blank" rel="noopener">APP / WEB BERRIZ</a></div>
  <h4>Horario de finalización</h4><p class="field-value">13 de noviembre de 2026 · hora exacta no publicada · KST</p>
@@ -119,7 +120,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <div class="card-top"><span class="pill live">KIDS' CHOICE 2026</span><span class="pill">BTS · GRUPAL</span></div>
  <h3>Nombre de la premiación</h3><p class="field-value">Kids' Choice Awards 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Favorite Music Group or Duo · BTS; Favorite Album · ARIRANG; Favorite Song · SWIM</p>
- <h4>Horario de reinicio</h4><p class="field-value">No aplica · votos ilimitados, sin registro de cuenta.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Horario de reinicio</h4><p class="field-value">No aplica · votos ilimitados, sin registro de cuenta.</p>
  <h4>Cómo votar</h4><p class="field-value">Entra a la boleta, recorre y vota en las 36 categorías. No necesitas registrar una cuenta. Los votos son ilimitados.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://kca.nick.tv/vote/favorite-music-group-or-duo" target="_blank" rel="noopener">WEB KCA · VOTAR</a></div>
  <h4>Horario de finalización</h4><p class="field-value">13 de noviembre de 2026 · hora según el sitio oficial</p>
@@ -129,7 +130,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  <div class="card-top"><span class="pill live">ASIA ARTIST AWARDS</span><span class="pill">BTS · GRUPAL</span></div>
  <h3>Nombre de la premiación</h3><p class="field-value">Asia Artist Awards 2026</p>
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">AAA Popularity Award · Grupo masculino · BTS</p>
- <h4>Horario de reinicio</h4><p class="field-value">No publicado.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Horario de reinicio</h4><p class="field-value">No publicado.</p>
  <h4>Cómo votar</h4><p class="field-value">Abre la página de votación, selecciona la categoría de grupo masculino y vota por BTS.</p>
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener">WEB AAA · VOTAR</a></div>
  <h4>Horario de finalización</h4><p class="field-value">4 de noviembre de 2026 · hora no publicada</p>
@@ -211,6 +212,12 @@ function renderWorldClock(){
  deadlines.forEach(item=>{const row=document.createElement('div');row.className='time-row';const left=document.createElement('div');const strong=document.createElement('strong');strong.textContent=item.name;const small=document.createElement('small');small.textContent=item.source;left.append(strong,small);const right=document.createElement('div');right.className='local';if(item.date){const d=new Date(item.date);right.textContent=fmt(d,tz,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false});const sub=document.createElement('small');sub.textContent=fmt(d,tz,{timeZoneName:'short'});right.append(document.createElement('br'),sub);}else{right.textContent='Hora no confirmada';}row.append(left,right);list.append(row);});
 }
 tzSelect.addEventListener('change',renderWorldClock);renderWorldClock();setInterval(renderWorldClock,1000);
+// Botones independientes: solo aparecen en premios con reinicio diario KST confirmado.
+function nextKstMidnight(){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));return new Date(Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day)+1)-9*60*60*1000);}
+function updateCardResetTimes(){const tz=tzSelect.value;document.querySelectorAll('[data-reset-result]').forEach(el=>{const d=nextKstMidnight();el.textContent='Próximo reinicio: '+fmt(d,tz,{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit',hour12:false})+' · '+fmt(d,tz,{timeZoneName:'short'})+' (tu zona).';});}
+document.querySelectorAll('[data-reset-toggle]').forEach(btn=>btn.addEventListener('click',()=>{const result=btn.parentElement.querySelector('[data-reset-result]');const open=btn.getAttribute('aria-expanded')!=='true';btn.setAttribute('aria-expanded',String(open));result.hidden=!open;if(open)updateCardResetTimes();}));
+tzSelect.addEventListener('change',updateCardResetTimes);
+
 const pad=n=>String(n).padStart(2,'0');
 function updateTimers(){document.querySelectorAll('[data-date]').forEach(el=>{const target=new Date(el.dataset.date).getTime(),now=Date.now(),diff=target-now;if(diff<=0){el.textContent='Votación cerrada o en actualización';return}const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);let alertText='',alertClass='';if(diff<=3600000){alertText='⚠️ ¡ÚLTIMA HORA!';alertClass='urgency-1'}else if(diff<=12*3600000){alertText='🔥 MENOS DE 12 H';alertClass='urgency-12'}else if(diff<=24*3600000){alertText='⏳ MENOS DE 24 H';alertClass='urgency-24'}el.innerHTML='<strong>'+d+'d '+pad(h)+'h '+pad(m)+'m '+pad(s)+'s</strong> restantes';if(alertText){const badge=document.createElement('span');badge.className='urgency '+alertClass;badge.textContent=alertText;el.append(badge);}});}
 updateTimers();setInterval(updateTimers,1000);
