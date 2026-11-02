@@ -175,7 +175,7 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
  <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · reinicio diario en Mnet Plus y X.</p>
  <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
- <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" href="https://x.com/hashtag/2026MAMAVOTE" target="_blank" rel="noopener">VOTAR EN X</a></div>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" href="https://twitter.com/intent/tweet?text=I%27m%20voting%20for%20BTS%20at%20%232026MAMAVOTE%20%23BTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
 </article>
   <article class="vote-card" data-kind="group">
  <div class="card-top"><span class="pill live">ARIA AWARDS 2026</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>Sin posición publicada</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
@@ -184,7 +184,7 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
  <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
  <h4>Horario de reinicio</h4><p class="field-value">No publicado para el voto oficial diario. Campaña #ARIASBTS en X.</p>
  <h4>Cómo votar</h4><p class="field-value">Voto oficial: entra a la web de ARIA o a la experiencia de votación en Spotify y selecciona BTS — ARIRANG. X: publica o comparte con <b>#ARIASBTS</b>.</p>
- <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.aria.com.au/vote" target="_blank" rel="noopener">WEB ARIA</a><a class="btn secondary" href="https://x.com/hashtag/ARIASBTS" target="_blank" rel="noopener">VOTAR EN X</a></div>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.aria.com.au/vote" target="_blank" rel="noopener">WEB ARIA</a><a class="btn secondary" href="https://twitter.com/intent/tweet?text=I%27m%20supporting%20BTS%20at%20the%20ARIA%20Awards!%20%23ARIASBTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
 </article>
   <article class="vote-card" data-kind="group">
  <div class="card-top"><span class="pill live">MMA 2026</span><span class="pill">BTS · GRUPAL</span></div><div class="ranking-line"><b>🏆 RANKING</b><span>#1 · reporte comunitario</span></div><div class="local-vote-time" data-vote-time="mma"><strong>Ventana diaria:</strong> 00:00–23:59 KST. <strong>Cierre:</strong> 13 nov KST; hora exacta no publicada.</div>
@@ -253,6 +253,21 @@ const voteSchedule={
  kca:{date:'2026-11-13',label:'Cierre · hora regional pendiente'},
  aaa:{date:'2026-11-04',label:'Cierre · hora oficial pendiente'},
  gda:{date:'2027-01-03',zone:'Asia/Seoul',label:'Fin previsto · hora oficial pendiente'}
+};
+const voteNames={mama:'MAMA 2026 · Cierre de votación BTS',aria:'ARIA Awards 2026 · Cierre de votación BTS',mma:'MMA 2026 · Fecha de cierre BTS',kca:"Kids' Choice Awards 2026 · Fecha de cierre BTS",aaa:'Asia Artist Awards 2026 · Fecha de cierre BTS',gda:'Golden Disc Awards 2027 · Fin previsto de votación BTS'};
+function calendarStamp(date){return date.toISOString().replace(/[-:]/g,'').replace(/\\.\\d{3}/,'');}
+function addCalendarReminders(){
+ document.querySelectorAll('[data-countdown]').forEach(counter=>{
+  const key=counter.dataset.countdown,s=voteSchedule[key],actions=counter.closest('.vote-card')?.querySelector('.actions');
+  if(!s||!actions||actions.querySelector('[data-calendar="'+key+'"]'))return;
+  let dates;
+  if(s.instant){const start=new Date(s.instant),end=new Date(start.getTime()+30*60000);dates=calendarStamp(start)+'/'+calendarStamp(end);}
+  else{const start=s.date.replace(/-/g,''),next=new Date(s.date+'T12:00:00Z');next.setUTCDate(next.getUTCDate()+1);const end=next.toISOString().slice(0,10).replace(/-/g,'');dates=start+'/'+end;}
+  const details='Recordatorio de BTS VOTING CENTER. Revisa la página oficial de la votación para confirmar horarios y reglas. '+(s.instant?'Cierre estimado con hora publicada.':'La organización no ha publicado la hora exacta; evento de día completo como recordatorio de fecha.');
+  const url='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(voteNames[key])+'&dates='+dates+'&details='+encodeURIComponent(details);
+  const a=document.createElement('a');a.className='btn secondary';a.href=url;a.target='_blank';a.rel='noopener';a.dataset.calendar=key;a.textContent='＋ GOOGLE CALENDAR';actions.appendChild(a);
+ });
+}
 };
 function localDateParts(date,tz){
  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date);
