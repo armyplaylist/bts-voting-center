@@ -35,6 +35,10 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
 @media(max-width:420px){.ranking-grid{grid-template-columns:1fr 1fr}.wrap{width:calc(100% - 20px)}.hero{padding:28px 14px 24px}.stat{font-size:.72rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 
+/* Apartados estandarizados de cada votación */
+.vote-card h4{margin:14px 0 4px;color:#63418c;font-size:.84rem;font-weight:900}
+.vote-card .field-value{margin:0;color:var(--muted);font-size:.84rem;line-height:1.5}
+.vote-card .kst-button{display:inline-flex;margin-top:8px;font-size:.7rem}
 /* Fichas detalladas de reglas y métodos de voto */
 .rule-box{padding:13px 14px;border:1px solid #e5d8f3;border-radius:15px;background:#fbf8ff;color:#6e5d81;font-size:.8rem;line-height:1.5}
 .rule-box h4{margin:0 0 7px;color:#55377c;font-size:.9rem}
@@ -85,46 +89,55 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  </div>
  <div class="cards" id="voteCards">
   <article class="vote-card" data-kind="group">
-   <div class="card-top"><span class="pill live">MAMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
-   <h3>Fans' Choice · 2.ª ronda</h3><div class="meta">Fans' Choice (Bonsang) + VISA Fans' Choice (Daesang)</div>
-   <p class="description">La votación de Fans’ Choice se realiza por dos vías: Mnet Plus (90%) y X (10%). Importante: el voto de Mnet Plus se emite en la APP; el enlace web solo sirve para abrir la información/evento y no sustituye el voto dentro de la app.</p>
-   <div class="deadline">⏰ Guía de fanbase: 8 nov · 23:59 KST</div><div class="countdown" data-date="2026-11-08T23:59:00+09:00">Calculando cuenta regresiva…</div><p class="note">⚠️ Hay discrepancia pública en la fecha de cierre: BTSxARMY Voting Team indica 8 nov, mientras una nota de Soompi informa 18 nov. Confirma el contador y el aviso de cierre dentro de Mnet Plus antes de planificar el último voto.</p>
-   <div class="rule-box"><h4>📱 Cómo votar en Mnet Plus</h4><ol><li>Abre la app Mnet Plus e inicia sesión.</li><li>Entra a 2026 MAMA AWARDS → FANS’ CHOICE.</li><li>Selecciona a BTS en la categoría masculina y completa las selecciones que solicite la pantalla, incluida la categoría VISA Fans’ Choice of the Year si aparece.</li><li>Confirma el envío y revisa que aparezca el comprobante de voto.</li></ol><p><b>Límite:</b> 1 participación diaria por ID y dispositivo. El día se cuenta en KST (Corea). Los votos obtenidos mediante accesos o métodos anormales pueden invalidarse.</p></div>
-   <div class="rule-box x-rule"><h4>𝕏 Cómo votar en X</h4><ol><li>Usa una cuenta pública.</li><li>Publica un post nuevo con <b>#2026MAMAVOTE #BTS</b> (solo el hashtag de un artista por publicación).</li><li>Hazlo una vez al día; si publicas varios votos en el mismo día KST, solo cuenta el primero.</li><li>Los reposts de publicaciones válidas también se contabilizan según la guía de votación.</li></ol><p><b>Peso:</b> X representa el 10% de Fans’ Choice. No mezcles hashtags de otros nominados en el mismo post.</p></div>
-   <div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">ABRIR EVENTO MNET+</a><a class="btn secondary" href="https://x.com/hashtag/2026MAMAVOTE" target="_blank" rel="noopener">VER VOTOS EN X</a></div>
-  </article>
+ <div class="card-top"><span class="pill live">MAMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
+ <h3>Nombre de la premiación</h3><p class="field-value">Mnet Asian Music Awards (MAMA) 2026</p>
+ <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
+ <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · reinicio diario en Mnet Plus y X.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" href="https://x.com/hashtag/2026MAMAVOTE" target="_blank" rel="noopener">VOTAR EN X</a></div>
+ <h4>Horario de finalización</h4><p class="field-value">8 de noviembre de 2026 · 23:59 KST</p>
+ <h4>Cuenta regresiva</h4><div class="countdown" data-date="2026-11-08T23:59:00+09:00">Calculando cuenta regresiva…</div>
+</article>
   <article class="vote-card" data-kind="group">
-   <div class="card-top"><span class="pill live">ARIA AWARDS 2026</span><span class="pill">BTS · GRUPAL</span></div>
-   <h3>Most Popular International Artist</h3><div class="meta">Nominación: BTS · ARIRANG</div>
-   <p class="description">BTS está nominado con ARIRANG. Hay dos formas distintas de apoyar: el voto oficial de ARIA (web/Spotify, con límite diario) y una campaña internacional de fanbases en X con #ARIASBTS. No son el mismo sistema.</p>
-   <div class="deadline">⏰ Voto oficial ARIA: 9 nov · 23:59 AEDT</div><div class="countdown" data-date="2026-11-09T23:59:00+11:00">Calculando cuenta regresiva…</div>
-   <div class="rule-box"><h4>🌐 Voto oficial de ARIA (web)</h4><ol><li>Abre la página oficial de votación.</li><li>Busca “Most Popular International Artist”.</li><li>Selecciona BTS — ARIRANG y envía el voto.</li><li>La página oficial permite 1 voto al día hasta el cierre.</li></ol><p>La página oficial también indica votación desde la app móvil de Spotify; abre Spotify en el móvil y busca la experiencia de votación ARIA.</p></div>
-   <div class="rule-box x-rule"><h4>𝕏 Campaña internacional de fanbases</h4><ol><li>Usa una cuenta pública de X.</li><li>Publica o comparte contenido con <b>#ARIASBTS</b>.</li><li>Las guías de fanbases indican votación ilimitada y que los reposts cuentan.</li></ol><p><b>Nota importante:</b> #ARIASBTS es una campaña organizada por fanbases para impulsar a BTS; no aparece como método de voto oficial en las reglas de la web de ARIA. No la confundas con el voto oficial diario.</p></div>
-   <div class="actions"><a class="btn" href="https://www.aria.com.au/vote" target="_blank" rel="noopener">VOTO OFICIAL ARIA</a><a class="btn secondary" href="https://x.com/hashtag/ARIASBTS" target="_blank" rel="noopener">ABRIR #ARIASBTS EN X</a></div>
-  </article>
+ <div class="card-top"><span class="pill live">ARIA AWARDS 2026</span><span class="pill">BTS · GRUPAL</span></div>
+ <h3>Nombre de la premiación</h3><p class="field-value">ARIA Awards 2026</p>
+ <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Most Popular International Artist · BTS — ARIRANG</p>
+ <h4>Horario de reinicio</h4><p class="field-value">No publicado para el voto oficial diario. Campaña #ARIASBTS en X.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Cómo votar</h4><p class="field-value">Voto oficial: entra a la web de ARIA o a la experiencia de votación en Spotify y selecciona BTS — ARIRANG. X: publica o comparte con <b>#ARIASBTS</b>.</p>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.aria.com.au/vote" target="_blank" rel="noopener">WEB ARIA</a><a class="btn secondary" href="https://x.com/hashtag/ARIASBTS" target="_blank" rel="noopener">VOTAR EN X</a></div>
+ <h4>Horario de finalización</h4><p class="field-value">9 de noviembre de 2026 · 23:59 AEDT</p>
+ <h4>Cuenta regresiva</h4><div class="countdown" data-date="2026-11-09T23:59:00+11:00">Calculando cuenta regresiva…</div>
+</article>
   <article class="vote-card" data-kind="group">
-   <div class="card-top"><span class="pill live">MMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
-   <h3>Global TOP10</h3><div class="meta">Votación internacional · Berriz</div>
-   <p class="description">El voto internacional se realiza en Berriz; los usuarios de Corea votan mediante Melon. Solo pueden participar usuarios de fuera de Corea del Sur que se hayan unido a K-Pop Square. La puntuación Global TOP10 combina Global-K Chart (60%), jurado (20%) y voto de fans (20%); dentro del voto de fans, Melon y Berriz se combinan 1:1.</p>
-   <div class="deadline">⏰ Del 30 oct al 13 nov 2026 · KST. El aviso de la guía no muestra una hora exacta de cierre.</div>
-   <div class="rule-box"><h4>📱 Cómo votar en Berriz</h4><ol><li>Abre Berriz y accede a la comunidad K-Pop Square.</li><li>Únete a K-Pop Square; es requisito para poder votar desde fuera de Corea.</li><li>Abre MMA2026 Global TOP10.</li><li>Elige BTS y confirma tu voto diario.</li><li>Al completar el voto recibirás un certificado diario que puedes capturar y compartir en X. También encontrarás un sticker de MMA2026 en Berriz &gt; My Cabinet para editar y usar.</li></ol><p><b>Elegibilidad:</b> solo usuarios internacionales fuera de Corea del Sur que se hayan unido a K-Pop Square. Actividad anormal puede provocar exclusión o restricción.</p><p><b>Límite y reinicio:</b> 1 voto asignado por día, de 00:00 a 23:59 KST. Se habilita un nuevo voto cada día a las 00:00 KST. Los votos enviados no se pueden cancelar ni cambiar.</p><p><b>Actualización:</b> los totales y votos individuales se actualizan cada 10 minutos; los votos anormales se excluyen.</p><p><b>Resultados:</b> los ganadores se revelan en MMA2026, el 14–15 de noviembre de 2026 en Gocheok Sky Dome.</p></div>
-   <div class="actions"><a class="btn" href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">ABRIR VOTACIÓN BERRIZ</a><a class="btn secondary" href="https://berriz.in/" target="_blank" rel="noopener">ABRIR BERRIZ</a></div>
-  </article>
+ <div class="card-top"><span class="pill live">MMA 2026</span><span class="pill">BTS · GRUPAL</span></div>
+ <h3>Nombre de la premiación</h3><p class="field-value">Melon Music Awards (MMA) 2026</p>
+ <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Global TOP10 · BTS</p>
+ <h4>Horario de reinicio</h4><p class="field-value">00:00 KST · 1 voto diario.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Cómo votar</h4><p class="field-value">Abre Berriz, únete a K-Pop Square, entra a MMA2026 Global TOP10, selecciona BTS y confirma tu voto.</p>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener">VOTAR EN BERRIZ</a><a class="btn secondary" href="https://berriz.in/" target="_blank" rel="noopener">APP / WEB BERRIZ</a></div>
+ <h4>Horario de finalización</h4><p class="field-value">13 de noviembre de 2026 · hora exacta no publicada · KST</p>
+ <h4>Cuenta regresiva</h4><div class="countdown" data-date="2026-11-13T23:59:00+09:00">Calculando cuenta regresiva…</div>
+</article>
   <article class="vote-card" data-kind="group">
-   <div class="card-top"><span class="pill live">KIDS' CHOICE 2026</span><span class="pill">BTS · GRUPAL</span></div>
-   <h3>36 categorías · VOTA EN TODAS</h3><div class="meta">BTS · ARIRANG · SWIM y el resto de categorías</div>
-   <p class="description">La votación de Kids’ Choice Awards permite votos ilimitados y no requiere registrar una cuenta. No te limites a las 3 categorías donde aparece BTS: completa las 36 categorías para apoyar en toda la boleta.</p>
-   <div class="deadline">⏰ Cierra: 13 nov 2026 · revisa la hora que muestra el sitio oficial en tu región</div><div class="countdown">Votación abierta hasta el 13 de noviembre.</div>
-   <div class="rule-box"><h4>🌐 Cómo votar · 36 categorías</h4><ol><li>Abre la página oficial de votación de KCA.</li><li>No necesitas crear ni registrar una cuenta para votar.</li><li>Recorre las 36 categorías, una por una.</li><li>En cada categoría selecciona a tu favorito y envía/continúa según indique la página.</li><li>Completa la boleta entera; vuelve a votar tantas veces como permita el sitio, ya que los votos son ilimitados.</li></ol><p><b>Regla clave:</b> no hay un límite diario anunciado; son votos ilimitados. Asegúrate de completar las 36 categorías en cada recorrido.</p></div>
-   <div class="actions"><a class="btn" href="https://kca.nick.tv/vote/favorite-music-group-or-duo" target="_blank" rel="noopener">ABRIR VOTACIÓN KCA</a></div>
-  </article>
+ <div class="card-top"><span class="pill live">KIDS' CHOICE 2026</span><span class="pill">BTS · GRUPAL</span></div>
+ <h3>Nombre de la premiación</h3><p class="field-value">Kids' Choice Awards 2026</p>
+ <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Favorite Music Group or Duo · BTS; Favorite Album · ARIRANG; Favorite Song · SWIM</p>
+ <h4>Horario de reinicio</h4><p class="field-value">No aplica · votos ilimitados, sin registro de cuenta.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Cómo votar</h4><p class="field-value">Entra a la boleta, recorre y vota en las 36 categorías. No necesitas registrar una cuenta. Los votos son ilimitados.</p>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://kca.nick.tv/vote/favorite-music-group-or-duo" target="_blank" rel="noopener">WEB KCA · VOTAR</a></div>
+ <h4>Horario de finalización</h4><p class="field-value">13 de noviembre de 2026 · hora según el sitio oficial</p>
+ <h4>Cuenta regresiva</h4><div class="countdown" data-date="2026-11-13T23:59:00-06:00">Calculando cuenta regresiva…</div>
+</article>
   <article class="vote-card" data-kind="group">
-   <div class="card-top"><span class="pill live">ASIA ARTIST AWARDS</span><span class="pill">BTS · GRUPAL</span></div>
-   <h3>AAA Popularity Award · Final</h3><div class="meta">Categoría: Grupo masculino</div>
-   <p class="description">La página oficial muestra la ronda final abierta y un ranking en vivo. Consulta la posición directamente en la web de AAA.</p>
-   <div class="deadline">⏰ Cierra: 4 nov · hora no indicada en la página</div>
-   <div class="actions"><a class="btn" href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener">VOTAR / VER RANKING</a></div>
-  </article>
+ <div class="card-top"><span class="pill live">ASIA ARTIST AWARDS</span><span class="pill">BTS · GRUPAL</span></div>
+ <h3>Nombre de la premiación</h3><p class="field-value">Asia Artist Awards 2026</p>
+ <h4>Categorías y nominaciones de BTS</h4><p class="field-value">AAA Popularity Award · Grupo masculino · BTS</p>
+ <h4>Horario de reinicio</h4><p class="field-value">No publicado.</p><a class="btn secondary kst-button" href="#world-clock">BUSCAR MI HORARIO SEGÚN KST</a>
+ <h4>Cómo votar</h4><p class="field-value">Abre la página de votación, selecciona la categoría de grupo masculino y vota por BTS.</p>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener">WEB AAA · VOTAR</a></div>
+ <h4>Horario de finalización</h4><p class="field-value">4 de noviembre de 2026 · hora no publicada</p>
+ <h4>Cuenta regresiva</h4><div class="countdown">Hora exacta de finalización no publicada.</div>
+</article>
  </div>
  <p class="note">Diferencia siempre el voto oficial del premio y las campañas de apoyo de fanbases en X. Si el organizador no publica una hora de reinicio o cierre, la página lo indica como “no publicado” en lugar de inventarla. Las reglas pueden actualizarse: revisa el aviso vigente antes de enviar cada voto.</p>
 </section>
@@ -163,7 +176,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
 </section>
 
 <section class="panel" id="world-clock">
- <div class="section-head"><div><h2>🌍 WORLD RESET & DEADLINE CLOCK</h2><p>Convierte los reinicios y cierres a la hora de tu ciudad.</p></div><span class="pill">TU HORA LOCAL</span></div>
+ <div class="section-head"><div><h2>🌍 BUSCAR HORARIO KST</h2><p>Selecciona tu zona horaria para convertir el reinicio y los horarios de Corea.</p></div><span class="pill">TU HORA LOCAL</span></div>
  <label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">Selecciona tu país o zona horaria</label>
  <select class="time-select" id="timezoneSelect">
   <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
@@ -173,7 +186,7 @@ nav a{text-decoration:none;padding:9px 13px;border-radius:12px;font-size:.8rem;f
  </select>
  <div class="world-clock" style="margin-top:13px">
   <div class="clock-box"><h3>🕒 Hora actual en tu zona</h3><div class="clock-time" id="localNow">--:--:--</div><div class="clock-detail" id="localDate">Selecciona una zona horaria.</div></div>
-  <div class="clock-box"><h3>💜 Reinicio diario MAMA</h3><div class="clock-time" id="mamaReset">--:--</div><div class="clock-detail" id="mamaResetDate">00:00 KST · cambia de día según Corea.</div></div>
+  <div class="clock-box"><h3>💜 Reinicio KST</h3><div class="clock-time" id="mamaReset">--:--</div><div class="clock-detail" id="mamaResetDate">00:00 KST · cambia de día según Corea.</div></div>
  </div>
  <div class="section-head" style="margin:20px 0 8px"><div><h3 style="margin:0;font-size:1rem">⏳ Finalizaciones en tu horario</h3><p>Conversión automática desde la zona horaria oficial del evento.</p></div></div>
  <div class="time-list" id="deadlineList"></div>
