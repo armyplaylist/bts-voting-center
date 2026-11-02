@@ -225,6 +225,14 @@ nav a:hover{background:#382448;color:#fff}
 .local-vote-time{background:#3b202d;border-color:#693244;color:#ffd1da}
 .local-vote-time strong{color:#ff9bad}
 button,.btn{transition:transform .18s ease,filter .18s ease}
+/* Destellos al tocar botones */
+button,.btn,.kst-button,.reset-toggle{position:relative;isolation:isolate}
+.click-spark{position:absolute;z-index:8;width:12px;height:12px;border-radius:50%;pointer-events:none;left:var(--spark-x);top:var(--spark-y);background:radial-gradient(circle,#fff 0 12%,#ffe6a6 22%,#ff9ac4 43%,#a987ff 62%,transparent 72%);box-shadow:0 0 9px 3px #ffd7f5aa;transform:translate(-50%,-50%) scale(.2);animation:buttonSpark .62s ease-out forwards}
+.click-spark:before,.click-spark:after{content:"";position:absolute;inset:-9px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 8%,#fff1b8 9% 11%,transparent 12% 25%,#ffb6db 26% 28%,transparent 29% 50%,#c8b2ff 51% 53%,transparent 54% 75%,#fff1b8 76% 78%,transparent 79%);animation:sparkSpin .62s ease-out forwards}
+.click-spark:after{inset:-15px;opacity:.7;transform:rotate(22deg) scale(.65)}
+@keyframes buttonSpark{0%{opacity:0;transform:translate(-50%,-50%) scale(.15)}25%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
+@keyframes sparkSpin{to{transform:rotate(110deg) scale(1.25);opacity:0}}
+@media(prefers-reduced-motion:reduce){.click-spark,.click-spark:before,.click-spark:after{animation:none!important;opacity:0!important}}
 button:hover,.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
 input,select,.time-select{background:#211a2b!important;color:#f7f1ff!important;border:1px solid #554366!important}
 option{background:#211a2b;color:#fff}
@@ -467,6 +475,19 @@ footer,.note{color:#887b90}
 </main>
 <script>
 const tzSelect=document.getElementById('timezoneSelect');
+// Destello breve en cada botón al hacer click o tocar.
+document.addEventListener('click',event=>{
+ const target=event.target.closest('button,.btn,.kst-button,.reset-toggle');
+ if(!target||target.disabled)return;
+ const rect=target.getBoundingClientRect();
+ const spark=document.createElement('span');
+ spark.className='click-spark';
+ spark.style.setProperty('--spark-x',(event.clientX?event.clientX-rect.left:rect.width/2)+'px');
+ spark.style.setProperty('--spark-y',(event.clientY?event.clientY-rect.top:rect.height/2)+'px');
+ target.appendChild(spark);
+ spark.addEventListener('animationend',()=>spark.remove(),{once:true});
+ setTimeout(()=>spark.remove(),750);
+});
 const timeFormatSelect=document.getElementById('timeFormatSelect');
 const fmt=(date,tz,opts={})=>new Intl.DateTimeFormat('es-MX',{timeZone:tz,...opts,hour12:timeFormatSelect.value==='12'}).format(date);
 const pad=n=>String(n).padStart(2,'0');
