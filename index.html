@@ -147,7 +147,31 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
 .btn{border-radius:999px;background:#6840a0;box-shadow:0 3px 0 #45276f;font-family:"DM Sans",sans-serif}.btn:hover{background:#7951b0}.btn.secondary{background:#fff0f3;color:#b32443;box-shadow:0 3px 0 #e8c6d0}
 .time-select,.filter{border-radius:10px;font-family:"DM Sans",sans-serif}.filter.active{background:#6840a0}
 .rank,.upcoming-item,.clock-box,.member{border-radius:12px}.member img{border-radius:8px}.note{border-left-color:#6840a0;background:#f5f0fa}
-@media(max-width:720px){.hero{border-radius:14px}.panel{border-radius:12px}.vote-card{border-radius:10px}}</style>
+@media(max-width:720px){.hero{border-radius:14px}.panel{border-radius:12px}.vote-card{border-radius:10px}}
+/* Estructura de centro de apoyo ARMY */
+.start-panel{border-top:3px solid #d52e4d}
+.start-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.start-action{display:flex;align-items:center;gap:13px;padding:15px;border:1px solid #e7dfea;border-radius:12px;background:linear-gradient(120deg,#fff,#faf7fc);text-decoration:none;color:#241a2b;transition:transform .18s,border-color .18s}
+.start-action:hover{transform:translateY(-2px);border-color:#b99bd8}
+.start-action.primary-action{background:linear-gradient(110deg,#fff1f3,#fff);border-color:#efcbd3}
+.start-number{display:grid;place-items:center;flex:0 0 38px;height:38px;border-radius:10px;background:#eee5f7;color:#6840a0;font-family:"Space Grotesk",sans-serif;font-weight:700}
+.primary-action .start-number{background:#d52e4d;color:white}
+.start-action strong,.source-grid strong{display:block;font-family:"Space Grotesk",sans-serif;font-size:.88rem;letter-spacing:.015em}
+.start-action small,.source-grid small{display:block;margin-top:4px;color:#766d7d;font-size:.76rem;line-height:1.4}
+.start-action>b{margin-left:auto;color:#b72d43;font-size:1.2rem}
+.start-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:15px;padding-top:14px;border-top:1px solid #eee7f0;color:#706777;font-size:.8rem;font-weight:700}
+.guide-steps{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.guide-step{display:flex;gap:12px;padding:15px;border:1px solid #e8e0ec;border-radius:11px;background:#fff}
+.guide-step>span{font-family:"Space Grotesk",sans-serif;font-size:1.2rem;font-weight:700;color:#c32749}
+.guide-step h3{margin:0 0 5px;font-family:"Space Grotesk",sans-serif;font-size:.94rem}
+.guide-step p{margin:0;color:#706777;font-size:.8rem;line-height:1.5}
+.source-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.source-grid a{display:block;padding:14px;border:1px solid #e8e0ec;border-radius:10px;background:#fff;text-decoration:none;color:#241a2b}
+.source-grid a:hover{border-color:#b99bd8;background:#fcf9ff}
+#start-here,#guide,#sources{scroll-margin-top:18px}
+@media(max-width:650px){.start-grid,.guide-steps{grid-template-columns:1fr}.source-grid{grid-template-columns:1fr 1fr}.start-tools{align-items:flex-start;flex-direction:column}}
+@media(max-width:390px){.source-grid{grid-template-columns:1fr}.start-action{padding:12px}}
+</style>
 </head>
 <body><main class="wrap">
 <header class="hero">
@@ -156,7 +180,17 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
  <p>Un solo lugar para encontrar votaciones, fechas límite y rankings de BTS. Cada voto cuenta.</p>
  <div class="hero-stats"><div class="stat">💜 BTS GROUP</div><div class="stat">GROUP VOTING</div><div class="stat">🗳️ VOTE TOGETHER</div></div>
 </header>
-<nav aria-label="Navegación"><a href="#active">Activas</a><a href="#upcoming">Próximas</a><a href="#country-time">Mi país</a></nav>
+<section class="panel start-panel" id="start-here">
+ <div class="section-head"><div><h2>💜 ARMY, EMPIEZA AQUÍ</h2><p>Todo lo esencial para apoyar a BTS, organizado en un solo lugar.</p></div><span class="pill live">TU CENTRO DE APOYO</span></div>
+ <div class="start-grid">
+  <a class="start-action primary-action" href="#active"><span class="start-number">01</span><span><strong>VOTAR AHORA</strong><small>Revisa las votaciones, instrucciones y enlaces para participar.</small></span><b>↗</b></a>
+  <a class="start-action" href="#guide"><span class="start-number">02</span><span><strong>APRENDER A VOTAR</strong><small>Pasos básicos para evitar errores antes de enviar tu voto.</small></span><b>↗</b></a>
+  <a class="start-action" href="#upcoming"><span class="start-number">03</span><span><strong>PREPARARME</strong><small>Consulta próximos eventos y fechas anunciadas.</small></span><b>↗</b></a>
+  <a class="start-action" href="#sources"><span class="start-number">04</span><span><strong>VER FUENTES OFICIALES</strong><small>Accede directamente a las plataformas de cada organización.</small></span><b>↗</b></a>
+ </div>
+ <div class="start-tools"><span>¿Quieres compartir este centro con otra ARMY?</span><button class="btn secondary" id="shareCenter" type="button">↗ COMPARTIR BTS VOTING CENTER</button></div>
+</section>
+<nav aria-label="Navegación"><a href="#start-here">Empieza aquí</a><a href="#active">Votaciones</a><a href="#guide">Cómo apoyar</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes oficiales</a><a href="#country-time">Mi hora</a></nav>
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2>🌍 ¿DE QUÉ PAÍS ERES?</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
   <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
   <option value="America/Los_Angeles">🇺🇸 Estados Unidos · Los Ángeles</option><option value="America/Denver">🇺🇸 Estados Unidos · Denver</option><option value="America/Chicago">🇺🇸 Estados Unidos · Chicago</option><option value="America/New_York">🇺🇸 Estados Unidos · Nueva York</option><option value="America/Anchorage">🇺🇸 Estados Unidos · Alaska</option><option value="Pacific/Honolulu">🇺🇸 Estados Unidos · Hawái</option><option value="America/Toronto">🇨🇦 Canadá · Toronto</option><option value="America/Vancouver">🇨🇦 Canadá · Vancouver</option>
@@ -233,19 +267,36 @@ nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav
  </div>
 </section>
 
+<section class="panel guide-panel" id="guide">
+ <div class="section-head"><div><h2>🗳️ HOW TO SUPPORT BTS</h2><p>Una ruta sencilla para participar con información clara.</p></div><span class="pill">GUÍA RÁPIDA</span></div>
+ <div class="guide-steps">
+  <article class="guide-step"><span>01</span><div><h3>Elige una votación</h3><p>Abre la tarjeta correspondiente y comprueba que la votación siga dentro de su periodo oficial.</p></div></article>
+  <article class="guide-step"><span>02</span><div><h3>Lee las reglas</h3><p>Revisa categorías, límites diarios, requisitos de cuenta y posibles restricciones regionales en la plataforma organizadora.</p></div></article>
+  <article class="guide-step"><span>03</span><div><h3>Entra desde el enlace oficial</h3><p>Usa los botones de la tarjeta. Evita enlaces reenviados que no puedas verificar y nunca compartas contraseñas ni códigos.</p></div></article>
+  <article class="guide-step"><span>04</span><div><h3>Confirma tu participación</h3><p>Comprueba que la plataforma registró el voto. Si hay reinicio diario, guarda el horario local y vuelve a revisar las reglas.</p></div></article>
+ </div>
+ <p class="note">Importante: BTS VOTING CENTER es una guía fan-made. Las reglas, horarios, disponibilidad por país y resultados pueden cambiar. La información de la organización y de la plataforma de votación siempre tiene prioridad.</p>
+</section>
 
+<section class="panel" id="sources">
+ <div class="section-head"><div><h2>🔗 OFFICIAL SOURCES</h2><p>Accesos directos a las plataformas enlazadas en las fichas de votación.</p></div><span class="pill">VERIFICA ANTES DE VOTAR</span></div>
+ <div class="source-grid">
+  <a href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener"><strong>MAMA 2026</strong><small>Mnet Plus · plataforma de votación ↗</small></a>
+  <a href="https://www.aria.com.au/vote" target="_blank" rel="noopener"><strong>ARIA Awards</strong><small>ARIA · página de votación ↗</small></a>
+  <a href="https://berriz.in/vote/mma2026" target="_blank" rel="noopener"><strong>MMA 2026</strong><small>Berriz · página de votación ↗</small></a>
+  <a href="https://kca.nick.tv/vote/favorite-music-group-or-duo" target="_blank" rel="noopener"><strong>Kids' Choice Awards</strong><small>Nickelodeon · boleta de votación ↗</small></a>
+  <a href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener"><strong>Asia Artist Awards</strong><small>AAA · página de votación ↗</small></a>
+  <a href="https://www.myloveidol.com/goldendisc/es/" target="_blank" rel="noopener"><strong>Golden Disc Awards</strong><small>CHOEAEDOL / información GDA ↗</small></a>
+ </div>
+</section>
 
-
-
-
-
-<footer class="footer">BTS VOTING CENTER · Fan-made, no afiliado a BIGHIT MUSIC, HYBE ni a las premiaciones.<br>Información revisada: 2 nov 2026</footer>
+<footer class="footer">BTS VOTING CENTER · Fan-made, no afiliado a BIGHIT MUSIC, HYBE ni a las premiaciones.<br>Comprueba siempre las reglas y anuncios en las fuentes oficiales. · Información revisada: 2 nov 2026</footer>BTS VOTING CENTER · Fan-made, no afiliado a BIGHIT MUSIC, HYBE ni a las premiaciones.<br>Información revisada: 2 nov 2026</footer>
 </main>
 <script>
-
 const tzSelect=document.getElementById('timezoneSelect');
 const timeFormatSelect=document.getElementById('timeFormatSelect');
 const fmt=(date,tz,opts={})=>new Intl.DateTimeFormat('es-MX',{timeZone:tz,...opts,hour12:timeFormatSelect.value==='12'}).format(date);
+const pad=n=>String(n).padStart(2,'0');
 const voteSchedule={
  mama:{date:'2026-11-08',instant:'2026-11-08T14:59:00Z',zone:'Asia/Seoul',label:'Cierre estimado · 23:59 KST'},
  aria:{date:'2026-11-09',instant:'2026-11-09T12:59:00Z',zone:'Australia/Sydney',label:'Cierre · 23:59 AEDT'},
@@ -263,19 +314,13 @@ function addCalendarReminders(){
   let dates;
   if(s.instant){const start=new Date(s.instant),end=new Date(start.getTime()+30*60000);dates=calendarStamp(start)+'/'+calendarStamp(end);}
   else{const start=s.date.replace(/-/g,''),next=new Date(s.date+'T12:00:00Z');next.setUTCDate(next.getUTCDate()+1);const end=next.toISOString().slice(0,10).replace(/-/g,'');dates=start+'/'+end;}
-  const details='Recordatorio de BTS VOTING CENTER. Revisa la página oficial de la votación para confirmar horarios y reglas. '+(s.instant?'Cierre estimado con hora publicada.':'La organización no ha publicado la hora exacta; evento de día completo como recordatorio de fecha.');
+  const details='Recordatorio de BTS VOTING CENTER. Revisa la página oficial para confirmar horarios y reglas. '+(s.instant?'Cierre estimado con hora publicada.':'La hora exacta no está publicada; evento de día completo como recordatorio.');
   const url='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(voteNames[key])+'&dates='+dates+'&details='+encodeURIComponent(details);
   const a=document.createElement('a');a.className='btn secondary';a.href=url;a.target='_blank';a.rel='noopener';a.dataset.calendar=key;a.textContent='＋ GOOGLE CALENDAR';actions.appendChild(a);
  });
 }
-};
-function localDateParts(date,tz){
- const parts=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(date);
- const out={};parts.forEach(p=>out[p.type]=p.value);return out;
-}
 function localDateLabel(iso,tz){
- const [y,m,d]=iso.split('-').map(Number);
- const utc=new Date(Date.UTC(y,m-1,d,12));
+ const [y,m,d]=iso.split('-').map(Number),utc=new Date(Date.UTC(y,m-1,d,12));
  return fmt(utc,tz,{weekday:'short',day:'numeric',month:'short',year:'numeric'});
 }
 function updateLocalTimes(){
@@ -283,33 +328,41 @@ function updateLocalTimes(){
  document.getElementById('localNow').textContent=fmt(now,tz,{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
  document.getElementById('localDate').textContent=fmt(now,tz,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
  document.querySelectorAll('[data-vote-time]').forEach(el=>{
-   const key=el.dataset.voteTime,s=voteSchedule[key];
-   const localDate=localDateLabel(s.date,s.zone||tz);
-   let detail='';
-   if(s.instant){
-     detail='Tu hora local de cierre: <strong>'+fmt(new Date(s.instant),tz,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',hour12:false})+'</strong>.';
-   }else{
-     detail='Fecha en tu zona: <strong>'+localDateLabel(s.date,tz)+'</strong>. Hora exacta aún no publicada.';
-   }
-   if(key==='mama') detail+=' Reinicio diario local: <strong>'+fmt(new Date('2026-11-01T15:00:00Z'),tz,{hour:'2-digit',minute:'2-digit',hour12:false})+'</strong>.';
-   if(key==='mma') detail+=' Reinicio diario local: <strong>'+fmt(new Date('2026-11-01T15:00:00Z'),tz,{hour:'2-digit',minute:'2-digit',hour12:false})+'</strong>.';
-   if(key==='gda') detail+=' Caducidad Daily Hearts local: <strong>'+fmt(new Date('2026-11-02T14:30:00Z'),tz,{hour:'2-digit',minute:'2-digit',hour12:false})+'</strong>.';
-   el.innerHTML='<strong>'+s.label+':</strong> '+(s.instant?fmt(new Date(s.instant),s.zone||tz,{hour:'2-digit',minute:'2-digit',hour12:false}):localDate)+' · '+detail;
+  const key=el.dataset.voteTime,s=voteSchedule[key];if(!s)return;
+  let detail='';
+  if(s.instant){detail='Tu hora local de cierre: <strong>'+fmt(new Date(s.instant),tz,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+'</strong>.';}
+  else{detail='Fecha en tu zona: <strong>'+localDateLabel(s.date,tz)+'</strong>. Hora exacta aún no publicada.';}
+  if(key==='mama'||key==='mma')detail+=' Reinicio diario local: <strong>'+fmt(new Date('2026-11-01T15:00:00Z'),tz,{hour:'2-digit',minute:'2-digit'})+'</strong>.';
+  if(key==='gda')detail+=' Caducidad Daily Hearts local: <strong>'+fmt(new Date('2026-11-02T14:30:00Z'),tz,{hour:'2-digit',minute:'2-digit'})+'</strong>.';
+  el.innerHTML='<strong>'+s.label+':</strong> '+(s.instant?fmt(new Date(s.instant),s.zone||tz,{hour:'2-digit',minute:'2-digit'}):localDateLabel(s.date,tz))+' · '+detail;
  });
  updateVoteCountdowns();
 }
 function updateVoteCountdowns(){
- const now=new Date(),tz=tzSelect.value;
+ const now=new Date();
  document.querySelectorAll('[data-countdown]').forEach(el=>{
-   const s=voteSchedule[el.dataset.countdown];
-   if(s.instant){
-     const diff=new Date(s.instant).getTime()-now.getTime();
-     if(diff<=0){el.textContent='El plazo indicado ya terminó';return;}
-     const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);
-     el.innerHTML='<strong>Cuenta regresiva:</strong> '+d+' días · '+pad(h)+' h · '+pad(m)+' min · '+pad(sec)+' s';
-   }else{
-     const [y,m,d]=s.date.split('-').map(Number);
-     const target=Date.UTC(y,m-1,d),diff=target-now.getTime();
-     if(diff<=0){el.innerHTML='<strong>Fecha indicada: hoy o ya pasó.</strong> La hora oficial sigue pendiente.';return;}
-     const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
-     el.innerHTML='<strong>Cuenta regresiva:</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s <span>hasta la fecha indicada; hora oficial pendiente.</span>';>
+  const s=voteSchedule[el.dataset.countdown];if(!s)return;
+  const target=s.instant?new Date(s.instant).getTime():Date.UTC(...s.date.split('-').map((v,i)=>i===1?Number(v)-1:Number(v)));
+  const diff=target-now.getTime();
+  if(diff<=0){el.innerHTML=s.instant?'El plazo indicado ya terminó.':'<strong>Fecha indicada: hoy o ya pasó.</strong> La hora oficial sigue pendiente.';return;}
+  const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
+  el.innerHTML='<strong>Cuenta regresiva:</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s'+(s.instant?'':' <span>hasta la fecha indicada; hora oficial pendiente.</span>');
+ });
+}
+document.getElementById('shareCenter')?.addEventListener('click',async()=>{
+ const data={title:'BTS VOTING CENTER',text:'Un solo lugar para encontrar votaciones, fechas e instrucciones para apoyar a BTS.',url:location.href};
+ const button=document.getElementById('shareCenter');
+ try{
+  if(navigator.share){await navigator.share(data);}
+  else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(data.url);button.textContent='✓ ENLACE COPIADO';}
+  else{button.textContent='COPIA EL ENLACE DESDE LA BARRA DEL NAVEGADOR';}
+ }catch(error){if(error.name!=='AbortError')button.textContent='NO SE PUDO COMPARTIR · COPIA EL ENLACE';}
+});
+tzSelect.addEventListener('change',updateLocalTimes);
+timeFormatSelect.addEventListener('change',updateLocalTimes);
+addCalendarReminders();
+updateLocalTimes();
+setInterval(updateVoteCountdowns,1000);
+</script>
+</body>
+</html>
