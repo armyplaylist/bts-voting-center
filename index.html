@@ -1578,6 +1578,39 @@ nav a{display:inline-flex;align-items:center;justify-content:center;gap:7px}
  nav a{gap:5px}
 }
 
+
+/* Dark mode readability: keep every text layer bright and high-contrast */
+body.dark-mode{
+ color:#f4effa!important;
+ --ink:#f4effa;
+ --muted:#d0c3df;
+}
+body.dark-mode :is(h1,h2,h3,h4,h5,strong,b,label,legend,.vote-title,.section-head h2,.birthday-tag,.birthday-meta,.clock-time,.rank .place){
+ color:#f5efff!important;
+}
+body.dark-mode :is(p,small,em,.note,.muted,.description,.vote-card .meta,.vote-card .field-value,.birthday-card .bday-info,.birthday-card .bday-info p,.birthday-card p,.guide-step p,.rank p,.upcoming-item p,.source-grid small,.member small,.local-vote-time,.time-row,.reset-result){
+ color:#d8cce7!important;
+}
+body.dark-mode :is(.panel,.vote-card,.birthday-card,.guide-step,.rank,.upcoming-item,.source-grid a,.clock-box,.country-panel,.birthday-intro,.birthday-hero-copy){
+ color:#f1eafa!important;
+}
+body.dark-mode :is(input,select,textarea,.time-select){
+ color:#f5efff!important;
+ background-color:#30283e!important;
+ border-color:#655477!important;
+}
+body.dark-mode input::placeholder,body.dark-mode textarea::placeholder{color:#c5b7d5!important;opacity:1}
+body.dark-mode a:not(.btn):not(.member):not(.birthday-filter):not(nav a){color:#d9c0ff}
+body.dark-mode .btn,body.dark-mode .btn.primary,body.dark-mode .filter.active,body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .btn{
+ color:#fff!important;text-shadow:0 1px 2px #32134f99;
+}
+body.dark-mode .btn.secondary,body.dark-mode .filter:not(.active),body.dark-mode .birthday-filter:not(.active),body.dark-mode nav a{
+ color:#f0e5ff!important;
+}
+body.dark-mode .vc-icon{color:inherit!important}
+body.dark-mode .complete-toggle{color:#f6edff!important}
+body.dark-mode .complete-toggle[aria-pressed="true"],body.dark-mode .vote-card.is-completed .complete-toggle{color:#e4ffeb!important}
+
 </style>
 </head>
 <body><main class="wrap">
