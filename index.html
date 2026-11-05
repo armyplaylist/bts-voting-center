@@ -2523,20 +2523,8 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
   <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
  </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
 
-<nav aria-label="Navegación"><a href="#home-hub">Inicio</a><a href="#choeaedol">Recolección</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños</a><a href="#guide">Guía</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes</a><a href="#country-time">Mi hora</a></nav>
-<section class="panel home-hub" id="home-hub">
- <div class="section-head"><div><h2>BIENVENIDA, ARMY</h2><p>Elige un apartado para abrirlo por separado. Cada sección tiene su propio espacio.</p></div><span class="pill">CENTRO DE APOYO BTS</span></div>
- <div class="hub-grid">
-  <a class="hub-card" href="#active"><span>01</span><strong>Votaciones</strong><small>Campañas activas, rankings y enlaces para votar.</small></a>
-  <a class="hub-card collection-hub" href="#choeaedol"><span>02</span><strong>Recolección</strong><small>Guía para reunir y entregar Ever Hearts para los GDA.</small></a>
-  <a class="hub-card" href="#completed"><span>03</span><strong>Finalizadas</strong><small>Historial de votaciones y resultados.</small></a>
-  <a class="hub-card" href="#birthday-voting"><span>04</span><strong>Cumpleaños</strong><small>Campañas de Jin y V, fechas y enlaces.</small></a>
-  <a class="hub-card" href="#upcoming"><span>05</span><strong>Próximas</strong><small>Eventos y votaciones anunciadas.</small></a>
-  <a class="hub-card" href="#guide"><span>06</span><strong>Guía ARMY</strong><small>Pasos y recomendaciones para apoyar a BTS.</small></a>
-  <a class="hub-card" href="#sources"><span>07</span><strong>Fuentes oficiales</strong><small>Plataformas y referencias de cada campaña.</small></a>
-  <a class="hub-card" href="#country-time"><span>08</span><strong>Mi horario</strong><small>Configura tu zona horaria y consulta horarios locales.</small></a>
- </div>
-</section>
+<nav aria-label="Navegación"><a href="#country-time">Inicio</a><a href="#choeaedol">Recolección</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños</a><a href="#guide">Guía</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes</a></nav>
+
 
 
 
@@ -3137,13 +3125,13 @@ updateResetCountdowns();
 (function(){
  const ids=['country-time','active','completed','upcoming','birthday-voting','choeaedol','guide','sources'];
  const panels=ids.map(id=>document.getElementById(id)).filter(Boolean);
- const home=document.getElementById('home-hub');
+ const home=document.getElementById('country-time');
  if(!home)return;
- [...panels,home].forEach(panel=>panel.classList.add('route-panel'));
+ panels.forEach(panel=>panel.classList.add('route-panel'));
  function render(){
-  const requested=(location.hash||'#home-hub').slice(1);
-  const target=requested==='home-hub'?home:panels.find(panel=>panel.id===requested)||home;
-  [...panels,home].forEach(panel=>{panel.hidden=panel!==target;});
+  const requested=(location.hash||'#country-time').slice(1);
+  const target=panels.find(panel=>panel.id===requested)||home;
+  panels.forEach(panel=>{panel.hidden=panel!==target;});
   document.querySelectorAll('nav a').forEach(link=>{
    const active=link.hash==='#'+target.id;
    link.classList.toggle('current-view',active);
