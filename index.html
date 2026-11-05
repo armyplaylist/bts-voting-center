@@ -2673,11 +2673,17 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
   window.scrollTo(0,0);
  }
  document.addEventListener("click",event=>{
-  const link=event.target.closest("a[href^=\"#\"]");if(!link)return;
+  const link=event.target.closest && event.target.closest('a[href^="#"]');if(!link)return;
   const id=link.getAttribute("href").slice(1);
-  if(pages.some(page=>page.id===id)){event.preventDefault();if(location.hash==="#"+id)showPage();else location.hash=id;}
+  if(pages.some(page=>page.id===id)){
+   event.preventDefault();
+   if(location.hash!=="#"+id)history.pushState(null,"","#"+id);
+   showPage();
+  }
  });
- window.addEventListener("hashchange",showPage);showPage();
+ window.addEventListener("hashchange",showPage);
+ window.addEventListener("popstate",showPage);
+ showPage();
 })();
 
 const tzSelect=document.getElementById('timezoneSelect');
