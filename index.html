@@ -1467,14 +1467,6 @@ updateResetCountdowns();
  const mx='America/Mexico_City',kst='Asia/Seoul';
  const format=(date,zone)=>new Intl.DateTimeFormat('es-MX',{timeZone:zone,day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:false}).format(date);
  const pad=n=>String(n).padStart(2,'0');
- function nextKstReset(hhmm){
-  const now=new Date(),parts=new Intl.DateTimeFormat('en-CA',{timeZone:kst,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now);
-  const p=Object.fromEntries(parts.filter(x=>x.type!=='literal').map(x=>[x.type,x.value]));
-  const [h,m]=hhmm.split(':').map(Number);
-  let target=new Date(Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day),h-9,m));
-  if(target<=now)target=new Date(target.getTime()+86400000);
-  return target;
- }
  function tick(){
   const now=Date.now();
   document.querySelectorAll('.bday-countdown[data-deadline]').forEach(el=>{
@@ -1484,13 +1476,6 @@ updateResetCountdowns();
    const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
    const approx=el.dataset.approx==='true'?' · hora orientativa':'';
    el.innerHTML='<strong>Faltan:</strong> '+d+' d · '+pad(h)+' h · '+pad(m)+' min · '+pad(s)+' s<br><span>Cierre KST: '+format(new Date(target),kst)+' · México: '+format(new Date(target),mx)+approx+'</span>';
-  });
-  document.querySelectorAll('.bday-reset[data-reset]').forEach(el=>{
-   const reset=el.dataset.reset;
-   if(reset==='unknown'||reset==='none')return;
-   const target=nextKstReset(reset),diff=target-now;
-   const h=Math.floor(diff/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
-   el.innerHTML='<strong>Próximo reinicio ('+reset+' KST):</strong> '+h+' h · '+pad(m)+' min · '+pad(s)+' s<br><span>México: '+format(target,mx)+' · Corea: '+format(target,kst)+'</span>';
   });
  }
  tick();setInterval(tick,1000);
