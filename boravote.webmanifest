@@ -1,0 +1,10 @@
+{
+  "name": "BORAvote — ARMY Voting Command Center",
+  "short_name": "BORAvote",
+  "start_url": "./boravote.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1a102e",
+  "theme_color": "#1a102e",
+  "description": "Organiza las misiones y el mass voting de ARMY."
+}
