@@ -155,7 +155,7 @@ body{font-family:"DM Sans",Arial,sans-serif;background-color:#f8f6fa;background-
 .era{font-family:"Space Grotesk",sans-serif;color:#ffb9c7;border-left:3px solid #f04b68;letter-spacing:.16em}
 h1,.section-head h2,.vote-card h3{font-family:"Space Grotesk",sans-serif;letter-spacing:-.04em}h1{font-weight:700;letter-spacing:-.075em}h1 span{font-family:"DM Sans",sans-serif;color:#d8c4f5;letter-spacing:.2em}
 .hero p{color:#e7dfed}.stat{border:1px solid #ffffff35;border-radius:999px;background:#ffffff0c;font-family:"Space Grotesk",sans-serif}
-nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav a:hover{color:var(--red)}
+nav{border-bottom-color:#ded4e5}nav a{font-family:"Space Grotesk",sans-serif}nav a:hover{color:var(--red)}nav a.current-view{color:var(--red);box-shadow:inset 0 -2px 0 var(--red)}
 .panel{border:1px solid #e5dce9;border-radius:16px;box-shadow:0 7px 22px #24152d0a}
 .pill{border-radius:999px;font-family:"Space Grotesk",sans-serif}.pill.live{background:#ffe8ed;color:#b51f3d}.pill.soon{background:#eee5fa;color:#674099}
 .vote-card{border:1px solid #e8e0ec;border-radius:13px;background:#fff;box-shadow:0 5px 15px #21112b0a}.vote-card:before{width:4px;background:linear-gradient(180deg,#d52e4d,#8b5ab9)}
@@ -2490,6 +2490,18 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
 .gda-collection-alert p{margin:6px 0 0;color:#65566f;font-size:.84rem;line-height:1.55}
 @media(prefers-color-scheme:dark){.gda-collection-alert{background:linear-gradient(120deg,#241b32,#2a1c2a);border-color:#514064;border-left-color:#bd9ae9;color:#f4eaff}.gda-collection-alert strong{color:#d9c0ff}.gda-collection-alert p{color:#e1d5ec}}
 
+
+/* Navegación por apartados independientes: el inicio funciona como portada */
+.route-panel[hidden]{display:none!important}
+.home-hub{margin-top:18px}
+.hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.hub-card{display:flex;flex-direction:column;gap:8px;min-height:132px;padding:18px;text-decoration:none;border:1px solid #e5dce9;border-radius:14px;background:linear-gradient(145deg,#fff,#faf7fc);transition:transform .18s,border-color .18s,box-shadow .18s}
+.hub-card:hover{transform:translateY(-2px);border-color:#cbb4e1;box-shadow:0 8px 20px #24152d10}
+.hub-card>span{color:#c32749;font-size:.72rem;font-weight:900;letter-spacing:.12em}
+.hub-card strong{color:#49305f;font:700 1.05rem 'Space Grotesk',sans-serif}
+.hub-card small{color:#716a79;font-size:.8rem;line-height:1.5}
+.hub-card.collection-hub{border-color:#e8c7d0;background:linear-gradient(145deg,#fff,#fff5f7)}
+@media(max-width:560px){.hub-grid{grid-template-columns:1fr}.hub-card{min-height:110px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -2511,7 +2523,21 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
   <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
  </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
 
-<nav aria-label="Navegación"><a href="#active">Inicio</a><a href="#choeaedol">Recolección</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños</a><a href="#guide">Guía</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes</a><a href="#country-time">Mi hora</a></nav>
+<nav aria-label="Navegación"><a href="#home-hub">Inicio</a><a href="#choeaedol">Recolección</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños</a><a href="#guide">Guía</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes</a><a href="#country-time">Mi hora</a></nav>
+<section class="panel home-hub" id="home-hub">
+ <div class="section-head"><div><h2>BIENVENIDA, ARMY</h2><p>Elige un apartado para abrirlo por separado. Cada sección tiene su propio espacio.</p></div><span class="pill">CENTRO DE APOYO BTS</span></div>
+ <div class="hub-grid">
+  <a class="hub-card" href="#active"><span>01</span><strong>Votaciones</strong><small>Campañas activas, rankings y enlaces para votar.</small></a>
+  <a class="hub-card collection-hub" href="#choeaedol"><span>02</span><strong>Recolección</strong><small>Guía para reunir y entregar Ever Hearts para los GDA.</small></a>
+  <a class="hub-card" href="#completed"><span>03</span><strong>Finalizadas</strong><small>Historial de votaciones y resultados.</small></a>
+  <a class="hub-card" href="#birthday-voting"><span>04</span><strong>Cumpleaños</strong><small>Campañas de Jin y V, fechas y enlaces.</small></a>
+  <a class="hub-card" href="#upcoming"><span>05</span><strong>Próximas</strong><small>Eventos y votaciones anunciadas.</small></a>
+  <a class="hub-card" href="#guide"><span>06</span><strong>Guía ARMY</strong><small>Pasos y recomendaciones para apoyar a BTS.</small></a>
+  <a class="hub-card" href="#sources"><span>07</span><strong>Fuentes oficiales</strong><small>Plataformas y referencias de cada campaña.</small></a>
+  <a class="hub-card" href="#country-time"><span>08</span><strong>Mi horario</strong><small>Configura tu zona horaria y consulta horarios locales.</small></a>
+ </div>
+</section>
+
 
 
 
@@ -3104,6 +3130,30 @@ updateResetCountdowns();
  observer.observe(document.body,{subtree:true,childList:true,characterData:true});
 })();
 
+</script>
+
+<script>
+/* Cada apartado ocupa una vista independiente; no se apilan en Inicio. */
+(function(){
+ const ids=['country-time','active','completed','upcoming','birthday-voting','choeaedol','guide','sources'];
+ const panels=ids.map(id=>document.getElementById(id)).filter(Boolean);
+ const home=document.getElementById('home-hub');
+ if(!home)return;
+ [...panels,home].forEach(panel=>panel.classList.add('route-panel'));
+ function render(){
+  const requested=(location.hash||'#home-hub').slice(1);
+  const target=requested==='home-hub'?home:panels.find(panel=>panel.id===requested)||home;
+  [...panels,home].forEach(panel=>{panel.hidden=panel!==target;});
+  document.querySelectorAll('nav a').forEach(link=>{
+   const active=link.hash==='#'+target.id;
+   link.classList.toggle('current-view',active);
+   if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
+  });
+  window.scrollTo({top:0,behavior:'instant'});
+ }
+ window.addEventListener('hashchange',render);
+ render();
+})();
 </script>
 </body>
 </html>
