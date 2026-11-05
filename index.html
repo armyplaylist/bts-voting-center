@@ -2275,6 +2275,48 @@ body.dark-mode .birthday-tag *{
  color:inherit!important;
 }
 
+
+/* LIGHT MODE VISIBILITY — theme switch and Jin/V birthday countdown tiles */
+body:not(.dark-mode) #themeToggle,
+body:not(.dark-mode) .theme-toggle{
+ background:#7868CC!important;
+ color:#FFFFFF!important;
+ -webkit-text-fill-color:#FFFFFF!important;
+ border:1px solid #6857B8!important;
+ opacity:1!important;
+ text-shadow:none!important;
+ box-shadow:none!important;
+}
+body:not(.dark-mode) #themeToggle *,
+body:not(.dark-mode) .theme-toggle *{
+ color:#FFFFFF!important;
+ -webkit-text-fill-color:#FFFFFF!important;
+}
+body:not(.dark-mode) .birthday-countdowns .birthday-countdown-card{
+ background:#EEE9FF!important;
+ background-image:linear-gradient(135deg,#EEE9FF 0%,#F7F2FF 100%)!important;
+ border:1px solid #CFC3F2!important;
+ box-shadow:0 3px 12px rgba(74,45,122,.10)!important;
+}
+body:not(.dark-mode) .birthday-countdowns .birthday-countdown-member{
+ color:#4A2D7A!important;
+ -webkit-text-fill-color:#4A2D7A!important;
+ font-weight:800!important;
+}
+body:not(.dark-mode) .birthday-countdowns .birthday-countdown-date,
+body:not(.dark-mode) .birthday-countdowns .birthday-countdown-local{
+ color:#6B5790!important;
+ -webkit-text-fill-color:#6B5790!important;
+}
+body:not(.dark-mode) .birthday-countdowns .birthday-countdown-timer{
+ color:#4A2D7A!important;
+ -webkit-text-fill-color:#4A2D7A!important;
+}
+body:not(.dark-mode) .birthday-countdowns .birthday-countdown-timer strong{
+ color:#FF6B7A!important;
+ -webkit-text-fill-color:#FF6B7A!important;
+}
+
 </style>
 </head>
 <body><main class="wrap">
