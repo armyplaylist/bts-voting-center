@@ -3065,7 +3065,7 @@ updateResetCountdowns();
   moon:'<path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>',
   sparkle:'<path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3ZM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/>',
-  x:'<path d="M5 4 19 20M19 4 5 20"/>','
+  x:'<path d="M5 4 19 20M19 4 5 20"/>',
  };
  function pick(el){
   const t=(el.textContent||'').toLowerCase();
@@ -3109,7 +3109,7 @@ updateResetCountdowns();
   el.prepend(icon);
  }
  function run(){
-  document.querySelectorAll('nav a,.btn,.filter,.birthday-filter,.complete-toggle,.hero-share a,.hero-share button,.theme-toggle).forEach(decorate);
+  document.querySelectorAll('nav a,.btn,.filter,.birthday-filter,.complete-toggle,.hero-share a,.hero-share button,.theme-toggle').forEach(decorate);
  }
  run();
  const observer=new MutationObserver(()=>run());
