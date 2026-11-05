@@ -2068,6 +2068,113 @@ body:not(.dark-mode) .theme-toggle{
  background:#8056bd!important;color:#fff!important;border:1px solid #8056bd!important;
 }
 
+
+/* LIGHT MODE — cool periwinkle / lilac palette inspired by the new reference */
+body:not(.dark-mode){
+ --bg:#f5f3ff;--ink:#302653;--muted:#756b98;--purple:#7564c7;--purple2:#9b8ce0;
+ --glass:#fffaff;--line:#e3def8;--shadow:0 9px 26px rgba(75,62,143,.10);
+ --flat-control-bg:#e8e3ff;--flat-control-hover:#dcd5ff;
+ --flat-control-text:#4f4386;--flat-control-border:#cfc7f3;
+ --flat-control-active:#7868cc;--flat-control-active-hover:#6858ba;
+ --flat-control-active-text:#fff;--flat-control-muted:#f0edff;
+ color:#302653!important;background-color:#f5f3ff!important;
+ background-image:
+  radial-gradient(ellipse at 10% 7%,rgba(193,183,250,.50),transparent 28rem),
+  radial-gradient(ellipse at 92% 22%,rgba(220,207,255,.48),transparent 27rem),
+  linear-gradient(150deg,#f8f6ff 0%,#f1efff 58%,#f7f2ff 100%)!important;
+}
+body:not(.dark-mode) .hero{
+ background:linear-gradient(130deg,#b9aff1 0%,#9789df 52%,#c0b4f0 100%)!important;
+ color:#302653!important;border:1px solid #d9d1ff!important;
+ box-shadow:0 12px 28px rgba(75,62,143,.16)!important;
+}
+body:not(.dark-mode) .hero h1,
+body:not(.dark-mode) .hero h1 span{color:#35285f!important}
+body:not(.dark-mode) .hero p{color:#453a70!important}
+body:not(.dark-mode) .era{
+ background:rgba(255,255,255,.30)!important;color:#473b78!important;
+ border:1px solid rgba(255,255,255,.62)!important;
+}
+body:not(.dark-mode) .stat{
+ background:rgba(255,255,255,.34)!important;
+ border:1px solid rgba(255,255,255,.58)!important;color:#40356f!important;
+}
+body:not(.dark-mode) nav{
+ background:rgba(255,255,255,.82)!important;border:1px solid #e1dcf7!important;
+ box-shadow:0 7px 20px rgba(75,62,143,.08)!important;
+}
+body:not(.dark-mode) nav a{color:#61558f!important}
+body:not(.dark-mode) nav a:hover,
+body:not(.dark-mode) nav a.active{background:#e8e3ff!important;color:#40346f!important}
+body:not(.dark-mode) .panel{
+ background:rgba(255,253,255,.94)!important;border:1px solid #e3def8!important;
+ box-shadow:0 8px 24px rgba(75,62,143,.08)!important;
+}
+body:not(.dark-mode) .section-head h2,
+body:not(.dark-mode) .vote-card h3,
+body:not(.dark-mode) .vote-card h4,
+body:not(.dark-mode) .rank h3,
+body:not(.dark-mode) .upcoming-item h3{color:#403568!important}
+body:not(.dark-mode) .section-head p,
+body:not(.dark-mode) .vote-card .meta,
+body:not(.dark-mode) .vote-card .description,
+body:not(.dark-mode) .vote-card .field-value,
+body:not(.dark-mode) .rank p,
+body:not(.dark-mode) .upcoming-item p{color:#776d98!important}
+body:not(.dark-mode) .vote-card,
+body:not(.dark-mode) .rank,
+body:not(.dark-mode) .clock-box{
+ background:linear-gradient(145deg,#fff 0%,#f7f5ff 100%)!important;
+ border:1px solid #e1dcf7!important;
+ box-shadow:0 5px 17px rgba(75,62,143,.07)!important;
+}
+body:not(.dark-mode) .vote-card:before{background:#9384dc!important}
+body:not(.dark-mode) .upcoming-item{
+ background:linear-gradient(145deg,#fff,#f1efff)!important;border:1px solid #e1dcf7!important;
+}
+body:not(.dark-mode) .pill{
+ background:#eae6ff!important;color:#5e5194!important;border:1px solid #dcd5f7!important;
+}
+body:not(.dark-mode) .pill.live{background:#f4e9f4!important;color:#94577e!important;border-color:#ead8eb!important}
+body:not(.dark-mode) .pill.soon{background:#eeeaff!important;color:#695ca3!important}
+body:not(.dark-mode) .deadline,
+body:not(.dark-mode) .local-vote-time{
+ background:#f2efff!important;color:#5e528d!important;border-color:#dfdaf7!important;
+}
+body:not(.dark-mode) .ranking-line,
+body:not(.dark-mode) .reset-result,
+body:not(.dark-mode) .rule-box{
+ background:#f1efff!important;color:#5b5085!important;border-color:#e1dcf7!important;
+}
+body:not(.dark-mode) .note{background:#f7f5ff!important;color:#756b91!important;border-color:#e3def8!important}
+body:not(.dark-mode) .member{
+ background:linear-gradient(145deg,#fff,#efedff)!important;
+ border:1px solid #dfdaf7!important;color:#554987!important;
+}
+body:not(.dark-mode) .member:hover,
+body:not(.dark-mode) .member.active{
+ background:#e5e0ff!important;border-color:#bcb1ed!important;color:#40346f!important;
+}
+body:not(.dark-mode) .time-select,
+body:not(.dark-mode) input,
+body:not(.dark-mode) select,
+body:not(.dark-mode) textarea{
+ background:#fff!important;color:#403568!important;border-color:#dcd6f2!important;
+}
+body:not(.dark-mode) .time-row{background:#f3f1ff!important;color:#514677!important}
+body:not(.dark-mode) .time-row .local,
+body:not(.dark-mode) .clock-time{color:#7564c7!important}
+body:not(.dark-mode) .vote-countdown{background:#f1efff!important;color:#554987!important;border-color:#dfdaf7!important}
+body:not(.dark-mode) .footer{color:#8980a5!important}
+body:not(.dark-mode) .footer a{color:#7564c7!important}
+body:not(.dark-mode) .empty{background:#fbfaff!important;color:#81779d!important}
+body:not(.dark-mode) .urgency-24{background:#ebe7ff!important;color:#66579e!important}
+body:not(.dark-mode) .urgency-12{background:#f7eee3!important;color:#926b42!important}
+body:not(.dark-mode) .urgency-1{background:#b85b83!important;color:#fff!important}
+body:not(.dark-mode) .theme-toggle{
+ background:#7868cc!important;color:#fff!important;border:1px solid #7868cc!important;
+}
+
 </style>
 </head>
 <body><main class="wrap">
