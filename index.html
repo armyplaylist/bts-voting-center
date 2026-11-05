@@ -1193,6 +1193,14 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
 #birthday-voting .birthday-toolbar{margin-top:10px}
 #birthday-voting .birthday-card>p{margin:0}
 #birthday-voting .birthday-card h3{margin-bottom:2px}
+/* Apartados independientes y detalles desplegables */
+.view-page{display:none!important}.view-page.is-current{display:block!important}
+.bday-method{margin:10px 0 2px;border:1px solid #e7deee;border-radius:10px;background:#faf8fc;overflow:hidden}
+.bday-method summary{padding:12px 14px;cursor:pointer;list-style:none;color:#6840a0;font-size:.78rem;font-weight:900;letter-spacing:.035em}
+.bday-method summary::-webkit-details-marker{display:none}
+.bday-method summary:after{content:"＋";float:right}.bday-method[open] summary:after{content:"−"}
+.bday-method-content{padding:0 14px 13px;color:#6f6670;font-size:.82rem;line-height:1.55}
+.bday-method-content p{margin:7px 0}.birthday-card .actions{margin-top:8px}
 </style>
 </head>
 <body><main class="wrap">
@@ -1210,7 +1218,7 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
   <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
  </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
 
-<nav aria-label="Navegación"><a href="#start-here">Empieza aquí</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños Jin &amp; V</a><a href="#guide">Cómo apoyar</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes oficiales</a><a href="#country-time">Mi hora</a></nav>
+<nav aria-label="Navegación"><a href="#start-here">Inicio</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños</a><a href="#guide">Guía</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes</a><a href="#country-time">Mi hora</a></nav>
 <section class="panel start-panel" id="start-here">
  <div class="section-head"><div><h2>💜 ARMY, EMPIEZA AQUÍ</h2><p>Todo lo esencial para apoyar a BTS, organizado en un solo lugar.</p></div><span class="pill live">TU CENTRO DE APOYO</span></div>
  <div class="start-grid">
@@ -1329,7 +1337,7 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
   <article class="birthday-card" data-bday="icpolls"><span class="birthday-tag">JIN + V · PRE-VOTACIÓN</span><h3>IC POLLS · December Birthday AD</h3><p>Encuesta preliminar de anuncios con ambos integrantes. Comprueba que la encuesta siga activa.</p><div class="birthday-meta">Cierre: 7 nov · 23:59 KST</div><div class="bday-countdown" data-deadline="2026-11-07T23:59:00+09:00"></div><div class="bday-info"><strong>Cómo participar:</strong> abre la encuesta web, selecciona a Jin o V según la categoría y envía tu voto. No necesitas recolectar Jams, Hearts ni puntos de una app. Comprueba las reglas de participación antes de enviar.<div class="actions"><a class="btn" href="https://icpolls.com/p/01M6DQ4AGWKQT9R1CDRJEAWDDX" target="_blank" rel="noopener">VOTAR EN IC POLLS ↗</a></div></article>
   <article class="birthday-card" data-bday="dailyduck"><span class="birthday-tag">JIN + V · PROYECTO CONJUNTO</span><h3>DailyDuck · Birthday Ad Gift</h3><p>Proyecto conjunto de anuncio y donación; no es una votación convencional. Revisa las condiciones antes de aportar Moi.</p><div class="birthday-meta">Periodo publicado: hasta el 15 nov 2026 KST · hora exacta no confirmada</div><div class="bday-countdown" data-deadline="2026-11-15T23:59:00+09:00" data-approx="true"></div><div class="bday-info"><strong>Cómo apoyar:</strong> este enlace corresponde a un proyecto de apoyo/donación, no a una votación gratuita. Revisa las condiciones, el método de aporte y el destino antes de participar. No necesitas recolectar Jams para votar aquí.<div class="actions"><a class="btn" href="https://dailyduck.com/vote/89d62809c58a426d84135e4dede4f774" target="_blank" rel="noopener">VER PROYECTO ↗</a></div></article>
  </div>
- <p class="note">Las cuentas regresivas muestran únicamente la hora local que elegiste al inicio. Los horarios aproximados se indican como orientativos. Las formas de conseguir puntos pueden variar según cada votación y el tipo de voto aceptado.</p>
+ <p class="note">Las cuentas regresivas muestran la hora local que elegiste al inicio. Los horarios aproximados se indican como orientativos.</p>
 </section>
 
 <section class="panel guide-panel" id="guide">
@@ -1359,6 +1367,25 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
 <footer class="footer">BTS VOTING CENTER · Información revisada: 4 nov 2026.<br>Consulta siempre las reglas y anuncios en las plataformas oficiales.</footer>
 </main>
 <script>
+// Navegación por apartados: solo se muestra una sección principal a la vez.
+(function(){
+ const ids=["country-time","start-here","active","completed","upcoming","birthday-voting","guide","sources"];
+ const pages=ids.map(id=>document.getElementById(id)).filter(Boolean);
+ pages.forEach(page=>page.classList.add("view-page"));
+ function showPage(){
+  const id=location.hash.slice(1),target=pages.find(page=>page.id===id)||document.getElementById("start-here");
+  pages.forEach(page=>page.classList.toggle("is-current",page===target));
+  document.querySelectorAll("nav a[href^=\"#\"]").forEach(link=>link.setAttribute("aria-current",link.getAttribute("href")==="#"+target.id?"page":"false"));
+  window.scrollTo(0,0);
+ }
+ document.addEventListener("click",event=>{
+  const link=event.target.closest("a[href^=\"#\"]");if(!link)return;
+  const id=link.getAttribute("href").slice(1);
+  if(pages.some(page=>page.id===id)){event.preventDefault();if(location.hash==="#"+id)showPage();else location.hash=id;}
+ });
+ window.addEventListener("hashchange",showPage);showPage();
+})();
+
 const tzSelect=document.getElementById('timezoneSelect');
 const timezoneStorageKey='bts-voting-timezone';
 (function restoreVisitorTimezone(){
@@ -1643,50 +1670,42 @@ updateResetCountdowns();
  });
 })();
 
-// Convert every birthday vote into the same structured card layout.
+// Cada votación de cumpleaños tiene un bloque separado de detalles y enlaces.
 (function(){
- const cards=document.querySelectorAll('.birthday-card');
- function heading(label){const el=document.createElement('h4');el.className='bday-section-title';el.textContent=label;return el;}
+ const cards=document.querySelectorAll(".birthday-card");
+ function heading(label){const el=document.createElement("h4");el.className="bday-section-title";el.textContent=label;return el;}
  function calendarLink(card){
-  const countdown=card.querySelector('.bday-countdown[data-deadline]');
-  const actions=card.querySelector('.actions');
+  const countdown=card.querySelector(".bday-countdown[data-deadline]"),actions=card.querySelector(".actions");
   if(!countdown||!actions)return;
-  actions.querySelector('.calendar-link')?.remove();
-  const target=new Date(countdown.dataset.deadline);
-  if(!Number.isFinite(target.getTime()))return;
+  actions.querySelector(".calendar-link")?.remove();
+  const target=new Date(countdown.dataset.deadline);if(!Number.isFinite(target.getTime()))return;
   const end=new Date(target.getTime()+15*60*1000);
-  const stamp=d=>d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');
-  const zone=tzSelect.value||Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
-  const title=(card.querySelector('h3')?.textContent||'BTS birthday vote')+' · Cierre';
-  const details='Recordatorio de cierre de votación. Hora convertida según la zona seleccionada en BTS Voting Center: '+zone+'. Verifica el cierre en la plataforma oficial.';
-  const url='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+stamp(target)+'/'+stamp(end)+'&ctz='+encodeURIComponent(zone)+'&details='+encodeURIComponent(details);
-  const a=document.createElement('a');a.className='btn calendar-link';a.href=url;a.target='_blank';a.rel='noopener';a.textContent='＋ AÑADIR CIERRE · CALENDAR';actions.appendChild(a);
+  const stamp=d=>d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z");
+  const zone=tzSelect.value||Intl.DateTimeFormat().resolvedOptions().timeZone||"UTC";
+  const title=(card.querySelector("h3")?.textContent||"BTS birthday vote")+" · Cierre";
+  const detailsText="Recordatorio de cierre. Hora convertida según la zona seleccionada: "+zone+". Verifica el cierre en la plataforma oficial.";
+  const url="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(title)+"&dates="+stamp(target)+"/"+stamp(end)+"&ctz="+encodeURIComponent(zone)+"&details="+encodeURIComponent(detailsText);
+  const link=document.createElement("a");link.className="btn calendar-link";link.href=url;link.target="_blank";link.rel="noopener";link.textContent="＋ AÑADIR CIERRE · CALENDAR";actions.appendChild(link);
  }
  cards.forEach(card=>{
-  if(card.dataset.formatted==='true'){calendarLink(card);return;}
-  const tag=card.querySelector('.birthday-tag'),title=card.querySelector('h3'),category=card.querySelector(':scope > p'),meta=card.querySelector('.birthday-meta'),countdown=card.querySelector('.bday-countdown'),info=card.querySelector('.bday-info'),actions=card.querySelector('.actions');
-  if(tag&&title&&category&&meta&&countdown&&info&&actions){
-   const categoryTitle=heading('Categorías y nominaciones');
-   category.classList.add('bday-category');
-   category.before(categoryTitle);
-   const closeTitle=heading('Cierre estimado');
-   meta.before(closeTitle);
-   const voteTitle=heading('Cómo votar');
-   info.before(voteTitle);
-   const raw=info.innerHTML;
-   const parts=raw.split(/<br\s*\/?><strong>Cómo obtener puntos:<\/strong>/i);
-   const access=(parts[0]||'').replace(/<strong>Acceso:<\/strong>/i,'').trim();
-   const points=(parts[1]||'').trim();
-   info.innerHTML='<p><strong>Acceso:</strong> '+access+'</p><p><strong>Cómo obtener puntos:</strong> '+points+'</p>';
-   const linksTitle=heading('Enlaces para votar');
-   actions.before(linksTitle);
-   card.dataset.formatted='true';
+  if(card.dataset.formatted==="true"){calendarLink(card);return;}
+  const title=card.querySelector("h3"),category=card.querySelector(":scope > p"),meta=card.querySelector(".birthday-meta"),countdown=card.querySelector(".bday-countdown"),info=card.querySelector(".bday-info");
+  if(title&&meta&&countdown&&info){
+   if(category){category.classList.add("bday-category");category.before(heading("Categorías y nominaciones"));}
+   meta.before(heading("Cierre"));
+   const actions=info.querySelector(".actions");
+   const guideHtml=Array.from(info.childNodes).filter(node=>node!==actions).map(node=>node.outerHTML||node.textContent).join("").trim();
+   const details=document.createElement("details");details.className="bday-method";
+   const summary=document.createElement("summary");summary.textContent="Moneda y detalles para participar";
+   const content=document.createElement("div");content.className="bday-method-content";content.innerHTML=guideHtml;
+   details.append(summary,content);info.replaceWith(details);
+   if(actions){details.after(heading("Enlaces oficiales"));details.after(actions);}
+   card.dataset.formatted="true";
   }
   calendarLink(card);
  });
  window.refreshBirthdayCalendarLinks=()=>cards.forEach(calendarLink);
 })();
-
 // Birthday vote countdowns: display only the visitor's selected local timezone.
 (function(){
  const kst='Asia/Seoul';
