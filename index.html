@@ -1220,6 +1220,10 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
  <p>Sumérgete en las votaciones, sigue cada fecha límite y nada junto a ARMY para apoyar a BTS.</p>
  <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">🌙 MODO OSCURO</button>
  <div class="hero-stats"><div class="stat">GROUP VOTING</div></div>
+ <div class="hero-share" aria-label="Comparte BTS Voting Center">
+  <a class="hero-share-x" id="shareCenter" href="https://twitter.com/intent/tweet?text=%F0%9F%92%9C%20ARMY%2C%20aqu%C3%AD%20tenemos%20las%20votaciones%20de%20BTS%20en%20un%20solo%20lugar.%20%C2%A1Comp%C3%A1rtelo%20con%20m%C3%A1s%20ARMY!%20%23BTS%20%23ARMY&url=https%3A%2F%2Farmyplaylist.github.io%2Fbts-voting-center%2F" target="_blank" rel="noopener noreferrer">𝕏 COMPARTIR CON MÁS ARMY</a>
+  <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
+ </div>
 </header>
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2>🌍 SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
   <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
@@ -1577,22 +1581,19 @@ document.querySelectorAll('a[data-x-copy]').forEach(link=>{
  });
 });
 const votingCenterUrl=new URL('/bts-voting-center/','https://armyplaylist.github.io').href;
-document.getElementById('shareCenter')?.addEventListener('click',async()=>{
- const data={title:'BTS VOTING CENTER',text:'💜 ARMY, aquí puedes encontrar las votaciones, fechas e instrucciones para apoyar a BTS. ¡Compártelo con más ARMY!',url:votingCenterUrl};
- const button=document.getElementById('shareCenter');
- try{
-  if(navigator.share){await navigator.share(data);}
-  else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(votingCenterUrl);button.textContent='✓ LINK COPIADO PARA COMPARTIR';}
-  else{button.textContent='COPIA EL LINK DESDE LA BARRA DEL NAVEGADOR';}
- }catch(error){if(error.name!=='AbortError')button.textContent='NO SE PUDO COMPARTIR · INTENTA COPIAR EL LINK';}
-});
 document.getElementById('copyCenterLink')?.addEventListener('click',async()=>{
  const button=document.getElementById('copyCenterLink');
+ const original='⧉ COPIAR ENLACE';
  try{
-  await navigator.clipboard.writeText(votingCenterUrl);
-  button.textContent='✓ LINK COPIADO';
+  if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(votingCenterUrl);}
+  else{
+   const field=document.createElement('textarea');field.value=votingCenterUrl;field.setAttribute('readonly','');field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();
+   const copied=document.execCommand('copy');field.remove();if(!copied)throw new Error('Clipboard unavailable');
+  }
+  button.textContent='✓ ENLACE COPIADO';button.classList.add('copied');
+  window.setTimeout(()=>{button.textContent=original;button.classList.remove('copied');},2600);
  }catch(error){
-  button.textContent='LINK: armyplaylist.github.io/bts-voting-center/';
+  button.textContent='COPIA: armyplaylist.github.io/bts-voting-center/';
  }
 });
 tzSelect.addEventListener('change',()=>{try{localStorage.setItem(timezoneStorageKey,tzSelect.value);}catch(e){}updateLocalTimes();addCalendarReminders();window.refreshBirthdayCalendarLinks?.();});
