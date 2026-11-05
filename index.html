@@ -2549,6 +2549,15 @@ body.dark-mode #birthday-voting .birthday-filters .birthday-filter[aria-pressed=
 /* Alerta automática para votaciones que cierran en menos de 24 horas */
 .urgent-vote-alert{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #f0b3b8;border-left:4px solid #d52f45;border-radius:10px;background:#fff0f1;color:#a51f35;font-size:.78rem;font-weight:900;letter-spacing:.025em}
 body.dark-mode .urgent-vote-alert{background:#422a34;border-color:#a94b5c;color:#ffb8c1}
+/* Cuenta regresiva diaria de recolección GDA */
+.gda-collection-countdown{margin:14px 0;padding:16px;border:1px solid #d9c8f4;border-radius:15px;background:linear-gradient(135deg,#f8f3ff,#fff8fb);text-align:center;color:#49366b}
+.gda-countdown-heading{font-size:.78rem;font-weight:900;letter-spacing:.07em}
+.gda-countdown-time{margin:7px 0 3px;font-size:clamp(1.8rem,6vw,2.5rem);font-weight:900;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.gda-countdown-status{font-size:.88rem;font-weight:800}
+.gda-collection-countdown p{margin:7px 0 0;font-size:.76rem;opacity:.8}
+.gda-collection-countdown.is-recount{border-color:#e6b75e;background:linear-gradient(135deg,#fff7e5,#fff0f1);color:#89551a}
+body.dark-mode .gda-collection-countdown{background:#30263e;border-color:#70578e;color:#f0e5ff}
+body.dark-mode .gda-collection-countdown.is-recount{background:#453523;border-color:#9d753a;color:#ffe2a8}
 /* Globitos de notificación en la navegación */
 nav a{display:inline-flex;align-items:center;gap:7px}
 .nav-notification{display:inline-flex;min-width:18px;height:18px;align-items:center;justify-content:center;padding:0 5px;border-radius:999px;background:#d52e4d;color:#fff;font:800 .66rem/1 "DM Sans",Arial,sans-serif;box-shadow:0 2px 6px #d52e4d35;vertical-align:middle}
@@ -2706,6 +2715,12 @@ body.dark-mode .nav-notification{background:#ff6b83;color:#24131a}
 
 <section class="panel" id="choeaedol">
  <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
+ <div class="gda-collection-countdown" id="gdaCollectionCountdown" role="status" aria-live="polite">
+  <div class="gda-countdown-heading">⏳ CIERRE DIARIO DE RECOLECCIÓN</div>
+  <div class="gda-countdown-time" id="gdaCollectionTimer">--:--:--</div>
+  <div class="gda-countdown-status" id="gdaCollectionStatus">Calculando horario KST…</div>
+  <p>23:30–00:00 KST · Recuento de la app</p>
+ </div>
  <div class="gda-collection-alert"><strong>🏆 ETAPA DE RECOLECCIÓN · GOLDEN DISC AWARDS</strong><p>Estamos reuniendo Ever Hearts para prepararnos para los GDA. Por eso, durante esta etapa dejamos los corazones recibidos en las publicaciones indicadas por las fanbases: cada 100 ❤️ corazones votados en esos posts nos da 10 ❤️ Ever Hearts permanentes.</p><p>📺 También puedes ver los videos que quieras para recolectar más Ever Hearts. ¡Cada aporte nos ayuda a preparar el apoyo a BTS!</p></div>
  <div class="guide-steps">
   <article class="guide-step"><span>👥</span><div><h3>¡Consigue 300 amigos!</h3><p>Hagamos crecer nuestra lista y apoyémonos entre ARMY.</p></div></article>
@@ -2780,6 +2795,31 @@ document.addEventListener('click',event=>{
 const timeFormatSelect=document.getElementById('timeFormatSelect');
 const fmt=(date,tz,opts={})=>new Intl.DateTimeFormat('es-MX',{timeZone:tz,...opts,hour12:timeFormatSelect.value==='12'}).format(date);
 const pad=n=>String(n).padStart(2,'0');
+function updateGdaCollectionCountdown(){
+ const timer=document.getElementById('gdaCollectionTimer');
+ const status=document.getElementById('gdaCollectionStatus');
+ const box=document.getElementById('gdaCollectionCountdown');
+ if(!timer||!status||!box)return;
+ const now=new Date();
+ const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(now);
+ const get=k=>Number(parts.find(p=>p.type===k)?.value||0);
+ const seconds=get('hour')*3600+get('minute')*60+get('second');
+ const recountStart=23*3600+30*60;
+ const remaining=seconds<recountStart?recountStart-seconds:86400-seconds;
+ const h=Math.floor(remaining/3600),m=Math.floor((remaining%3600)/60),sec=remaining%60;
+ timer.textContent=[h,m,sec].map(n=>String(n).padStart(2,'0')).join(':');
+ const recount=seconds>=recountStart;
+ box.classList.toggle('is-recount',recount);
+ if(recount){
+  status.textContent='🔄 La app está realizando el recuento. El nuevo ciclo comienza a las 00:00 KST.';
+  box.querySelector('.gda-countdown-heading').textContent='🔄 RECUENTO DE LA APP';
+ }else{
+  status.textContent='Tiempo restante para finalizar la recolección de hoy.';
+  box.querySelector('.gda-countdown-heading').textContent='⏳ CIERRE DIARIO DE RECOLECCIÓN';
+ }
+}
+updateGdaCollectionCountdown();
+setInterval(updateGdaCollectionCountdown,1000);
 function updateSectionNotificationBadges(){
  const definitions=[
   {id:'choeaedol',count:document.querySelectorAll('#choeaedol .gda-collection-alert').length,label:'Aviso de recolección GDA'},
