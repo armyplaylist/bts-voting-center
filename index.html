@@ -1838,6 +1838,102 @@ body.dark-mode :is(.btn.primary,.btn:not(.secondary),.hero-share-x,
  .btn,.filter,.birthday-filter,nav a,.member,button{transition:none!important}
 }
 
+
+/* THEME COLOR OVERRIDE — single source of truth for every control */
+body{
+ --flat-control-bg:#eee6f7;
+ --flat-control-hover:#e2d4f0;
+ --flat-control-text:#563875;
+ --flat-control-border:#d4c1e8;
+ --flat-control-active:#8054ad;
+ --flat-control-active-hover:#704596;
+ --flat-control-active-text:#fff;
+ --flat-control-muted:#e6dced;
+}
+body.dark-mode{
+ --flat-control-bg:#33283e;
+ --flat-control-hover:#443451;
+ --flat-control-text:#f5eaff;
+ --flat-control-border:#705b82;
+ --flat-control-active:#79569b;
+ --flat-control-active-hover:#8b68ad;
+ --flat-control-active-text:#fff;
+ --flat-control-muted:#40334b;
+}
+body :is(.btn,.filter,.birthday-filter,nav a,.member,.reset-toggle,
+button:not(.time-select),.hero-share a,.hero-share button,
+.complete-toggle,.theme-toggle,.vote-card .actions a,.vote-card .actions button,
+.birthday-card a,.birthday-card button,.source-grid a,.rank a,.upcoming-item a){
+ background:var(--flat-control-bg)!important;
+ color:var(--flat-control-text)!important;
+ -webkit-text-fill-color:var(--flat-control-text)!important;
+ border:1px solid var(--flat-control-border)!important;
+ border-radius:11px!important;
+ box-shadow:none!important;
+ text-shadow:none!important;
+ filter:none!important;
+ opacity:1!important;
+}
+body :is(.btn,.filter,.birthday-filter,nav a,.member,.reset-toggle,
+button:not(.time-select),.hero-share a,.hero-share button,
+.complete-toggle,.theme-toggle,.vote-card .actions a,.vote-card .actions button,
+.birthday-card a,.birthday-card button,.source-grid a,.rank a,.upcoming-item a):is(.primary,.active,.complete-toggle,.theme-toggle,.hero-share-x),
+body :is(.btn.primary,.btn:not(.secondary),.filter.active,.birthday-filter.active,
+.member.active,.complete-toggle,.theme-toggle,.hero-share-x,.hero-share button,
+.vote-card .actions .btn:not(.secondary)){
+ background:var(--flat-control-active)!important;
+ color:var(--flat-control-active-text)!important;
+ -webkit-text-fill-color:var(--flat-control-active-text)!important;
+ border-color:var(--flat-control-active)!important;
+ box-shadow:none!important;
+ text-shadow:none!important;
+}
+body :is(.btn,.filter,.birthday-filter,nav a,.member,.reset-toggle,
+button:not(.time-select),.hero-share a,.hero-share button,
+.complete-toggle,.theme-toggle,.vote-card .actions a,.vote-card .actions button,
+.birthday-card a,.birthday-card button):hover{
+ background:var(--flat-control-hover)!important;
+ color:var(--flat-control-text)!important;
+ -webkit-text-fill-color:var(--flat-control-text)!important;
+ border-color:var(--flat-control-border)!important;
+ box-shadow:none!important;
+ transform:none!important;
+}
+body :is(.btn.primary,.btn:not(.secondary),.filter.active,.birthday-filter.active,
+.member.active,.complete-toggle,.theme-toggle,.hero-share-x,.hero-share button,
+.vote-card .actions .btn:not(.secondary)):hover{
+ background:var(--flat-control-active-hover)!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border-color:var(--flat-control-active-hover)!important;
+}
+body :is(.btn.secondary,.vote-card .actions .btn.secondary){
+ background:var(--flat-control-muted)!important;
+ color:var(--flat-control-text)!important;
+ -webkit-text-fill-color:var(--flat-control-text)!important;
+}
+body :is(.btn,.filter,.birthday-filter,nav a,.member,.reset-toggle,
+button,.hero-share a,.hero-share button,.complete-toggle,.theme-toggle)::before,
+body :is(.btn,.filter,.birthday-filter,nav a,.member,.reset-toggle,
+button,.hero-share a,.hero-share button,.complete-toggle,.theme-toggle)::after{
+ content:none!important;display:none!important;
+}
+body.dark-mode :is(.btn,.filter,.birthday-filter,nav a,.member,.reset-toggle,
+button:not(.time-select),.hero-share a,.hero-share button,.complete-toggle,.theme-toggle,
+.vote-card .actions a,.vote-card .actions button,.birthday-card a,.birthday-card button){
+ background-color:var(--flat-control-bg)!important;
+ color:var(--flat-control-text)!important;
+ -webkit-text-fill-color:var(--flat-control-text)!important;
+ border-color:var(--flat-control-border)!important;
+}
+body.dark-mode :is(.btn.primary,.btn:not(.secondary),.filter.active,.birthday-filter.active,
+.member.active,.complete-toggle,.theme-toggle,.hero-share-x,.hero-share button,
+.vote-card .actions .btn:not(.secondary)){
+ background:var(--flat-control-active)!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border-color:var(--flat-control-active)!important;
+}
+body :is(.vc-icon){background:transparent!important;color:inherit!important;border:0!important;box-shadow:none!important}
+
 </style>
 </head>
 <body><main class="wrap">
