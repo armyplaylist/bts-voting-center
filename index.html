@@ -2545,6 +2545,10 @@ body.dark-mode #birthday-voting .birthday-filters .birthday-filter[aria-pressed=
 .choeaedol-heart-guide{display:grid;gap:8px}
 .choeaedol-heart-guide p{margin:0;padding:0;border-radius:0;background:transparent;line-height:1.55}
 .choeaedol-heart-guide strong{color:#d12f3f}
+
+/* Alerta automática para votaciones que cierran en menos de 24 horas */
+.urgent-vote-alert{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #f0b3b8;border-left:4px solid #d52f45;border-radius:10px;background:#fff0f1;color:#a51f35;font-size:.78rem;font-weight:900;letter-spacing:.025em}
+body.dark-mode .urgent-vote-alert{background:#422a34;border-color:#a94b5c;color:#ffb8c1}
 </style>
 </head>
 <body><main class="wrap">
@@ -2771,6 +2775,18 @@ document.addEventListener('click',event=>{
 const timeFormatSelect=document.getElementById('timeFormatSelect');
 const fmt=(date,tz,opts={})=>new Intl.DateTimeFormat('es-MX',{timeZone:tz,...opts,hour12:timeFormatSelect.value==='12'}).format(date);
 const pad=n=>String(n).padStart(2,'0');
+function updateUrgentAlert(card,diff){
+ if(!card)return;
+ let alert=card.querySelector('.urgent-vote-alert');
+ if(diff>0&&diff<=86400000){
+  if(!alert){
+   alert=document.createElement('div');alert.className='urgent-vote-alert';
+   alert.textContent='⚠️ ¡ATENCIÓN! ESTA VOTACIÓN CIERRA EN MENOS DE 24 HORAS';
+   const countdown=card.querySelector('.bday-countdown,.vote-countdown');
+   if(countdown)countdown.insertAdjacentElement('beforebegin',alert);else card.prepend(alert);
+  }
+ }else if(alert){alert.remove();}
+}
 const voteSchedule={
  mama:{date:'2026-11-08',instant:'2026-11-08T14:59:00Z',zone:'Asia/Seoul',label:'Cierre estimado · 23:59 KST'},
  aria:{date:'2026-11-09',instant:'2026-11-09T12:59:00Z',zone:'Australia/Sydney',label:'Cierre · 23:59 AEDT'},
@@ -2848,6 +2864,7 @@ function updateVoteCountdowns(){
   const s=voteSchedule[el.dataset.countdown];if(!s)return;
   const target=s.instant?new Date(s.instant).getTime():Date.UTC(...s.date.split('-').map((v,i)=>i===1?Number(v)-1:Number(v)));
   const diff=target-now.getTime();
+  updateUrgentAlert(el.closest('.vote-card'),diff);
   if(diff<=0){el.innerHTML=s.instant?'El plazo indicado ya terminó.':'<strong>Fecha indicada: hoy o ya pasó.</strong> La hora oficial sigue pendiente.';return;}
   const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
   el.innerHTML='<strong>Cuenta regresiva:</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s'+(s.instant?'':' <span>hasta la fecha indicada; hora oficial pendiente.</span>');
@@ -3085,6 +3102,7 @@ updateResetCountdowns();
   document.querySelectorAll('.bday-countdown[data-deadline]').forEach(el=>{
    const target=new Date(el.dataset.deadline).getTime(),diff=target-now,sourceZone=el.dataset.zone||kst;
    if(!Number.isFinite(target))return;
+   updateUrgentAlert(el.closest('.birthday-card'),diff);
    const local=format(new Date(target),localZone);
    if(diff<=0){el.classList.add('is-ended');el.innerHTML='<strong>Plazo finalizado.</strong><br><span>Cierre en tu zona: '+local+'.</span>';return;}
    const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);
