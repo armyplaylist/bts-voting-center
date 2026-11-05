@@ -1934,6 +1934,140 @@ body.dark-mode :is(.btn.primary,.btn:not(.secondary),.filter.active,.birthday-fi
 }
 body :is(.vc-icon){background:transparent!important;color:inherit!important;border:0!important;box-shadow:none!important}
 
+
+/* LIGHT MODE — StudyMate-inspired pastel lavender, blush and warm ivory */
+body:not(.dark-mode){
+ --bg:#fff8f7;
+ --ink:#342747;
+ --muted:#82758d;
+ --purple:#8056bd;
+ --purple2:#a98bd4;
+ --glass:#fffafc;
+ --line:#eadff0;
+ --shadow:0 8px 24px rgba(117,83,151,.09);
+ --flat-control-bg:#f1e8fa;
+ --flat-control-hover:#e9dcf6;
+ --flat-control-text:#60447e;
+ --flat-control-border:#dfd0ed;
+ --flat-control-active:#8056bd;
+ --flat-control-active-hover:#7046ad;
+ --flat-control-active-text:#fff;
+ --flat-control-muted:#f8edf3;
+ color:#342747!important;
+ background-color:#fff8f7!important;
+ background-image:
+  radial-gradient(ellipse at 8% 5%,rgba(220,199,245,.62),transparent 27rem),
+  radial-gradient(ellipse at 94% 18%,rgba(248,213,225,.58),transparent 25rem),
+  radial-gradient(ellipse at 48% 100%,rgba(239,225,248,.72),transparent 32rem)!important;
+}
+body:not(.dark-mode) .hero{
+ background:linear-gradient(135deg,#eee2fb 0%,#f7e8f1 54%,#fcebed 100%)!important;
+ color:#39294e!important;border:1px solid #e8d9f0!important;
+ box-shadow:0 10px 28px rgba(128,86,189,.10)!important;
+}
+body:not(.dark-mode) .hero h1,
+body:not(.dark-mode) .hero h1 span{color:#60447e!important}
+body:not(.dark-mode) .hero p{color:#766583!important}
+body:not(.dark-mode) .era{
+ background:#fff9fc!important;color:#795b9b!important;
+ border:1px solid #e4d5ef!important;
+}
+body:not(.dark-mode) .stat{
+ background:rgba(255,255,255,.68)!important;
+ border:1px solid #e7d9ef!important;color:#674d82!important;
+}
+body:not(.dark-mode) nav{
+ background:rgba(255,250,252,.88)!important;
+ border:1px solid #eadff0!important;
+ box-shadow:0 5px 18px rgba(117,83,151,.07)!important;
+}
+body:not(.dark-mode) nav a{color:#70558d!important}
+body:not(.dark-mode) nav a:hover,
+body:not(.dark-mode) nav a.active{
+ background:#eee3f8!important;color:#57377f!important;
+}
+body:not(.dark-mode) .panel{
+ background:rgba(255,251,253,.94)!important;
+ border:1px solid #eadff0!important;
+ box-shadow:0 8px 24px rgba(117,83,151,.07)!important;
+}
+body:not(.dark-mode) .section-head h2,
+body:not(.dark-mode) .vote-card h3,
+body:not(.dark-mode) .vote-card h4,
+body:not(.dark-mode) .rank h3,
+body:not(.dark-mode) .upcoming-item h3{color:#49345f!important}
+body:not(.dark-mode) .section-head p,
+body:not(.dark-mode) .vote-card .meta,
+body:not(.dark-mode) .vote-card .description,
+body:not(.dark-mode) .vote-card .field-value,
+body:not(.dark-mode) .rank p,
+body:not(.dark-mode) .upcoming-item p{color:#82758d!important}
+body:not(.dark-mode) .vote-card,
+body:not(.dark-mode) .rank,
+body:not(.dark-mode) .clock-box{
+ background:linear-gradient(145deg,#fffefe 0%,#fff8fb 100%)!important;
+ border:1px solid #eadff0!important;
+ box-shadow:0 5px 16px rgba(117,83,151,.07)!important;
+}
+body:not(.dark-mode) .vote-card:before{background:#c5a6e6!important}
+body:not(.dark-mode) .upcoming-item{
+ background:linear-gradient(145deg,#fffefe,#f8f0fa)!important;
+ border:1px solid #eadff0!important;
+}
+body:not(.dark-mode) .pill{
+ background:#f0e8f8!important;color:#71528f!important;
+ border:1px solid #e5d8ef!important;
+}
+body:not(.dark-mode) .pill.live{
+ background:#fbe9ef!important;color:#a34f70!important;border-color:#f2d9e3!important;
+}
+body:not(.dark-mode) .pill.soon{
+ background:#f1eafa!important;color:#75579a!important;
+}
+body:not(.dark-mode) .deadline,
+body:not(.dark-mode) .local-vote-time,
+body:not(.dark-mode) .rule-box.x-rule{
+ background:#fff0f3!important;color:#88546a!important;border-color:#f1dce5!important;
+}
+body:not(.dark-mode) .ranking-line,
+body:not(.dark-mode) .reset-result,
+body:not(.dark-mode) .rule-box{
+ background:#f5effa!important;color:#68527e!important;border-color:#e8dcef!important;
+}
+body:not(.dark-mode) .note{
+ background:#fff5f7!important;color:#796b80!important;border-color:#f1dfe8!important;
+}
+body:not(.dark-mode) .member{
+ background:linear-gradient(145deg,#fff,#f6effb)!important;
+ border:1px solid #e7d9ef!important;color:#674d82!important;
+}
+body:not(.dark-mode) .member:hover,
+body:not(.dark-mode) .member.active{
+ background:#f1e7fa!important;border-color:#cdb5e5!important;color:#563878!important;
+}
+body:not(.dark-mode) .member img{background:#f2e8f7!important}
+body:not(.dark-mode) .time-select,
+body:not(.dark-mode) input,
+body:not(.dark-mode) select,
+body:not(.dark-mode) textarea{
+ background:#fffdfd!important;color:#493b57!important;border-color:#e4d7e9!important;
+}
+body:not(.dark-mode) .time-row{background:#f8f2fa!important;color:#59456d!important}
+body:not(.dark-mode) .time-row .local,
+body:not(.dark-mode) .clock-time{color:#8056bd!important}
+body:not(.dark-mode) .vote-countdown{
+ background:#f7f0fa!important;color:#64477f!important;border-color:#e8dcef!important;
+}
+body:not(.dark-mode) .footer{color:#96869e!important}
+body:not(.dark-mode) .footer a{color:#8056bd!important}
+body:not(.dark-mode) .empty{background:#fffafd!important;color:#887991!important}
+body:not(.dark-mode) .urgency-24{background:#eee5fa!important;color:#705092!important}
+body:not(.dark-mode) .urgency-12{background:#fff0df!important;color:#99633c!important}
+body:not(.dark-mode) .urgency-1{background:#c65375!important;color:#fff!important}
+body:not(.dark-mode) .theme-toggle{
+ background:#8056bd!important;color:#fff!important;border:1px solid #8056bd!important;
+}
+
 </style>
 </head>
 <body><main class="wrap">
