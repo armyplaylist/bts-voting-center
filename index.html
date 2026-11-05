@@ -1699,7 +1699,7 @@ updateResetCountdowns();
    const summary=document.createElement("summary");summary.textContent="Moneda y detalles para participar";
    const content=document.createElement("div");content.className="bday-method-content";content.innerHTML=guideHtml;
    details.append(summary,content);info.replaceWith(details);
-   if(actions){details.after(heading("Enlaces oficiales"));details.after(actions);}
+   if(actions){const linksHeading=heading("Enlaces oficiales");details.after(linksHeading);linksHeading.after(actions);}
    card.dataset.formatted="true";
   }
   calendarLink(card);
