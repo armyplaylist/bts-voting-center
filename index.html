@@ -1201,6 +1201,16 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
 .bday-method summary:after{content:"＋";float:right}.bday-method[open] summary:after{content:"−"}
 .bday-method-content{padding:0 14px 13px;color:#6f6670;font-size:.82rem;line-height:1.55}
 .bday-method-content p{margin:7px 0}.birthday-card .actions{margin-top:8px}
+/* Birthday countdowns for Jin and V */
+.birthday-countdown-heading{margin:4px 0 10px;color:#78648b;font-size:.72rem;font-weight:900;letter-spacing:.12em}
+.birthday-countdowns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 18px}
+.birthday-countdown-card{padding:17px;border:1px solid #e6dfea;border-radius:13px;background:linear-gradient(120deg,#f4edff,#fff4f6);text-align:center}
+.birthday-countdown-member{font-family:"Space Grotesk",sans-serif;color:#6840a0;font-size:1.05rem;font-weight:700;letter-spacing:.12em}
+.birthday-countdown-date{margin:3px 0 9px;color:#8b7b96;font-size:.72rem;font-weight:900;letter-spacing:.08em}
+.birthday-countdown-timer{color:#30213e;font-family:"Space Grotesk",sans-serif;font-size:clamp(.86rem,2.5vw,1.12rem);font-weight:700;font-variant-numeric:tabular-nums}
+.birthday-countdown-timer strong{color:#c32749}
+.birthday-countdown-local{display:block;margin-top:6px;color:#867b8d;font-family:"DM Sans",sans-serif;font-size:.7rem;font-weight:600}
+@media(max-width:420px){.birthday-countdown-card{padding:13px 8px}.birthday-countdown-timer{font-size:.82rem}}
 </style>
 </head>
 <body><main class="wrap">
@@ -1271,7 +1281,7 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
  <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">APP CHOEAEDOL · ANDROID</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">APP CHOEAEDOL · iOS</a><a class="btn secondary" href="https://www.myloveidol.com/goldendisc/es/" target="_blank" rel="noopener">INFO OFICIAL GDA</a></div>
 </article>
  </div>
- <p class="note">Rankings revisados el 2 nov 2026. MAMA y MMA incluyen reportes de seguimiento comunitario/fanbase, no contadores oficiales; AAA muestra el marcador publicado por la organización. ARIA y KCA no ofrecen una tabla pública de posiciones. Diferencia siempre el voto oficial del premio y las campañas de apoyo de fanbases en X. Si el organizador no publica una hora de reinicio o cierre, la página lo indica como “no publicado” en lugar de inventarla. Las reglas pueden actualizarse: revisa el aviso vigente antes de enviar cada voto.</p>
+ 
 </section>
 
 <section class="panel" id="completed">
@@ -1295,6 +1305,11 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
 
 <section class="panel" id="birthday-voting">
  <div class="section-head"><div><h2>🎂 BIRTHDAY VOTING · JIN &amp; V</h2></div><span class="pill live">DICIEMBRE 2026</span></div>
+  <div class="birthday-countdown-heading">PRÓXIMOS CUMPLEAÑOS</div>
+  <div class="birthday-countdowns" aria-label="Cuenta regresiva para los cumpleaños de Jin y V">
+   <article class="birthday-countdown-card"><div class="birthday-countdown-member">JIN</div><div class="birthday-countdown-date">4 DICIEMBRE</div><div class="birthday-countdown-timer" data-birthday="jin"></div></article>
+   <article class="birthday-countdown-card"><div class="birthday-countdown-member">V</div><div class="birthday-countdown-date">30 DICIEMBRE</div><div class="birthday-countdown-timer" data-birthday="v"></div></article>
+  </div>
   <div class="birthday-toolbar">
   <div><h2>Votaciones de cumpleaños</h2></div>
   <span class="birthday-total" id="birthdayResults">13 votaciones</span>
@@ -1696,6 +1711,26 @@ updateResetCountdowns();
   calendarLink(card);
  });
  window.refreshBirthdayCalendarLinks=()=>cards.forEach(calendarLink);
+})();
+// Cuenta regresiva anual a los cumpleaños de Jin y V (medianoche KST).
+(function(){
+ const birthdays={jin:{month:12,day:4},v:{month:12,day:30}};
+ const pad=n=>String(n).padStart(2,'0');
+ const zoneLabel=()=>tzSelect.value||Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
+ const formatLocal=(date,zone)=>new Intl.DateTimeFormat('es-MX',{timeZone:zone,day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:timeFormatSelect.value==='12'}).format(date);
+ function tickBirthdayCountdowns(){
+  const now=new Date(),zone=zoneLabel();
+  Object.entries(birthdays).forEach(([member,birthday])=>{
+   const el=document.querySelector('[data-birthday="'+member+'"]');if(!el)return;
+   let year=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Seoul',year:'numeric'}).format(now));
+   let target=new Date(year+'-'+pad(birthday.month)+'-'+pad(birthday.day)+'T00:00:00+09:00');
+   if(target<=now)target=new Date((year+1)+'-'+pad(birthday.month)+'-'+pad(birthday.day)+'T00:00:00+09:00');
+   const diff=target-now,days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
+   el.innerHTML='<strong>'+days+'</strong> d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s<span class="birthday-countdown-local">Inicio del cumpleaños en tu hora: '+formatLocal(target,zone)+'</span>';
+  });
+ }
+ tickBirthdayCountdowns();setInterval(tickBirthdayCountdowns,1000);
+ timeFormatSelect.addEventListener('change',tickBirthdayCountdowns);
 })();
 // Birthday vote countdowns: display only the visitor's selected local timezone.
 (function(){
