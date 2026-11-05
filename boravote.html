@@ -46,7 +46,20 @@
 <nav class="tabs" aria-label="Navegación principal"><button class="tab active" data-tab="home" onclick="switchTab('home')"><span>⌂</span>Home</button><button class="tab" data-tab="missions" onclick="switchTab('missions')"><span>◎</span>Misiones</button><button class="tab" data-tab="academy" onclick="switchTab('academy')"><span>▤</span>Academia</button><button class="tab" data-tab="squad" onclick="switchTab('squad')"><span>♧</span>Squad</button></nav><div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), store=(k,v)=>localStorage.setItem('bora_'+k,JSON.stringify(v)), read=(k,d)=>{try{return JSON.parse(localStorage.getItem('bora_'+k))??d}catch{return d}};
-const apps=[['Mnet Plus','Premios y votaciones disponibles en Mnet Plus','Verifica categoría y reglas en la app oficial.'],['IDOLCHAMP','Premios con CHAMSIM / corazones','Consulta el tipo de voto y su disponibilidad.'],['DuckAD','Misiones y campañas compatibles','Comprueba campaña, límites y requisitos.'],['My1Pick','Premios y rankings habilitados','Verifica si el voto es gratuito o de pago.'],['UPICK','Premios y categorías activas','Revisa las reglas antes de gastar tickets.'],['Fancast','Votaciones y campañas activas','Confirma el evento y la hora de cierre.']];
+const apps=[
+['PODOAL','Votaciones de cumpleaños y campañas disponibles','Confirma la votación activa y sus reglas en PODOAL.'],
+['UPICK','Votaciones de cumpleaños y premios disponibles','Revisa el tipo de ticket, límite y fecha de cierre.'],
+['GIFT iFan','Votaciones y campañas disponibles','Comprueba que la campaña de BTS esté activa.'],
+['IDOLCHAMP','Votaciones y premios disponibles','Consulta el recurso requerido y el límite de votos.'],
+['My1Pick','Votaciones y rankings disponibles','Verifica la categoría y las condiciones del evento.'],
+['Starvibe','Votaciones de cumpleaños disponibles','Confirma el ranking y el periodo de participación.'],
+['Picnic','Votaciones de cumpleaños disponibles','Revisa la votación activa y el enlace oficial.'],
+['Fanplus','Votaciones de cumpleaños disponibles','Selecciona la votación correcta de Jin o V.'],
+['FANNSTAR','Votaciones de cumpleaños y anuncios','Comprueba el ranking y las reglas de la campaña.'],
+['K-DOL','Votaciones y rankings disponibles','Verifica el evento y el periodo de conteo.'],
+['IC POLLS','Votaciones disponibles','Comprueba que la encuesta corresponda a la campaña vigente.'],
+['DailyDuck','Votaciones y misiones disponibles','Revisa las misiones y recompensas oficiales.']
+];
 function renderMissions(){ $('#missionList').innerHTML=apps.map((a,i)=>'<article class="card mission"><div class="app-row"><div class="app-icon">'+(i+1)+'</div><div><h3>'+a[0]+'</h3><p class="muted">'+a[1]+'</p></div></div><span class="state">Revisión manual · sin sincronización</span><p class="muted">'+a[2]+'</p><div class="mission-actions"><button class="btn small" onclick="toastMsg(\'Abre '+a[0]+' y sigue su método oficial para obtener recursos.\')">Ganar hearts · guía</button><button class="btn small ghost" onclick="toastMsg(\'Guía ligera: revisa la misión y evita reproducir anuncios si tienes datos limitados.\')">Misión sin anuncios</button></div><button class="btn ghost small" onclick="markMission('+i+')">Marcar como revisada</button></article>').join('');}
 function markMission(i){let m=read('missions',{});m[i]=!m[i];store('missions',m);toastMsg(m[i]?'Misión marcada como revisada':'Marca retirada');}
 function addAccount(){let v=$('#aliasInput').value.trim();if(!v)return;let a=read('accounts',[]);if(a.length>=5)return toastMsg('Máximo 5 alias.');a.push({id:Date.now(),name:v});store('accounts',a);$('#aliasInput').value='';renderAccounts();}
