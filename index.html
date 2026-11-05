@@ -1087,6 +1087,24 @@ body>body>body>.wrap{position:relative;z-index:1}
 .bday-countdown{padding:10px 11px;border-radius:10px;background:#f3edf9;border:1px solid #e6d9f0;color:#49305f;font:700 .8rem/1.45 "DM Sans",sans-serif;font-variant-numeric:tabular-nums}
 .bday-countdown strong{color:#c32749}.bday-countdown.is-ended{background:#f5eeee;color:#8d5962}
 .bday-info{padding:10px 11px;border-radius:10px;background:#faf7fc;color:#675575;font-size:.76rem;line-height:1.5}.bday-info strong{color:#6840a0}body.dark-mode .bday-countdown,body.dark-mode .bday-info{background:#282130;color:#e8dff0;border-color:#4c3b5b}
+
+/* Birthday cards: full editorial format inspired by the supplied reference */
+.birthday-grid{grid-template-columns:1fr!important;gap:18px}
+.birthday-card{padding:clamp(18px,3vw,27px)!important;border-radius:22px!important;background:linear-gradient(145deg,#fff,#f6effb)!important;border:1px solid #e4d9ed!important;border-left:6px solid #9a78c8!important;box-shadow:0 8px 22px #54377b10!important;gap:12px!important}
+.birthday-card h3{font-family:"Space Grotesk",sans-serif;font-size:1.25rem!important;color:#2b2035}
+.birthday-card .birthday-tag{margin-bottom:1px}
+.birthday-card .bday-section-title{margin:13px 0 1px;color:#765b94;font-size:.8rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.birthday-card .bday-category{margin:0;color:#776d80;font-size:.9rem;line-height:1.65;font-weight:500}
+.birthday-card .birthday-meta{padding:12px 14px;border:1px solid #e5d9ef;border-radius:14px;background:#f3edf9;color:#654b7c;font-size:.86rem;line-height:1.55;font-weight:800}
+.birthday-card .bday-countdown{padding:14px;border:1px solid #e5d9ef;border-left:5px solid #9a78c8;border-radius:14px;background:linear-gradient(100deg,#f4edf9,#fff8fa);font-size:.9rem;line-height:1.7}
+.birthday-card .bday-info{padding:0;background:transparent;color:#756a7d;font-size:.88rem;line-height:1.7}
+.birthday-card .bday-info p{margin:5px 0;color:#756a7d;font-size:.88rem;font-weight:500}
+.birthday-card .bday-info strong{color:#65438a}
+.birthday-card .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding-top:5px}
+.birthday-card .actions .btn{min-height:48px;border-radius:999px!important;padding:12px 15px;font-size:.82rem}
+.birthday-card .actions .btn.calendar-link{grid-column:1/-1;background:#f3a18b!important;color:#50354d!important;box-shadow:0 5px 0 #c87566!important}
+@media(max-width:520px){.birthday-card .actions{grid-template-columns:1fr}.birthday-card .actions .btn.calendar-link{grid-column:auto}}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -1447,7 +1465,7 @@ document.getElementById('copyCenterLink')?.addEventListener('click',async()=>{
   button.textContent='LINK: armyplaylist.github.io/bts-voting-center/';
  }
 });
-tzSelect.addEventListener('change',()=>{try{localStorage.setItem(timezoneStorageKey,tzSelect.value);}catch(e){}updateLocalTimes();addCalendarReminders();});
+tzSelect.addEventListener('change',()=>{try{localStorage.setItem(timezoneStorageKey,tzSelect.value);}catch(e){}updateLocalTimes();addCalendarReminders();window.refreshBirthdayCalendarLinks?.();});
 timeFormatSelect.addEventListener('change',updateLocalTimes);
 addCalendarReminders();
 updateLocalTimes();
@@ -1481,6 +1499,51 @@ updateResetCountdowns();
  });
 })();
 
+
+
+// Convert every birthday vote into the same structured card layout.
+(function(){
+ const cards=document.querySelectorAll('.birthday-card');
+ function heading(label){const el=document.createElement('h4');el.className='bday-section-title';el.textContent=label;return el;}
+ function calendarLink(card){
+  const countdown=card.querySelector('.bday-countdown[data-deadline]');
+  const actions=card.querySelector('.actions');
+  if(!countdown||!actions)return;
+  actions.querySelector('.calendar-link')?.remove();
+  const target=new Date(countdown.dataset.deadline);
+  if(!Number.isFinite(target.getTime()))return;
+  const end=new Date(target.getTime()+15*60*1000);
+  const stamp=d=>d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');
+  const zone=tzSelect.value||Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
+  const title=(card.querySelector('h3')?.textContent||'BTS birthday vote')+' · Cierre';
+  const details='Recordatorio de cierre de votación. Hora convertida según la zona seleccionada en BTS Voting Center: '+zone+'. Verifica el cierre en la plataforma oficial.';
+  const url='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+stamp(target)+'/'+stamp(end)+'&ctz='+encodeURIComponent(zone)+'&details='+encodeURIComponent(details);
+  const a=document.createElement('a');a.className='btn calendar-link';a.href=url;a.target='_blank';a.rel='noopener';a.textContent='＋ AÑADIR CIERRE · CALENDAR';actions.appendChild(a);
+ }
+ cards.forEach(card=>{
+  if(card.dataset.formatted==='true'){calendarLink(card);return;}
+  const tag=card.querySelector('.birthday-tag'),title=card.querySelector('h3'),category=card.querySelector(':scope > p'),meta=card.querySelector('.birthday-meta'),countdown=card.querySelector('.bday-countdown'),info=card.querySelector('.bday-info'),actions=card.querySelector('.actions');
+  if(tag&&title&&category&&meta&&countdown&&info&&actions){
+   const categoryTitle=heading('Categorías y nominaciones');
+   category.classList.add('bday-category');
+   category.before(categoryTitle);
+   const closeTitle=heading('Cierre estimado');
+   meta.before(closeTitle);
+   const voteTitle=heading('Cómo votar');
+   info.before(voteTitle);
+   const raw=info.innerHTML;
+   const parts=raw.split(/<br\s*\/?><strong>Cómo obtener puntos:<\/strong>/i);
+   const access=(parts[0]||'').replace(/<strong>Acceso:<\/strong>/i,'').trim();
+   const points=(parts[1]||'').trim();
+   info.innerHTML='<p><strong>Acceso:</strong> '+access+'</p><p><strong>Cómo obtener puntos:</strong> '+points+'</p>';
+   const linksTitle=heading('Link a app o web');
+   actions.before(linksTitle);
+   card.dataset.formatted='true';
+  }
+  calendarLink(card);
+ });
+ window.refreshBirthdayCalendarLinks=()=>cards.forEach(calendarLink);
+})();
 
 // Birthday vote countdowns: source timezone plus the visitor's selected local timezone.
 (function(){
