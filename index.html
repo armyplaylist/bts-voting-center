@@ -1728,6 +1728,116 @@ body.dark-mode .vote-card[data-kind="group"] .pill{
  background:#40334f!important;color:#eadcf8!important;border-color:#66527c!important;
 }
 
+
+/* FLAT THEME SYSTEM — all controls adapt to the selected color mode */
+:root{
+ --control-bg:#eee5f8;
+ --control-bg-hover:#e3d4f2;
+ --control-text:#563575;
+ --control-border:#d8c5eb;
+ --control-primary:#8054ad;
+ --control-primary-hover:#704596;
+ --control-primary-text:#ffffff;
+ --control-muted-bg:#e7dff0;
+ --control-focus:#a77bd2;
+}
+body.dark-mode{
+ --control-bg:#33283e;
+ --control-bg-hover:#443451;
+ --control-text:#f5eaff;
+ --control-border:#69547b;
+ --control-primary:#79569b;
+ --control-primary-hover:#8b68ad;
+ --control-primary-text:#ffffff;
+ --control-muted-bg:#40334b;
+ --control-focus:#c6a0eb;
+}
+/* Shared flat surface for navigation, filters, cards and action buttons */
+.btn,.filter,.birthday-filter,nav a,.member,.reset-toggle,
+button:not(.time-select),.hero-share a,.hero-share button,
+.complete-toggle,.theme-toggle,.vote-card .actions a,
+.vote-card .actions button,.birthday-card a,.birthday-card button,
+.source-grid a,.rank a,.upcoming-item a{
+ background:var(--control-bg)!important;
+ color:var(--control-text)!important;
+ -webkit-text-fill-color:var(--control-text)!important;
+ border:1px solid var(--control-border)!important;
+ border-radius:12px!important;
+ box-shadow:none!important;
+ text-shadow:none!important;
+ filter:none!important;
+ opacity:1!important;
+ transition:background-color .18s ease,border-color .18s ease,color .18s ease!important;
+}
+.btn::before,.btn::after,.btn.secondary::before,
+.btn.secondary::after,.filter::before,.filter::after,
+button::before,button::after,nav a::before,nav a::after{
+ content:none!important;display:none!important;
+}
+.btn:hover,.filter:hover,.birthday-filter:hover,nav a:hover,
+.member:hover,.reset-toggle:hover,button:not(.time-select):hover,
+.hero-share a:hover,.hero-share button:hover,
+.vote-card .actions a:hover,.vote-card .actions button:hover,
+.birthday-card a:hover,.birthday-card button:hover{
+ background:var(--control-bg-hover)!important;
+ color:var(--control-text)!important;
+ -webkit-text-fill-color:var(--control-text)!important;
+ border-color:var(--control-focus)!important;
+ box-shadow:none!important;
+ transform:none!important;
+}
+.btn.primary,.btn:not(.secondary),.hero-share-x,
+.filter.active,.birthday-filter.active,.member.active,
+.complete-toggle,.theme-toggle,.hero-share button,
+.vote-card .actions .btn:not(.secondary){
+ background:var(--control-primary)!important;
+ color:var(--control-primary-text)!important;
+ -webkit-text-fill-color:var(--control-primary-text)!important;
+ border-color:var(--control-primary)!important;
+ box-shadow:none!important;
+ text-shadow:none!important;
+}
+.btn.primary:hover,.btn:not(.secondary):hover,.hero-share-x:hover,
+.filter.active:hover,.birthday-filter.active:hover,
+.member.active:hover,.complete-toggle:hover,.theme-toggle:hover,
+.hero-share button:hover,.vote-card .actions .btn:not(.secondary):hover{
+ background:var(--control-primary-hover)!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+ border-color:var(--control-primary-hover)!important;
+}
+.btn.secondary,.vote-card .actions .btn.secondary{
+ background:var(--control-muted-bg)!important;
+ color:var(--control-text)!important;
+ -webkit-text-fill-color:var(--control-text)!important;
+}
+.vc-icon,.btn .vc-icon,.filter .vc-icon,.birthday-filter .vc-icon,
+nav a .vc-icon,.hero-share .vc-icon,.complete-toggle .vc-icon{
+ color:inherit!important;
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+}
+body.dark-mode :is(.btn,.filter,.birthday-filter,nav a,.member,
+.reset-toggle,button:not(.time-select),.hero-share a,.hero-share button,
+.complete-toggle,.theme-toggle,.vote-card .actions a,
+.vote-card .actions button,.birthday-card a,.birthday-card button){
+ color:var(--control-text)!important;
+ -webkit-text-fill-color:var(--control-text)!important;
+}
+body.dark-mode :is(.btn.primary,.btn:not(.secondary),.hero-share-x,
+.filter.active,.birthday-filter.active,.member.active,
+.complete-toggle,.theme-toggle,.hero-share button,
+.vote-card .actions .btn:not(.secondary)){
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+:is(button,a,[role="button"],input,select,textarea):focus-visible{
+ outline:2px solid var(--control-focus)!important;
+ outline-offset:2px!important;
+}
+@media(prefers-reduced-motion:reduce){
+ .btn,.filter,.birthday-filter,nav a,.member,button{transition:none!important}
+}
+
 </style>
 </head>
 <body><main class="wrap">
