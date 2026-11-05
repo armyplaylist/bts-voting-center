@@ -1133,6 +1133,60 @@ body>body>body>.wrap{position:relative;z-index:1}
 .birthday-card .actions .web-vote-link{background:#ee9d89!important;color:#51364b!important;box-shadow:0 4px 0 #c87868!important}
 .birthday-card .actions .web-vote-link:hover{filter:brightness(1.04)}
 
+
+/* Clean interface refresh: quieter surfaces, clearer hierarchy */
+:root{--bg:#faf9fc;--ink:#30283a;--muted:#81788b;--purple:#7454a0;--purple2:#9a82bd;--line:#eae6ef;--shadow:0 2px 10px #30213d08}
+body{background:#faf9fc!important;color:#30283a}
+.wrap{width:min(1040px,calc(100% - 32px));padding:18px 0 42px}
+.hero{padding:30px 18px 24px!important;border-radius:18px!important;background:#fff!important;color:var(--ink)!important;box-shadow:none!important;border:1px solid #eeeaf2}
+.hero:before,.hero:after{display:none!important}
+.hero .era{display:none!important}
+.hero h1{font-size:clamp(2.2rem,7vw,3.8rem)!important;margin:0 0 8px!important;color:#30283a!important}
+.hero h1 span{font-size:.42em!important;color:#8065a5!important;letter-spacing:.12em!important;margin-top:8px!important}
+.hero p{max-width:520px!important;margin:0 auto 14px!important;color:#81788b!important;font-size:.92rem!important;font-weight:500!important}
+.hero-stats{margin-top:10px!important}
+.stat{padding:6px 10px!important;border:0!important;background:#f3eff7!important;color:#77618f!important;border-radius:8px!important;font-size:.7rem!important}
+nav{position:static!important;justify-content:flex-start!important;margin:12px 0 18px!important;padding:6px!important;border:1px solid #eeeaf2!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important;backdrop-filter:none!important}
+nav a{padding:8px 10px!important;border-radius:8px!important;font-size:.76rem!important;font-weight:700!important}
+.panel,.country-panel{border:1px solid #eeeaf2!important;border-radius:14px!important;background:#fff!important;box-shadow:none!important;padding:18px!important}
+.section-head h2,.panel h2{font-size:1rem!important;letter-spacing:0!important}
+.section-head p{font-weight:400!important;line-height:1.55!important}
+.birthday-intro,.birthday-hero-copy{padding:18px!important;border:1px solid #eeeaf2!important;border-radius:14px!important;background:#fff!important;color:#62596b!important;box-shadow:none!important}
+.birthday-headline{gap:6px!important}
+.birthday-headline span{padding:5px 8px!important;background:#f4f0f8!important;color:#725b8c!important;font-size:.68rem!important}
+.birthday-hero-copy h3{font-size:1.25rem!important;color:#30283a!important}
+.birthday-hero-copy p{font-size:.86rem!important;color:#81788b!important}
+.birthday-primary-cta{margin-top:12px!important;padding:10px 14px!important;background:#7454a0!important;color:white!important;border-radius:9px!important;box-shadow:none!important}
+.birthday-benefits{margin-top:12px!important;color:#81788b!important;font-weight:600!important}
+.birthday-toolbar{margin:20px 0 10px!important}
+.birthday-toolbar h2{font-size:1.05rem!important}
+.birthday-total{background:#f3eff7!important;color:#7454a0!important;border-radius:8px!important}
+.birthday-filters{gap:6px!important;margin-bottom:12px!important}
+.birthday-filter{padding:7px 11px!important;border:1px solid #e9e4ee!important;border-radius:8px!important;background:#fff!important;color:#746a7e!important;font-size:.74rem!important;font-weight:700!important}
+.birthday-filter.active{background:#7454a0!important;border-color:#7454a0!important;color:#fff!important}
+.birthday-grid{gap:10px!important}
+.birthday-card{padding:16px!important;border:1px solid #eeeaf2!important;border-left:3px solid #b5a2cb!important;border-radius:13px!important;background:#fff!important;box-shadow:none!important;gap:8px!important}
+.birthday-card h3{font-family:"DM Sans",sans-serif!important;font-size:1.04rem!important;font-weight:700!important;color:#30283a!important}
+.birthday-card .birthday-tag{padding:4px 7px!important;border-radius:6px!important;background:#f4f0f8!important;color:#745d90!important;font-size:.64rem!important;font-weight:700!important}
+.birthday-card .bday-section-title{margin:8px 0 0!important;color:#78688a!important;font-size:.72rem!important;letter-spacing:.04em!important}
+.birthday-card .bday-category,.birthday-card p,.birthday-card .bday-info,.birthday-card .bday-info p{font-size:.83rem!important;line-height:1.55!important;color:#766e7e!important}
+.birthday-card .birthday-meta{padding:9px 11px!important;border:0!important;border-radius:8px!important;background:#f7f5f9!important;color:#6d5b80!important;font-size:.78rem!important;font-weight:700!important}
+.birthday-card .bday-countdown{padding:9px 11px!important;border:0!important;border-left:3px solid #a993c2!important;border-radius:8px!important;background:#f7f5f9!important;color:#51475b!important;font-size:.82rem!important;line-height:1.5!important}
+.birthday-card .bday-info{padding:0!important}
+.birthday-card .actions{display:flex!important;flex-wrap:wrap!important;gap:7px!important;padding-top:4px!important}
+.birthday-card .actions .btn{min-height:38px!important;padding:9px 13px!important;border-radius:8px!important;background:#7454a0!important;color:#fff!important;box-shadow:none!important;font-size:.74rem!important;font-weight:700!important}
+.birthday-card .actions .btn.calendar-link{background:#f3eff7!important;color:#6d5687!important;box-shadow:none!important}
+.birthday-card .actions .web-vote-link{background:#f3eff7!important;color:#6d5687!important;box-shadow:none!important}
+button,.btn{transition:background .15s ease,border-color .15s ease!important}
+body.dark-mode{background:#17141c!important;color:#eee8f4!important}
+body.dark-mode .hero,body.dark-mode .panel,body.dark-mode .country-panel,body.dark-mode .birthday-card,body.dark-mode nav,body.dark-mode .birthday-intro,body.dark-mode .birthday-hero-copy{background:#211d27!important;border-color:#38313f!important;box-shadow:none!important}
+body.dark-mode .hero h1,body.dark-mode .birthday-card h3,body.dark-mode .birthday-hero-copy h3{color:#f0eaf5!important}
+body.dark-mode .hero p,body.dark-mode .birthday-card p,body.dark-mode .birthday-card .bday-info,body.dark-mode .birthday-card .bday-info p,body.dark-mode .birthday-hero-copy p{color:#bdb3c8!important}
+body.dark-mode .birthday-card .birthday-meta,body.dark-mode .birthday-card .bday-countdown,body.dark-mode .stat{background:#2b2532!important;color:#ded3e9!important;border:0!important}
+body.dark-mode .birthday-filter{background:#211d27!important;border-color:#393140!important;color:#c9bdd5!important}
+body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .btn{background:#8769ad!important;color:white!important}
+@media(max-width:600px){.wrap{width:calc(100% - 22px)!important;padding-top:10px!important}.hero{padding:24px 14px 20px!important}.panel,.country-panel{padding:14px!important}.birthday-card{padding:14px!important}.birthday-card .actions .btn{flex:1 1 auto;text-align:center}}
+
 </style>
 </head>
 <body><main class="wrap">
