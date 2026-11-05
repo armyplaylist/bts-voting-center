@@ -1211,6 +1211,34 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
 .birthday-countdown-timer strong{color:#c32749}
 .birthday-countdown-local{display:block;margin-top:6px;color:#867b8d;font-family:"DM Sans",sans-serif;font-size:.7rem;font-weight:600}
 @media(max-width:420px){.birthday-countdown-card{padding:13px 8px}.birthday-countdown-timer{font-size:.82rem}}
+
+/* Acciones de compartir: acabado suave y contemporáneo */
+.hero .hero-share{
+ display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:22px
+}
+.hero .hero-share a,.hero .hero-share button{
+ display:inline-flex;align-items:center;justify-content:center;gap:9px;
+ min-height:44px;padding:0 19px;border:1px solid transparent;border-radius:999px;
+ font:700 .78rem "DM Sans",Arial,sans-serif;letter-spacing:.015em;text-decoration:none;
+ cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease
+}
+.hero .hero-share-x{
+ color:#24172f;background:linear-gradient(135deg,#f5eaff,#dfc9f7);
+ box-shadow:0 5px 16px #09061125
+}
+.hero .hero-share-copy{
+ color:#f4edf9;background:#ffffff0d;border-color:#ffffff35!important;
+ box-shadow:inset 0 1px #ffffff12
+}
+.hero .hero-share a:hover,.hero .hero-share button:hover{
+ transform:translateY(-2px);box-shadow:0 7px 18px #09061135
+}
+.hero .hero-share-copy:hover{background:#ffffff19;color:#fff}
+.hero .hero-share button.copied{background:#dff4e8;color:#285c42;border-color:#dff4e8!important}
+@media(max-width:480px){
+ .hero .hero-share{display:flex;gap:8px}
+ .hero .hero-share a,.hero .hero-share button{flex:1 1 100%;min-height:43px}
+}
 </style>
 </head>
 <body><main class="wrap">
