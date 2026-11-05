@@ -2505,6 +2505,41 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
 
 /* El aviso de etapa de recolección queda sin fondo ni borde */
 .gda-collection-alert{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+
+/* Birthday filters: all five buttons in purple with white labels */
+#birthday-voting .birthday-filters .birthday-filter,
+body.dark-mode #birthday-voting .birthday-filters .birthday-filter{
+  background:#7048ad!important;
+  border:1px solid #7048ad!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 3px 8px #40245f24!important;
+}
+#birthday-voting .birthday-filters .birthday-filter:hover,
+#birthday-voting .birthday-filters .birthday-filter:focus-visible,
+body.dark-mode #birthday-voting .birthday-filters .birthday-filter:hover,
+body.dark-mode #birthday-voting .birthday-filters .birthday-filter:focus-visible{
+  background:#5f3b96!important;
+  border-color:#5f3b96!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+#birthday-voting .birthday-filters .birthday-filter.active,
+#birthday-voting .birthday-filters .birthday-filter[aria-pressed="true"],
+body.dark-mode #birthday-voting .birthday-filters .birthday-filter.active,
+body.dark-mode #birthday-voting .birthday-filters .birthday-filter[aria-pressed="true"]{
+  background:#593486!important;
+  border-color:#593486!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  box-shadow:0 3px 8px #40245f38!important;
+}
+#birthday-voting .birthday-filters .birthday-filter .vc-icon,
+#birthday-voting .birthday-filters .birthday-filter .vc-icon svg{
+  color:#fff!important;
+  stroke:#fff!important;
+}
+
 </style>
 </head>
 <body><main class="wrap">
