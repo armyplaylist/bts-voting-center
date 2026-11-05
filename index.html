@@ -3108,12 +3108,23 @@ updateResetCountdowns();
   icon.innerHTML='<svg viewBox="0 0 24 24" focusable="false">'+paths[name]+'</svg>';
   el.prepend(icon);
  }
+ const iconSelector='nav a,.btn,.filter,.birthday-filter,.complete-toggle,.hero-share a,.hero-share button,.theme-toggle';
  function run(){
-  document.querySelectorAll('nav a,.btn,.filter,.birthday-filter,.complete-toggle,.hero-share a,.hero-share button,.theme-toggle').forEach(decorate);
+  document.querySelectorAll(iconSelector).forEach(decorate);
  }
  run();
- const observer=new MutationObserver(()=>run());
- observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+ // Vigila solo elementos nuevos; los contadores cambian cada segundo y no deben
+ // provocar un escaneo completo del documento en navegadores móviles.
+ const observer=new MutationObserver(records=>{
+  records.forEach(record=>{
+   record.addedNodes.forEach(node=>{
+    if(node.nodeType!==1)return;
+    if(node.matches(iconSelector))decorate(node);
+    node.querySelectorAll(iconSelector).forEach(decorate);
+   });
+  });
+ });
+ observer.observe(document.body,{subtree:true,childList:true});
 })();
 
 </script>
