@@ -1239,6 +1239,57 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
  .hero .hero-share{display:flex;gap:8px}
  .hero .hero-share a,.hero .hero-share button{flex:1 1 100%;min-height:43px}
 }
+
+/* Lavender button system — Voting Center */
+:root{
+ --vc-lilac:#a783d4;--vc-purple:#7045a8;--vc-deep:#43245f;
+ --vc-border:#ddc9f2;--vc-soft:#f6efff;--vc-glow:0 7px 18px #7045a825;
+}
+.btn,.filter,nav a,.member,.reset-toggle,button{
+ transition:background .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.btn{
+ min-height:42px;padding:11px 18px;border:1px solid transparent;border-radius:999px;
+ background:linear-gradient(135deg,#9c75cc,#7045a8 72%,#593184);
+ color:#fff;font-family:"DM Sans",Arial,sans-serif;font-size:.82rem;font-weight:800;
+ letter-spacing:.01em;box-shadow:0 4px 0 #4d2b78,0 7px 16px #7045a825;
+}
+.btn:hover{background:linear-gradient(135deg,#ad8bd8,#8058b5);box-shadow:0 4px 0 #593184,var(--vc-glow);transform:translateY(-1px)}
+.btn:active{transform:translateY(1px);box-shadow:0 2px 0 #4d2b78}
+.btn:focus-visible,.filter:focus-visible,nav a:focus-visible,button:focus-visible,select:focus-visible{
+ outline:3px solid #c7a8eb;outline-offset:3px;
+}
+.btn.secondary{
+ border:1px solid var(--vc-border);background:linear-gradient(145deg,#fff,#f7f1ff);
+ color:#65418f;box-shadow:0 3px 10px #7045a812;
+}
+.btn.secondary:hover{border-color:#b895df;background:#f1e6ff;color:#4c2c76;box-shadow:var(--vc-glow)}
+.btn.copied{background:linear-gradient(135deg,#6f4b9d,#493064);color:#fff}
+.filter{
+ min-height:36px;padding:8px 15px;border:1px solid #e0d2ee;border-radius:999px;
+ background:#fff;color:#71578e;font-family:"DM Sans",Arial,sans-serif;font-weight:700;
+}
+.filter:hover{border-color:#b99cdb;background:#f7f0ff;color:#56357f}
+.filter.active{border-color:#7045a8;background:linear-gradient(135deg,#9a74c8,#7045a8);color:#fff;box-shadow:0 4px 12px #7045a82b}
+nav{gap:8px;padding:8px;border:1px solid #e7dcef;border-radius:999px;background:#ffffffd9;box-shadow:0 6px 18px #38204d0d}
+nav a{padding:10px 15px;border-radius:999px;color:#6c5682;font-weight:700}
+nav a:hover{background:#f0e6fb;color:#58357f}
+.member{border:1px solid #e4d8ef;border-radius:15px;background:linear-gradient(145deg,#fff,#f7f1fc);color:#61417f}
+.member:hover,.member.active{border-color:#b99bdc;background:linear-gradient(145deg,#f4eaff,#e8d9f8);color:#56317f;box-shadow:0 5px 14px #7045a81b}
+.time-select,select{
+ border:1px solid #dfd0ee;border-radius:13px;background:#fff;color:#49305f;
+}
+button:not(.btn):not(.filter):not(.member){
+ border-radius:999px;
+}
+.actions .btn{flex:0 0 auto}
+@media(max-width:520px){
+ .btn{min-height:40px;padding:10px 14px;font-size:.78rem}
+ nav{justify-content:center;gap:4px}
+ nav a{padding:9px 11px;font-size:.73rem}
+ .filter{padding:8px 12px}
+}
+
 </style>
 </head>
 <body><main class="wrap">
