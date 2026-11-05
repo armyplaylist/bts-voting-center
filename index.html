@@ -2549,6 +2549,11 @@ body.dark-mode #birthday-voting .birthday-filters .birthday-filter[aria-pressed=
 /* Alerta automática para votaciones que cierran en menos de 24 horas */
 .urgent-vote-alert{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #f0b3b8;border-left:4px solid #d52f45;border-radius:10px;background:#fff0f1;color:#a51f35;font-size:.78rem;font-weight:900;letter-spacing:.025em}
 body.dark-mode .urgent-vote-alert{background:#422a34;border-color:#a94b5c;color:#ffb8c1}
+/* Globitos de notificación en la navegación */
+nav a{display:inline-flex;align-items:center;gap:7px}
+.nav-notification{display:inline-flex;min-width:18px;height:18px;align-items:center;justify-content:center;padding:0 5px;border-radius:999px;background:#d52e4d;color:#fff;font:800 .66rem/1 "DM Sans",Arial,sans-serif;box-shadow:0 2px 6px #d52e4d35;vertical-align:middle}
+.nav-notification[hidden]{display:none}
+body.dark-mode .nav-notification{background:#ff6b83;color:#24131a}
 </style>
 </head>
 <body><main class="wrap">
@@ -2775,6 +2780,22 @@ document.addEventListener('click',event=>{
 const timeFormatSelect=document.getElementById('timeFormatSelect');
 const fmt=(date,tz,opts={})=>new Intl.DateTimeFormat('es-MX',{timeZone:tz,...opts,hour12:timeFormatSelect.value==='12'}).format(date);
 const pad=n=>String(n).padStart(2,'0');
+function updateSectionNotificationBadges(){
+ const definitions=[
+  {id:'choeaedol',count:document.querySelectorAll('#choeaedol .gda-collection-alert').length,label:'Aviso de recolección GDA'},
+  {id:'active',count:document.querySelectorAll('#active .urgent-vote-alert').length,label:'Votaciones que cierran en menos de 24 horas'},
+  {id:'birthday-voting',count:document.querySelectorAll('#birthday-voting .urgent-vote-alert').length,label:'Votaciones de cumpleaños que cierran en menos de 24 horas'}
+ ];
+ definitions.forEach(({id,count,label})=>{
+  const link=document.querySelector('nav a[href="#'+id+'"]');if(!link)return;
+  let bubble=link.querySelector('.nav-notification');
+  if(!bubble){bubble=document.createElement('span');bubble.className='nav-notification';bubble.setAttribute('aria-hidden','true');link.appendChild(bubble);}
+  bubble.textContent=count>9?'9+':String(count);
+  bubble.hidden=count===0;
+  if(count>0)link.setAttribute('aria-label',link.textContent.replace(/\\s+/g,' ').trim()+' · '+count+' '+label);
+  else link.removeAttribute('aria-label');
+ });
+}
 function updateUrgentAlert(card,diff){
  if(!card)return;
  let alert=card.querySelector('.urgent-vote-alert');
@@ -2786,7 +2807,9 @@ function updateUrgentAlert(card,diff){
    if(countdown)countdown.insertAdjacentElement('beforebegin',alert);else card.prepend(alert);
   }
  }else if(alert){alert.remove();}
+ updateSectionNotificationBadges();
 }
+
 const voteSchedule={
  mama:{date:'2026-11-08',instant:'2026-11-08T14:59:00Z',zone:'Asia/Seoul',label:'Cierre estimado · 23:59 KST'},
  aria:{date:'2026-11-09',instant:'2026-11-09T12:59:00Z',zone:'Australia/Sydney',label:'Cierre · 23:59 AEDT'},
