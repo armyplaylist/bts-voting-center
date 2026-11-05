@@ -1105,6 +1105,30 @@ body>body>body>.wrap{position:relative;z-index:1}
 .birthday-card .actions .btn.calendar-link{grid-column:1/-1;background:#f3a18b!important;color:#50354d!important;box-shadow:0 5px 0 #c87566!important}
 @media(max-width:520px){.birthday-card .actions{grid-template-columns:1fr}.birthday-card .actions .btn.calendar-link{grid-column:auto}}
 
+
+/* Marketing refresh: clear value proposition, segmentation and action hierarchy */
+.birthday-hero-copy{padding:clamp(20px,4vw,30px)!important;background:linear-gradient(120deg,#f2eaff 0%,#fff1f4 100%)!important}
+.birthday-headline{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px}
+.birthday-headline span{padding:7px 11px;border-radius:99px;background:#fff;color:#68468f;font-size:.72rem;font-weight:900;letter-spacing:.04em}
+.birthday-hero-copy h3{margin:4px 0 8px;font:700 clamp(1.25rem,3vw,1.7rem)/1.2 "Space Grotesk",sans-serif;color:#342244}
+.birthday-hero-copy p{max-width:690px;margin:0;color:#695b75;font-size:.92rem;line-height:1.65;font-weight:500}
+.birthday-primary-cta{display:inline-flex;align-items:center;gap:15px;margin-top:17px;padding:13px 19px;border-radius:999px;background:#9de5ec;color:#28414a;text-decoration:none;font-size:.8rem;font-weight:900;box-shadow:0 4px 0 #579eaa}
+.birthday-primary-cta span{font-size:1.1rem}
+.birthday-benefits{display:flex;gap:8px 17px;flex-wrap:wrap;margin-top:17px;color:#765d8c;font-size:.75rem;font-weight:800}
+.birthday-toolbar{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:23px 0 12px}
+.birthday-toolbar h2{margin:0;font:700 1.15rem "Space Grotesk",sans-serif}
+.birthday-toolbar p{margin:5px 0 0;color:var(--muted);font-size:.82rem}
+.birthday-total{padding:7px 11px;border-radius:99px;background:#eee6f7;color:#69468f;font-size:.73rem;font-weight:900}
+.birthday-filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.birthday-filter{padding:9px 14px;border:1px solid #dfd2eb;border-radius:99px;background:#fff;color:#715b86;font:800 .78rem "DM Sans",sans-serif;cursor:pointer}
+.birthday-filter.active{background:#6840a0;border-color:#6840a0;color:#fff}
+.birthday-card[hidden]{display:none!important}
+.birthday-card .actions .btn:not(.calendar-link){background:#9de5ec!important;color:#28414a!important;box-shadow:0 4px 0 #579eaa!important}
+.birthday-card .actions .btn:not(.calendar-link):hover{background:#b5edf1!important}
+.birthday-card .bday-countdown{font-weight:700}
+.birthday-card .bday-info p{margin:7px 0}
+@media(max-width:520px){.birthday-benefits{display:grid;gap:7px}.birthday-primary-cta{width:100%;justify-content:center}}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -1208,9 +1232,25 @@ body>body>body>.wrap{position:relative;z-index:1}
 
 <section class="panel" id="birthday-voting">
  <div class="section-head"><div><h2>🎂 BIRTHDAY VOTING · JIN &amp; V</h2><p>Votaciones individuales y compartidas · cada cuenta regresiva se adapta a la zona horaria elegida al inicio.</p></div><span class="pill live">DICIEMBRE 2026</span></div>
- <div class="birthday-intro"><strong>🐹 Jin · 4 de diciembre</strong> &nbsp; · &nbsp; <strong>🐻 V · 30 de diciembre</strong><br>Jin · 4 de diciembre · V · 30 de diciembre. Consulta en cada ficha si se vota desde una app o desde la web y cómo conseguir los puntos.</div>
- <div class="section-head" style="margin-top:18px"><div><h2>Votaciones abiertas</h2><p>Cada ficha muestra el cierre, el tipo de acceso y cómo conseguir puntos para votar.</p></div></div>
- <div class="birthday-grid">
+ <div class="birthday-intro birthday-hero-copy">
+  <div class="birthday-headline"><span>🐹 JIN · 4 DIC</span><span>🐻 V · 30 DIC</span></div>
+  <h3>Un voto a la vez. Todo el apoyo cuenta.</h3>
+  <p>Encuentra las campañas de cumpleaños de Jin y V en un solo lugar. Revisa cuánto tiempo queda, dónde participar y cómo conseguir los recursos necesarios antes de votar.</p>
+  <a class="birthday-primary-cta" href="#birthday-campaigns">VER CAMPAÑAS ABIERTAS <span>↓</span></a>
+  <div class="birthday-benefits"><span>✓ Horarios en tu zona</span><span>✓ App o web identificado</span><span>✓ Guía de puntos por campaña</span></div>
+ </div>
+ <div class="birthday-toolbar">
+  <div><h2>Elige dónde participar</h2><p>Empieza por las campañas que cierran antes y revisa sus condiciones.</p></div>
+  <span class="birthday-total" id="birthdayResults">13 campañas</span>
+ </div>
+ <div class="birthday-filters" role="group" aria-label="Filtrar campañas de cumpleaños">
+  <button type="button" class="birthday-filter active" data-bday-filter="all" aria-pressed="true">Todas</button>
+  <button type="button" class="birthday-filter" data-bday-filter="jin" aria-pressed="false">Jin</button>
+  <button type="button" class="birthday-filter" data-bday-filter="v" aria-pressed="false">V</button>
+  <button type="button" class="birthday-filter" data-bday-filter="shared" aria-pressed="false">Compartidas</button>
+  <button type="button" class="birthday-filter" data-bday-filter="web" aria-pressed="false">Web disponible</button>
+ </div>
+ <div class="birthday-grid" id="birthday-campaigns">
   <article class="birthday-card" data-bday="podoal"><span class="birthday-tag">JIN + V · COMPARTIDA</span><h3>Podoal · December Birthday</h3><p>Vota por Jin o V en la categoría de cumpleaños de diciembre.</p><div class="birthday-meta">Cierre: 5 nov · 16:59 KST</div><div class="bday-countdown" data-deadline="2026-11-05T16:59:00+09:00"></div><div class="bday-info"><strong>Acceso:</strong> APP<br><strong>Cómo obtener puntos:</strong> Podals: asistencia, anuncios y misiones dentro de Podoal.</div><div class="actions"><a class="btn" href="https://global.podoal.io/app/fandings/670" target="_blank" rel="noopener">VOTAR EN PODOAL ↗</a></div></article>
   <article class="birthday-card" data-bday="upick"><span class="birthday-tag">JIN + V · COMPARTIDA</span><h3>UPICK · December Birthday Idol Vote</h3><p>Votación de cumpleaños de diciembre; Jin y V figuran entre los candidatos.</p><div class="birthday-meta">Cierre: 6 nov · 15:00 KST</div><div class="bday-countdown" data-deadline="2026-11-06T15:00:00+09:00"></div><div class="bday-info"><strong>Acceso:</strong> APP<br><strong>Cómo obtener puntos:</strong> Blue Jams: recompensas y misiones dentro de UPICK; revisa qué tipo acepta la encuesta.</div><div class="actions"><a class="btn" href="https://s.u-pick.io/dl/1qboCV4sdeuWoWcUkWTz6n" target="_blank" rel="noopener">VOTAR EN UPICK ↗</a></div></article>
   <article class="birthday-card" data-bday="giftifan"><span class="birthday-tag">JIN + V · COMPARTIDA</span><h3>Giftifan · Brightest Star of December</h3><p>Encuesta de cumpleaños de diciembre. Comprueba los candidatos dentro de la ficha.</p><div class="birthday-meta">Cierre: 6 nov · 09:00 KST</div><div class="bday-countdown" data-deadline="2026-11-06T09:00:00+09:00"></div><div class="bday-info"><strong>Acceso:</strong> APP / enlace web<br><strong>Cómo obtener puntos:</strong> Puntos gratuitos mediante tareas y recompensas disponibles en Giftifan; comprueba las opciones activas.</div><div class="actions"><a class="btn" href="https://giftifan.page.link/ghth" target="_blank" rel="noopener">VOTAR EN GIFTIFAN ↗</a></div></article>
@@ -1500,6 +1540,30 @@ updateResetCountdowns();
 })();
 
 
+
+
+(function(){
+ const cards=[...document.querySelectorAll('.birthday-card')];
+ const filters=[...document.querySelectorAll('[data-bday-filter]')];
+ const total=document.getElementById('birthdayResults');
+ function setFilter(value){
+  let visible=0;
+  cards.forEach(card=>{
+   const tag=(card.querySelector('.birthday-tag')?.textContent||'').toUpperCase();
+   const access=(card.querySelector('.bday-info')?.textContent||'').toUpperCase();
+   const match=value==='all'||
+    (value==='jin'&&tag.includes('JIN'))||
+    (value==='v'&&(tag.includes(' V ')||tag.startsWith('V ')||tag.includes('JIN + V')) )||
+    (value==='shared'&&tag.includes('COMPARTIDA'))||
+    (value==='web'&&access.includes('WEB'));
+   card.hidden=!match;if(match)visible++;
+  });
+  if(total)total.textContent=visible+' campaña'+(visible===1?'':'s');
+  filters.forEach(button=>{const active=button.dataset.bdayFilter===value;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+ }
+ filters.forEach(button=>button.addEventListener('click',()=>setFilter(button.dataset.bdayFilter)));
+ setFilter('all');
+})();
 
 // Convert every birthday vote into the same structured card layout.
 (function(){
