@@ -4,38 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f8f6fa">
-<meta name="description" content="BORAvote: organiza tus misiones de votación en las aplicaciones de BTS Voting Center.">
-<title>BORAvote · BTS Voting Center</title>
+<meta name="description" content="BORAvote: misión de apoyo comunitario en Choeaedol.">
+<title>BORAvote · Misión Choeaedol</title>
 <style>
 :root{--bg:#f8f6fa;--ink:#30243c;--muted:#786d82;--purple:#6840a0;--line:#e8e0ed;--soft:#f0e9f7;--white:#fff;--green:#347b60}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "DM Sans",Arial,sans-serif}
-main{width:min(850px,calc(100% - 28px));margin:0 auto;padding:25px 0 60px}
+main{width:min(720px,calc(100% - 28px));margin:0 auto;padding:25px 0 60px}
 .back{display:inline-block;color:var(--purple);font-weight:800;text-decoration:none;margin-bottom:22px}
 header{padding:25px;border-radius:18px;background:#2a1c35;color:white}
 header small{color:#d9c7ed;font-weight:800;letter-spacing:.12em}
 h1{font-size:clamp(2rem,6vw,3rem);margin:8px 0 4px;line-height:1.1}
 header p{margin:8px 0 0;color:#e3d9e9}
-.mission-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:26px 0 8px}
+section{margin-top:25px}
+.heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
 h2{font-size:1.2rem;margin:0}
 .counter{font-size:.8rem;color:var(--muted);white-space:nowrap}
 .description{color:var(--muted);font-size:.9rem;margin:0 0 16px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
-.filter{border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:var(--white);color:var(--muted);font-weight:800;cursor:pointer}
-.filter[aria-pressed="true"]{background:var(--soft);border-color:#d8c8e8;color:var(--purple)}
-.mission-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.mission{display:flex;align-items:flex-start;gap:12px;padding:15px;background:var(--white);border:1px solid var(--line);border-radius:14px;min-width:0}
-.mission input{width:19px;height:19px;margin:2px 0 0;accent-color:var(--purple);flex:none}
-.mission strong{display:block;font-size:.95rem}
-.mission small{display:block;color:var(--muted);font-size:.78rem;margin-top:3px}
-.mission.done{background:#fbfafc}
-.mission.done strong{text-decoration:line-through;color:var(--muted)}
-.empty{grid-column:1/-1;padding:22px;text-align:center;color:var(--muted);background:var(--white);border:1px dashed var(--line);border-radius:14px}
-.actions{display:flex;justify-content:flex-end;margin-top:14px}
+.mission{padding:20px;background:var(--white);border:1px solid var(--line);border-radius:16px}
+.mission-title{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.app-mark{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:var(--soft);color:var(--purple);font-weight:900;font-size:1.1rem}
+.mission-title strong{display:block;font-size:1.05rem}
+.mission-title small{color:var(--muted)}
+.task-list{display:grid;gap:10px}
+.task{display:flex;align-items:flex-start;gap:11px;padding:13px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.task input{width:19px;height:19px;margin:2px 0 0;accent-color:var(--purple);flex:none}
+.task strong{display:block;font-size:.92rem}
+.task small{display:block;color:var(--muted);font-size:.8rem;margin-top:3px}
+.task.done{background:#fbfafc}
+.task.done strong{text-decoration:line-through;color:var(--muted)}
+.reward{margin-top:14px;padding:15px;border-radius:12px;background:var(--soft);color:#503477}
+.reward strong{display:block;margin-bottom:3px}
+.reward p{margin:0;font-size:.88rem}
+.actions{display:flex;justify-content:flex-end;margin-top:13px}
 button.reset{border:0;border-radius:9px;padding:9px 13px;background:var(--soft);color:var(--purple);font-weight:800;cursor:pointer}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b99cdb;outline-offset:3px}
-.footnote{margin-top:18px;color:var(--muted);font-size:.8rem}
-@media(max-width:560px){.mission-list{grid-template-columns:1fr}header{padding:20px}.mission-heading{align-items:flex-start;flex-direction:column;gap:4px}}
+.footnote{margin-top:16px;color:var(--muted);font-size:.8rem}
+@media(max-width:560px){header{padding:20px}.heading{align-items:flex-start;flex-direction:column;gap:4px}.mission{padding:15px}}
 </style>
 </head>
 <body>
@@ -44,70 +49,61 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b99c
 <header>
 <small>ORGANIZADOR DE VOTACIONES</small>
 <h1>BORAvote</h1>
-<p>Tus misiones de votación, organizadas por aplicación.</p>
+<p>Una misión comunitaria para apoyar y fortalecer a ARMY en Choeaedol.</p>
 </header>
 
 <section aria-labelledby="missions-title">
-<div class="mission-heading">
-<h2 id="missions-title">Misiones</h2>
-<span class="counter" id="progress" aria-live="polite">0 de 12 completadas</span>
+<div class="heading">
+<h2 id="missions-title">Misión · Choeaedol</h2>
+<span class="counter" id="progress" aria-live="polite">0 de 3 tareas completadas</span>
 </div>
-<p class="description">Revisa cada plataforma y marca la misión cuando hayas terminado. Puedes cambiar su estado cuando quieras.</p>
-<div class="filters" role="group" aria-label="Filtrar misiones">
-<button class="filter" type="button" data-filter="all" aria-pressed="true">Todas <span id="all-count">12</span></button>
-<button class="filter" type="button" data-filter="pending" aria-pressed="false">Pendientes <span id="pending-count">12</span></button>
-<button class="filter" type="button" data-filter="done" aria-pressed="false">Completadas <span id="done-count">0</span></button>
+<p class="description">Completa estas acciones para construir una red de apoyo y participar en el intercambio de votos de la comunidad.</p>
+
+<div class="mission">
+<div class="mission-title">
+<div class="app-mark" aria-hidden="true">C</div>
+<div><strong>Choeaedol</strong><small>Amigos · corazones · apoyo a publicaciones ARMY</small></div>
 </div>
-<div class="mission-list" id="missions">
-<label class="mission"><input type="checkbox" data-app="PODOAL"><span><strong>PODOAL</strong><small>Entra a la aplicación y revisa las votaciones disponibles para BTS.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="UPICK"><span><strong>UPICK</strong><small>Comprueba las votaciones activas, sus requisitos y fechas límite.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="GIFT iFan"><span><strong>GIFT iFan</strong><small>Consulta las campañas disponibles y completa tu participación.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="IDOLCHAMP"><span><strong>IDOLCHAMP</strong><small>Revisa las votaciones abiertas y las condiciones para participar.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="My1Pick"><span><strong>My1Pick</strong><small>Comprueba las categorías y los periodos de votación.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="Starvibe"><span><strong>Starvibe</strong><small>Consulta las votaciones disponibles para BTS.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="Picnic"><span><strong>Picnic</strong><small>Revisa las campañas y participa si hay alguna disponible.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="Fanplus"><span><strong>Fanplus</strong><small>Comprueba las votaciones y eventos disponibles.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="FANNSTAR"><span><strong>FANNSTAR</strong><small>Consulta los rankings y eventos en los que se puede participar.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="K-DOL"><span><strong>K-DOL</strong><small>Revisa los eventos y votaciones disponibles.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="IC POLLS"><span><strong>IC POLLS</strong><small>Comprueba si hay encuestas abiertas para responder.</small></span></label>
-<label class="mission"><input type="checkbox" data-app="DailyDuck"><span><strong>DailyDuck</strong><small>Consulta las misiones y campañas disponibles.</small></span></label>
+<div class="task-list" id="tasks">
+<label class="task"><input type="checkbox" data-task="friends"><span><strong>Conseguir 300 amigos</strong><small>Amplía tu lista de amigos en Choeaedol hasta llegar a 300.</small></span></label>
+<label class="task"><input type="checkbox" data-task="hearts" id="daily-hearts"><span><strong>Enviar tus 3 corazones diarios</strong><small>Envía los tres corazones cada día a tus amigos de la comunidad.</small></span></label>
+<label class="task"><input type="checkbox" data-task="posts"><span><strong>Votar en publicaciones de ARMY</strong><small>Apoya los posts de otras ARMY para participar en el intercambio comunitario.</small></span></label>
 </div>
-<div class="actions"><button class="reset" id="reset" type="button">Reiniciar misiones</button></div>
-<p class="footnote">El estado de tus misiones se guarda solo en este navegador. BORAvote no inicia sesión ni registra votos automáticamente. La disponibilidad, las reglas y las fechas deben confirmarse en cada aplicación.</p>
+<div class="reward">
+<strong>Recompensa de apoyo mutuo</strong>
+<p>Por cada 100 votos que aportes en publicaciones de ARMY, la meta es recibir 10 votos de regreso permanentes.</p>
+</div>
+<div class="actions"><button class="reset" id="reset" type="button">Reiniciar tareas</button></div>
+</div>
+<p class="footnote">Las casillas sirven para llevar tu propio control en este navegador. La devolución de votos depende de la participación y el acuerdo de la comunidad; BORAvote no puede garantizar ni enviar votos automáticamente. La tarea de los 3 corazones se reinicia cada día.</p>
 </section>
 </main>
 <script>
 (function(){
-const checks=Array.from(document.querySelectorAll('[data-app]'));
-const filters=Array.from(document.querySelectorAll('[data-filter]'));
-const key='boravote-missions-v1';
-let activeFilter='all';
+const checks=Array.from(document.querySelectorAll('[data-task]'));
+const key='boravote-choeaedol-v1';
+const todayKey='boravote-choeaedol-day';
+const today=new Date().toLocaleDateString('en-CA');
 function read(){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch(error){return {}}}
-function update(){
- const completed=checks.filter(c=>c.checked).length;
- document.getElementById('progress').textContent=completed+' de '+checks.length+' completadas';
- document.getElementById('all-count').textContent=checks.length;
- document.getElementById('pending-count').textContent=checks.length-completed;
- document.getElementById('done-count').textContent=completed;
- checks.forEach(c=>{
-  const card=c.closest('.mission');
-  card.classList.toggle('done',c.checked);
-  card.hidden=activeFilter==='pending'?c.checked:activeFilter==='done'?!c.checked:false;
- });
- const visible=checks.some(c=>!c.closest('.mission').hidden);
- let empty=document.getElementById('empty-state');
- if(!visible){
-  if(!empty){empty=document.createElement('p');empty.id='empty-state';empty.className='empty';empty.textContent=activeFilter==='done'?'Aún no has completado ninguna misión.':'¡No tienes misiones pendientes!';document.getElementById('missions').appendChild(empty);}
- }else if(empty){empty.remove();}
-}
-function save(){const state={};checks.forEach(c=>state[c.dataset.app]=c.checked);try{localStorage.setItem(key,JSON.stringify(state));}catch(error){}update();}
-const saved=read();
-checks.forEach(c=>{c.checked=!!saved[c.dataset.app];c.addEventListener('change',save);});
-filters.forEach(button=>button.addEventListener('click',()=>{
- activeFilter=button.dataset.filter;
- filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+function save(){
+ const state={};
+ checks.forEach(c=>{if(c.dataset.task!=='hearts')state[c.dataset.task]=c.checked;});
+ state.hearts=checks.find(c=>c.dataset.task==='hearts').checked;
+ state.day=today;
+ try{localStorage.setItem(key,JSON.stringify(state));localStorage.setItem(todayKey,today);}catch(error){}
  update();
-}));
+}
+function update(){
+ const done=checks.filter(c=>c.checked).length;
+ document.getElementById('progress').textContent=done+' de 3 tareas completadas';
+ checks.forEach(c=>c.closest('.task').classList.toggle('done',c.checked));
+}
+const saved=read();
+checks.forEach(c=>{
+ if(c.dataset.task==='hearts')c.checked=saved.day===today && !!saved.hearts;
+ else c.checked=!!saved[c.dataset.task];
+ c.addEventListener('change',save);
+});
 document.getElementById('reset').addEventListener('click',()=>{
  checks.forEach(c=>c.checked=false);
  save();
