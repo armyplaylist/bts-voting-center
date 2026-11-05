@@ -3295,5 +3295,33 @@ updateResetCountdowns();
  render();
 })();
 </script>
+
+<script>
+/* GoatCounter: medir navegación entre secciones */
+(function(){
+ const labels={
+  'country-time':'Horarios',
+  'active':'Votaciones',
+  'completed':'Finalizadas',
+  'upcoming':'Próximas',
+  'birthday-voting':'Cumpleaños',
+  'choeaedol':'Recolección',
+  'guide':'Guía',
+  'sources':'Fuentes'
+ };
+ let previous=location.hash||'#country-time';
+ window.addEventListener('hashchange',function(){
+  const hash=location.hash||'#country-time';
+  if(hash===previous)return;
+  previous=hash;
+  const id=hash.slice(1),label=labels[id];
+  if(!label)return;
+  if(window.goatcounter&&typeof window.goatcounter.count==='function'){
+   window.goatcounter.count({path:'/seccion/'+id,title:'Sección: '+label});
+  }
+ });
+})();
+</script>
+
 </body>
 </html>
