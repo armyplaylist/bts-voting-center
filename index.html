@@ -2473,6 +2473,16 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
  .birthday-filters .birthday-filter,
  .birthday-filters .birthday-filter .vc-icon{transition:none!important}
 }
+
+
+/* Small birthday accents beside the section title */
+.birthday-section-heading{display:flex;align-items:center;gap:7px}
+.birthday-heading-decor{display:inline-flex;align-items:center;justify-content:center;line-height:1;flex:none}
+.birthday-heading-decor.balloon{font-size:1.12em;transform-origin:50% 90%;animation:birthday-balloon-float 3s ease-in-out infinite}
+.birthday-heading-decor.cake{font-size:.92em;animation:birthday-cake-bob 2.8s ease-in-out infinite}
+@keyframes birthday-balloon-float{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-4px) rotate(5deg)}}
+@keyframes birthday-cake-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){.birthday-heading-decor{animation:none!important}}
 </style>
 </head>
 <body><main class="wrap">
@@ -2577,7 +2587,7 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
    <article class="birthday-countdown-card"><div class="birthday-countdown-member">V</div><div class="birthday-countdown-date">30 DICIEMBRE</div><div class="birthday-countdown-timer" data-birthday="v"></div></article>
   </div>
   <div class="birthday-toolbar">
-  <div><h2>Votaciones de cumpleaños</h2></div>
+  <div><h2 class="birthday-section-heading"><span class="birthday-heading-decor balloon" aria-hidden="true">🎈</span> Votaciones de cumpleaños <span class="birthday-heading-decor cake" aria-hidden="true">🎂</span></h2></div>
   <span class="birthday-total" id="birthdayResults">13 votaciones</span>
  </div>
  <div class="birthday-filters" role="group" aria-label="Filtrar votaciones de cumpleaños">
