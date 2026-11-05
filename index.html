@@ -1363,6 +1363,102 @@ button:not(.btn):not(.filter):not(.member){
  .vote-card .actions .btn,.birthday-card .actions .btn{flex:1 1 auto}
 }
 
+
+
+/* Crystal-gloss button finish — inspired by the approved lavender reference */
+:root{
+ --gloss-violet:#7135bd;
+ --gloss-purple:#9256dc;
+ --gloss-lilac:#c99cff;
+ --gloss-edge:#e8d2ff;
+ --gloss-shadow:rgba(102,48,164,.28);
+}
+.btn,.filter,nav a,.member,.reset-toggle,button:not(.time-select){
+ position:relative;
+ isolation:isolate;
+ transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease,color .2s ease;
+}
+.btn{
+ overflow:hidden;
+ border:1px solid rgba(255,255,255,.72);
+ border-radius:999px;
+ background:
+  radial-gradient(ellipse at 22% 8%,rgba(255,255,255,.72),transparent 34%),
+  linear-gradient(180deg,#bd91f5 0%,#9455df 42%,#7137bb 100%);
+ color:#fff;
+ text-shadow:0 1px 2px rgba(53,20,93,.2);
+ box-shadow:
+  inset 0 2px 2px rgba(255,255,255,.78),
+  inset 0 -3px 5px rgba(64,25,115,.28),
+  0 3px 0 #5b2b9c,
+  0 8px 18px var(--gloss-shadow),
+  0 0 12px rgba(192,143,255,.22);
+}
+.btn::after{
+ content:"";
+ position:absolute;inset:2px 8% auto;height:42%;
+ border-radius:999px;
+ background:linear-gradient(180deg,rgba(255,255,255,.48),rgba(255,255,255,0));
+ pointer-events:none;z-index:-1;
+}
+.btn:hover{
+ transform:translateY(-2px);
+ background:
+  radial-gradient(ellipse at 22% 8%,rgba(255,255,255,.82),transparent 36%),
+  linear-gradient(180deg,#cba5fa 0%,#a36ae9 45%,#7c42c5 100%);
+ box-shadow:inset 0 2px 2px #ffffffd9,inset 0 -3px 5px #40197344,0 3px 0 #5b2b9c,0 12px 24px #7135bd55,0 0 18px #c99cff77;
+}
+.btn:active{transform:translateY(1px);box-shadow:inset 0 2px 5px #48207866,0 1px 0 #5b2b9c,0 3px 9px #7135bd33}
+.btn.secondary{
+ border:1px solid #e8d5ff;
+ background:radial-gradient(ellipse at 25% 0%,#fff 0%,transparent 48%),linear-gradient(145deg,#fff 0%,#f8efff 58%,#ead9ff 100%);
+ color:#62349b;text-shadow:none;
+ box-shadow:inset 0 2px 2px #fff,inset 0 -2px 4px #c6a3e855,0 3px 0 #c5a1e6,0 8px 18px #8a58b52b;
+}
+.btn.secondary:hover{
+ background:radial-gradient(ellipse at 25% 0%,#fff 0%,transparent 48%),linear-gradient(145deg,#fff 0%,#f4e8ff 58%,#e4ccff 100%);
+ box-shadow:inset 0 2px 2px #fff,0 3px 0 #bd94e3,0 11px 22px #8a58b544;
+}
+.btn.copied{background:linear-gradient(180deg,#8bdbbd,#4cae91);border-color:#d9fff0;color:#fff;box-shadow:inset 0 2px 2px #ffffffbb,0 3px 0 #36846d,0 8px 18px #4cae9140}
+.filter{
+ border:1px solid #ead9fb;
+ background:radial-gradient(ellipse at 25% 0%,#fff 0%,transparent 55%),linear-gradient(145deg,#fff,#f3e9ff);
+ color:#68438e;
+ box-shadow:inset 0 1px 2px #fff,0 3px 9px #8055a51c;
+}
+.filter.active{
+ border-color:#e8d4ff;
+ background:radial-gradient(ellipse at 24% 4%,#ffffffa8,transparent 42%),linear-gradient(180deg,#b88aef,#8a4bd0 62%,#7138b4);
+ color:#fff;text-shadow:0 1px 2px #4c247a55;
+ box-shadow:inset 0 2px 2px #ffffffbd,inset 0 -2px 4px #49207855,0 3px 0 #5d2b98,0 7px 16px #7135bd44;
+}
+nav a,.member{
+ border:1px solid #eadbfa;
+ background:linear-gradient(145deg,#fff,#f5edff);
+ box-shadow:inset 0 1px 2px #fff,0 3px 9px #8055a51a;
+}
+nav a:hover,.member:hover,.member.active{
+ background:radial-gradient(ellipse at 25% 0%,#fff 0%,transparent 48%),linear-gradient(145deg,#f4e7ff,#e4d0fb);
+ border-color:#c7a1ed;
+ box-shadow:inset 0 1px 2px #fff,0 5px 13px #8055a52c;
+ transform:translateY(-1px);
+}
+button:not(.btn):not(.filter):not(.member):not(.time-select){
+ border:1px solid #ead8fb;
+ background:radial-gradient(ellipse at 25% 0%,#fff 0%,transparent 48%),linear-gradient(145deg,#fff,#f2e7ff);
+ color:#623b91;
+ box-shadow:inset 0 1px 2px #fff,0 4px 12px #8055a522;
+}
+button:not(.btn):not(.filter):not(.member):not(.time-select):hover{
+ transform:translateY(-1px);box-shadow:inset 0 1px 2px #fff,0 7px 16px #8055a533;
+}
+.btn:focus-visible,.filter:focus-visible,nav a:focus-visible,button:focus-visible{
+ outline:3px solid #d8b7ff;outline-offset:3px;
+}
+@media(prefers-reduced-motion:reduce){
+ .btn,.filter,nav a,.member,button{transition:none}
+}
+
 </style>
 </head>
 <body><main class="wrap">
