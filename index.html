@@ -1272,7 +1272,7 @@ body>body>body>.wrap{position:relative;z-index:1}
   <article class="birthday-card" data-bday="icpolls"><span class="birthday-tag">JIN + V · PRE-VOTACIÓN</span><h3>IC POLLS · December Birthday AD</h3><p>Encuesta preliminar de anuncios con ambos integrantes. Comprueba que la encuesta siga activa.</p><div class="birthday-meta">Cierre: 7 nov · 23:59 KST</div><div class="bday-countdown" data-deadline="2026-11-07T23:59:00+09:00"></div><div class="bday-info"><strong>Acceso:</strong> WEB<br><strong>Cómo obtener puntos:</strong> No usa puntos de app: selecciona la opción y envía tu voto en la encuesta web.</div><div class="actions"><a class="btn" href="https://icpolls.com/p/01M6DQ4AGWKQT9R1CDRJEAWDDX" target="_blank" rel="noopener">VOTAR EN IC POLLS ↗</a></div></article>
   <article class="birthday-card" data-bday="dailyduck"><span class="birthday-tag">JIN + V · PROYECTO CONJUNTO</span><h3>DailyDuck · Birthday Ad Gift</h3><p>Proyecto conjunto de anuncio y donación; no es una votación convencional. Revisa las condiciones antes de aportar Moi.</p><div class="birthday-meta">Periodo publicado: hasta el 15 nov 2026 KST · hora exacta no confirmada</div><div class="bday-countdown" data-deadline="2026-11-15T23:59:00+09:00" data-approx="true"></div><div class="bday-info"><strong>Acceso:</strong> WEB · PROYECTO<br><strong>Cómo obtener puntos:</strong> Moi: participación/donación según las condiciones del proyecto; no es una votación gratuita convencional.</div><div class="actions"><a class="btn" href="https://dailyduck.com/vote/89d62809c58a426d84135e4dede4f774" target="_blank" rel="noopener">VER PROYECTO ↗</a></div></article>
  </div>
- <p class="note">Las cuentas regresivas muestran la hora local que elegiste al inicio y conservan la referencia oficial de Corea (KST) o Japón (JST). Los horarios aproximados deben confirmarse en la plataforma. Las formas de conseguir puntos pueden variar según la campaña y el tipo de voto aceptado.</p>
+ <p class="note">Las cuentas regresivas muestran únicamente la hora local que elegiste al inicio. Los horarios aproximados se indican como orientativos. Las formas de conseguir puntos pueden variar según la campaña y el tipo de voto aceptado.</p>
 </section>
 
 <section class="panel guide-panel" id="guide">
@@ -1609,7 +1609,7 @@ updateResetCountdowns();
  window.refreshBirthdayCalendarLinks=()=>cards.forEach(calendarLink);
 })();
 
-// Birthday vote countdowns: source timezone plus the visitor's selected local timezone.
+// Birthday vote countdowns: display only the visitor's selected local timezone.
 (function(){
  const kst='Asia/Seoul';
  const format=(date,zone)=>new Intl.DateTimeFormat('es-MX',{timeZone:zone,weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',hour12:timeFormatSelect.value==='12'}).format(date);
@@ -1619,11 +1619,11 @@ updateResetCountdowns();
   document.querySelectorAll('.bday-countdown[data-deadline]').forEach(el=>{
    const target=new Date(el.dataset.deadline).getTime(),diff=target-now,sourceZone=el.dataset.zone||kst;
    if(!Number.isFinite(target))return;
-   const local=format(new Date(target),localZone),source=format(new Date(target),sourceZone);
+   const local=format(new Date(target),localZone);
    if(diff<=0){el.classList.add('is-ended');el.innerHTML='<strong>Plazo finalizado.</strong><br><span>Cierre en tu zona: '+local+'.</span>';return;}
    const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);
    const approx=el.dataset.approx==='true'?' · hora orientativa':'';
-   el.innerHTML='<strong>Faltan:</strong> '+d+' d · '+pad(h)+' h · '+pad(m)+' min · '+pad(sec)+' s<br><span>Tu hora: '+local+' · Referencia '+sourceZone+': '+source+approx+'</span>';
+   el.innerHTML='<strong>Cuenta regresiva:</strong> '+d+' d · '+pad(h)+' h · '+pad(m)+' min · '+pad(sec)+' s<br><span>Cierre en tu hora local: '+local+approx+'</span>';
   });
  }
  tick();setInterval(tick,1000);
