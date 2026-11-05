@@ -1129,6 +1129,10 @@ body>body>body>.wrap{position:relative;z-index:1}
 .birthday-card .bday-info p{margin:7px 0}
 @media(max-width:520px){.birthday-benefits{display:grid;gap:7px}.birthday-primary-cta{width:100%;justify-content:center}}
 
+
+.birthday-card .actions .web-vote-link{background:#ee9d89!important;color:#51364b!important;box-shadow:0 4px 0 #c87868!important}
+.birthday-card .actions .web-vote-link:hover{filter:brightness(1.04)}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -1565,6 +1569,28 @@ updateResetCountdowns();
  setFilter('all');
 })();
 
+// Add a dedicated browser-voting shortcut only where a web route is available.
+(function(){
+ const webRoutes={
+  giftifan:'https://giftifan.com/index_en.php',
+  starvibe:'https://www.starvibe.fun/leader-board/birthday',
+  picnic:'https://www.picnic.fan/en/vote/313',
+  'fanplus-jin':'https://fanplus.co.kr/en/votes/609',
+  'fanplus-v':'https://fanplus.co.kr/en/votes/609',
+  fannstar:'https://en.fannstar.tf.co.kr/rank/view/adsb'
+ };
+ Object.entries(webRoutes).forEach(([id,url])=>{
+  const card=document.querySelector('.birthday-card[data-bday="'+id+'"]');
+  const actions=card?.querySelector('.actions');
+  if(!actions||actions.querySelector('.web-vote-link'))return;
+  const link=document.createElement('a');
+  link.className='btn web-vote-link';
+  link.href=url;link.target='_blank';link.rel='noopener noreferrer';
+  link.textContent='VOTAR EN WEB ↗';
+  actions.insertBefore(link,actions.firstChild);
+ });
+})();
+
 // Convert every birthday vote into the same structured card layout.
 (function(){
  const cards=document.querySelectorAll('.birthday-card');
@@ -1600,7 +1626,7 @@ updateResetCountdowns();
    const access=(parts[0]||'').replace(/<strong>Acceso:<\/strong>/i,'').trim();
    const points=(parts[1]||'').trim();
    info.innerHTML='<p><strong>Acceso:</strong> '+access+'</p><p><strong>Cómo obtener puntos:</strong> '+points+'</p>';
-   const linksTitle=heading('Link a app o web');
+   const linksTitle=heading('Enlaces para votar');
    actions.before(linksTitle);
    card.dataset.formatted='true';
   }
