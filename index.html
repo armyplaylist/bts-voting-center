@@ -1194,7 +1194,7 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
 #birthday-voting .birthday-card>p{margin:0}
 #birthday-voting .birthday-card h3{margin-bottom:2px}
 /* Apartados independientes y detalles desplegables */
-.view-page{display:none!important}.view-page.is-current{display:block!important}
+/* Los apartados permanecen visibles; el menú usa anclas normales. */
 .bday-method{margin:10px 0 2px;border:1px solid #e7deee;border-radius:10px;background:#faf8fc;overflow:hidden}
 .bday-method summary{padding:12px 14px;cursor:pointer;list-style:none;color:#6840a0;font-size:.78rem;font-weight:900;letter-spacing:.035em}
 .bday-method summary::-webkit-details-marker{display:none}
@@ -2669,30 +2669,8 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
 <footer class="footer">BTS VOTING CENTER · Información revisada: 4 nov 2026.<br>Consulta siempre las reglas y anuncios en las plataformas oficiales.</footer>
 </main>
 <script>
-// Navegación por apartados: solo se muestra una sección principal a la vez.
-(function(){
- const ids=["country-time","active","completed","upcoming","birthday-voting","choeaedol","guide","sources"];
- const pages=ids.map(id=>document.getElementById(id)).filter(Boolean);
- pages.forEach(page=>page.classList.add("view-page"));
- function showPage(){
-  const id=location.hash.slice(1),target=pages.find(page=>page.id===id)||document.getElementById("active");
-  pages.forEach(page=>page.classList.toggle("is-current",page===target));
-  document.querySelectorAll("nav a[href^=\"#\"]").forEach(link=>link.setAttribute("aria-current",link.getAttribute("href")==="#"+target.id?"page":"false"));
-  window.scrollTo(0,0);
- }
- document.addEventListener("click",event=>{
-  const link=event.target.closest && event.target.closest('a[href^="#"]');if(!link)return;
-  const id=link.getAttribute("href").slice(1);
-  if(pages.some(page=>page.id===id)){
-   event.preventDefault();
-   if(location.hash!=="#"+id)history.pushState(null,"","#"+id);
-   showPage();
-  }
- });
- window.addEventListener("hashchange",showPage);
- window.addEventListener("popstate",showPage);
- showPage();
-})();
+// Navegación nativa por anclas: mantiene todos los apartados visibles.
+
 
 const tzSelect=document.getElementById('timezoneSelect');
 const timezoneStorageKey='bts-voting-timezone';
