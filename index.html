@@ -2175,6 +2175,49 @@ body:not(.dark-mode) .theme-toggle{
  background:#7868cc!important;color:#fff!important;border:1px solid #7868cc!important;
 }
 
+
+/* ACCESSIBILITY COLOR SPEC — requested light and dark mode values */
+body:not(.dark-mode){
+ --ink:#4A2D7A!important;
+ --muted:#4A2D7A!important;
+ color:#4A2D7A!important;
+ background-color:#fff!important;
+}
+body:not(.dark-mode) :is(p,span,small,label,h1,h2,h3,h4,h5,h6,
+.section-head,.section-head p,.vote-card .meta,.vote-card .description,
+.vote-card .field-value,.rank p,.upcoming-item p,.footer,.birthday-meta,
+.birthday-countdown-heading,.note,.empty,.ranking-line,.rule-box,.time-row){
+ color:#4A2D7A!important;
+}
+body:not(.dark-mode) :is(.panel,.vote-card,.rank,.clock-box,.upcoming-item,
+nav,.time-row,.note,.empty){
+ background-color:#fff!important;
+}
+body.dark-mode{
+ --muted:#CCCCCC!important;
+ --ink:#F2EAFB!important;
+}
+body.dark-mode :is(p,small,label,.muted,.meta,.description,.field-value,
+.section-head p,.rank p,.upcoming-item p,.footer,.birthday-meta,
+.birthday-countdown-heading,.note,.empty,.ranking-line,.rule-box,
+.time-row,.local-vote-time,.vote-countdown,.vote-card .meta,
+.vote-card .description,.vote-card .field-value){
+ color:#CCCCCC!important;
+}
+body.dark-mode .countdown strong,
+body.dark-mode .bday-countdown strong,
+body.dark-mode .urgency-1,
+body.dark-mode .urgency-1 strong{
+ color:#FF6B7A!important;
+}
+body.dark-mode .urgency-1{
+ background:#FF6B7A!important;
+ color:#241a2d!important;
+ border-color:#FF6B7A!important;
+}
+body.dark-mode .ranking-line b{color:#FF6B7A!important}
+body.dark-mode .deadline{color:#CCCCCC!important}
+
 </style>
 </head>
 <body><main class="wrap">
