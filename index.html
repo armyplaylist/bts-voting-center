@@ -1218,17 +1218,8 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
   <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
  </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
 
-<nav aria-label="Navegación"><a href="#start-here">Inicio</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños</a><a href="#guide">Guía</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes</a><a href="#country-time">Mi hora</a></nav>
-<section class="panel start-panel" id="start-here">
- <div class="section-head"><div><h2>💜 ARMY, EMPIEZA AQUÍ</h2><p>Todo lo esencial para apoyar a BTS, organizado en un solo lugar.</p></div><span class="pill live">TU CENTRO DE APOYO</span></div>
- <div class="start-grid">
-  <a class="start-action primary-action" href="#active"><span class="start-number">01</span><span><strong>VOTAR AHORA</strong><small>Revisa las votaciones, instrucciones y enlaces para participar.</small></span><b>↗</b></a>
-  <a class="start-action" href="#guide"><span class="start-number">02</span><span><strong>APRENDER A VOTAR</strong><small>Pasos básicos para evitar errores antes de enviar tu voto.</small></span><b>↗</b></a>
-  <a class="start-action" href="#upcoming"><span class="start-number">03</span><span><strong>PREPARARME</strong><small>Consulta próximos eventos y fechas anunciadas.</small></span><b>↗</b></a>
-  <a class="start-action" href="#sources"><span class="start-number">04</span><span><strong>VER FUENTES OFICIALES</strong><small>Accede directamente a las plataformas de cada organización.</small></span><b>↗</b></a>
- </div>
- <div class="start-tools"><span>¿Quieres compartir este centro con otra ARMY?</span><button class="btn secondary" id="shareCenter" type="button">↗ COMPARTIR CON MÁS ARMY</button><button class="btn secondary" id="copyCenterLink" type="button">🔗 COPIAR LINK DE VOTACIONES</button></div>
- </section>
+<nav aria-label="Navegación"><a href="#active">Inicio</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños</a><a href="#guide">Guía</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes</a><a href="#country-time">Mi hora</a></nav>
+
 
 
 
@@ -1369,11 +1360,11 @@ body.dark-mode .birthday-filter.active,body.dark-mode .birthday-card .actions .b
 <script>
 // Navegación por apartados: solo se muestra una sección principal a la vez.
 (function(){
- const ids=["country-time","start-here","active","completed","upcoming","birthday-voting","guide","sources"];
+ const ids=["country-time","active","completed","upcoming","birthday-voting","guide","sources"];
  const pages=ids.map(id=>document.getElementById(id)).filter(Boolean);
  pages.forEach(page=>page.classList.add("view-page"));
  function showPage(){
-  const id=location.hash.slice(1),target=pages.find(page=>page.id===id)||document.getElementById("start-here");
+  const id=location.hash.slice(1),target=pages.find(page=>page.id===id)||document.getElementById("active");
   pages.forEach(page=>page.classList.toggle("is-current",page===target));
   document.querySelectorAll("nav a[href^=\"#\"]").forEach(link=>link.setAttribute("aria-current",link.getAttribute("href")==="#"+target.id?"page":"false"));
   window.scrollTo(0,0);
