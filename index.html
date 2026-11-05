@@ -2383,6 +2383,26 @@ body.dark-mode .birthday-filters .birthday-filter.active:hover{
   border-color:#B99BD8!important;
 }
 
+
+/* DARK MODE — birthday countdowns: red only for the day number */
+body.dark-mode .birthday-countdowns .birthday-countdown-timer,
+body.dark-mode .birthday-countdowns .birthday-countdown-timer:not(strong),
+body.dark-mode .birthday-countdowns .birthday-countdown-local,
+body.dark-mode .birthday-card .bday-countdown,
+body.dark-mode .birthday-card .bday-countdown.is-ended{
+  color:#FFFFFF!important;
+  -webkit-text-fill-color:#FFFFFF!important;
+}
+body.dark-mode .birthday-countdowns .birthday-countdown-timer strong,
+body.dark-mode .birthday-card .bday-countdown strong{
+  color:#FF6B7A!important;
+  -webkit-text-fill-color:#FF6B7A!important;
+}
+body.dark-mode .birthday-card .bday-countdown *:not(strong){
+  color:#FFFFFF!important;
+  -webkit-text-fill-color:#FFFFFF!important;
+}
+
 </style>
 </head>
 <body><main class="wrap">
