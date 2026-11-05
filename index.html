@@ -1611,6 +1611,64 @@ body.dark-mode .vc-icon{color:inherit!important}
 body.dark-mode .complete-toggle{color:#f6edff!important}
 body.dark-mode .complete-toggle[aria-pressed="true"],body.dark-mode .vote-card.is-completed .complete-toggle{color:#e4ffeb!important}
 
+
+/* FINAL PALETTE HARMONY — every interactive control follows the lavender ARMY identity */
+:root{
+ --vc-button-main:linear-gradient(135deg,#bd9af0 0%,#9667d2 48%,#7045a8 100%);
+ --vc-button-hover:linear-gradient(135deg,#c9a9f5 0%,#a47add 48%,#8057b8 100%);
+ --vc-button-soft:linear-gradient(145deg,#fff 0%,#f8f2ff 55%,#eee2fb 100%);
+ --vc-button-edge:#dfc9f3;
+ --vc-button-ink:#603b88;
+}
+.btn,.filter,.birthday-filter,nav a,.member,.reset-toggle,
+button:not(.time-select),.hero-share a,.hero-share button,.complete-toggle{
+ border-color:var(--vc-button-edge)!important;
+}
+.btn,.btn.primary,.actions .btn:not(.secondary),.hero-share-x{
+ background:var(--vc-button-main)!important;color:#fff!important;
+ border:1px solid #f4eaff!important;
+ box-shadow:inset 0 2px 2px #ffffffb8, inset 0 -3px 6px #57308044,0 3px 0 #654092,0 8px 17px #8055b533!important;
+}
+.btn:hover,.btn.primary:hover,.actions .btn:not(.secondary):hover,.hero-share-x:hover{
+ background:var(--vc-button-hover)!important;filter:brightness(1.04);
+}
+.btn.secondary,.filter:not(.active),.birthday-filter:not(.active),
+nav a,.member,.reset-toggle,button:not(.btn):not(.filter):not(.member):not(.time-select):not(.complete-toggle):not(.theme-toggle):not(.hero-share button){
+ background:var(--vc-button-soft)!important;color:var(--vc-button-ink)!important;
+ box-shadow:inset 0 1px 2px #fff,0 3px 9px #8055a51c!important;
+}
+.filter.active,.birthday-filter.active,.member.active,.complete-toggle,.theme-toggle,.hero-share button{
+ background:var(--vc-button-main)!important;color:#fff!important;
+ border:1px solid #f4eaff!important;
+ box-shadow:inset 0 2px 2px #ffffffb8,0 3px 0 #654092,0 7px 15px #8055b533!important;
+}
+.btn.secondary:hover,.filter:not(.active):hover,.birthday-filter:not(.active):hover,
+nav a:hover,.member:hover,.reset-toggle:hover{
+ background:linear-gradient(145deg,#fff 0%,#f1e5ff 55%,#e4d1f7 100%)!important;color:#4e2d75!important;
+}
+body.dark-mode .btn.secondary,body.dark-mode .filter:not(.active),
+body.dark-mode .birthday-filter:not(.active),body.dark-mode nav a,
+body.dark-mode .member,body.dark-mode .reset-toggle,
+body.dark-mode button:not(.btn):not(.filter):not(.member):not(.time-select):not(.complete-toggle):not(.theme-toggle):not(.hero-share button){
+ background:linear-gradient(145deg,#453354 0%,#382746 100%)!important;
+ color:#f4eaff!important;border-color:#80649c!important;
+ box-shadow:inset 0 1px 2px #ffffff20,0 3px 10px #10091b66!important;
+}
+body.dark-mode .btn,body.dark-mode .btn.primary,body.dark-mode .filter.active,
+body.dark-mode .birthday-filter.active,body.dark-mode .complete-toggle,
+body.dark-mode .theme-toggle,body.dark-mode .hero-share button,
+body.dark-mode .hero-share-x{
+ color:#fff!important;text-shadow:0 1px 2px #29133e99!important;
+}
+body.dark-mode .vc-icon{color:inherit!important}
+.vote-card[data-kind="group"] .pill{display:inline-flex;align-items:center;gap:7px}
+.vote-card[data-kind="group"] .pill .vc-icon{
+ width:1.55rem;height:1.55rem;flex-basis:1.55rem;
+ color:#fff;background:linear-gradient(145deg,#a77bd8,#68419c);
+ border:1px solid #eadbff;box-shadow:inset 0 1px 2px #fff8,0 2px 7px #603b8840;
+}
+body.dark-mode .vote-card[data-kind="group"] .pill .vc-icon{color:#fff!important}
+
 </style>
 </head>
 <body><main class="wrap">
@@ -2177,7 +2235,8 @@ updateResetCountdowns();
   moon:'<path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5Z"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>',
   sparkle:'<path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3ZM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/>',
-  x:'<path d="M5 4 19 20M19 4 5 20"/>'
+  x:'<path d="M5 4 19 20M19 4 5 20"/>',
+   bts:'<path d="M4 2h6v20H4L7 12 4 2Z"/><path d="M14 2h6l-3 10 3 10h-6V2Z"/>'
  };
  function pick(el){
   const t=(el.textContent||'').toLowerCase();
@@ -2198,6 +2257,7 @@ updateResetCountdowns();
    return 'external';
   }
   if(el.matches('.complete-toggle'))return 'check';
+   if(el.matches('.vote-card[data-kind="group"] .pill'))return 'bts';
   if(t.includes('modo oscuro'))return 'moon';
   if(t.includes('copiar'))return 'link';
   if(t.includes('compartir'))return 'share';
@@ -2221,7 +2281,7 @@ updateResetCountdowns();
   el.prepend(icon);
  }
  function run(){
-  document.querySelectorAll('nav a,.btn,.filter,.birthday-filter,.complete-toggle,.hero-share a,.hero-share button,.theme-toggle').forEach(decorate);
+  document.querySelectorAll('nav a,.btn,.filter,.birthday-filter,.complete-toggle,.hero-share a,.hero-share button,.theme-toggle,.vote-card[data-kind="group"] .pill').forEach(decorate);
  }
  run();
  const observer=new MutationObserver(()=>run());
