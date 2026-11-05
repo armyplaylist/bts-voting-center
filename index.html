@@ -1235,15 +1235,15 @@ body>body>body>.wrap{position:relative;z-index:1}
  <div class="birthday-intro birthday-hero-copy">
   <div class="birthday-headline"><span>🐹 JIN · 4 DIC</span><span>🐻 V · 30 DIC</span></div>
   <h3>Un voto a la vez. Todo el apoyo cuenta.</h3>
-  <p>Encuentra las campañas de cumpleaños de Jin y V en un solo lugar. Revisa cuánto tiempo queda, dónde participar y cómo conseguir los recursos necesarios antes de votar.</p>
+  <p>Encuentra las votaciones de cumpleaños de Jin y V en un solo lugar. Revisa cuánto tiempo queda, dónde participar y cómo conseguir los recursos necesarios antes de votar.</p>
   <a class="birthday-primary-cta" href="#birthday-campaigns">VER CAMPAÑAS ABIERTAS <span>↓</span></a>
   <div class="birthday-benefits"><span>✓ Horarios en tu zona</span><span>✓ App o web identificado</span><span>✓ Guía de puntos por campaña</span></div>
  </div>
  <div class="birthday-toolbar">
-  <div><h2>Elige dónde participar</h2><p>Empieza por las campañas que cierran antes y revisa sus condiciones.</p></div>
-  <span class="birthday-total" id="birthdayResults">13 campañas</span>
+  <div><h2>Elige dónde votar</h2><p>Empieza por las votaciones que cierran antes y revisa sus condiciones.</p></div>
+  <span class="birthday-total" id="birthdayResults">13 votaciones</span>
  </div>
- <div class="birthday-filters" role="group" aria-label="Filtrar campañas de cumpleaños">
+ <div class="birthday-filters" role="group" aria-label="Filtrar votaciones de cumpleaños">
   <button type="button" class="birthday-filter active" data-bday-filter="all" aria-pressed="true">Todas</button>
   <button type="button" class="birthday-filter" data-bday-filter="jin" aria-pressed="false">Jin</button>
   <button type="button" class="birthday-filter" data-bday-filter="v" aria-pressed="false">V</button>
@@ -1558,7 +1558,7 @@ updateResetCountdowns();
     (value==='web'&&access.includes('WEB'));
    card.hidden=!match;if(match)visible++;
   });
-  if(total)total.textContent=visible+' campaña'+(visible===1?'':'s');
+  if(total)total.textContent=visible+' votación'+(visible===1?'':'es');
   filters.forEach(button=>{const active=button.dataset.bdayFilter===value;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
  }
  filters.forEach(button=>button.addEventListener('click',()=>setFilter(button.dataset.bdayFilter)));
