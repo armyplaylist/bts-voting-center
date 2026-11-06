@@ -3369,7 +3369,7 @@ updateResetCountdowns();
 
 
 <script>
-// Cuenta regresiva pequeña para el desplegable de la votación en vivo MAMA.
+// Cuenta regresiva en vivo para la votación MAMA: actualiza cada segundo.
 (function(){
  const el=document.getElementById('mamaLiveMiniCountdown');if(!el)return;
  const target=new Date('2026-11-20T18:00:00+09:00').getTime();
@@ -3377,10 +3377,13 @@ updateResetCountdowns();
  function tick(){
   const diff=target-Date.now();
   if(diff<=0){el.textContent='¡Ceremonia en curso!';return;}
-  const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000);
-  el.textContent=days+'d '+pad(hours)+'h '+pad(mins)+'m';
+  const days=Math.floor(diff/86400000);
+  const hours=Math.floor(diff%86400000/3600000);
+  const mins=Math.floor(diff%3600000/60000);
+  const secs=Math.floor(diff%60000/1000);
+  el.textContent=days+'d '+pad(hours)+'h '+pad(mins)+'m '+pad(secs)+'s';
  }
- tick();setInterval(tick,60000);
+ tick();setInterval(tick,1000);
 })();
 </script>
 </body>
