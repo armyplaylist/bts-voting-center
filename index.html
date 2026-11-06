@@ -2573,6 +2573,10 @@ body.dark-mode .nav-notification{background:#ff6b83;color:#24131a}
 .mama-live-summary:after{content:'＋';font-size:1rem;margin-left:auto;color:#b72d43}
 .mama-live-details[open] .mama-live-summary:after{content:'−'}
 .mama-mini-countdown{display:inline-flex;align-items:center;padding:4px 7px;border-radius:3px;background:#f8e8ec;color:#9b2c43;font-size:.68rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* El distintivo PRIORITARIO del desplegable MAMA replica el del registro de certificados */
+body:not(.dark-mode) .mama-live-vote-alert .priority-tag{background:#f0e8f8!important;color:#6840a0!important}
+body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#ff4058!important}
 </style>
 
 <!-- GoatCounter: estadísticas privadas de visitas -->
@@ -2609,7 +2613,7 @@ body.dark-mode .nav-notification{background:#ff6b83;color:#24131a}
  <details class="mama-live-details">
   <summary class="mama-live-summary"><span>★ VOTACIÓN EN VIVO · 20 NOVIEMBRE</span><span class="mama-mini-countdown" id="mamaLiveMiniCountdown">Calculando…</span></summary>
   <div class="rule-box x-rule mama-live-vote-alert" style="margin:10px 0;border-width:2px;border-left:6px solid #d93655;background:linear-gradient(110deg,#fff2f4,#fff9fb)">
-   <div class="priority-certificate-head"><h4 style="margin:0">★ FECHA CLAVE · VOTACIÓN EN VIVO</h4><span class="priority-tag">PRIORITARIO</span></div>
+   <div class="priority-certificate-head"><h4 style="margin:0">★ FECHA CLAVE · VOTACIÓN EN VIVO</h4><span class="priority-tag"><span class="priority-star">★</span> PRIORITARIO</span></div>
    <p><strong>20 DE NOVIEMBRE DE 2026 · DURANTE LA TRANSMISIÓN EN VIVO</strong></p>
    <p>La votación en vivo para <strong>VISA Fans’ Choice of the Year (DAESANG)</strong> se realizará durante la ceremonia del 20 de noviembre. El programa comienza a las <strong>18:00 KST</strong>; la hora exacta de apertura del voto se anunciará durante la transmisión. Mantén Mnet Plus listo y sigue los avisos oficiales.</p>
   </div>
