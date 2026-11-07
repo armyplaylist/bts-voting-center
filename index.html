@@ -2820,7 +2820,8 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 </style>
 
 <style>
-/* Mi espacio ARMY: cuentas, capturas e historial privado */
+.army-campaign-details{display:grid;gap:5px;padding:12px 14px;border:1px solid #e2d7ec;border-radius:13px;background:#f7f2fb;color:#685477;font-size:.78rem;line-height:1.5;font-weight:700}.army-campaign-details strong{color:#49345e;font-size:.84rem}.army-campaign-details span{overflow-wrap:anywhere}.army-campaign-details small{color:#8a7b92;font-size:.7rem;font-weight:600}
+ /* Mi espacio ARMY: cuentas, capturas e historial privado */
 .army-account-panel{scroll-margin-top:90px}
 .army-privacy-note{padding:13px 15px;margin:0 0 16px;border:1px solid #d8c9e9;border-radius:15px;background:#f5effb;color:#5e4776;font-size:.82rem;line-height:1.5}
 .army-auth-card,.army-subcard{padding:18px;border:1px solid #e5dced;border-radius:19px;background:linear-gradient(145deg,#fff,#faf7fd)}
@@ -2947,24 +2948,12 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
   <div class="army-work-grid">
    <div class="army-subcard">
     <h3>Registrar una participación</h3>
-    <p>Elige la votación y su categoría, indica la fecha de cierre y adjunta tus capturas.</p>
+    <p>Selecciona una votación del sitio. La categoría, fecha de cierre e ID de referencia se asignan automáticamente.</p>
     <form id="army-proof-form" class="army-form">
-     <label>Nombre de la votación<input id="army-campaign-name" type="text" maxlength="120" placeholder="Ej. MAMA Awards 2026" required></label>
-     <label>Categoría
-      <select id="army-campaign-category" required>
-       <option value="">Selecciona una categoría</option>
-       <option>MAMA · Fans' Choice</option>
-       <option>ARIA Awards</option>
-       <option>Melon Music Awards</option>
-       <option>Asia Artist Awards</option>
-       <option>Golden Disc Awards</option>
-       <option>Votación de cumpleaños</option>
-       <option>Recolección de votos o corazones</option>
-       <option>Otra categoría</option>
-      </select>
+     <label>Votación
+      <select id="army-campaign-select" required><option value="">Cargando votaciones…</option></select>
      </label>
-     <label>Nombre que aparecerá en tu comprobante<input id="army-display-name" type="text" maxlength="70" placeholder="Tu nombre o usuario ARMY" required></label>
-     <label>Fecha y hora de finalización<input id="army-campaign-end" type="datetime-local" required></label>
+     <div id="army-campaign-details" class="army-campaign-details" aria-live="polite">La información se obtiene del calendario de BTS Voting Center.</div>
      <label>Capturas de pantalla<input id="army-proof-files" type="file" accept="image/jpeg,image/png,image/webp" multiple required><small>JPG, PNG o WEBP · máximo 10 MB por imagen.</small></label>
      <button id="army-proof-submit" class="army-primary-btn" type="submit">Guardar capturas</button>
      <p id="army-proof-message" class="army-feedback" role="status" aria-live="polite"></p>
@@ -2973,8 +2962,8 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
    <div class="army-subcard army-certificate-info">
     <h3>Comprobantes personales</h3>
     <div class="army-certificate-mark">✦</div>
-    <p>Cuando llegue la fecha de cierre que registraste, aparecerá un comprobante digital asociado a tu participación.</p>
-    <ul><li>Nombre de la votación y categoría</li><li>Fecha de cierre y emisión</li><li>Número de capturas registradas</li><li>Código único de referencia</li></ul>
+    <p>El sistema detectará el cierre de cada votación y emitirá un solo comprobante por cuenta y campaña.</p>
+    <ul><li>Votación y categoría detectadas</li><li>ID de referencia de la campaña</li><li>Fecha de cierre y emisión</li><li>Código personal único</li></ul>
     <p class="army-disclaimer">Este documento acredita el registro de capturas en BTS Voting Center. No es un certificado oficial del organizador ni verifica que los votos hayan sido contabilizados.</p>
    </div>
   </div>
@@ -4004,6 +3993,7 @@ function armyInternalEmail(username){
  const certificateList = $('army-certificate-list');
  let currentUser = null;
  let certificates = new Map();
+ let campaignRegistry = new Map();
 
  function escapeHtml(value){
   return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -4039,16 +4029,45 @@ function armyInternalEmail(username){
    $('army-history-count').textContent = '0 registros';
   }
  }
+ async function loadCampaignRegistry(){
+  const select = $('army-campaign-select');
+  const details = $('army-campaign-details');
+  const result = await supabaseClient.from('voting_campaign_registry')
+   .select('campaign_key,reference_id,campaign_name,category,closes_at,timezone,closure_note')
+   .eq('active',true).order('campaign_name',{ascending:true});
+  if(result.error) throw result.error;
+  campaignRegistry = new Map((result.data || []).map(c=>[c.campaign_key,c]));
+  const previous = select.value;
+  select.innerHTML = '<option value="">Selecciona una votación</option>' +
+   [...campaignRegistry.values()].map(c=>'<option value="'+escapeHtml(c.campaign_key)+'">'+escapeHtml(c.campaign_name)+'</option>').join('');
+  if(previous && campaignRegistry.has(previous)) select.value = previous;
+  if(!campaignRegistry.size){
+   select.innerHTML = '<option value="">No hay votaciones disponibles</option>';
+   details.textContent = 'Las votaciones aparecerán aquí cuando estén registradas en la agenda.';
+  } else updateCampaignDetails();
+ }
+ function updateCampaignDetails(){
+  const campaign = campaignRegistry.get($('army-campaign-select').value);
+  const details = $('army-campaign-details');
+  if(!campaign){details.textContent='Selecciona una votación para consultar su categoría y cierre.';return;}
+  const closeText = campaign.closes_at
+   ? (new Date(campaign.closes_at).getTime() <= Date.now() ? 'Votación finalizada' : 'Comprobante disponible automáticamente al finalizar')
+   : 'Cierre exacto pendiente de confirmación oficial. El comprobante se habilitará cuando se registre.';
+  details.innerHTML = '<strong>'+escapeHtml(campaign.category)+'</strong><span>ID de referencia: '+escapeHtml(campaign.reference_id)+'</span><span>'+escapeHtml(closeText)+'</span><small>'+escapeHtml(campaign.closure_note || '')+'</small>';
+ }
+ $('army-campaign-select').addEventListener('change',updateCampaignDetails);
+
  async function refreshPersonalArea(){
   if(!currentUser) return;
   historyList.innerHTML = '<div class="army-empty">Cargando tu historial…</div>';
   certificateList.innerHTML = '<div class="army-empty">Revisando cierres de votación…</div>';
   try{
+   await loadCampaignRegistry();
    const certResult = await supabaseClient.rpc('ensure_my_voting_certificates');
    if(certResult.error) throw certResult.error;
    certificates = new Map((certResult.data || []).map(c => [c.id,c]));
    const recordsResult = await supabaseClient.from('voting_proof_records')
-    .select('id,campaign_key,campaign_name,category,display_name,campaign_end_at,submitted_at')
+    .select('id,campaign_key,campaign_reference_id,campaign_name,category,display_name,campaign_end_at,submitted_at')
     .order('submitted_at',{ascending:false});
    if(recordsResult.error) throw recordsResult.error;
    const records = recordsResult.data || [];
@@ -4074,7 +4093,7 @@ function armyInternalEmail(username){
       if(signed.error || !signed.data?.signedUrl) return '';
       return '<a href="'+escapeHtml(signed.data.signedUrl)+'" target="_blank" rel="noopener" aria-label="Abrir captura"><img src="'+escapeHtml(signed.data.signedUrl)+'" alt="Captura de '+escapeHtml(r.campaign_name)+'" loading="lazy"></a>';
      }));
-     return '<article class="army-history-card"><div class="army-history-top"><div><strong>'+escapeHtml(r.campaign_name)+'</strong><div class="army-history-meta">'+escapeHtml(r.category)+' · Registrado: '+escapeHtml(dateText(r.submitted_at))+'<br>Cierre registrado: '+escapeHtml(dateText(r.campaign_end_at))+' · '+files.length+' captura(s)</div></div><span class="army-status '+(ended?'done':'')+'">'+(ended?'Finalizada':'En seguimiento')+'</span></div><div class="army-proof-thumbs">'+thumbs.join('')+'</div></article>';
+     return '<article class="army-history-card"><div class="army-history-top"><div><strong>'+escapeHtml(r.campaign_name)+'</strong><div class="army-history-meta">'+escapeHtml(r.category)+' · ID: '+escapeHtml(r.campaign_reference_id || r.campaign_key)+'<br>Registrado: '+escapeHtml(dateText(r.submitted_at))+' · '+(r.campaign_end_at?'Cierre: '+escapeHtml(dateText(r.campaign_end_at)):'Cierre pendiente de confirmación')+' · '+files.length+' captura(s)</div></div><span class="army-status '+(ended?'done':'')+'">'+(ended?'Finalizada':'En seguimiento')+'</span></div><div class="army-proof-thumbs">'+thumbs.join('')+'</div></article>';
     }));
     historyList.innerHTML = cards.join('');
    }
@@ -4091,7 +4110,7 @@ function armyInternalEmail(username){
    certificateList.innerHTML = '<div class="army-empty">Aún no hay votaciones finalizadas con capturas registradas.</div>';
    return;
   }
-  certificateList.innerHTML = rows.map(c=>'<article class="army-certificate-card"><div><strong>'+escapeHtml(c.campaign_name)+'</strong><small>'+escapeHtml(c.category)+' · '+escapeHtml(c.proof_count)+' captura(s) · Emitido: '+escapeHtml(dateText(c.issued_at))+'</small><small>Código: '+escapeHtml(c.verification_code)+'</small></div><button type="button" class="army-primary-btn" data-certificate-id="'+escapeHtml(c.id)+'">Ver comprobante</button></article>').join('');
+  certificateList.innerHTML = rows.map(c=>'<article class="army-certificate-card"><div><strong>'+escapeHtml(c.campaign_name)+'</strong><small>'+escapeHtml(c.category)+' · '+escapeHtml(c.proof_count)+' captura(s) · Emitido: '+escapeHtml(dateText(c.issued_at))+'</small><small>ID de votación: '+escapeHtml(c.campaign_reference_id || c.campaign_key)+' · Código: '+escapeHtml(c.verification_code)+'</small></div><button type="button" class="army-primary-btn" data-certificate-id="'+escapeHtml(c.id)+'">Descargar comprobante</button></article>').join('');
  }
  function openCertificate(c){
   const win = window.open('','_blank');
@@ -4105,7 +4124,7 @@ function armyInternalEmail(username){
   win.document.open();
   win.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Comprobante ARMY · ${title}</title><style>
   @page{size:A4 landscape;margin:0}*{box-sizing:border-box}body{margin:0;background:#f3eef8;color:#30213f;font-family:Arial,sans-serif}.sheet{width:297mm;height:210mm;margin:auto;padding:15mm;background:#fff;position:relative;overflow:hidden}.frame{height:100%;border:2px solid #76559a;padding:13mm 17mm;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}.frame:before{content:"";position:absolute;inset:4mm;border:1px solid #e0d4eb;pointer-events:none}.kicker{font-size:10pt;letter-spacing:4px;color:#8b6aa9;font-weight:bold}.brand{margin:7mm 0 3mm;font-size:25pt;letter-spacing:3px;font-weight:900;color:#39234e}.line{width:35mm;height:2px;background:#b79bcf;margin:3mm auto 6mm}.title{font-family:Georgia,serif;font-size:31pt;color:#4a3260;margin:0 0 4mm}.intro{font-size:11pt;color:#776a80;margin:0}.person{font-family:Georgia,serif;font-size:25pt;color:#6e4a91;margin:7mm 0 2mm}.campaign{font-size:17pt;font-weight:bold;color:#3d2a50;margin:0 0 2mm}.category{font-size:11pt;color:#796c84}.details{display:flex;gap:20mm;margin:9mm 0 0}.detail{min-width:35mm}.detail strong{display:block;font-size:14pt;color:#49335f}.detail span{display:block;margin-top:2mm;font-size:8pt;letter-spacing:1px;color:#91839c;text-transform:uppercase}.footer{margin-top:auto;width:100%;display:flex;justify-content:space-between;align-items:end;gap:10mm;text-align:left}.code{font-family:monospace;font-size:9pt;color:#5f4b71}.disclaimer{max-width:145mm;font-size:7.5pt;line-height:1.4;color:#8d8395;text-align:right}.print{position:fixed;top:12px;right:12px;border:0;border-radius:9px;padding:11px 15px;background:#51356e;color:#fff;font-weight:bold;cursor:pointer}@media print{body{background:#fff}.sheet{margin:0}.print{display:none}}@media screen{.sheet{margin:20px auto;box-shadow:0 8px 35px #34214630}}@media(max-width:700px){.sheet{transform-origin:top left;transform:scale(.5);margin:10px;width:297mm}}
-  </style></head><body><button class="print" onclick="window.print()">Guardar como PDF / Imprimir</button><main class="sheet"><div class="frame"><div class="kicker">BTS VOTING CENTER · REGISTRO PERSONAL</div><div class="brand">ARMY PARTICIPATION</div><div class="line"></div><h1 class="title">Comprobante de participación</h1><p class="intro">Se deja constancia del registro de capturas en el espacio personal de</p><div class="person">${name}</div><div class="campaign">${title}</div><div class="category">${category}</div><div class="details"><div class="detail"><strong>${ended}</strong><span>Fecha de finalización registrada</span></div><div class="detail"><strong>${c.proof_count}</strong><span>Capturas registradas</span></div><div class="detail"><strong>${issued}</strong><span>Fecha de emisión</span></div></div><div class="footer"><div class="code">CÓDIGO DE REFERENCIA<br>${code}</div><div class="disclaimer">Documento personal generado por BTS Voting Center a partir de las capturas registradas por el usuario. No es un certificado oficial del organizador y no verifica la contabilización de votos.</div></div></div></main></body></html>`);
+  </style></head><body><button class="print" onclick="window.print()">Guardar como PDF / Imprimir</button><main class="sheet"><div class="frame"><div class="kicker">BTS VOTING CENTER · REGISTRO PERSONAL</div><div class="brand">ARMY PARTICIPATION</div><div class="line"></div><h1 class="title">Comprobante de participación</h1><p class="intro">Se deja constancia del registro de capturas en el espacio personal de</p><div class="person">${name}</div><div class="campaign">${title}</div><div class="category">${category}</div><div class="details"><div class="detail"><strong>${ended}</strong><span>Fecha de finalización registrada</span></div><div class="detail"><strong>${c.proof_count}</strong><span>Capturas registradas</span></div><div class="detail"><strong>${issued}</strong><span>Fecha de emisión</span></div></div><div class="footer"><div class="code">ID DE VOTACIÓN · ${escapeHtml(c.campaign_reference_id || c.campaign_key)}<br>CÓDIGO PERSONAL · ${code}</div><div class="disclaimer">Documento personal generado por BTS Voting Center a partir de las capturas registradas por el usuario. No es un certificado oficial del organizador y no verifica la contabilización de votos.</div></div></div></main></body></html>`);
   win.document.close();
  }
  authForm.addEventListener('submit',async event=>{
@@ -4151,20 +4170,16 @@ function armyInternalEmail(username){
   const allowed = ['image/jpeg','image/png','image/webp'];
   if(files.some(f=>!allowed.includes(f.type))){message(proofMessage,'Solo se permiten imágenes JPG, PNG o WEBP.',true);return;}
   if(files.some(f=>f.size>10*1024*1024)){message(proofMessage,'Cada imagen debe pesar 10 MB o menos.',true);return;}
-  const campaignName = $('army-campaign-name').value.trim();
-  const category = $('army-campaign-category').value;
-  const displayName = $('army-display-name').value.trim();
-  const endValue = $('army-campaign-end').value;
-  const endDate = new Date(endValue);
-  if(!campaignName || !category || !displayName || !endValue || Number.isNaN(endDate.getTime())){message(proofMessage,'Completa todos los datos de la votación.',true);return;}
-  const campaignKey = slug(campaignName)+'-'+slug(category);
+  const campaignKey = $('army-campaign-select').value;
+  const campaign = campaignRegistry.get(campaignKey);
+  if(!campaign){message(proofMessage,'Selecciona una votación válida de la lista.',true);return;}
+  const displayName = currentUser.user_metadata?.username || 'ARMY';
   const button = $('army-proof-submit');
   setBusy(button,true,'Guardando capturas…');
   message(proofMessage,'');
   try{
    const upsert = await supabaseClient.from('voting_proof_records').upsert({
-    user_id:currentUser.id,campaign_key:campaignKey,campaign_name:campaignName,
-    category,display_name:displayName,campaign_end_at:endDate.toISOString()
+    user_id:currentUser.id,campaign_key:campaignKey,display_name:displayName
    },{onConflict:'user_id,campaign_key'}).select().single();
    if(upsert.error) throw upsert.error;
    const record = upsert.data;
