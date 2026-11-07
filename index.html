@@ -2776,6 +2776,15 @@ header.hero{display:none!important}
 #appBackButton.is-back{background:#eee5ff;color:#6840b5}
 
 
+/* Ajuste final: barra única, baja y compacta */
+.vc-bottom-nav{height:54px!important;min-height:54px!important;max-height:54px!important;width:min(440px,calc(100% - 28px))!important;padding:3px 6px!important;gap:2px!important;border-radius:19px!important;overflow:hidden!important}
+.vc-bottom-nav a{height:46px!important;min-height:46px!important;max-height:46px!important;gap:2px!important;padding:2px 1px!important;border-radius:13px!important}
+.vc-bottom-nav a span{width:18px!important;height:18px!important}
+.vc-bottom-nav a svg{width:18px!important;height:18px!important}
+.vc-bottom-nav a small{font-size:9px!important;line-height:1!important}
+main.wrap{padding-bottom:78px!important}
+@media(max-width:380px){.vc-bottom-nav{width:calc(100% - 18px)!important}.vc-bottom-nav a small{font-size:8.5px!important}}
+
 /* Evita paneles duplicados y limita la barra al borde inferior */
 .vc-bottom-nav{position:fixed!important;left:50%!important;right:auto!important;top:auto!important;bottom:max(8px,env(safe-area-inset-bottom))!important;width:min(620px,calc(100% - 24px))!important;height:68px!important;min-height:68px!important;max-height:68px!important;box-sizing:border-box!important;overflow:hidden!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;padding:5px 7px!important;margin:0!important;transform:translateX(-50%)!important}
 .vc-bottom-nav a{height:54px!important;min-height:0!important;max-height:54px!important;margin:0!important;box-sizing:border-box!important}
@@ -3027,7 +3036,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 
 </head>
 <body><main class="wrap">
-<div class="app-topbar"><a id="appBackButton" href="#army-account" aria-label="Mi cuenta"><svg class="account-icon" viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.4-4.1 3.5-6.5 8-6.5s7.6 2.4 8 6.5z"/></svg><svg class="back-icon" viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="m15 18-6-6 6-6M9 12h11"/></svg></a><div class="app-brand">BTS<small>VOTING CENTER</small></div><a class="app-notice" href="#agenda" aria-label="Agenda">♧</a></div>
+<div class="app-topbar"><a id="appBackButton" href="#army-account" aria-label="Mi cuenta"><svg class="account-icon" viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.4-4.1 3.5-6.5 8-6.5s7.6 2.4 8 6.5z"/></svg><svg class="back-icon" viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="m15 18-6-6 6-6M9 12h11"/></svg></a><div class="app-brand">BTS<small>VOTING CENTER</small></div></div>
 
 <header class="hero" id="top">
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
@@ -4355,6 +4364,7 @@ function armyInternalEmail(username){
   ['birthday-voting','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v9H4zM3 12h18M12 12v9M12 12c-5 0-7-1-7-3 0-3 5-2 7 3Zm0 0c5 0 7-1 7-3 0-3-5-2-7 3ZM12 3v4M9 5l3 2 3-2"/></svg>','Cumpleaños'],
   ['more-hub','<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="5" r="1.5"/><circle cx="12" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="12" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/></svg>','Más']
  ];
+ document.querySelectorAll('.vc-bottom-nav').forEach(el=>el.remove());
  const dock=document.createElement('nav');dock.className='vc-bottom-nav';dock.setAttribute('aria-label','Navegación inferior');
  dock.innerHTML=tabs.map(([id,ico,label])=>'<a href="#'+id+'" data-vc-tab="'+id+'"><span>'+ico+'</span><small>'+label+'</small></a>').join('');
  document.body.appendChild(dock);
