@@ -29,7 +29,7 @@
 <meta property="og:description" content="Encuentra las votaciones grupales de BTS, fechas límite, horarios y enlaces oficiales. Todo lo que ARMY necesita para apoyar a BTS en un solo lugar.">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/f/ff/BTS_logo_%282017%29.png">
 <meta property="og:image:secure_url" content="https://upload.wikimedia.org/wikipedia/commons/f/ff/BTS_logo_%282017%29.png">
-<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1800">
 <meta property="og:image:height" content="1800">
 <meta property="og:image:alt" content="Logotipo oficial de BTS">
@@ -3335,7 +3335,7 @@ updateResetCountdowns();
 <script>
 /* Cada apartado ocupa una vista independiente; no se apilan en Inicio. */
 (function(){
- const ids=['country-time','active','completed','upcoming','birthday-voting','choeaedol','guide','sources'];
+ const ids=['country-time','active','birthday-voting','choeaedol','upcoming','sources','guide','completed'];
  const panels=ids.map(id=>document.getElementById(id)).filter(Boolean);
  const home=document.getElementById('country-time');
  if(!home)return;
@@ -3360,11 +3360,11 @@ updateResetCountdowns();
 /* GoatCounter: medir navegación entre secciones */
 (function(){
  const labels={
-  'country-time':'Horarios',
-  'active':'Votaciones',
+  'country-time':'Inicio',
+  'active':'Votaciones activas',
   'completed':'Finalizadas',
-  'upcoming':'Próximas',
-  'birthday-voting':'Cumpleaños',
+  'upcoming':'Próximas votaciones',
+  'birthday-voting':'Votaciones de cumpleaños',
   'choeaedol':'Recolección',
   'guide':'Guía',
   'sources':'Fuentes'
