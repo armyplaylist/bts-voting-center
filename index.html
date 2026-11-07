@@ -2928,10 +2928,10 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
  </div>
  <div class="army-privacy-note"><strong>Tu espacio es privado.</strong> Tus capturas y tu historial solo estarán disponibles para la cuenta con la que iniciaste sesión.</div>
  <div id="army-auth-panel" class="army-auth-card">
-  <div class="army-auth-copy"><h3>Inicia sesión o crea tu cuenta</h3><p>Usa tu correo electrónico para guardar tus participaciones y acceder a ellas desde otros dispositivos.</p></div>
+  <div class="army-auth-copy"><h3>Entra con tu usuario ARMY</h3><p>No necesitas correo electrónico. Crea un nombre de usuario único y una contraseña para guardar tus participaciones.</p></div>
   <form id="army-auth-form" class="army-form">
-   <label>Correo electrónico<input id="army-auth-email" type="email" autocomplete="email" placeholder="tu correo" required></label>
-   <label>Contraseña<input id="army-auth-password" type="password" autocomplete="current-password" minlength="8" placeholder="Mínimo 8 caracteres" required></label>
+   <label>Nombre de usuario<input id="army-auth-username" type="text" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" placeholder="Ej. army_bts2026" required><small>De 3 a 20 caracteres: letras, números, punto, guion o guion bajo.</small></label>
+   <label>Contraseña<input id="army-auth-password" type="password" autocomplete="current-password" minlength="8" maxlength="72" placeholder="Mínimo 8 caracteres" required></label>
    <div class="army-auth-actions">
     <button class="army-primary-btn" type="submit" data-auth-action="login">Iniciar sesión</button>
     <button class="army-secondary-btn" type="submit" data-auth-action="signup">Crear cuenta</button>
@@ -2941,7 +2941,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
  </div>
  <div id="army-member-panel" hidden>
   <div class="army-member-bar">
-   <div><span class="army-eyebrow">SESIÓN ACTIVA</span><strong id="army-member-email"></strong></div>
+   <div><span class="army-eyebrow">SESIÓN ACTIVA</span><strong id="army-member-username"></strong></div>
    <button type="button" id="army-logout" class="army-secondary-btn">Cerrar sesión</button>
   </div>
   <div class="army-work-grid">
@@ -3986,7 +3986,11 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const SUPABASE_URL = 'https://kerhrpdrmxkffelufgbh.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC';
+const LEGACY_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlcmhycGRybXhrZmZlbHVmZ2JoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjQxMzksImV4cCI6MjEwOTY0MDEzOX0.xRddFFVOIBx2KgDspdy-jZn0pusMeKhFvMgCpRQnOmU';
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+function armyInternalEmail(username){
+ return 'army_'+String(username).trim().toLowerCase()+'@accounts.invalid';
+}
 
 (function(){
  const $ = (id) => document.getElementById(id);
@@ -4026,10 +4030,10 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
   authPanel.hidden = !!currentUser;
   memberPanel.hidden = !currentUser;
   if(currentUser){
-   $('army-member-email').textContent = currentUser.email || 'Cuenta ARMY';
+   $('army-member-username').textContent = currentUser.user_metadata?.username || 'Cuenta ARMY';
    await refreshPersonalArea();
   } else {
-   $('army-member-email').textContent = '';
+   $('army-member-username').textContent = '';
    historyList.innerHTML = '<div class="army-empty">Inicia sesión para consultar tu historial.</div>';
    certificateList.innerHTML = '<div class="army-empty">Aún no tienes comprobantes emitidos.</div>';
    $('army-history-count').textContent = '0 registros';
@@ -4107,23 +4111,29 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
  authForm.addEventListener('submit',async event=>{
   event.preventDefault();
   const action = event.submitter?.dataset.authAction || 'login';
-  const email = $('army-auth-email').value.trim();
+  const username = $('army-auth-username').value.trim();
   const password = $('army-auth-password').value;
   const button = event.submitter;
   setBusy(button,true,action==='signup'?'Creando cuenta…':'Ingresando…');
   message(authMessage,'');
   try{
    if(action==='signup'){
-    const result = await supabaseClient.auth.signUp({email,password});
-    if(result.error) throw result.error;
-    if(result.data.session){
-     message(authMessage,'Tu cuenta está lista. Ya puedes registrar tus capturas.');
-    } else {
-     message(authMessage,'Revisa tu correo para confirmar la cuenta y después inicia sesión.');
+    const result = await supabaseClient.functions.invoke('army-username-signup',{
+     body:{username,password},
+     headers:{Authorization:'Bearer '+LEGACY_ANON_KEY}
+    });
+    if(result.error){
+     let detail = result.error.message || 'No pudimos crear la cuenta.';
+     try{const body=await result.error.context?.json();if(body?.error) detail=body.error;}catch(_){}
+     throw new Error(detail);
     }
+    if(result.data?.error) throw new Error(result.data.error);
+    const login = await supabaseClient.auth.signInWithPassword({email:armyInternalEmail(username),password});
+    if(login.error) throw login.error;
+    message(authMessage,'¡Tu cuenta ARMY está lista! Ya puedes registrar tus capturas.');
    } else {
-    const result = await supabaseClient.auth.signInWithPassword({email,password});
-    if(result.error) throw result.error;
+    const result = await supabaseClient.auth.signInWithPassword({email:armyInternalEmail(username),password});
+    if(result.error) throw new Error('No encontramos esa combinación de usuario y contraseña.');
     message(authMessage,'Sesión iniciada correctamente.');
    }
   }catch(error){message(authMessage,error.message || 'No pudimos completar el acceso.',true);}
