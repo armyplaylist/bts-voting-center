@@ -2667,6 +2667,35 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
  .birthday-countdown-timer{font-size:.72rem}
 }
 
+
+/* Iconos delicados para la navegación de secciones */
+nav[aria-label="Navegación principal"] a{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 13px!important;border-radius:12px!important;transition:background .18s ease,color .18s ease,transform .18s ease}
+nav[aria-label="Navegación principal"] a svg{width:17px;height:17px;flex:0 0 17px;stroke-width:1.8;opacity:.9}
+nav[aria-label="Navegación principal"] a:hover{background:#eee7f5!important;color:#583c78!important;transform:translateY(-1px)}
+nav[aria-label="Navegación principal"] a[aria-current="page"]{background:#eee7f5!important;color:#553477!important}
+@media(max-width:720px){nav[aria-label="Navegación principal"]{gap:5px}nav[aria-label="Navegación principal"] a{gap:6px;padding:9px 11px!important;font-size:.72rem!important}nav[aria-label="Navegación principal"] a svg{width:16px;height:16px;flex-basis:16px}}
+
+/* Tipografía editorial: títulos limpios, redondeados y con presencia */
+h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-card h3,.panel-title{
+ font-family:'DM Sans',system-ui,sans-serif!important;
+ font-weight:800!important;
+ letter-spacing:-.045em;
+ line-height:1.12;
+ text-wrap:balance;
+}
+.hero h1,.hero h2{letter-spacing:-.05em}
+.section-head h2{font-size:clamp(1.38rem,2.7vw,1.8rem)}
+.vote-card h3,.birthday-card h3{font-size:1.12rem;letter-spacing:-.035em}
+@media(max-width:600px){
+ h1{font-size:clamp(1.8rem,8vw,2.5rem)}
+ .section-head h2{font-size:1.35rem}
+}
+
+/* Iconos de línea para identificar visualmente cada sección */
+.section-head h2{display:flex;align-items:center;gap:10px}
+.section-heading-icon{width:34px;height:34px;flex:0 0 34px;display:inline-flex;align-items:center;justify-content:center;border-radius:11px;background:linear-gradient(145deg,#f0e8ff,#fbe9ee);color:#7650a8;box-shadow:inset 0 0 0 1px #e7d9f5}
+.section-heading-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:600px){.section-heading-icon{width:30px;height:30px;flex-basis:30px;border-radius:10px}.section-heading-icon svg{width:17px;height:17px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -2683,7 +2712,7 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<nav aria-label="Navegación principal"><a href="/">Inicio</a><a href="/votaciones/">Votaciones activas</a><a href="/cumpleanos/">Cumpleaños</a><a href="/recoleccion/">Recolección</a><a href="/proximas/">Próximas</a><a href="/finalizadas/">Finalizadas</a><a href="/guia/">Guía</a><a href="/fuentes/">Fuentes</a></nav>
+<nav aria-label="Navegación principal"><a href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></a><a href="/votaciones/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H4z"/><path d="M8 21h8M12 17v4M8 9h8M8 13h5"/></svg><span>Votaciones activas</span></a><a href="/cumpleanos/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h16v10H4z"/><path d="M4 14h16M8 10V7a2 2 0 0 1 4 0v3M16 10V7a2 2 0 0 0-4 0"/><path d="M8 4v1M16 4v1"/></svg><span>Cumpleaños</span></a><a href="/recoleccion/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 8.6c0 5.4-8.8 11-8.8 11S3.2 14 3.2 8.6A4.6 4.6 0 0 1 12 6.3a4.6 4.6 0 0 1 8.8 2.3Z"/></svg><span>Recolección</span></a><a href="/proximas/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"/></svg><span>Próximas</span></a><a href="/finalizadas/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg><span>Finalizadas</span></a><a href="/guia/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5z"/><path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20M8 7h8M8 10h6"/></svg><span>Guía</span></a><a href="/fuentes/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l3-3A5 5 0 0 0 13 2.9l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg><span>Fuentes</span></a></nav>
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
   <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
@@ -2693,7 +2722,7 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
  </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
 
 <section class="panel" id="choeaedol">
- <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.7A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11Z"/><path d="M8 12h8M12 8v8"/></svg></span> RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
  <div class="gda-collection-countdown" id="gdaCollectionCountdown" role="status" aria-live="polite">
   <div class="gda-countdown-heading">⏳ CIERRE DIARIO DE RECOLECCIÓN</div>
   <div class="gda-countdown-time" id="gdaCollectionTimer">--:--:--</div>
@@ -2713,7 +2742,7 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
 </section>
 
 <section class="panel" id="active">
- <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5M9 19v2h6v-2"/></svg></span> ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
  <div class="cards" id="voteCards">
   <div class="rule-box mama-certificate-link"><div class="priority-certificate-head"><h4>📩 REGISTRO DE CERTIFICADOS MAMA</h4><span class="priority-tag"><span class="priority-star">★</span> PRIORITARIO</span></div><p>Comparte tus certificados de voto en el tracker comunitario de BTS Voting Org.</p><div class="actions"><a class="btn" href="https://btsvote-mama-voting-tracker.vercel.app/" target="_blank" rel="noopener noreferrer">ENVIAR CERTIFICADOS ↗</a></div></div>
   <article class="vote-card" data-kind="group">
@@ -2782,7 +2811,7 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
 </section>
 
 <section class="panel" id="birthday-voting">
- <div class="section-head"><div><h2>🎂 BIRTHDAY VOTING · JIN &amp; V</h2></div><span class="pill live">DICIEMBRE 2026</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4z"/><path d="M4 15h16M8 11V7a2 2 0 0 1 4 0v4M16 11V7a2 2 0 0 0-4 0"/><path d="M8 4v1M16 4v1"/></svg></span> BIRTHDAY VOTING · JIN &amp; V</h2></div><span class="pill live">DICIEMBRE 2026</span></div>
   <div class="birthday-countdown-heading">PRÓXIMOS CUMPLEAÑOS</div>
   <div class="birthday-countdowns" aria-label="Cuenta regresiva para los cumpleaños de Jin y V">
    <article class="birthday-countdown-card"><div class="birthday-countdown-member">JIN</div><div class="birthday-countdown-date">4 DICIEMBRE</div><div class="birthday-countdown-timer" data-birthday="jin"></div></article>
@@ -2825,7 +2854,7 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
 </section>
 
 <section class="panel" id="upcoming">
- <div class="section-head"><div><h2>🗓️ UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"/></svg></span> UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
  <div class="upcoming">
   <article class="vote-card" data-kind="group">
  <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-gda" src="https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png" alt="Logotipo de Golden Disc Awards" loading="lazy" decoding="async">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div>
@@ -2845,7 +2874,7 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
 </section>
 
 <section class="panel guide-panel" id="guide">
- <div class="section-head"><div><h2>🗳️ HOW TO SUPPORT BTS</h2><p>Una ruta sencilla para participar con información clara.</p></div><span class="pill">GUÍA RÁPIDA</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5z"/><path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20M8 7h8M8 10h6"/></svg></span> HOW TO SUPPORT BTS</h2><p>Una ruta sencilla para participar con información clara.</p></div><span class="pill">GUÍA RÁPIDA</span></div>
  <div class="guide-steps">
   <article class="guide-step"><span>01</span><div><h3>Elige una votación</h3><p>Abre la tarjeta correspondiente y comprueba que la votación siga dentro de su periodo oficial.</p></div></article>
   <article class="guide-step"><span>02</span><div><h3>Lee las reglas</h3><p>Revisa categorías, límites diarios, requisitos de cuenta y posibles restricciones regionales en la plataforma organizadora.</p></div></article>
@@ -2856,7 +2885,7 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
 </section>
 
 <section class="panel" id="sources">
- <div class="section-head"><div><h2>🔗 OFFICIAL SOURCES</h2><p>Accesos directos a las plataformas enlazadas en las fichas de votación.</p></div><span class="pill">VERIFICA ANTES DE VOTAR</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l3-3A5 5 0 0 0 13 2.9l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg></span> OFFICIAL SOURCES</h2><p>Accesos directos a las plataformas enlazadas en las fichas de votación.</p></div><span class="pill">VERIFICA ANTES DE VOTAR</span></div>
  <div class="source-grid">
   <a href="https://kdolmaster.tistory.com/1811" target="_blank" rel="noopener"><strong>KDOL · Cumpleaños diciembre</strong><small>Calendario oficial y reglas de la campaña ↗</small></a>
   <a href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener"><strong>MAMA 2026</strong><small>Mnet Plus · plataforma de votación ↗</small></a>
@@ -2869,7 +2898,7 @@ body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9d
 </section>
 
 <section class="panel" id="completed">
- <div class="section-head"><div><h2>✓ COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span> COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
  <div class="cards">
 <article class="vote-card" data-kind="birthday">
  <div class="card-top"><h3 class="vote-title">Podoal · December Birthday</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
@@ -3057,6 +3086,19 @@ function updateLocalTimes(){
  });
  updateVoteCountdowns();
 }
+function countdownLocale(){
+ const lang=document.documentElement.lang||'es';
+ const words={
+ es:{count:'Cuenta regresiva:',reset:'Reinicio de votos (00:00 KST):',ended:'El plazo indicado ya terminó.',datePassed:'Fecha indicada: hoy o ya pasó.',pending:'La hora oficial sigue pendiente.',until:'hasta la fecha indicada; hora oficial pendiente.',birthdayStart:'Inicio del cumpleaños en tu hora:',closeLocal:'Cierre en tu hora local:',closeZone:'Cierre en tu zona:',deadlineEnded:'Plazo finalizado.',approx:' · hora orientativa',d:'d',h:'h',min:'min',s:'s'},
+ en:{count:'Countdown:',reset:'Vote reset (00:00 KST):',ended:'The stated deadline has passed.',datePassed:'The stated date is today or has passed.',pending:'The official time is still pending.',until:'until the stated date; official time pending.',birthdayStart:'Birthday starts in your local time:',closeLocal:'Deadline in your local time:',closeZone:'Deadline in your time zone:',deadlineEnded:'Voting period ended.',approx:' · approximate time',d:'d',h:'h',min:'min',s:'s'},
+ ko:{count:'카운트다운:',reset:'투표 초기화 (KST 00:00):',ended:'안내된 마감 시간이 지났습니다.',datePassed:'안내된 날짜가 오늘이거나 지났습니다.',pending:'공식 시간은 아직 미정입니다.',until:'안내된 날짜까지; 공식 시간 미정.',birthdayStart:'현지 시간 기준 생일 시작:',closeLocal:'현지 시간 기준 마감:',closeZone:'시간대 기준 마감:',deadlineEnded:'투표 기간이 종료되었습니다.',approx:' · 예상 시간',d:'일',h:'시간',min:'분',s:'초'},
+ ja:{count:'カウントダウン:',reset:'投票リセット (KST 00:00):',ended:'指定された締切は過ぎました。',datePassed:'指定日は今日または過去の日付です。',pending:'公式時刻は未発表です。',until:'指定日まで（公式時刻は未発表）。',birthdayStart:'現地時間での誕生日開始:',closeLocal:'現地時間での締切:',closeZone:'選択した時間帯での締切:',deadlineEnded:'投票期間は終了しました。',approx:' · 目安の時刻',d:'日',h:'時間',min:'分',s:'秒'},
+ pt:{count:'Contagem regressiva:',reset:'Reinício dos votos (00:00 KST):',ended:'O prazo informado já terminou.',datePassed:'A data indicada é hoje ou já passou.',pending:'O horário oficial ainda não foi divulgado.',until:'até a data indicada; horário oficial pendente.',birthdayStart:'Início do aniversário no seu horário:',closeLocal:'Encerramento no seu horário local:',closeZone:'Encerramento no seu fuso horário:',deadlineEnded:'Período de votação encerrado.',approx:' · horário aproximado',d:'d',h:'h',min:'min',s:'s'},
+ th:{count:'นับถอยหลัง:',reset:'รีเซ็ตการโหวต (00:00 KST):',ended:'หมดเขตตามเวลาที่ระบุแล้ว',datePassed:'วันที่ระบุคือวันนี้หรือผ่านไปแล้ว',pending:'ยังไม่มีการยืนยันเวลาอย่างเป็นทางการ',until:'จนถึงวันที่ระบุ; ยังไม่มีเวลาอย่างเป็นทางการ',birthdayStart:'วันเกิดเริ่มตามเวลาท้องถิ่นของคุณ:',closeLocal:'ปิดโหวตตามเวลาท้องถิ่น:',closeZone:'ปิดโหวตตามเขตเวลาของคุณ:',deadlineEnded:'สิ้นสุดช่วงโหวตแล้ว',approx:' · เวลาโดยประมาณ',d:'วัน',h:'ชม.',min:'นาที',s:'วิ.'},
+ ru:{count:'Обратный отсчёт:',reset:'Сброс голосов (00:00 KST):',ended:'Указанный срок уже истёк.',datePassed:'Указанная дата — сегодня или уже прошла.',pending:'Официальное время ещё не объявлено.',until:'до указанной даты; официальное время не объявлено.',birthdayStart:'Начало дня рождения по вашему времени:',closeLocal:'Окончание по вашему местному времени:',closeZone:'Окончание в вашем часовом поясе:',deadlineEnded:'Голосование завершено.',approx:' · примерное время',d:'д',h:'ч',min:'мин',s:'с'}
+ };
+ return words[lang]||words.es;
+}
 function updateResetCountdowns(){
  const now=new Date();
  const kstDate=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
@@ -3065,7 +3107,7 @@ function updateResetCountdowns(){
  const diff=nextReset.getTime()-now.getTime();
  const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
  document.querySelectorAll('[data-reset-countdown="korea-midnight"]').forEach(el=>{
-  el.innerHTML='<strong>Reinicio de votos (00:00 KST):</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s';
+  const w=countdownLocale();el.innerHTML='<strong>'+w.reset+'</strong> '+days+' '+w.d+' · '+pad(hours)+' '+w.h+' · '+pad(mins)+' '+w.min+' · '+pad(secs)+' '+w.s;
  });
 }
 function updateVoteCountdowns(){
@@ -3075,9 +3117,9 @@ function updateVoteCountdowns(){
   const target=s.instant?new Date(s.instant).getTime():Date.UTC(...s.date.split('-').map((v,i)=>i===1?Number(v)-1:Number(v)));
   const diff=target-now.getTime();
   updateUrgentAlert(el.closest('.vote-card'),diff);
-  if(diff<=0){el.innerHTML=s.instant?'El plazo indicado ya terminó.':'<strong>Fecha indicada: hoy o ya pasó.</strong> La hora oficial sigue pendiente.';return;}
+  const w=countdownLocale();if(diff<=0){el.innerHTML=s.instant?w.ended:'<strong>'+w.datePassed+'</strong> '+w.pending;return;}
   const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
-  el.innerHTML='<strong>Cuenta regresiva:</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s'+(s.instant?'':' <span>hasta la fecha indicada; hora oficial pendiente.</span>');
+  el.innerHTML='<strong>'+w.count+'</strong> '+days+' '+w.d+' · '+pad(hours)+' '+w.h+' · '+pad(mins)+' '+w.min+' · '+pad(secs)+' '+w.s+(s.instant?'':' <span>'+w.until+'</span>');
  });
 }
 // Alterna copies para que cada apertura del composer de X tenga una frase distinta.
@@ -3296,7 +3338,7 @@ updateResetCountdowns();
    let target=new Date(year+'-'+pad(birthday.month)+'-'+pad(birthday.day)+'T00:00:00+09:00');
    if(target<=now)target=new Date((year+1)+'-'+pad(birthday.month)+'-'+pad(birthday.day)+'T00:00:00+09:00');
    const diff=target-now,days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
-   el.innerHTML='<strong>'+days+'</strong> d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s<span class="birthday-countdown-local">Inicio del cumpleaños en tu hora: '+formatLocal(target,zone)+'</span>';
+   const w=countdownLocale();el.innerHTML='<strong>'+days+'</strong> '+w.d+' · '+pad(hours)+' '+w.h+' · '+pad(mins)+' '+w.min+' · '+pad(secs)+' '+w.s+'<span class="birthday-countdown-local">'+w.birthdayStart+' '+formatLocal(target,zone)+'</span>';
   });
  }
  tickBirthdayCountdowns();window.__btsRegisterSecondTick(tickBirthdayCountdowns);
@@ -3314,10 +3356,10 @@ updateResetCountdowns();
    if(!Number.isFinite(target))return;
    updateUrgentAlert(el.closest('.birthday-card'),diff);
    const local=format(new Date(target),localZone);
-   if(diff<=0){el.classList.add('is-ended');el.innerHTML='<strong>Plazo finalizado.</strong><br><span>Cierre en tu zona: '+local+'.</span>';return;}
+   const w=countdownLocale();if(diff<=0){el.classList.add('is-ended');el.innerHTML='<strong>'+w.deadlineEnded+'</strong><br><span>'+w.closeZone+' '+local+'.</span>';return;}
    const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);
-   const approx=el.dataset.approx==='true'?' · hora orientativa':'';
-   el.innerHTML='<strong>Cuenta regresiva:</strong> '+d+' d · '+pad(h)+' h · '+pad(m)+' min · '+pad(sec)+' s<br><span>Cierre en tu hora local: '+local+approx+'</span>';
+   const approx=el.dataset.approx==='true'?w.approx:'';
+   el.innerHTML='<strong>'+w.count+'</strong> '+d+' '+w.d+' · '+pad(h)+' '+w.h+' · '+pad(m)+' '+w.min+' · '+pad(sec)+' '+w.s+'<br><span>'+w.closeLocal+' '+local+approx+'</span>';
   });
  }
  tick();window.__btsRegisterSecondTick(tick);
