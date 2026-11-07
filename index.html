@@ -2872,6 +2872,17 @@ body{padding-bottom:92px}
 .panel.section-current{animation:section-arrive .2s ease-out}
 @keyframes section-arrive{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:600px){.account-orb{top:10px;left:10px;width:56px;height:56px}.account-orb span{font-size:1.35rem}.account-orb small{font-size:.54rem}.bottom-sections{width:calc(100% - 12px);bottom:max(6px,env(safe-area-inset-bottom));padding:6px;gap:3px;border-radius:18px}.bottom-sections a{flex-basis:61px;min-width:58px;padding:7px 2px}.bottom-sections a small{font-size:.57rem}body{padding-bottom:86px}}
+
+.army-profile-card{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:20px;border:1px solid #e7deee;border-radius:22px;background:linear-gradient(120deg,#fff,#f5effb)}
+.army-profile-avatar-wrap{width:104px;height:104px;flex:0 0 104px;border-radius:50%;overflow:hidden;border:3px solid #e5d5f4;background:#f1e8fa;display:grid;place-items:center}
+.army-profile-avatar{width:100%;height:100%;object-fit:cover}
+.army-profile-placeholder{font-size:2.8rem;color:#9b7abb}
+.army-profile-details{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:180px;flex:1}
+.army-profile-details>strong{font-size:1.15rem;color:#49345e}
+.army-avatar-upload{display:inline-flex;align-items:center;justify-content:center;margin-top:5px;padding:9px 13px;border-radius:12px;background:#eee4ff;color:#684b91;font-size:.78rem;font-weight:900;cursor:pointer}
+.army-avatar-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.army-profile-details>small{color:#82758d;font-size:.7rem;font-weight:700}
+@media(max-width:600px){.army-profile-card{gap:12px}.army-profile-avatar-wrap{width:84px;height:84px;flex-basis:84px}.army-profile-card>#army-logout{width:100%}}
 </style>
 
 </head>
@@ -2940,12 +2951,12 @@ body{padding-bottom:92px}
 
 <section class="panel army-account-panel" id="army-account">
  <div class="section-head">
-  <div><h2>💜 MI ESPACIO ARMY</h2><p>Registra tus capturas de votación y consulta tu historial personal.</p></div>
+  <div><h2>💜 MI CUENTA ARMY</h2><p>Tu perfil personal dentro de BTS Voting Center.</p></div>
   <span class="pill">ÁREA PERSONAL</span>
  </div>
- <div class="army-privacy-note"><strong>Tu espacio es privado.</strong> Tus capturas y tu historial solo estarán disponibles para la cuenta con la que iniciaste sesión.</div>
+ <div class="army-privacy-note"><strong>Tu cuenta es privada.</strong> Administra tu perfil con un nombre de usuario único y una foto personal.</div>
  <div id="army-auth-panel" class="army-auth-card">
-  <div class="army-auth-copy"><h3>Entra con tu usuario ARMY</h3><p>No necesitas correo electrónico. Crea un nombre de usuario único y una contraseña para guardar tus participaciones.</p></div>
+  <div class="army-auth-copy"><h3>Entra con tu usuario ARMY</h3><p>No necesitas correo electrónico. Crea un nombre de usuario único y una contraseña para acceder a tu perfil.</p></div>
   <form id="army-auth-form" class="army-form">
    <label>Nombre de usuario<input id="army-auth-username" type="text" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" placeholder="Ej. army_bts2026" required><small>De 3 a 20 caracteres: letras, números, punto, guion o guion bajo.</small></label>
    <label>Contraseña<input id="army-auth-password" type="password" autocomplete="current-password" minlength="8" maxlength="72" placeholder="Mínimo 8 caracteres" required></label>
@@ -2957,28 +2968,19 @@ body{padding-bottom:92px}
   <p id="army-auth-message" class="army-feedback" role="status" aria-live="polite"></p>
  </div>
  <div id="army-member-panel" hidden>
-  <div class="army-member-bar">
-   <div><span class="army-eyebrow">SESIÓN ACTIVA</span><strong id="army-member-username"></strong></div>
-   <button type="button" id="army-logout" class="army-secondary-btn">Cerrar sesión</button>
-  </div>
-  <div class="army-work-grid">
-   <div class="army-subcard">
-    <h3>Registrar una participación</h3>
-    <p>Selecciona una votación del sitio. La categoría, fecha de cierre e ID de referencia se asignan automáticamente.</p>
-    <form id="army-proof-form" class="army-form">
-     <label>Votación
-      <select id="army-campaign-select" required><option value="">Cargando votaciones…</option></select>
-     </label>
-     <div id="army-campaign-details" class="army-campaign-details" aria-live="polite">La información se obtiene del calendario de BTS Voting Center.</div>
-     <label>Capturas de pantalla<input id="army-proof-files" type="file" accept="image/jpeg,image/png,image/webp" multiple required><small>JPG, PNG o WEBP · máximo 10 MB por imagen.</small></label>
-     <button id="army-proof-submit" class="army-primary-btn" type="submit">Guardar capturas</button>
-     <p id="army-proof-message" class="army-feedback" role="status" aria-live="polite"></p>
-    </form>
+  <div class="army-profile-card">
+   <div class="army-profile-avatar-wrap">
+    <img id="army-profile-avatar" class="army-profile-avatar" alt="Foto de perfil" hidden>
+    <div id="army-profile-placeholder" class="army-profile-placeholder" aria-hidden="true">♡</div>
    </div>
-  </div>
-  <div class="army-history-block">
-   <div class="army-history-heading"><div><h3>Mi historial</h3><p>Tus participaciones y capturas guardadas.</p></div><span id="army-history-count" class="pill">0 registros</span></div>
-   <div id="army-history-list" class="army-history-list"><div class="army-empty">Inicia sesión para consultar tu historial.</div></div>
+   <div class="army-profile-details">
+    <span class="army-eyebrow">TU PERFIL</span>
+    <strong id="army-member-username"></strong>
+    <label class="army-avatar-upload">Cambiar foto de perfil<input id="army-avatar-file" type="file" accept="image/jpeg,image/png,image/webp"></label>
+    <small>JPG, PNG o WEBP · máximo 5 MB.</small>
+    <p id="army-profile-message" class="army-feedback" role="status" aria-live="polite"></p>
+   </div>
+   <button type="button" id="army-logout" class="army-secondary-btn">Cerrar sesión</button>
   </div>
  </div>
 </section>
@@ -3977,165 +3979,94 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-
-const SUPABASE_URL = 'https://kerhrpdrmxkffelufgbh.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC';
-const LEGACY_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlcmhycGRybXhrZmZlbHVmZ2JoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjQxMzksImV4cCI6MjEwOTY0MDEzOX0.xRddFFVOIBx2KgDspdy-jZn0pusMeKhFvMgCpRQnOmU';
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-function armyInternalEmail(username){
- return 'army_'+String(username).trim().toLowerCase()+'@accounts.invalid';
+const SUPABASE_URL='https://kerhrpdrmxkffelufgbh.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC';
+const LEGACY_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlcmhycGRybXhrZmVsbHVmZ2JoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjQxMzksImV4cCI6MjEwOTY0MDEzOX0.xRddFFVOIBx2KgDspdy-jZn0pusMeKhFvMgCpRQnOmU';
+const supabaseClient=createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const $=id=>document.getElementById(id);
+const authPanel=$('army-auth-panel'),memberPanel=$('army-member-panel'),authForm=$('army-auth-form');
+const authMessage=$('army-auth-message'),profileMessage=$('army-profile-message');
+let currentUser=null;
+function showMessage(node,text,error=false){node.textContent=text||'';node.style.color=error?'#a52d45':'#6a4b88';}
+function internalEmail(username){return 'army_'+String(username).trim().toLowerCase()+'@accounts.invalid';}
+async function loadAvatar(){
+ if(!currentUser)return;
+ const result=await supabaseClient.from('army_usernames').select('avatar_path').eq('user_id',currentUser.id).maybeSingle();
+ if(result.error)throw result.error;
+ const img=$('army-profile-avatar'),placeholder=$('army-profile-placeholder');
+ if(result.data?.avatar_path){
+  const signed=await supabaseClient.storage.from('army-profile-photos').createSignedUrl(result.data.avatar_path,3600);
+  if(signed.error)throw signed.error;
+  img.src=signed.data.signedUrl;img.hidden=false;placeholder.hidden=true;
+ }else{img.removeAttribute('src');img.hidden=true;placeholder.hidden=false;}
 }
-
-(function(){
- const $ = (id) => document.getElementById(id);
- const authPanel = $('army-auth-panel');
- const memberPanel = $('army-member-panel');
- const authForm = $('army-auth-form');
- const proofForm = $('army-proof-form');
- const authMessage = $('army-auth-message');
- const proofMessage = $('army-proof-message');
- const historyList = $('army-history-list');
- let currentUser = null;
- let campaignRegistry = new Map();
-
- function escapeHtml(value){
-  return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+async function updateSession(session){
+ currentUser=session?.user||null;
+ authPanel.hidden=!!currentUser;memberPanel.hidden=!currentUser;
+ if(currentUser){
+  $('army-member-username').textContent=currentUser.user_metadata?.username||'Cuenta ARMY';
+  showMessage(profileMessage,'');
+  try{await loadAvatar();}catch(error){console.error(error);showMessage(profileMessage,'No pudimos cargar tu foto de perfil.',true);}
+ }else{
+  $('army-member-username').textContent='';
+  $('army-avatar-file').value='';
+  $('army-profile-avatar').hidden=true;
+  $('army-profile-placeholder').hidden=false;
  }
- function dateText(value){
-  const date = new Date(value);
-  if(Number.isNaN(date.getTime())) return 'Fecha no disponible';
-  return new Intl.DateTimeFormat(document.documentElement.lang || 'es',{dateStyle:'medium',timeStyle:'short'}).format(date);
- }
- function slug(value){
-  return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,90);
- }
- function message(node,text,isError){
-  node.textContent = text || '';
-  node.style.color = isError ? '#a52d45' : '#6a4b88';
- }
- function setBusy(button,busy,label){
-  button.disabled = busy;
-  if(busy){button.dataset.oldLabel=button.textContent;button.textContent=label;}
-  else if(button.dataset.oldLabel){button.textContent=button.dataset.oldLabel;delete button.dataset.oldLabel;}
- }
- async function updateSession(session){
-  currentUser = session?.user || null;
-  authPanel.hidden = !!currentUser;
-  memberPanel.hidden = !currentUser;
-  if(currentUser){
-   $('army-member-username').textContent = currentUser.user_metadata?.username || 'Cuenta ARMY';
-   await refreshPersonalArea();
-  } else {
-   $('army-member-username').textContent = '';
-   historyList.innerHTML = '<div class="army-empty">Inicia sesión para consultar tu historial.</div>';
-   $('army-history-count').textContent = '0 registros';
+}
+authForm.addEventListener('submit',async event=>{
+ event.preventDefault();
+ const button=event.submitter,action=button?.dataset.authAction||'login';
+ const username=$('army-auth-username').value.trim(),password=$('army-auth-password').value;
+ if(!/^[A-Za-z0-9][A-Za-z0-9._-]{2,19}$/.test(username)){showMessage(authMessage,'El usuario debe tener entre 3 y 20 caracteres válidos.',true);return;}
+ if(password.length<8||password.length>72){showMessage(authMessage,'La contraseña debe tener entre 8 y 72 caracteres.',true);return;}
+ const buttons=[...authForm.querySelectorAll('button')];buttons.forEach(b=>b.disabled=true);
+ showMessage(authMessage,action==='signup'?'Creando tu cuenta…':'Iniciando sesión…');
+ try{
+  if(action==='signup'){
+   const result=await supabaseClient.functions.invoke('army-username-signup',{
+    body:{username,password},
+    headers:{Authorization:'Bearer '+LEGACY_ANON_KEY}
+   });
+   if(result.error)throw result.error;
   }
- }
- async function loadCampaignRegistry(){
-  const select = $('army-campaign-select');
-  const details = $('army-campaign-details');
-  const result = await supabaseClient.from('voting_campaign_registry')
-   .select('campaign_key,reference_id,campaign_name,category,closes_at,timezone,closure_note')
-   .eq('active',true).order('campaign_name',{ascending:true});
-  if(result.error) throw result.error;
-  campaignRegistry = new Map((result.data || []).map(c=>[c.campaign_key,c]));
-  const previous = select.value;
-  select.innerHTML = '<option value="">Selecciona una votación</option>' +
-   [...campaignRegistry.values()].map(c=>'<option value="'+escapeHtml(c.campaign_key)+'">'+escapeHtml(c.campaign_name)+'</option>').join('');
-  if(previous && campaignRegistry.has(previous)) select.value = previous;
-  addCampaignProofLinks();
-  if(!campaignRegistry.size){
-   select.innerHTML = '<option value="">No hay votaciones disponibles</option>';
-   details.textContent = 'Las votaciones aparecerán aquí cuando estén registradas en la agenda.';
-  } else updateCampaignDetails();
- }
- function updateCampaignDetails(){
-  const campaign = campaignRegistry.get($('army-campaign-select').value);
-  const details = $('army-campaign-details');
-  if(!campaign){details.textContent='Selecciona una votación para consultar su categoría y cierre.';return;}
-  const closeText = campaign.closes_at
-   ? (new Date(campaign.closes_at).getTime() <= Date.now() ? 'Votación finalizada' : 'En seguimiento hasta el cierre')
-   : 'Cierre exacto pendiente de confirmación oficial. El estado se actualizará cuando se registre.';
-  details.innerHTML = '<strong>'+escapeHtml(campaign.category)+'</strong><span>ID interno de referencia: '+escapeHtml(campaign.reference_id)+'</span><span>'+escapeHtml(closeText)+'</span><small>'+escapeHtml(campaign.closure_note || '')+'</small>';
- }
- function addCampaignProofLinks(){
-  for(const campaign of campaignRegistry.values()){
-   const countdown = document.querySelector('[data-countdown="'+campaign.campaign_key+'"]');
-   const card = countdown?.closest('.vote-card');
-   if(!card || card.querySelector('[data-army-proof-campaign="'+campaign.campaign_key+'"]')) continue;
-   let actions = card.querySelector('.actions');
-   if(!actions){actions=document.createElement('div');actions.className='actions';card.appendChild(actions);}
-   const button=document.createElement('button');
-   button.type='button';button.className='btn secondary';
-   button.dataset.armyProofCampaign=campaign.campaign_key;
-   button.textContent='SUBIR CAPTURAS';
-   actions.appendChild(button);
-  }
- }
- $('army-campaign-select').addEventListener('change',updateCampaignDetails);
- document.addEventListener('click',event=>{
-  const button=event.target.closest('[data-army-proof-campaign]');
-  if(!button) return;
-  const key=button.dataset.armyProofCampaign;
-  if(!campaignRegistry.has(key)) return;
-  $('army-campaign-select').value=key;
-  updateCampaignDetails();
-  const accountLink=document.querySelector('a[href="#army-account"]');
-  if(accountLink) accountLink.click();
-  $('army-account').scrollIntoView({behavior:'smooth',block:'start'});
- });
-
- async function refreshPersonalArea(){
-  if(!currentUser) return;
-  historyList.innerHTML = '<div class="army-empty">Cargando tu historial…</div>';
-  try{
-   await loadCampaignRegistry();
-   const recordsResult = await supabaseClient.from('voting_proof_records')
-    .select('id,campaign_key,campaign_reference_id,campaign_name,category,display_name,campaign_end_at,submitted_at')
-    .order('submitted_at',{ascending:false});
-   if(recordsResult.error) throw recordsResult.error;
-   const records = recordsResult.data || [];
-   $('army-history-count').textContent = records.length + (records.length === 1 ? ' registro' : ' registros');
-   if(!records.length){
-    historyList.innerHTML = '<div class="army-empty">Todavía no has registrado participaciones. Puedes guardar tu primera captura arriba.</div>';
-   } else {
-    const ids = records.map(r=>r.id);
-    const filesResult = await supabaseClient.from('voting_proof_files')
-      .select('id,record_id,storage_path,original_name,uploaded_at')
-      .in('record_id',ids).order('uploaded_at',{ascending:true});
-    if(filesResult.error) throw filesResult.error;
-    const byRecord = new Map();
-    for(const file of (filesResult.data || [])){
-     if(!byRecord.has(file.record_id)) byRecord.set(file.record_id,[]);
-     byRecord.get(file.record_id).push(file);
-    }
-    const cards = await Promise.all(records.map(async r=>{
-     const files = byRecord.get(r.id) || [];
-     const ended = !!r.campaign_end_at && new Date(r.campaign_end_at).getTime() <= Date.now();
-     const thumbs = await Promise.all(files.map(async file=>{
-      const signed = await supabaseClient.storage.from('voting-proofs').createSignedUrl(file.storage_path,3600);
-      if(signed.error || !signed.data?.signedUrl) return '';
-      return '<a href="'+escapeHtml(signed.data.signedUrl)+'" target="_blank" rel="noopener" aria-label="Abrir captura"><img src="'+escapeHtml(signed.data.signedUrl)+'" alt="Captura de '+escapeHtml(r.campaign_name)+'" loading="lazy"></a>';
-     }));
-     return '<article class="army-history-card"><div class="army-history-top"><div><strong>'+escapeHtml(r.campaign_name)+'</strong><div class="army-history-meta">'+escapeHtml(r.category)+' · ID: '+escapeHtml(r.campaign_reference_id || r.campaign_key)+'<br>Registrado: '+escapeHtml(dateText(r.submitted_at))+' · '+(r.campaign_end_at?'Cierre: '+escapeHtml(dateText(r.campaign_end_at)):'Cierre pendiente de confirmación')+' · '+files.length+' captura(s)</div></div><span class="army-status '+(ended?'done':'')+'">'+(ended?'Finalizada':'En seguimiento')+'</span></div><div class="army-proof-thumbs">'+thumbs.join('')+'</div></article>';
-    }));
-    historyList.innerHTML = cards.join('');
-   }
-  }catch(error){
-   console.error('No se pudo cargar el espacio ARMY:',error);
-   historyList.innerHTML = '<div class="army-empty">No pudimos cargar tu historial. Intenta actualizar la página.</div>';
-  }
- }
-
- supabaseClient.auth.onAuthStateChange((_event,session)=>{
-  Promise.resolve().then(()=>updateSession(session));
- });
- loadCampaignRegistry().catch(error=>console.error('No se pudo cargar el registro de votaciones:',error));
- supabaseClient.auth.getSession().then(({data,error})=>{
-  if(error){message(authMessage,'No pudimos comprobar la sesión. Recarga la página.',true);return;}
-  updateSession(data.session);
- });
-})();
+  const login=await supabaseClient.auth.signInWithPassword({email:internalEmail(username),password});
+  if(login.error)throw login.error;
+  showMessage(authMessage,action==='signup'?'¡Tu cuenta está lista!':'¡Bienvenida de nuevo!');
+  await updateSession(login.data.session);
+ }catch(error){
+  console.error(error);
+  const detail=error?.message||'Intenta de nuevo.';
+  showMessage(authMessage,detail.includes('already')||detail.includes('duplicate')?'Ese nombre de usuario ya está ocupado.':detail,true);
+ }finally{buttons.forEach(b=>b.disabled=false);}
+});
+$('army-avatar-file').addEventListener('change',async event=>{
+ const file=event.target.files?.[0];if(!file||!currentUser)return;
+ const allowed=['image/jpeg','image/png','image/webp'];
+ if(!allowed.includes(file.type)){showMessage(profileMessage,'Elige una imagen JPG, PNG o WEBP.',true);event.target.value='';return;}
+ if(file.size>5*1024*1024){showMessage(profileMessage,'La imagen no puede superar 5 MB.',true);event.target.value='';return;}
+ const extension=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';
+ const path=currentUser.id+'/avatar.'+extension;
+ showMessage(profileMessage,'Guardando tu foto…');
+ try{
+  const upload=await supabaseClient.storage.from('army-profile-photos').upload(path,file,{upsert:true,contentType:file.type,cacheControl:'3600'});
+  if(upload.error)throw upload.error;
+  const saved=await supabaseClient.from('army_usernames').update({avatar_path:path}).eq('user_id',currentUser.id);
+  if(saved.error)throw saved.error;
+  await loadAvatar();
+  showMessage(profileMessage,'Foto de perfil actualizada.');
+ }catch(error){console.error(error);showMessage(profileMessage,'No pudimos guardar la foto. Intenta otra vez.',true);}
+ finally{event.target.value='';}
+});
+$('army-logout').addEventListener('click',async()=>{
+ const result=await supabaseClient.auth.signOut();
+ if(result.error)showMessage(profileMessage,'No pudimos cerrar la sesión.',true);
+});
+supabaseClient.auth.onAuthStateChange((_event,session)=>{Promise.resolve().then(()=>updateSession(session));});
+supabaseClient.auth.getSession().then(({data,error})=>{
+ if(error){showMessage(authMessage,'No pudimos comprobar la sesión. Recarga la página.',true);return;}
+ updateSession(data.session);
+});
 </script>
 
 
