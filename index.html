@@ -2930,7 +2930,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 
 </head>
 <body><main class="wrap">
-<div class="app-topbar"><a href="#army-account" aria-label="Mi cuenta">●</a><div class="app-brand">BTS<small>VOTING CENTER</small></div><a class="app-notice" href="#agenda" aria-label="Agenda y avisos">♧</a></div>
+<div class="app-topbar"><a href="#army-account" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c.4-4.1 3.5-6.5 8-6.5s7.6 2.4 8 6.5z"/></svg></a><div class="app-brand">BTS<small>VOTING CENTER</small></div><a class="app-notice" href="#agenda" aria-label="Agenda y avisos">♧</a></div>
 
 <header class="hero" id="top">
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
@@ -4222,7 +4222,7 @@ function armyInternalEmail(username){
 (function(){
  const nav=document.querySelector('main.wrap>nav[aria-label="Navegación principal"]');
  if(!nav)return;
- const items=[['country-time','⌂','Inicio'],['agenda','▦','Agenda'],['active','♜','Votaciones'],['birthday-voting','♙','Cumpleaños'],['more-hub','•••','Más'],['army-account','●','Cuenta']];
+ const items=[['country-time','⌂','Inicio'],['agenda','▦','Agenda'],['active','♜','Votaciones'],['birthday-voting','♙','Cumpleaños'],['more-hub','•••','Más']];
  const dock=document.createElement('nav');dock.className='app-bottom-nav';dock.setAttribute('aria-label','Secciones principales');
  dock.innerHTML=items.map(([id,icon,label])=>'<a href="#'+id+'" data-app-tab="'+id+'"><span aria-hidden="true">'+icon+'</span>'+label+'</a>').join('');
  document.body.appendChild(dock);
