@@ -2711,7 +2711,7 @@ h1,h2,h3,h4,
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<nav aria-label="Navegación principal"><a href="#top">Inicio</a><a href="#active">Votaciones activas</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
+<nav aria-label="Navegación principal"><a href="?section=inicio">Inicio</a><a href="?section=votaciones">Votaciones activas</a><a href="?section=cumpleanos">Cumpleaños</a><a href="?section=recoleccion">Recolección</a><a href="?section=proximas">Próximas</a><a href="?section=finalizadas">Finalizadas</a><a href="?section=guia">Guía</a><a href="?section=fuentes">Fuentes</a></nav>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
@@ -3460,38 +3460,28 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 </script>
 
 <script>
-/* En GitHub Pages se muestran todas las secciones en una sola página y la navegación usa anclas.
-   En Vercel se conserva el comportamiento de rutas independientes. */
+/* Navegación independiente: GitHub Pages usa ?section=... y Vercel conserva sus rutas propias. */
 (function(){
- if(location.hostname === 'armyplaylist.github.io') return;
- const routes={
-  '/':'country-time',
-  '/votaciones':'active',
-  '/cumpleanos':'birthday-voting',
-  '/recoleccion':'choeaedol',
-  '/proximas':'upcoming',
-  '/finalizadas':'completed',
-  '/guia':'guide',
-  '/fuentes':'sources'
- };
+ const ids=['country-time','active','birthday-voting','choeaedol','upcoming','completed','guide','sources'];
  const home=document.getElementById('country-time');
  if(!home)return;
+ if(location.hostname==='armyplaylist.github.io'){
+  const pages={inicio:'country-time',votaciones:'active',cumpleanos:'birthday-voting',recoleccion:'choeaedol',proximas:'upcoming',finalizadas:'completed',guia:'guide',fuentes:'sources'};
+  const key=new URLSearchParams(location.search).get('section')||'inicio';
+  const targetId=pages[key]||'country-time';
+  ids.forEach(id=>{const panel=document.getElementById(id);if(panel)panel.hidden=id!==targetId;});
+  document.querySelectorAll('nav a').forEach(link=>{
+   const active=new URL(link.href).searchParams.get('section')===key;
+   link.classList.toggle('current-view',active);
+   if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
+  });
+  window.scrollTo({top:0,behavior:'instant'});
+  return;
+ }
+ const routes={'/':'country-time','/votaciones':'active','/cumpleanos':'birthday-voting','/recoleccion':'choeaedol','/proximas':'upcoming','/finalizadas':'completed','/guia':'guide','/fuentes':'sources'};
  let path=location.pathname;while(path.length>1&&path.endsWith('/'))path=path.slice(0,-1);
  const targetId=routes[path]||'country-time';
- const target=document.getElementById(targetId)||home;
- Object.values(routes).forEach(id=>{
-  const panel=document.getElementById(id);
-  if(panel)panel.hidden=panel!==target;
- });
- document.querySelectorAll('nav a').forEach(link=>{
-  let linkPath=link.getAttribute('href')||'';
-  if(linkPath.startsWith('#')) return;
-  while(linkPath.length>1&&linkPath.endsWith('/'))linkPath=linkPath.slice(0,-1);
-  const active=linkPath===path;
-  link.classList.toggle('current-view',active);
-  if(active)link.setAttribute('aria-current','page');
-  else link.removeAttribute('aria-current');
- });
+ ids.forEach(id=>{const panel=document.getElementById(id);if(panel)panel.hidden=id!==targetId;});
  window.scrollTo({top:0,behavior:'instant'});
 })();
 
