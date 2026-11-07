@@ -2619,6 +2619,48 @@ body.dark-mode .vote-importance-body strong{color:#eadbfa}
 
 </style>
 
+<script>
+/* Agenda diaria: las tareas se guardan localmente y se reinician por fecha. */
+(function(){
+ const root=document.getElementById('agenda');
+ if(!root)return;
+ const dateEl=document.getElementById('agendaTodayDate');
+ const progress=document.getElementById('agendaProgress');
+ const checks=[...root.querySelectorAll('[data-agenda-task]')];
+ const dateKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+ const storageKey='bts-voting-agenda-'+dateKey();
+ const localeMap={es:'es-MX',en:'en-US',ko:'ko-KR',ja:'ja-JP',pt:'pt-BR',th:'th-TH',ru:'ru-RU'};
+ function updateProgress(){
+  const done=checks.filter(c=>c.checked).length;
+  progress.textContent=done+' de '+checks.length+' completadas';
+  checks.forEach(c=>c.closest('.agenda-task').classList.toggle('is-done',c.checked));
+ }
+ function restore(){
+  let saved={};try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}');}catch(e){}
+  checks.forEach(c=>{c.checked=!!saved[c.dataset.agendaTask];});
+  updateProgress();
+ }
+ function save(){
+  const values={};checks.forEach(c=>values[c.dataset.agendaTask]=c.checked);
+  try{localStorage.setItem(storageKey,JSON.stringify(values));}catch(e){}
+  updateProgress();
+ }
+ function updateDate(){
+  const lang=(document.getElementById('languageSelect')||{}).value||'es';
+  dateEl.textContent=new Intl.DateTimeFormat(localeMap[lang]||'es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date());
+ }
+ function updateEvents(){
+  const today=dateKey();
+  root.querySelectorAll('[data-agenda-start]').forEach(item=>{
+   item.hidden=item.dataset.agendaEnd<today;
+  });
+ }
+ checks.forEach(c=>c.addEventListener('change',save));
+ const langSelect=document.getElementById('languageSelect');
+ langSelect&&langSelect.addEventListener('change',updateDate);
+ updateDate();restore();updateEvents();
+})();
+</script>
 <!-- GoatCounter: estadísticas privadas de visitas -->
 <script>window.goatcounter={path:function(p){return location.host+p;}};</script>
 <script data-goatcounter="https://romi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -2711,6 +2753,21 @@ h1,h2,h3,h4,
   font-family:'Poppins',sans-serif !important;
 }
 </style>
+<style>
+.agenda-panel .agenda-today{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;margin-bottom:12px;background:#f7f3f8;border:1px solid #e9e1eb;border-radius:4px}
+.agenda-eyebrow{display:block;margin-bottom:4px;color:#8a718f;font-size:.66rem;font-weight:800;letter-spacing:.12em}
+.agenda-today strong{font-size:1rem}.agenda-progress{color:#654777;font-size:.78rem;font-weight:800}
+.agenda-checklist{display:grid;gap:8px}
+.agenda-task{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;border:1px solid #e8e1e5;border-radius:4px;background:#fff;cursor:pointer}
+.agenda-task input{width:18px;height:18px;margin:2px 0 0;accent-color:#654477;flex:none}
+.agenda-task span{display:grid;gap:4px}.agenda-task strong{font-size:.87rem}.agenda-task small{color:#766e78;font-size:.77rem;line-height:1.45}
+.agenda-task.is-done{background:#f8f6f8}.agenda-task.is-done strong{text-decoration:line-through;color:#887f89}
+.agenda-events-head{margin:23px 0 10px}.agenda-events-head h3{margin:0;font-size:.98rem}.agenda-events-head p{margin:4px 0 0;color:#766e78;font-size:.77rem}
+.agenda-events{display:grid;gap:8px}.agenda-event{display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px;border:1px solid #e8e1e5;background:#fff;border-radius:4px}
+.agenda-date{color:#9c2d43;font-size:.7rem;font-weight:900;letter-spacing:.04em}.agenda-event div{display:grid;gap:3px}.agenda-event strong{font-size:.83rem}.agenda-event small{color:#766e78;font-size:.74rem;line-height:1.4}.agenda-event a{color:#624276;font-size:.76rem;font-weight:800;text-decoration:none}.agenda-event[hidden]{display:none}
+.agenda-footnote{margin:14px 0 0;color:#817783;font-size:.72rem;line-height:1.5}
+@media(max-width:520px){.agenda-event{grid-template-columns:1fr auto;gap:5px 10px}.agenda-date{grid-column:1/-1}.agenda-event div{grid-column:1}.agenda-event a{grid-column:2;grid-row:2}}
+</style>
 </head>
 <body><main class="wrap">
 <header class="hero" id="top">
@@ -2726,7 +2783,7 @@ h1,h2,h3,h4,
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#active">Votaciones activas</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
+<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda ARMY</a><a href="#active">Votaciones activas</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
@@ -2735,6 +2792,26 @@ h1,h2,h3,h4,
   <option value="America/Guatemala">🇬🇹 Guatemala</option><option value="America/Belize">🇧🇿 Belice</option><option value="America/Tegucigalpa">🇭🇳 Honduras</option><option value="America/El_Salvador">🇸🇻 El Salvador</option><option value="America/Managua">🇳🇮 Nicaragua</option><option value="America/Costa_Rica">🇨🇷 Costa Rica</option><option value="America/Panama">🇵🇦 Panamá</option><option value="America/Bogota">🇨🇴 Colombia</option><option value="America/Lima">🇵🇪 Perú</option><option value="America/Guayaquil">🇪🇨 Ecuador</option><option value="America/Caracas">🇻🇪 Venezuela</option><option value="America/La_Paz">🇧🇴 Bolivia</option><option value="America/Santiago">🇨🇱 Chile · Santiago</option><option value="America/Argentina/Buenos_Aires">🇦🇷 Argentina</option><option value="America/Montevideo">🇺🇾 Uruguay</option><option value="America/Sao_Paulo">🇧🇷 Brasil · São Paulo</option><option value="America/Asuncion">🇵🇾 Paraguay</option><option value="America/Puerto_Rico">🇵🇷 Puerto Rico</option><option value="America/Santo_Domingo">🇩🇴 República Dominicana</option><option value="America/Havana">🇨🇺 Cuba</option>
   <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
  </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
+
+<section class="panel agenda-panel" id="agenda">
+ <div class="section-head"><div><h2>🗓️ AGENDA ARMY</h2><p>Organiza tus tareas de apoyo y consulta las próximas fechas importantes de BTS.</p></div><span class="pill">TU PLAN DEL DÍA</span></div>
+ <div class="agenda-today"><div><span class="agenda-eyebrow">AGENDA DE HOY</span><strong id="agendaTodayDate">--</strong></div><span class="agenda-progress" id="agendaProgress" aria-live="polite">0 de 4 completadas</span></div>
+ <div class="agenda-checklist" id="agendaChecklist" aria-label="Tareas diarias">
+  <label class="agenda-task"><input type="checkbox" data-agenda-task="votes"><span><strong>Revisar las votaciones activas</strong><small>Comprueba posiciones, límites y reglas vigentes antes de participar.</small></span></label>
+  <label class="agenda-task"><input type="checkbox" data-agenda-task="mama"><span><strong>Revisar MAMA y sus publicaciones</strong><small>Consulta la tarjeta de MAMA y verifica si hay novedades de la campaña en Mnet Plus o X.</small></span></label>
+  <label class="agenda-task"><input type="checkbox" data-agenda-task="hearts"><span><strong>Revisar la recolección de CHOEAEDOL</strong><small>Comprueba tus Ever Hearts y el cierre diario de recolección, indicado a las 23:30 KST.</small></span></label>
+  <label class="agenda-task"><input type="checkbox" data-agenda-task="birthday"><span><strong>Revisar las votaciones de cumpleaños</strong><small>Comprueba las campañas activas para Jin y V y sus límites diarios.</small></span></label>
+ </div>
+ <div class="agenda-events-head"><div><h3>Próximas fechas</h3><p>Fechas publicadas o indicadas en las secciones de esta página.</p></div></div>
+ <div class="agenda-events" id="agendaEvents">
+  <article class="agenda-event" data-agenda-start="2026-11-20" data-agenda-end="2026-11-20"><span class="agenda-date">20 NOV 2026</span><div><strong>MAMA · Votación en vivo</strong><small>Consulta los detalles y las instrucciones dentro de la tarjeta de MAMA.</small></div><a href="#active" aria-label="Ver votaciones activas">Ver</a></article>
+  <article class="agenda-event" data-agenda-start="2026-12-04" data-agenda-end="2026-12-04"><span class="agenda-date">4 DIC 2026</span><div><strong>Cumpleaños de Jin</strong><small>Revisa las campañas de cumpleaños disponibles.</small></div><a href="#birthday-voting">Ver</a></article>
+  <article class="agenda-event" data-agenda-start="2026-12-08" data-agenda-end="2026-12-08"><span class="agenda-date">8 DIC 2026</span><div><strong>Inicio previsto de GDA 2027</strong><small>La fecha indicada para el periodo de votación; confirma el anuncio del organizador.</small></div><a href="#upcoming">Ver</a></article>
+  <article class="agenda-event" data-agenda-start="2026-12-30" data-agenda-end="2026-12-30"><span class="agenda-date">30 DIC 2026</span><div><strong>Cumpleaños de V</strong><small>Revisa las campañas de cumpleaños disponibles.</small></div><a href="#birthday-voting">Ver</a></article>
+  <article class="agenda-event" data-agenda-start="2027-01-03" data-agenda-end="2027-01-03"><span class="agenda-date">3 ENE 2027</span><div><strong>Cierre previsto de GDA 2027</strong><small>La fecha indicada para el periodo de votación; confirma el cierre oficial.</small></div><a href="#upcoming">Ver</a></article>
+ </div>
+ <p class="agenda-footnote">Las tareas se reinician cada día en este dispositivo. Las fechas se muestran como recordatorios y pueden cambiar si los organizadores actualizan sus calendarios.</p>
+</section>
 
 <section class="panel" id="choeaedol">
  <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
@@ -3423,6 +3500,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
    if(href==='#upcoming')return 'calendar';
    if(href==='#sources')return 'external';
    if(href==='#country-time')return 'sun';
+   if(href==='#agenda')return 'calendar';
   }
   if(el.matches('.birthday-filter')){
    if(t.includes('todas'))return 'sparkle';
@@ -3477,7 +3555,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 <script>
 /* Vercel: secciones independientes mediante anclas, compatibles con las rutas directas. */
 (function(){
- const routes={'/':'country-time','/votaciones':'active','/cumpleanos':'birthday-voting','/recoleccion':'choeaedol','/proximas':'upcoming','/finalizadas':'completed','/guia':'guide','/fuentes':'sources'};
+ const routes={'/':'country-time','/agenda':'agenda','/votaciones':'active','/cumpleanos':'birthday-voting','/recoleccion':'choeaedol','/proximas':'upcoming','/finalizadas':'completed','/guia':'guide','/fuentes':'sources'};
  const ids=Object.values(routes);
  const home=document.getElementById('country-time');
  if(!home)return;
@@ -3503,6 +3581,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 (function(){
  const labels={
   'country-time':'Inicio',
+  'agenda':'Agenda ARMY',
   'active':'Votaciones activas',
   'completed':'Finalizadas',
   'upcoming':'Próximas votaciones',
