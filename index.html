@@ -2674,6 +2674,22 @@ nav[aria-label="Navegación principal"] a svg{width:17px;height:17px;flex:0 0 17
 nav[aria-label="Navegación principal"] a:hover{background:#eee7f5!important;color:#583c78!important;transform:translateY(-1px)}
 nav[aria-label="Navegación principal"] a[aria-current="page"]{background:#eee7f5!important;color:#553477!important}
 @media(max-width:720px){nav[aria-label="Navegación principal"]{gap:5px}nav[aria-label="Navegación principal"] a{gap:6px;padding:9px 11px!important;font-size:.72rem!important}nav[aria-label="Navegación principal"] a svg{width:16px;height:16px;flex-basis:16px}}
+
+/* Tipografía editorial: títulos limpios, redondeados y con presencia */
+h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-card h3,.panel-title{
+ font-family:'DM Sans',system-ui,sans-serif!important;
+ font-weight:800!important;
+ letter-spacing:-.045em;
+ line-height:1.12;
+ text-wrap:balance;
+}
+.hero h1,.hero h2{letter-spacing:-.05em}
+.section-head h2{font-size:clamp(1.38rem,2.7vw,1.8rem)}
+.vote-card h3,.birthday-card h3{font-size:1.12rem;letter-spacing:-.035em}
+@media(max-width:600px){
+ h1{font-size:clamp(1.8rem,8vw,2.5rem)}
+ .section-head h2{font-size:1.35rem}
+}
 </style>
 </head>
 <body><main class="wrap">
