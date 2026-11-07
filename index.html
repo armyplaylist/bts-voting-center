@@ -2610,6 +2610,12 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#f
 /* Globo del selector horario con continentes morados */
 .timezone-globe{display:inline-flex;vertical-align:-.22em;width:1.35em;height:1.35em;margin-right:.12em;flex:none}
 .timezone-globe svg{display:block;width:100%;height:100%}
+
+/* Selector de idioma accesible, integrado con los controles principales */
+.language-control{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:10px auto 0;padding:10px 15px;border:1px solid rgba(105,75,160,.18);border-radius:999px;background:rgba(255,255,255,.78);color:#513b78;font-weight:850;font-size:.82rem;box-shadow:0 3px 12px rgba(65,42,100,.07)}
+.language-control select{max-width:190px;border:0;outline:0;background:transparent;color:inherit;font:inherit;font-weight:800;cursor:pointer}
+.language-control select option{background:#fff;color:#493568}
+@media(max-width:420px){.language-control{font-size:.76rem;padding:9px 12px}.language-control select{max-width:165px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -2618,6 +2624,8 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#f
  <h1>BTS <span>VOTING CENTER</span></h1>
  <p>Sumérgete en las votaciones, sigue cada fecha límite y nada junto a ARMY para apoyar a BTS.</p>
  <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">🌙 MODO OSCURO</button>
+ <label class="language-control" aria-label="Seleccionar idioma"><span aria-hidden="true">🌐</span><span class="language-label">IDIOMA</span><select id="languageSelect" aria-label="Idioma de la página"><option value="es">Español</option><option value="en">English</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="pt">Português (Brasil)</option><option value="th">ไทย</option><option value="ru">Русский</option></select></label>
+
 
  <div class="hero-share" aria-label="Comparte BTS Voting Center">
   <a class="hero-share-x" id="shareCenter" href="https://twitter.com/intent/tweet?text=%F0%9F%92%9C%20ARMY%2C%20aqu%C3%AD%20tenemos%20las%20votaciones%20de%20BTS%20en%20un%20solo%20lugar.%20%C2%A1Comp%C3%A1rtelo%20con%20m%C3%A1s%20ARMY!%20%23BTS%20%23ARMY&url=https%3A%2F%2Farmyplaylist.github.io%2Fbts-voting-center%2F" target="_blank" rel="noopener noreferrer">𝕏 COMPARTIR CON MÁS ARMY</a>
@@ -3413,6 +3421,63 @@ updateResetCountdowns();
   el.textContent=days+'d '+pad(hours)+'h '+pad(mins)+'m '+pad(secs)+'s';
  }
  tick();window.__btsRegisterSecondTick(tick);
+})();
+</script>
+
+<script>
+/* Idioma automático según idioma/región del navegador, con selector manual persistente. */
+(function(){
+ const select=document.getElementById('languageSelect');if(!select)return;
+ const supported=['es','en','ko','ja','pt','th','ru'];
+ const labels={
+ es:['Inicio','Votaciones activas','Votaciones de cumpleaños','Recolección','Próximas votaciones','Fuentes','Guía rápida','Historial','Selecciona tu país o zona horaria','País o zona horaria','Tu hora local','Formato de hora','Hora local actual','Modo oscuro','Compartir con más ARMY','Copiar enlace','En curso','Próximamente','Verifica antes de votar','Resultados finales de las votaciones cerradas.','Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.','Una ruta sencilla para participar con información clara.','Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.','Rankings y horarios locales al inicio de cada votación.','Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.','Cierre diario de recolección','Calculando horario KST…','Próximos cumpleaños','Todas','Compartidas','Web disponible','Votaciones de cumpleaños','Votaciones terminadas','Información revisada'],
+ en:['Home','Active voting','Birthday voting','Collection','Upcoming voting','Sources','Quick guide','History','Select your country or time zone','Country or time zone','Your local time','Time format','Current local time','Dark mode','Share with more ARMY','Copy link','In progress','Coming soon','Check before voting','Final results of closed votes.','Upcoming announced events; exact dates will be added when the organizer publishes them.','A simple guide to participate with clear information.','Choose your country and, if it has multiple time zones, your city or region. We will convert the times to the start of each vote.','Rankings and local times at the start of each vote.','Collect Ever Hearts to support BTS at the Golden Disc Awards.','Daily collection reset','Calculating KST time…','Upcoming birthdays','All','Shared','Web available','Birthday voting','Voting ended','Information reviewed'],
+ ko:['홈','진행 중인 투표','생일 투표','하트 모으기','예정된 투표','공식 출처','빠른 안내','지난 기록','국가 또는 시간대를 선택하세요','국가 또는 시간대','현지 시간','시간 형식','현재 현지 시간','다크 모드','더 많은 ARMY와 공유','링크 복사','진행 중','예정','투표 전 확인하세요','종료된 투표의 최종 결과.','발표된 예정 이벤트입니다. 주최 측이 정확한 날짜를 공개하면 추가됩니다.','명확한 정보를 바탕으로 참여하는 간단한 안내입니다.','국가와 여러 시간대가 있는 경우 도시 또는 지역을 선택하세요. 투표 시작 시간에 맞춰 변환합니다.','투표 시작 시 순위와 현지 시간.','Golden Disc Awards에서 BTS를 응원할 Ever Hearts를 모으세요.','매일 하트 모으기 마감','KST 시간 계산 중…','다가오는 생일','전체','공동','웹 투표 가능','생일 투표','투표 종료','정보 확인일'],
+ ja:['ホーム','投票中','誕生日投票','ハート収集','今後の投票','公式情報','クイックガイド','履歴','国またはタイムゾーンを選択','国またはタイムゾーン','現地時間','時刻形式','現在の現地時間','ダークモード','ARMYと共有','リンクをコピー','開催中','近日公開','投票前に確認','終了した投票の最終結果。','発表済みの今後のイベントです。主催者が正確な日程を発表次第追加します。','正確な情報で参加するための簡単なガイドです。','国と、複数のタイムゾーンがある場合は都市または地域を選択してください。投票開始時刻に合わせて変換します。','投票開始時のランキングと現地時間。','Golden Disc AwardsでBTSを応援するEver Heartsを集めましょう。','毎日の収集締切','KST時刻を計算中…','もうすぐ誕生日','すべて','共同','ウェブ投票あり','誕生日投票','投票終了','情報確認日'],
+ pt:['Início','Votações ativas','Votações de aniversário','Coleta','Próximas votações','Fontes oficiais','Guia rápido','Histórico','Selecione seu país ou fuso horário','País ou fuso horário','Seu horário local','Formato de hora','Horário local atual','Modo escuro','Compartilhar com mais ARMY','Copiar link','Em andamento','Em breve','Confira antes de votar','Resultados finais das votações encerradas.','Próximos eventos anunciados; as datas exatas serão adicionadas quando a organização publicar.','Um guia simples para participar com informações claras.','Escolha seu país e, se houver vários fusos horários, sua cidade ou região. Converteremos os horários para o início de cada votação.','Rankings e horários locais no início de cada votação.','Reúna Ever Hearts para apoiar o BTS no Golden Disc Awards.','Encerramento diário da coleta','Calculando horário KST…','Próximos aniversários','Todas','Compartilhadas','Votação pela web disponível','Votações de aniversário','Votação encerrada','Informações revisadas'],
+ th:['หน้าแรก','โหวตที่กำลังเปิด','โหวตวันเกิด','สะสมหัวใจ','โหวตที่กำลังจะมาถึง','แหล่งข้อมูล','คู่มือฉบับย่อ','ประวัติ','เลือกประเทศหรือเขตเวลา','ประเทศหรือเขตเวลา','เวลาท้องถิ่นของคุณ','รูปแบบเวลา','เวลาท้องถิ่นปัจจุบัน','โหมดมืด','แชร์ให้ ARMY คนอื่น','คัดลอกลิงก์','กำลังดำเนินการ','เร็ว ๆ นี้','ตรวจสอบก่อนโหวต','ผลสุดท้ายของการโหวตที่ปิดแล้ว','กิจกรรมที่ประกาศแล้ว วันที่แน่นอนจะเพิ่มเมื่อผู้จัดประกาศ','คู่มือสั้น ๆ เพื่อเข้าร่วมอย่างเข้าใจง่าย','เลือกประเทศและเมืองหรือภูมิภาค หากมีหลายเขตเวลา เราจะแปลงเวลาให้ตรงกับเวลาเริ่มโหวต','อันดับและเวลาท้องถิ่นเมื่อเริ่มโหวต','สะสม Ever Hearts เพื่อสนับสนุน BTS ใน Golden Disc Awards','เวลาปิดการสะสมประจำวัน','กำลังคำนวณเวลา KST…','วันเกิดที่กำลังจะมาถึง','ทั้งหมด','ร่วมกัน','มีการโหวตผ่านเว็บ','โหวตวันเกิด','ปิดโหวตแล้ว','ตรวจสอบข้อมูลแล้ว'],
+ ru:['Главная','Активные голосования','Голосования ко дню рождения','Сбор сердечек','Предстоящие голосования','Источники','Краткое руководство','История','Выберите страну или часовой пояс','Страна или часовой пояс','Ваше местное время','Формат времени','Текущее местное время','Тёмная тема','Поделиться с ARMY','Скопировать ссылку','Идёт','Скоро','Проверьте перед голосованием','Итоги завершённых голосований.','Объявленные будущие события; точные даты будут добавлены после публикации организаторами.','Краткое руководство для участия с понятной информацией.','Выберите страну и, если часовых поясов несколько, город или регион. Мы переведём время к началу голосования.','Рейтинги и местное время на момент начала голосования.','Собирайте Ever Hearts, чтобы поддержать BTS на Golden Disc Awards.','Ежедневное завершение сбора','Рассчитываем время KST…','Ближайшие дни рождения','Все','Совместные','Доступно голосование на сайте','Голосования ко дню рождения','Голосование завершено','Дата проверки информации']
+ };
+ const keys=labels.es;
+ const index={es:0,en:1,ko:2,ja:3,pt:4,th:5,ru:6};
+ const originals=new WeakMap();let observer=null;
+ function detect(){
+  const prefs=[...(navigator.languages||[]),navigator.language||''];
+  for(const pref of prefs){const p=pref.toLowerCase();const lang=p.split('-')[0];if(supported.includes(lang))return lang;
+   const region=(p.split('-')[1]||'').toUpperCase();if(region==='BR')return 'pt';}
+  const region=(new Intl.Locale(navigator.language||'es').region||'').toUpperCase();
+  if(region==='BR')return 'pt';if(region==='KR')return 'ko';if(region==='JP')return 'ja';if(region==='TH')return 'th';if(region==='RU')return 'ru';
+  return 'es';
+ }
+ function translateNode(node,lang){
+  if(!originals.has(node))originals.set(node,node.nodeValue);
+  let value=originals.get(node);
+  if(lang!=='es'){for(let i=0;i<keys.length;i++){const source=keys[i];if(source&&value.includes(source))value=value.split(source).join(labels[lang][i]);}}
+  if(node.nodeValue!==value)node.nodeValue=value;
+ }
+ function apply(lang,save){
+  if(!supported.includes(lang))lang='es';
+  if(observer)observer.disconnect();
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let node;while((node=walker.nextNode())){if(node.nodeValue.trim())translateNode(node,lang);}
+  document.documentElement.lang=lang;select.value=lang;
+  const current=select.options[select.selectedIndex];select.setAttribute('aria-label','Page language: '+(current?current.text:lang));
+  if(save){try{localStorage.setItem('bts-voting-language',lang);}catch(e){}}
+  if(observer)observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+ }
+ let saved=null;try{saved=localStorage.getItem('bts-voting-language');}catch(e){}
+ apply(supported.includes(saved)?saved:detect(),false);
+ select.addEventListener('change',()=>apply(select.value,true));
+ observer=new MutationObserver(records=>{
+  const lang=select.value;
+  observer.disconnect();
+  for(const record of records){
+   if(record.type==='characterData'&&record.target.nodeType===Node.TEXT_NODE&&record.target.nodeValue.trim())translateNode(record.target,lang);
+   for(const added of record.addedNodes||[]){if(added.nodeType===Node.TEXT_NODE){if(added.nodeValue.trim())translateNode(added,lang);}else if(added.nodeType===Node.ELEMENT_NODE){const w=document.createTreeWalker(added,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode()))if(n.nodeValue.trim())translateNode(n,lang);}}
+  }
+  observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+ });
+ observer.observe(document.body,{subtree:true,childList:true,characterData:true});
 })();
 </script>
 </body>
