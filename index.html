@@ -3472,7 +3472,7 @@ updateResetCountdowns();
   const lang=select.value;
   observer.disconnect();
   for(const record of records){
-   if(record.type==='characterData'&&record.target.nodeType===Node.TEXT_NODE&&record.target.nodeValue.trim())translateNode(record.target,lang);
+   if(record.type==='characterData'&&record.target.nodeType===Node.TEXT_NODE&&record.target.nodeValue.trim()){originals.set(record.target,record.target.nodeValue);translateNode(record.target,lang);}
    for(const added of record.addedNodes||[]){if(added.nodeType===Node.TEXT_NODE){if(added.nodeValue.trim())translateNode(added,lang);}else if(added.nodeType===Node.ELEMENT_NODE){const w=document.createTreeWalker(added,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode()))if(n.nodeValue.trim())translateNode(n,lang);}}
   }
   observer.observe(document.body,{subtree:true,childList:true,characterData:true});
