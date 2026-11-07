@@ -2617,40 +2617,6 @@ body.dark-mode .vote-importance summary{color:#d9c4f0}
 body.dark-mode .vote-importance-body{color:#c7bbd1}
 body.dark-mode .vote-importance-body strong{color:#eadbfa}
 
-
-/* FIX DEFINITIVO: dock inferior compacto, nunca ocupa la altura de la pantalla */
-nav.bottom-sections{
-  box-sizing:border-box!important;
-  height:76px!important;
-  min-height:76px!important;
-  max-height:76px!important;
-  align-content:center!important;
-  align-items:center!important;
-  grid-auto-rows:minmax(0,1fr)!important;
-  padding:6px!important;
-  overflow:hidden!important;
-}
-nav.bottom-sections>a,
-nav.bottom-sections>.nav-more-toggle{
-  box-sizing:border-box!important;
-  height:60px!important;
-  min-height:60px!important;
-  max-height:60px!important;
-  align-self:center!important;
-  justify-self:stretch!important;
-  margin:0!important;
-  padding:5px 2px!important;
-  line-height:1!important;
-}
-nav.bottom-sections>a>span,
-nav.bottom-sections>.nav-more-toggle>span{display:block!important;flex:0 0 auto!important}
-nav.bottom-sections>a>small,
-nav.bottom-sections>.nav-more-toggle>small{display:block!important;flex:0 0 auto!important}
-@media(max-width:600px){
-  nav.bottom-sections{height:72px!important;min-height:72px!important;max-height:72px!important;width:calc(100% - 24px)!important;bottom:max(8px,env(safe-area-inset-bottom))!important}
-  nav.bottom-sections>a,nav.bottom-sections>.nav-more-toggle{height:58px!important;min-height:58px!important;max-height:58px!important}
-}
-
 </style>
 
 <script>
@@ -2891,50 +2857,6 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 .army-empty{padding:18px;border:1px dashed #d8cce2;border-radius:15px;color:#897d92;text-align:center;font-size:.8rem;font-weight:700;background:#fff9}
 @media(max-width:700px){.army-work-grid{grid-template-columns:1fr}.army-auth-actions>*{flex:1}}
 @media(prefers-reduced-motion:reduce){.army-primary-btn,.army-secondary-btn{transition:none}}
-
-/* Navegación por secciones independientes y panel inferior fijo */
-.account-orb{position:fixed;top:14px;left:14px;z-index:1001;width:64px;height:64px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;text-decoration:none;background:linear-gradient(145deg,#fff,#eee4ff);border:1px solid #d9c7ef;box-shadow:0 7px 22px #39264f2b;color:#69449c}
-.account-orb span{font-size:1.55rem;line-height:1;font-weight:900}
-.account-orb small{font-size:.58rem;font-weight:900}
-.bottom-sections{position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:1000;width:min(760px,calc(100% - 20px));display:flex;justify-content:flex-start;gap:5px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:8px;border:1px solid #ffffffeb;border-radius:22px;background:#fffdf9ed;backdrop-filter:blur(18px);box-shadow:0 8px 30px #34204730}
-.bottom-sections::-webkit-scrollbar{display:none}
-.bottom-sections a{flex:1 0 66px;min-width:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px 4px;border-radius:14px;text-decoration:none;color:#78648e;font-size:1.12rem;line-height:1}
-.bottom-sections a small{font-size:.62rem;line-height:1.15;font-weight:900;white-space:nowrap}
-.bottom-sections a.active{background:#eee4ff;color:#633a99}
-body{padding-bottom:92px}
-.panel.section-hidden{display:none!important}
-.panel.section-current{animation:section-arrive .2s ease-out}
-@keyframes section-arrive{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:600px){.account-orb{top:10px;left:10px;width:56px;height:56px}.account-orb span{font-size:1.35rem}.account-orb small{font-size:.54rem}.bottom-sections{width:calc(100% - 12px);bottom:max(6px,env(safe-area-inset-bottom));padding:6px;gap:3px;border-radius:18px}.bottom-sections a{flex-basis:61px;min-width:58px;padding:7px 2px}.bottom-sections a small{font-size:.57rem}body{padding-bottom:86px}}
-
-.army-profile-card{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:20px;border:1px solid #e7deee;border-radius:22px;background:linear-gradient(120deg,#fff,#f5effb)}
-.army-profile-avatar-wrap{width:104px;height:104px;flex:0 0 104px;border-radius:50%;overflow:hidden;border:3px solid #e5d5f4;background:#f1e8fa;display:grid;place-items:center}
-.army-profile-avatar{width:100%;height:100%;object-fit:cover}
-.army-profile-placeholder{font-size:2.8rem;color:#9b7abb}
-.army-profile-details{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:180px;flex:1}
-.army-profile-details>strong{font-size:1.15rem;color:#49345e}
-.army-avatar-upload{display:inline-flex;align-items:center;justify-content:center;margin-top:5px;padding:9px 13px;border-radius:12px;background:#eee4ff;color:#684b91;font-size:.78rem;font-weight:900;cursor:pointer}
-.army-avatar-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.army-profile-details>small{color:#82758d;font-size:.7rem;font-weight:700}
-@media(max-width:600px){.army-profile-card{gap:12px}.army-profile-avatar-wrap{width:84px;height:84px;flex-basis:84px}.army-profile-card>#army-logout{width:100%}}
-.account-orb #army-account-orb-avatar{width:37px;height:37px;border-radius:50%;object-fit:cover;border:2px solid #d9c7ef}.account-orb #army-account-orb-icon{font-size:1.35rem;line-height:1}
-/* Navegación móvil corregida: cinco accesos visibles y resto dentro de Más */
-.hero.section-away{display:none!important}
-.bottom-sections{position:fixed!important;left:50%!important;right:auto!important;bottom:max(8px,env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;width:min(620px,calc(100% - 24px))!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;justify-content:stretch!important;gap:5px!important;overflow:visible!important;padding:7px!important;border-radius:20px!important;z-index:1100!important}
-.bottom-sections a,.bottom-sections .nav-more-toggle{flex:none!important;min-width:0!important;width:100%!important;min-height:54px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;padding:6px 2px!important;border:0!important;border-radius:13px!important;background:transparent!important;text-decoration:none!important;color:#78648e!important;font:inherit!important;cursor:pointer!important}
-.bottom-sections a span,.bottom-sections .nav-more-toggle span{font-size:1.1rem!important;line-height:1!important}
-.bottom-sections a small,.bottom-sections .nav-more-toggle small{font-size:clamp(.54rem,2.2vw,.68rem)!important;line-height:1.1!important;font-weight:900!important;white-space:nowrap!important}
-.bottom-sections a.active,.bottom-sections .nav-more-toggle[aria-expanded="true"]{background:#eee4ff!important;color:#633a99!important}
-.nav-more-panel{position:fixed;z-index:1099;left:50%;bottom:calc(max(8px,env(safe-area-inset-bottom)) + 78px);transform:translateX(-50%);width:min(620px,calc(100% - 24px));display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;padding:8px;border:1px solid #fff;border-radius:17px;background:#fffdf9f5;backdrop-filter:blur(18px);box-shadow:0 8px 30px #34204730}
-.nav-more-panel[hidden]{display:none!important}
-.nav-more-panel a{display:flex;min-width:0;min-height:54px;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:5px 1px;border-radius:12px;text-decoration:none;color:#78648e}
-.nav-more-panel a span{font-size:1.1rem;line-height:1}
-.nav-more-panel a small{font-size:clamp(.5rem,1.9vw,.63rem);font-weight:900;line-height:1.1;text-align:center;white-space:normal}
-.nav-more-panel a.active{background:#eee4ff;color:#633a99}
-body{padding-bottom:104px!important}
-@media(max-width:600px){.bottom-sections{width:calc(100% - 20px)!important;bottom:max(7px,env(safe-area-inset-bottom))!important;padding:6px!important}.bottom-sections a,.bottom-sections .nav-more-toggle{min-height:52px!important}.nav-more-panel{width:calc(100% - 20px);bottom:calc(max(7px,env(safe-area-inset-bottom)) + 73px);grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:6px}.nav-more-panel a{min-height:50px}.account-orb{top:12px!important;left:12px!important}}
-@media(max-width:360px){.bottom-sections a small,.bottom-sections .nav-more-toggle small{font-size:.5rem!important}.nav-more-panel a small{font-size:.48rem}}
-
 </style>
 
 </head>
@@ -2952,21 +2874,7 @@ body{padding-bottom:104px!important}
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<a class="account-orb" href="#army-account" aria-label="Mi cuenta" title="Mi cuenta"><img id="army-account-orb-avatar" alt="" hidden><span id="army-account-orb-icon" aria-hidden="true">♙</span><small>Mi cuenta</small></a>
-<nav class="bottom-sections" aria-label="Secciones principales">
-<a href="#country-time" data-section-link="country-time"><span aria-hidden="true">⌂</span><small>Inicio</small></a>
-<a href="#agenda" data-section-link="agenda"><span aria-hidden="true">▦</span><small>Agenda</small></a>
-<a href="#active" data-section-link="active"><span aria-hidden="true">♡</span><small>Votaciones</small></a>
-<a href="#birthday-voting" data-section-link="birthday-voting"><span aria-hidden="true">♕</span><small>Cumpleaños</small></a>
-<button type="button" class="nav-more-toggle" aria-expanded="false" aria-controls="nav-more-panel"><span aria-hidden="true">•••</span><small>Más</small></button>
-</nav>
-<div class="nav-more-panel" id="nav-more-panel" hidden>
-<a href="#choeaedol" data-section-link="choeaedol"><span aria-hidden="true">◉</span><small>Recolección</small></a>
-<a href="#upcoming" data-section-link="upcoming"><span aria-hidden="true">◷</span><small>Próximas</small></a>
-<a href="#completed" data-section-link="completed"><span aria-hidden="true">✓</span><small>Finalizadas</small></a>
-<a href="#guide" data-section-link="guide"><span aria-hidden="true">ⓘ</span><small>Guía</small></a>
-<a href="#sources" data-section-link="sources"><span aria-hidden="true">↗</span><small>Fuentes</small></a>
-</div>
+<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda ARMY</a><a href="#army-account">Mi espacio</a><a href="#active">Votaciones activas</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
@@ -3006,12 +2914,12 @@ body{padding-bottom:104px!important}
 
 <section class="panel army-account-panel" id="army-account">
  <div class="section-head">
-  <div><h2>💜 MI CUENTA ARMY</h2><p>Tu perfil personal dentro de BTS Voting Center.</p></div>
+  <div><h2>💜 MI ESPACIO ARMY</h2><p>Registra tus capturas de votación y consulta tu historial personal.</p></div>
   <span class="pill">ÁREA PERSONAL</span>
  </div>
- <div class="army-privacy-note"><strong>Tu cuenta es privada.</strong> Administra tu perfil con un nombre de usuario único y una foto personal.</div>
+ <div class="army-privacy-note"><strong>Tu espacio es privado.</strong> Tus capturas y tu historial solo estarán disponibles para la cuenta con la que iniciaste sesión.</div>
  <div id="army-auth-panel" class="army-auth-card">
-  <div class="army-auth-copy"><h3>Entra con tu usuario ARMY</h3><p>No necesitas correo electrónico. Crea un nombre de usuario único y una contraseña para acceder a tu perfil.</p></div>
+  <div class="army-auth-copy"><h3>Entra con tu usuario ARMY</h3><p>No necesitas correo electrónico. Crea un nombre de usuario único y una contraseña para guardar tus participaciones.</p></div>
   <form id="army-auth-form" class="army-form">
    <label>Nombre de usuario<input id="army-auth-username" type="text" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" placeholder="Ej. army_bts2026" required><small>De 3 a 20 caracteres: letras, números, punto, guion o guion bajo.</small></label>
    <label>Contraseña<input id="army-auth-password" type="password" autocomplete="current-password" minlength="8" maxlength="72" placeholder="Mínimo 8 caracteres" required></label>
@@ -3023,23 +2931,32 @@ body{padding-bottom:104px!important}
   <p id="army-auth-message" class="army-feedback" role="status" aria-live="polite"></p>
  </div>
  <div id="army-member-panel" hidden>
-  <div class="army-profile-card">
-   <div class="army-profile-avatar-wrap">
-    <img id="army-profile-avatar" class="army-profile-avatar" alt="Foto de perfil" hidden>
-    <div id="army-profile-placeholder" class="army-profile-placeholder" aria-hidden="true">♡</div>
-   </div>
-   <div class="army-profile-details">
-    <span class="army-eyebrow">TU PERFIL</span>
-    <strong id="army-member-username"></strong>
-    <label class="army-avatar-upload">Cambiar foto de perfil<input id="army-avatar-file" type="file" accept="image/jpeg,image/png,image/webp"></label>
-    <small>JPG, PNG o WEBP · máximo 5 MB.</small>
-    <p id="army-profile-message" class="army-feedback" role="status" aria-live="polite"></p>
-   </div>
+  <div class="army-member-bar">
+   <div><span class="army-eyebrow">SESIÓN ACTIVA</span><strong id="army-member-username"></strong></div>
    <button type="button" id="army-logout" class="army-secondary-btn">Cerrar sesión</button>
+  </div>
+  <div class="army-work-grid">
+   <div class="army-subcard">
+    <h3>Registrar una participación</h3>
+    <p>Selecciona una votación del sitio. La categoría, fecha de cierre e ID de referencia se asignan automáticamente.</p>
+    <form id="army-proof-form" class="army-form">
+     <label>Votación
+      <select id="army-campaign-select" required><option value="">Cargando votaciones…</option></select>
+     </label>
+     <div id="army-campaign-details" class="army-campaign-details" aria-live="polite">La información se obtiene del calendario de BTS Voting Center.</div>
+     <label>Capturas de pantalla<input id="army-proof-files" type="file" accept="image/jpeg,image/png,image/webp" multiple required><small>JPG, PNG o WEBP · máximo 10 MB por imagen.</small></label>
+     <button id="army-proof-submit" class="army-primary-btn" type="submit">Guardar capturas</button>
+     <p id="army-proof-message" class="army-feedback" role="status" aria-live="polite"></p>
+    </form>
+   </div>
+  </div>
+  <div class="army-history-block">
+   <div class="army-history-heading"><div><h3>Mi historial</h3><p>Tus participaciones y capturas guardadas.</p></div><span id="army-history-count" class="pill">0 registros</span></div>
+   <div id="army-history-list" class="army-history-list"><div class="army-empty">Inicia sesión para consultar tu historial.</div></div>
   </div>
  </div>
 </section>
-<section class="panel" id="choeaedol">
+\n<section class="panel" id="choeaedol">
  <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
  <div class="gda-collection-countdown" id="gdaCollectionCountdown" role="status" aria-live="polite">
   <div class="gda-countdown-heading">⏳ CIERRE DIARIO DE RECOLECCIÓN</div>
@@ -4034,150 +3951,166 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-const SUPABASE_URL='https://kerhrpdrmxkffelufgbh.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY='sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC';
-const LEGACY_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlcmhycGRybXhrZmVsbHVmZ2JoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjQxMzksImV4cCI6MjEwOTY0MDEzOX0.xRddFFVOIBx2KgDspdy-jZn0pusMeKhFvMgCpRQnOmU';
-const supabaseClient=createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
-const $=id=>document.getElementById(id);
-const authPanel=$('army-auth-panel'),memberPanel=$('army-member-panel'),authForm=$('army-auth-form');
-const authMessage=$('army-auth-message'),profileMessage=$('army-profile-message');
-let currentUser=null;
-function showMessage(node,text,error=false){node.textContent=text||'';node.style.color=error?'#a52d45':'#6a4b88';}
-function internalEmail(username){return 'army_'+String(username).trim().toLowerCase()+'@accounts.invalid';}
-async function loadAvatar(){
- if(!currentUser)return;
- const result=await supabaseClient.from('army_usernames').select('avatar_path').eq('user_id',currentUser.id).maybeSingle();
- if(result.error)throw result.error;
- const img=$('army-profile-avatar'),placeholder=$('army-profile-placeholder');
- if(result.data?.avatar_path){
-  const signed=await supabaseClient.storage.from('army-profile-photos').createSignedUrl(result.data.avatar_path,3600);
-  if(signed.error)throw signed.error;
-  img.src=signed.data.signedUrl;img.hidden=false;placeholder.hidden=true;
-  const orb=$('army-account-orb-avatar'),orbIcon=$('army-account-orb-icon');if(orb){orb.src=signed.data.signedUrl;orb.hidden=false;orbIcon.hidden=true;}
- }else{img.removeAttribute('src');img.hidden=true;placeholder.hidden=false;const orb=$('army-account-orb-avatar'),orbIcon=$('army-account-orb-icon');if(orb){orb.removeAttribute('src');orb.hidden=true;orbIcon.hidden=false;}}
-}
-async function updateSession(session){
- currentUser=session?.user||null;
- authPanel.hidden=!!currentUser;memberPanel.hidden=!currentUser;
- if(currentUser){
-  $('army-member-username').textContent=currentUser.user_metadata?.username||'Cuenta ARMY';
-  showMessage(profileMessage,'');
-  try{await loadAvatar();}catch(error){console.error(error);showMessage(profileMessage,'No pudimos cargar tu foto de perfil.',true);}
- }else{
-  $('army-member-username').textContent='';
-  $('army-avatar-file').value='';
-  $('army-profile-avatar').hidden=true;
-  $('army-profile-placeholder').hidden=false;
- }
-}
-authForm.addEventListener('submit',async event=>{
- event.preventDefault();
- const button=event.submitter,action=button?.dataset.authAction||'login';
- const username=$('army-auth-username').value.trim(),password=$('army-auth-password').value;
- if(!/^[A-Za-z0-9][A-Za-z0-9._-]{2,19}$/.test(username)){showMessage(authMessage,'El usuario debe tener entre 3 y 20 caracteres válidos.',true);return;}
- if(password.length<8||password.length>72){showMessage(authMessage,'La contraseña debe tener entre 8 y 72 caracteres.',true);return;}
- const buttons=[...authForm.querySelectorAll('button')];buttons.forEach(b=>b.disabled=true);
- showMessage(authMessage,action==='signup'?'Creando tu cuenta…':'Iniciando sesión…');
- try{
-  if(action==='signup'){
-   const result=await supabaseClient.functions.invoke('army-username-signup',{
-    body:{username,password},
-    headers:{Authorization:'Bearer '+LEGACY_ANON_KEY}
-   });
-   if(result.error)throw result.error;
-  }
-  const login=await supabaseClient.auth.signInWithPassword({email:internalEmail(username),password});
-  if(login.error)throw login.error;
-  showMessage(authMessage,action==='signup'?'¡Tu cuenta está lista!':'¡Bienvenida de nuevo!');
-  await updateSession(login.data.session);
- }catch(error){
-  console.error(error);
-  const detail=error?.message||'Intenta de nuevo.';
-  showMessage(authMessage,detail.includes('already')||detail.includes('duplicate')?'Ese nombre de usuario ya está ocupado.':detail,true);
- }finally{buttons.forEach(b=>b.disabled=false);}
-});
-$('army-avatar-file').addEventListener('change',async event=>{
- const file=event.target.files?.[0];if(!file||!currentUser)return;
- const allowed=['image/jpeg','image/png','image/webp'];
- if(!allowed.includes(file.type)){showMessage(profileMessage,'Elige una imagen JPG, PNG o WEBP.',true);event.target.value='';return;}
- if(file.size>5*1024*1024){showMessage(profileMessage,'La imagen no puede superar 5 MB.',true);event.target.value='';return;}
- const extension=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';
- const path=currentUser.id+'/avatar.'+extension;
- showMessage(profileMessage,'Guardando tu foto…');
- try{
-  const upload=await supabaseClient.storage.from('army-profile-photos').upload(path,file,{upsert:true,contentType:file.type,cacheControl:'3600'});
-  if(upload.error)throw upload.error;
-  const saved=await supabaseClient.from('army_usernames').update({avatar_path:path}).eq('user_id',currentUser.id);
-  if(saved.error)throw saved.error;
-  await loadAvatar();
-  showMessage(profileMessage,'Foto de perfil actualizada.');
- }catch(error){console.error(error);showMessage(profileMessage,'No pudimos guardar la foto. Intenta otra vez.',true);}
- finally{event.target.value='';}
-});
-$('army-logout').addEventListener('click',async()=>{
- const result=await supabaseClient.auth.signOut();
- if(result.error)showMessage(profileMessage,'No pudimos cerrar la sesión.',true);
-});
-supabaseClient.auth.onAuthStateChange((_event,session)=>{Promise.resolve().then(()=>updateSession(session));});
-supabaseClient.auth.getSession().then(({data,error})=>{
- if(error){showMessage(authMessage,'No pudimos comprobar la sesión. Recarga la página.',true);return;}
- updateSession(data.session);
-});
-</script>
 
+const SUPABASE_URL = 'https://kerhrpdrmxkffelufgbh.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC';
+const LEGACY_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlcmhycGRybXhrZmZlbHVmZ2JoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjQxMzksImV4cCI6MjEwOTY0MDEzOX0.xRddFFVOIBx2KgDspdy-jZn0pusMeKhFvMgCpRQnOmU';
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+function armyInternalEmail(username){
+ return 'army_'+String(username).trim().toLowerCase()+'@accounts.invalid';
+}
 
-<script>
 (function(){
- const sectionIds=['country-time','agenda','army-account','active','birthday-voting','choeaedol','upcoming','completed','guide','sources'];
- const sections=sectionIds.map(id=>document.getElementById(id)).filter(Boolean);
- const nav=document.querySelector('.bottom-sections');
- const links=Array.from(document.querySelectorAll('[data-section-link]'));
- const hero=document.querySelector('header.hero');
- const moreButton=document.querySelector('.nav-more-toggle');
- const morePanel=document.getElementById('nav-more-panel');
- if(moreButton&&morePanel){
-  moreButton.addEventListener('click',()=>{
-   const opening=morePanel.hidden;
-   morePanel.hidden=!opening;
-   moreButton.setAttribute('aria-expanded',opening?'true':'false');
-  });
-  document.addEventListener('click',event=>{
-   if(!morePanel.hidden&&!event.target.closest('.bottom-sections')&&!event.target.closest('.nav-more-panel')){
-    morePanel.hidden=true;moreButton.setAttribute('aria-expanded','false');
-   }
-  });
+ const $ = (id) => document.getElementById(id);
+ const authPanel = $('army-auth-panel');
+ const memberPanel = $('army-member-panel');
+ const authForm = $('army-auth-form');
+ const proofForm = $('army-proof-form');
+ const authMessage = $('army-auth-message');
+ const proofMessage = $('army-proof-message');
+ const historyList = $('army-history-list');
+ let currentUser = null;
+ let campaignRegistry = new Map();
+
+ function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
  }
- function showSection(id,updateHash){
-  if(!sectionIds.includes(id)||!document.getElementById(id)) id='country-time';
-  sections.forEach(section=>{
-   const current=section.id===id;
-   section.classList.toggle('section-current',current);
-   section.classList.toggle('section-hidden',!current);
-   section.setAttribute('aria-hidden',current?'false':'true');
-  });
-  links.forEach(link=>{
-   const current=link.dataset.sectionLink===id;
-   link.classList.toggle('active',current);
-   if(current) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
-  });
-  if(hero) hero.classList.toggle('section-away',id!=='country-time');
-  if(morePanel&&moreButton){morePanel.hidden=true;moreButton.setAttribute('aria-expanded','false');}
-  if(updateHash && location.hash!=='#'+id) history.replaceState(null,'','#'+id);
-  window.scrollTo({top:0,behavior:'instant'});
+ function dateText(value){
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime())) return 'Fecha no disponible';
+  return new Intl.DateTimeFormat(document.documentElement.lang || 'es',{dateStyle:'medium',timeStyle:'short'}).format(date);
  }
- function routeFromHash(){showSection(decodeURIComponent(location.hash.slice(1)),false);}
+ function slug(value){
+  return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,90);
+ }
+ function message(node,text,isError){
+  node.textContent = text || '';
+  node.style.color = isError ? '#a52d45' : '#6a4b88';
+ }
+ function setBusy(button,busy,label){
+  button.disabled = busy;
+  if(busy){button.dataset.oldLabel=button.textContent;button.textContent=label;}
+  else if(button.dataset.oldLabel){button.textContent=button.dataset.oldLabel;delete button.dataset.oldLabel;}
+ }
+ async function updateSession(session){
+  currentUser = session?.user || null;
+  authPanel.hidden = !!currentUser;
+  memberPanel.hidden = !currentUser;
+  if(currentUser){
+   $('army-member-username').textContent = currentUser.user_metadata?.username || 'Cuenta ARMY';
+   await refreshPersonalArea();
+  } else {
+   $('army-member-username').textContent = '';
+   historyList.innerHTML = '<div class="army-empty">Inicia sesión para consultar tu historial.</div>';
+   $('army-history-count').textContent = '0 registros';
+  }
+ }
+ async function loadCampaignRegistry(){
+  const select = $('army-campaign-select');
+  const details = $('army-campaign-details');
+  const result = await supabaseClient.from('voting_campaign_registry')
+   .select('campaign_key,reference_id,campaign_name,category,closes_at,timezone,closure_note')
+   .eq('active',true).order('campaign_name',{ascending:true});
+  if(result.error) throw result.error;
+  campaignRegistry = new Map((result.data || []).map(c=>[c.campaign_key,c]));
+  const previous = select.value;
+  select.innerHTML = '<option value="">Selecciona una votación</option>' +
+   [...campaignRegistry.values()].map(c=>'<option value="'+escapeHtml(c.campaign_key)+'">'+escapeHtml(c.campaign_name)+'</option>').join('');
+  if(previous && campaignRegistry.has(previous)) select.value = previous;
+  addCampaignProofLinks();
+  if(!campaignRegistry.size){
+   select.innerHTML = '<option value="">No hay votaciones disponibles</option>';
+   details.textContent = 'Las votaciones aparecerán aquí cuando estén registradas en la agenda.';
+  } else updateCampaignDetails();
+ }
+ function updateCampaignDetails(){
+  const campaign = campaignRegistry.get($('army-campaign-select').value);
+  const details = $('army-campaign-details');
+  if(!campaign){details.textContent='Selecciona una votación para consultar su categoría y cierre.';return;}
+  const closeText = campaign.closes_at
+   ? (new Date(campaign.closes_at).getTime() <= Date.now() ? 'Votación finalizada' : 'En seguimiento hasta el cierre')
+   : 'Cierre exacto pendiente de confirmación oficial. El estado se actualizará cuando se registre.';
+  details.innerHTML = '<strong>'+escapeHtml(campaign.category)+'</strong><span>ID interno de referencia: '+escapeHtml(campaign.reference_id)+'</span><span>'+escapeHtml(closeText)+'</span><small>'+escapeHtml(campaign.closure_note || '')+'</small>';
+ }
+ function addCampaignProofLinks(){
+  for(const campaign of campaignRegistry.values()){
+   const countdown = document.querySelector('[data-countdown="'+campaign.campaign_key+'"]');
+   const card = countdown?.closest('.vote-card');
+   if(!card || card.querySelector('[data-army-proof-campaign="'+campaign.campaign_key+'"]')) continue;
+   let actions = card.querySelector('.actions');
+   if(!actions){actions=document.createElement('div');actions.className='actions';card.appendChild(actions);}
+   const button=document.createElement('button');
+   button.type='button';button.className='btn secondary';
+   button.dataset.armyProofCampaign=campaign.campaign_key;
+   button.textContent='SUBIR CAPTURAS';
+   actions.appendChild(button);
+  }
+ }
+ $('army-campaign-select').addEventListener('change',updateCampaignDetails);
  document.addEventListener('click',event=>{
-  const anchor=event.target.closest('a[href^="#"]');
-  if(!anchor)return;
-  const id=decodeURIComponent(anchor.getAttribute('href').slice(1));
-  if(!sectionIds.includes(id))return;
-  event.preventDefault();
-  showSection(id,true);
+  const button=event.target.closest('[data-army-proof-campaign]');
+  if(!button) return;
+  const key=button.dataset.armyProofCampaign;
+  if(!campaignRegistry.has(key)) return;
+  $('army-campaign-select').value=key;
+  updateCampaignDetails();
+  const accountLink=document.querySelector('a[href="#army-account"]');
+  if(accountLink) accountLink.click();
+  $('army-account').scrollIntoView({behavior:'smooth',block:'start'});
  });
- window.addEventListener('hashchange',routeFromHash);
- const initial=decodeURIComponent(location.hash.slice(1));
- showSection(sectionIds.includes(initial)?initial:'country-time',!sectionIds.includes(initial));
+
+ async function refreshPersonalArea(){
+  if(!currentUser) return;
+  historyList.innerHTML = '<div class="army-empty">Cargando tu historial…</div>';
+  try{
+   await loadCampaignRegistry();
+   const recordsResult = await supabaseClient.from('voting_proof_records')
+    .select('id,campaign_key,campaign_reference_id,campaign_name,category,display_name,campaign_end_at,submitted_at')
+    .order('submitted_at',{ascending:false});
+   if(recordsResult.error) throw recordsResult.error;
+   const records = recordsResult.data || [];
+   $('army-history-count').textContent = records.length + (records.length === 1 ? ' registro' : ' registros');
+   if(!records.length){
+    historyList.innerHTML = '<div class="army-empty">Todavía no has registrado participaciones. Puedes guardar tu primera captura arriba.</div>';
+   } else {
+    const ids = records.map(r=>r.id);
+    const filesResult = await supabaseClient.from('voting_proof_files')
+      .select('id,record_id,storage_path,original_name,uploaded_at')
+      .in('record_id',ids).order('uploaded_at',{ascending:true});
+    if(filesResult.error) throw filesResult.error;
+    const byRecord = new Map();
+    for(const file of (filesResult.data || [])){
+     if(!byRecord.has(file.record_id)) byRecord.set(file.record_id,[]);
+     byRecord.get(file.record_id).push(file);
+    }
+    const cards = await Promise.all(records.map(async r=>{
+     const files = byRecord.get(r.id) || [];
+     const ended = !!r.campaign_end_at && new Date(r.campaign_end_at).getTime() <= Date.now();
+     const thumbs = await Promise.all(files.map(async file=>{
+      const signed = await supabaseClient.storage.from('voting-proofs').createSignedUrl(file.storage_path,3600);
+      if(signed.error || !signed.data?.signedUrl) return '';
+      return '<a href="'+escapeHtml(signed.data.signedUrl)+'" target="_blank" rel="noopener" aria-label="Abrir captura"><img src="'+escapeHtml(signed.data.signedUrl)+'" alt="Captura de '+escapeHtml(r.campaign_name)+'" loading="lazy"></a>';
+     }));
+     return '<article class="army-history-card"><div class="army-history-top"><div><strong>'+escapeHtml(r.campaign_name)+'</strong><div class="army-history-meta">'+escapeHtml(r.category)+' · ID: '+escapeHtml(r.campaign_reference_id || r.campaign_key)+'<br>Registrado: '+escapeHtml(dateText(r.submitted_at))+' · '+(r.campaign_end_at?'Cierre: '+escapeHtml(dateText(r.campaign_end_at)):'Cierre pendiente de confirmación')+' · '+files.length+' captura(s)</div></div><span class="army-status '+(ended?'done':'')+'">'+(ended?'Finalizada':'En seguimiento')+'</span></div><div class="army-proof-thumbs">'+thumbs.join('')+'</div></article>';
+    }));
+    historyList.innerHTML = cards.join('');
+   }
+  }catch(error){
+   console.error('No se pudo cargar el espacio ARMY:',error);
+   historyList.innerHTML = '<div class="army-empty">No pudimos cargar tu historial. Intenta actualizar la página.</div>';
+  }
+ }
+
+ supabaseClient.auth.onAuthStateChange((_event,session)=>{
+  Promise.resolve().then(()=>updateSession(session));
+ });
+ loadCampaignRegistry().catch(error=>console.error('No se pudo cargar el registro de votaciones:',error));
+ supabaseClient.auth.getSession().then(({data,error})=>{
+  if(error){message(authMessage,'No pudimos comprobar la sesión. Recarga la página.',true);return;}
+  updateSession(data.session);
+ });
 })();
 </script>
+
 </body>
 </html>
