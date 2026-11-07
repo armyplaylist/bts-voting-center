@@ -2818,7 +2818,56 @@ body.dark-mode .daily-ending-alert h3{color:#ffe6ec}body.dark-mode .daily-ending
 body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.dark-mode .daily-ending-item small{color:#e0c4ce}body.dark-mode .daily-ending-time,body.dark-mode .daily-ending-link{color:#ffafc0}
 @media(max-width:480px){.daily-ending-alert{padding:14px}.daily-ending-item{align-items:flex-start}.daily-ending-time{font-size:.72rem}}
 </style>
-</head>
+
+<style>
+/* Mi espacio ARMY: cuentas, capturas e historial privado */
+.army-account-panel{scroll-margin-top:90px}
+.army-privacy-note{padding:13px 15px;margin:0 0 16px;border:1px solid #d8c9e9;border-radius:15px;background:#f5effb;color:#5e4776;font-size:.82rem;line-height:1.5}
+.army-auth-card,.army-subcard{padding:18px;border:1px solid #e5dced;border-radius:19px;background:linear-gradient(145deg,#fff,#faf7fd)}
+.army-auth-card{max-width:620px;margin:auto}
+.army-auth-copy h3,.army-subcard h3,.army-history-heading h3{margin:0 0 6px;color:#38254c;font-size:1.05rem;font-weight:900}
+.army-auth-copy p,.army-subcard>p,.army-history-heading p{margin:0 0 14px;color:#786b83;font-size:.82rem;line-height:1.5;font-weight:700}
+.army-form{display:grid;gap:12px}
+.army-form label{display:grid;gap:6px;color:#58436d;font-size:.79rem;font-weight:900}
+.army-form input,.army-form select{width:100%;min-width:0;padding:12px 13px;border:1px solid #d9cde4;border-radius:12px;background:#fff;color:#30243b;font:700 .87rem Nunito,system-ui,sans-serif}
+.army-form input:focus,.army-form select:focus{outline:3px solid #a88bc833;border-color:#8c6bb3}
+.army-form small{color:#8a7d93;font-size:.72rem;font-weight:700}
+.army-auth-actions{display:flex;gap:9px;flex-wrap:wrap}
+.army-primary-btn,.army-secondary-btn{display:inline-flex;justify-content:center;align-items:center;min-height:42px;padding:10px 15px;border:0;border-radius:12px;font:900 .8rem Nunito,system-ui,sans-serif;cursor:pointer}
+.army-primary-btn{background:#553775;color:white;box-shadow:0 3px 0 #39234f}
+.army-secondary-btn{background:#eee6f5;color:#5d4377}
+.army-primary-btn:disabled{opacity:.55;cursor:wait}
+.army-feedback{min-height:18px;margin:7px 0 0;color:#6a4b88;font-size:.78rem;font-weight:800;line-height:1.45}
+.army-member-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 15px;margin-bottom:15px;border-radius:15px;background:#f0e9f6}
+.army-member-bar strong{display:block;color:#443054;font-size:.9rem;overflow-wrap:anywhere}
+.army-eyebrow{display:block;margin-bottom:3px;color:#8b76a0;font-size:.65rem;font-weight:900;letter-spacing:.12em}
+.army-work-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:13px}
+.army-certificate-info{display:flex;flex-direction:column;align-items:flex-start}
+.army-certificate-mark{display:grid;place-items:center;width:58px;height:58px;margin:5px 0 12px;border:1px solid #d9c8e9;border-radius:50%;background:#f2eafa;color:#76549b;font-size:1.8rem}
+.army-certificate-info ul{padding-left:19px;margin:0 0 13px;color:#665474;font-size:.79rem;line-height:1.8;font-weight:700}
+.army-disclaimer{margin-top:auto!important;padding:10px 12px;border-radius:12px;background:#f6f1f7;color:#81748a!important;font-size:.7rem!important}
+.army-history-block{margin-top:20px}
+.army-history-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
+.army-history-heading p{margin:0}
+.army-history-list,.army-certificate-list{display:grid;gap:10px}
+.army-history-card,.army-certificate-card{padding:14px;border:1px solid #e7deee;border-radius:16px;background:#fff}
+.army-history-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.army-history-top strong{display:block;color:#3e2d50;font-size:.88rem}
+.army-history-meta{margin-top:4px;color:#84778d;font-size:.72rem;font-weight:700;line-height:1.5}
+.army-status{display:inline-flex;padding:5px 9px;border-radius:99px;background:#eee8f5;color:#6a4a88;font-size:.67rem;font-weight:900}
+.army-status.done{background:#e8f3ed;color:#39704f}
+.army-proof-thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.army-proof-thumbs a{display:block;width:76px;height:76px;overflow:hidden;border:1px solid #e3d9eb;border-radius:10px;background:#f5f1f7}
+.army-proof-thumbs img{width:100%;height:100%;object-fit:cover}
+.army-certificate-card{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;background:linear-gradient(120deg,#fff,#f5effb)}
+.army-certificate-card strong{display:block;color:#49345e;font-size:.88rem}
+.army-certificate-card small{display:block;margin-top:4px;color:#82758d;font-size:.72rem;font-weight:700}
+.army-certificate-card button{white-space:nowrap}
+.army-empty{padding:18px;border:1px dashed #d8cce2;border-radius:15px;color:#897d92;text-align:center;font-size:.8rem;font-weight:700;background:#fff9}
+@media(max-width:700px){.army-work-grid{grid-template-columns:1fr}.army-auth-actions>*{flex:1}.army-certificate-card{align-items:flex-start}.army-certificate-card button{width:100%}}
+@media(prefers-reduced-motion:reduce){.army-primary-btn,.army-secondary-btn{transition:none}}
+</style>
+\n</head>
 <body><main class="wrap">
 <header class="hero" id="top">
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
@@ -2833,7 +2882,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda ARMY</a><a href="#active">Votaciones activas</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
+<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda ARMY</a><a href="#army-account">Mi espacio</a><a href="#active">Votaciones activas</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
@@ -2870,7 +2919,75 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
  <p class="agenda-footnote">Las tareas se reinician cada día en este dispositivo. Las fechas se muestran como recordatorios y pueden cambiar si los organizadores actualizan sus calendarios.</p>
 </section>
 
-<section class="panel" id="choeaedol">
+
+<section class="panel army-account-panel" id="army-account">
+ <div class="section-head">
+  <div><h2>💜 MI ESPACIO ARMY</h2><p>Registra tus capturas de votación, consulta tu historial y conserva tus comprobantes personales.</p></div>
+  <span class="pill">ÁREA PERSONAL</span>
+ </div>
+ <div class="army-privacy-note"><strong>Tu espacio es privado.</strong> Tus capturas y tu historial solo estarán disponibles para la cuenta con la que iniciaste sesión.</div>
+ <div id="army-auth-panel" class="army-auth-card">
+  <div class="army-auth-copy"><h3>Inicia sesión o crea tu cuenta</h3><p>Usa tu correo electrónico para guardar tus participaciones y acceder a ellas desde otros dispositivos.</p></div>
+  <form id="army-auth-form" class="army-form">
+   <label>Correo electrónico<input id="army-auth-email" type="email" autocomplete="email" placeholder="tu correo" required></label>
+   <label>Contraseña<input id="army-auth-password" type="password" autocomplete="current-password" minlength="8" placeholder="Mínimo 8 caracteres" required></label>
+   <div class="army-auth-actions">
+    <button class="army-primary-btn" type="submit" data-auth-action="login">Iniciar sesión</button>
+    <button class="army-secondary-btn" type="submit" data-auth-action="signup">Crear cuenta</button>
+   </div>
+  </form>
+  <p id="army-auth-message" class="army-feedback" role="status" aria-live="polite"></p>
+ </div>
+ <div id="army-member-panel" hidden>
+  <div class="army-member-bar">
+   <div><span class="army-eyebrow">SESIÓN ACTIVA</span><strong id="army-member-email"></strong></div>
+   <button type="button" id="army-logout" class="army-secondary-btn">Cerrar sesión</button>
+  </div>
+  <div class="army-work-grid">
+   <div class="army-subcard">
+    <h3>Registrar una participación</h3>
+    <p>Elige la votación y su categoría, indica la fecha de cierre y adjunta tus capturas.</p>
+    <form id="army-proof-form" class="army-form">
+     <label>Nombre de la votación<input id="army-campaign-name" type="text" maxlength="120" placeholder="Ej. MAMA Awards 2026" required></label>
+     <label>Categoría
+      <select id="army-campaign-category" required>
+       <option value="">Selecciona una categoría</option>
+       <option>MAMA · Fans' Choice</option>
+       <option>ARIA Awards</option>
+       <option>Melon Music Awards</option>
+       <option>Asia Artist Awards</option>
+       <option>Golden Disc Awards</option>
+       <option>Votación de cumpleaños</option>
+       <option>Recolección de votos o corazones</option>
+       <option>Otra categoría</option>
+      </select>
+     </label>
+     <label>Nombre que aparecerá en tu comprobante<input id="army-display-name" type="text" maxlength="70" placeholder="Tu nombre o usuario ARMY" required></label>
+     <label>Fecha y hora de finalización<input id="army-campaign-end" type="datetime-local" required></label>
+     <label>Capturas de pantalla<input id="army-proof-files" type="file" accept="image/jpeg,image/png,image/webp" multiple required><small>JPG, PNG o WEBP · máximo 10 MB por imagen.</small></label>
+     <button id="army-proof-submit" class="army-primary-btn" type="submit">Guardar capturas</button>
+     <p id="army-proof-message" class="army-feedback" role="status" aria-live="polite"></p>
+    </form>
+   </div>
+   <div class="army-subcard army-certificate-info">
+    <h3>Comprobantes personales</h3>
+    <div class="army-certificate-mark">✦</div>
+    <p>Cuando llegue la fecha de cierre que registraste, aparecerá un comprobante digital asociado a tu participación.</p>
+    <ul><li>Nombre de la votación y categoría</li><li>Fecha de cierre y emisión</li><li>Número de capturas registradas</li><li>Código único de referencia</li></ul>
+    <p class="army-disclaimer">Este documento acredita el registro de capturas en BTS Voting Center. No es un certificado oficial del organizador ni verifica que los votos hayan sido contabilizados.</p>
+   </div>
+  </div>
+  <div class="army-history-block">
+   <div class="army-history-heading"><div><h3>Mi historial</h3><p>Tus participaciones y capturas guardadas.</p></div><span id="army-history-count" class="pill">0 registros</span></div>
+   <div id="army-history-list" class="army-history-list"><div class="army-empty">Inicia sesión para consultar tu historial.</div></div>
+  </div>
+  <div class="army-history-block">
+   <div class="army-history-heading"><div><h3>Mis comprobantes</h3><p>Se habilitan automáticamente después de la fecha de finalización registrada.</p></div></div>
+   <div id="army-certificate-list" class="army-certificate-list"><div class="army-empty">Aún no tienes comprobantes emitidos.</div></div>
+  </div>
+ </div>
+</section>
+\n<section class="panel" id="choeaedol">
  <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
  <div class="gda-collection-countdown" id="gdaCollectionCountdown" role="status" aria-live="polite">
   <div class="gda-countdown-heading">⏳ CIERRE DIARIO DE RECOLECCIÓN</div>
@@ -3862,5 +3979,223 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 
 })();
 </script>
-</body>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+const SUPABASE_URL = 'https://kerhrpdrmxkffelufgbh.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC';
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+(function(){
+ const $ = (id) => document.getElementById(id);
+ const authPanel = $('army-auth-panel');
+ const memberPanel = $('army-member-panel');
+ const authForm = $('army-auth-form');
+ const proofForm = $('army-proof-form');
+ const authMessage = $('army-auth-message');
+ const proofMessage = $('army-proof-message');
+ const historyList = $('army-history-list');
+ const certificateList = $('army-certificate-list');
+ let currentUser = null;
+ let certificates = new Map();
+
+ function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ }
+ function dateText(value){
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime())) return 'Fecha no disponible';
+  return new Intl.DateTimeFormat(document.documentElement.lang || 'es',{dateStyle:'medium',timeStyle:'short'}).format(date);
+ }
+ function slug(value){
+  return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,90);
+ }
+ function message(node,text,isError){
+  node.textContent = text || '';
+  node.style.color = isError ? '#a52d45' : '#6a4b88';
+ }
+ function setBusy(button,busy,label){
+  button.disabled = busy;
+  if(busy){button.dataset.oldLabel=button.textContent;button.textContent=label;}
+  else if(button.dataset.oldLabel){button.textContent=button.dataset.oldLabel;delete button.dataset.oldLabel;}
+ }
+ async function updateSession(session){
+  currentUser = session?.user || null;
+  authPanel.hidden = !!currentUser;
+  memberPanel.hidden = !currentUser;
+  if(currentUser){
+   $('army-member-email').textContent = currentUser.email || 'Cuenta ARMY';
+   await refreshPersonalArea();
+  } else {
+   $('army-member-email').textContent = '';
+   historyList.innerHTML = '<div class="army-empty">Inicia sesión para consultar tu historial.</div>';
+   certificateList.innerHTML = '<div class="army-empty">Aún no tienes comprobantes emitidos.</div>';
+   $('army-history-count').textContent = '0 registros';
+  }
+ }
+ async function refreshPersonalArea(){
+  if(!currentUser) return;
+  historyList.innerHTML = '<div class="army-empty">Cargando tu historial…</div>';
+  certificateList.innerHTML = '<div class="army-empty">Revisando cierres de votación…</div>';
+  try{
+   const certResult = await supabaseClient.rpc('ensure_my_voting_certificates');
+   if(certResult.error) throw certResult.error;
+   certificates = new Map((certResult.data || []).map(c => [c.id,c]));
+   const recordsResult = await supabaseClient.from('voting_proof_records')
+    .select('id,campaign_key,campaign_name,category,display_name,campaign_end_at,submitted_at')
+    .order('submitted_at',{ascending:false});
+   if(recordsResult.error) throw recordsResult.error;
+   const records = recordsResult.data || [];
+   $('army-history-count').textContent = records.length + (records.length === 1 ? ' registro' : ' registros');
+   if(!records.length){
+    historyList.innerHTML = '<div class="army-empty">Todavía no has registrado participaciones. Puedes guardar tu primera captura arriba.</div>';
+   } else {
+    const ids = records.map(r=>r.id);
+    const filesResult = await supabaseClient.from('voting_proof_files')
+      .select('id,record_id,storage_path,original_name,uploaded_at')
+      .in('record_id',ids).order('uploaded_at',{ascending:true});
+    if(filesResult.error) throw filesResult.error;
+    const byRecord = new Map();
+    for(const file of (filesResult.data || [])){
+     if(!byRecord.has(file.record_id)) byRecord.set(file.record_id,[]);
+     byRecord.get(file.record_id).push(file);
+    }
+    const cards = await Promise.all(records.map(async r=>{
+     const files = byRecord.get(r.id) || [];
+     const ended = new Date(r.campaign_end_at).getTime() <= Date.now();
+     const thumbs = await Promise.all(files.map(async file=>{
+      const signed = await supabaseClient.storage.from('voting-proofs').createSignedUrl(file.storage_path,3600);
+      if(signed.error || !signed.data?.signedUrl) return '';
+      return '<a href="'+escapeHtml(signed.data.signedUrl)+'" target="_blank" rel="noopener" aria-label="Abrir captura"><img src="'+escapeHtml(signed.data.signedUrl)+'" alt="Captura de '+escapeHtml(r.campaign_name)+'" loading="lazy"></a>';
+     }));
+     return '<article class="army-history-card"><div class="army-history-top"><div><strong>'+escapeHtml(r.campaign_name)+'</strong><div class="army-history-meta">'+escapeHtml(r.category)+' · Registrado: '+escapeHtml(dateText(r.submitted_at))+'<br>Cierre registrado: '+escapeHtml(dateText(r.campaign_end_at))+' · '+files.length+' captura(s)</div></div><span class="army-status '+(ended?'done':'')+'">'+(ended?'Finalizada':'En seguimiento')+'</span></div><div class="army-proof-thumbs">'+thumbs.join('')+'</div></article>';
+    }));
+    historyList.innerHTML = cards.join('');
+   }
+   renderCertificates();
+  }catch(error){
+   console.error('No se pudo cargar el espacio ARMY:',error);
+   historyList.innerHTML = '<div class="army-empty">No pudimos cargar tu historial. Intenta actualizar la página.</div>';
+   certificateList.innerHTML = '<div class="army-empty">No pudimos revisar tus comprobantes.</div>';
+  }
+ }
+ function renderCertificates(){
+  const rows = [...certificates.values()].sort((a,b)=>new Date(b.issued_at)-new Date(a.issued_at));
+  if(!rows.length){
+   certificateList.innerHTML = '<div class="army-empty">Aún no hay votaciones finalizadas con capturas registradas.</div>';
+   return;
+  }
+  certificateList.innerHTML = rows.map(c=>'<article class="army-certificate-card"><div><strong>'+escapeHtml(c.campaign_name)+'</strong><small>'+escapeHtml(c.category)+' · '+escapeHtml(c.proof_count)+' captura(s) · Emitido: '+escapeHtml(dateText(c.issued_at))+'</small><small>Código: '+escapeHtml(c.verification_code)+'</small></div><button type="button" class="army-primary-btn" data-certificate-id="'+escapeHtml(c.id)+'">Ver comprobante</button></article>').join('');
+ }
+ function openCertificate(c){
+  const win = window.open('','_blank');
+  if(!win){message(proofMessage,'Permite las ventanas emergentes para abrir tu comprobante.',true);return;}
+  const issued = dateText(c.issued_at);
+  const ended = dateText(c.campaign_end_at);
+  const name = escapeHtml(c.display_name);
+  const title = escapeHtml(c.campaign_name);
+  const category = escapeHtml(c.category);
+  const code = escapeHtml(c.verification_code);
+  win.document.open();
+  win.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Comprobante ARMY · ${title}</title><style>
+  @page{size:A4 landscape;margin:0}*{box-sizing:border-box}body{margin:0;background:#f3eef8;color:#30213f;font-family:Arial,sans-serif}.sheet{width:297mm;height:210mm;margin:auto;padding:15mm;background:#fff;position:relative;overflow:hidden}.frame{height:100%;border:2px solid #76559a;padding:13mm 17mm;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}.frame:before{content:"";position:absolute;inset:4mm;border:1px solid #e0d4eb;pointer-events:none}.kicker{font-size:10pt;letter-spacing:4px;color:#8b6aa9;font-weight:bold}.brand{margin:7mm 0 3mm;font-size:25pt;letter-spacing:3px;font-weight:900;color:#39234e}.line{width:35mm;height:2px;background:#b79bcf;margin:3mm auto 6mm}.title{font-family:Georgia,serif;font-size:31pt;color:#4a3260;margin:0 0 4mm}.intro{font-size:11pt;color:#776a80;margin:0}.person{font-family:Georgia,serif;font-size:25pt;color:#6e4a91;margin:7mm 0 2mm}.campaign{font-size:17pt;font-weight:bold;color:#3d2a50;margin:0 0 2mm}.category{font-size:11pt;color:#796c84}.details{display:flex;gap:20mm;margin:9mm 0 0}.detail{min-width:35mm}.detail strong{display:block;font-size:14pt;color:#49335f}.detail span{display:block;margin-top:2mm;font-size:8pt;letter-spacing:1px;color:#91839c;text-transform:uppercase}.footer{margin-top:auto;width:100%;display:flex;justify-content:space-between;align-items:end;gap:10mm;text-align:left}.code{font-family:monospace;font-size:9pt;color:#5f4b71}.disclaimer{max-width:145mm;font-size:7.5pt;line-height:1.4;color:#8d8395;text-align:right}.print{position:fixed;top:12px;right:12px;border:0;border-radius:9px;padding:11px 15px;background:#51356e;color:#fff;font-weight:bold;cursor:pointer}@media print{body{background:#fff}.sheet{margin:0}.print{display:none}}@media screen{.sheet{margin:20px auto;box-shadow:0 8px 35px #34214630}}@media(max-width:700px){.sheet{transform-origin:top left;transform:scale(.5);margin:10px;width:297mm}}
+  </style></head><body><button class="print" onclick="window.print()">Guardar como PDF / Imprimir</button><main class="sheet"><div class="frame"><div class="kicker">BTS VOTING CENTER · REGISTRO PERSONAL</div><div class="brand">ARMY PARTICIPATION</div><div class="line"></div><h1 class="title">Comprobante de participación</h1><p class="intro">Se deja constancia del registro de capturas en el espacio personal de</p><div class="person">${name}</div><div class="campaign">${title}</div><div class="category">${category}</div><div class="details"><div class="detail"><strong>${ended}</strong><span>Fecha de finalización registrada</span></div><div class="detail"><strong>${c.proof_count}</strong><span>Capturas registradas</span></div><div class="detail"><strong>${issued}</strong><span>Fecha de emisión</span></div></div><div class="footer"><div class="code">CÓDIGO DE REFERENCIA<br>${code}</div><div class="disclaimer">Documento personal generado por BTS Voting Center a partir de las capturas registradas por el usuario. No es un certificado oficial del organizador y no verifica la contabilización de votos.</div></div></div></main></body></html>`);
+  win.document.close();
+ }
+ authForm.addEventListener('submit',async event=>{
+  event.preventDefault();
+  const action = event.submitter?.dataset.authAction || 'login';
+  const email = $('army-auth-email').value.trim();
+  const password = $('army-auth-password').value;
+  const button = event.submitter;
+  setBusy(button,true,action==='signup'?'Creando cuenta…':'Ingresando…');
+  message(authMessage,'');
+  try{
+   if(action==='signup'){
+    const result = await supabaseClient.auth.signUp({email,password});
+    if(result.error) throw result.error;
+    if(result.data.session){
+     message(authMessage,'Tu cuenta está lista. Ya puedes registrar tus capturas.');
+    } else {
+     message(authMessage,'Revisa tu correo para confirmar la cuenta y después inicia sesión.');
+    }
+   } else {
+    const result = await supabaseClient.auth.signInWithPassword({email,password});
+    if(result.error) throw result.error;
+    message(authMessage,'Sesión iniciada correctamente.');
+   }
+  }catch(error){message(authMessage,error.message || 'No pudimos completar el acceso.',true);}
+  finally{setBusy(button,false);}
+ });
+ $('army-logout').addEventListener('click',async()=>{
+  const {error}=await supabaseClient.auth.signOut();
+  if(error) message(authMessage,error.message,true);
+ });
+ proofForm.addEventListener('submit',async event=>{
+  event.preventDefault();
+  if(!currentUser){message(proofMessage,'Inicia sesión para guardar tus capturas.',true);return;}
+  const files = [...$('army-proof-files').files];
+  if(!files.length){message(proofMessage,'Selecciona al menos una captura.',true);return;}
+  const allowed = ['image/jpeg','image/png','image/webp'];
+  if(files.some(f=>!allowed.includes(f.type))){message(proofMessage,'Solo se permiten imágenes JPG, PNG o WEBP.',true);return;}
+  if(files.some(f=>f.size>10*1024*1024)){message(proofMessage,'Cada imagen debe pesar 10 MB o menos.',true);return;}
+  const campaignName = $('army-campaign-name').value.trim();
+  const category = $('army-campaign-category').value;
+  const displayName = $('army-display-name').value.trim();
+  const endValue = $('army-campaign-end').value;
+  const endDate = new Date(endValue);
+  if(!campaignName || !category || !displayName || !endValue || Number.isNaN(endDate.getTime())){message(proofMessage,'Completa todos los datos de la votación.',true);return;}
+  const campaignKey = slug(campaignName)+'-'+slug(category);
+  const button = $('army-proof-submit');
+  setBusy(button,true,'Guardando capturas…');
+  message(proofMessage,'');
+  try{
+   const upsert = await supabaseClient.from('voting_proof_records').upsert({
+    user_id:currentUser.id,campaign_key:campaignKey,campaign_name:campaignName,
+    category,display_name:displayName,campaign_end_at:endDate.toISOString()
+   },{onConflict:'user_id,campaign_key'}).select().single();
+   if(upsert.error) throw upsert.error;
+   const record = upsert.data;
+   let saved = 0;
+   for(const file of files){
+    const extension = file.name.split('.').pop().toLowerCase();
+    const path = currentUser.id+'/'+record.id+'/'+crypto.randomUUID()+'.'+extension;
+    const upload = await supabaseClient.storage.from('voting-proofs').upload(path,file,{contentType:file.type,upsert:false});
+    if(upload.error) throw upload.error;
+    const insert = await supabaseClient.from('voting_proof_files').insert({
+     record_id:record.id,user_id:currentUser.id,storage_path:path,
+     original_name:file.name,content_type:file.type,file_size:file.size
+    });
+    if(insert.error){
+     await supabaseClient.storage.from('voting-proofs').remove([path]);
+     throw insert.error;
+    }
+    saved++;
+   }
+   proofForm.reset();
+   message(proofMessage,saved+' captura(s) guardada(s) correctamente en tu historial.');
+   await refreshPersonalArea();
+  }catch(error){
+   console.error('Error al guardar capturas:',error);
+   message(proofMessage,error.message || 'No pudimos guardar tus capturas. Intenta de nuevo.',true);
+   await refreshPersonalArea();
+  }finally{setBusy(button,false);}
+ });
+ certificateList.addEventListener('click',event=>{
+  const button = event.target.closest('[data-certificate-id]');
+  if(!button) return;
+  const certificate = certificates.get(button.dataset.certificateId);
+  if(certificate) openCertificate(certificate);
+ });
+ supabaseClient.auth.onAuthStateChange((_event,session)=>{
+  Promise.resolve().then(()=>updateSession(session));
+ });
+ supabaseClient.auth.getSession().then(({data,error})=>{
+  if(error){message(authMessage,'No pudimos comprobar la sesión. Recarga la página.',true);return;}
+  updateSession(data.session);
+ });
+})();
+</script>
+\n</body>
 </html>
