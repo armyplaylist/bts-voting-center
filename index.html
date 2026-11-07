@@ -3524,46 +3524,103 @@ updateResetCountdowns();
 
  };
 
+
  const keys=labels.es;
  const index={es:0,en:1,ko:2,ja:3,pt:4,th:5,ru:6};
- const originals=new WeakMap();let observer=null;
+ const originals=new WeakMap();
+ let observer=null, activeLang='es', translating=false, pending=new Set(), scheduled=false, generation=0;
+ const splitMark='\n|||BTS_VOTING_TRANSLATION_BOUNDARY_8492|||\n';
  function detect(){
   const prefs=[...(navigator.languages||[]),navigator.language||''];
-  for(const pref of prefs){const p=pref.toLowerCase();const lang=p.split('-')[0];if(supported.includes(lang))return lang;
-   const region=(p.split('-')[1]||'').toUpperCase();if(region==='BR')return 'pt';}
-  const region=(new Intl.Locale(navigator.language||'es').region||'').toUpperCase();
-  if(region==='BR')return 'pt';if(region==='KR')return 'ko';if(region==='JP')return 'ja';if(region==='TH')return 'th';if(region==='RU')return 'ru';
+  for(const pref of prefs){const p=(pref||'').toLowerCase(),lang=p.split('-')[0],region=(p.split('-')[1]||'').toUpperCase();if(supported.includes(lang))return lang;if(region==='BR')return 'pt';}
   return 'es';
  }
- function translateNode(node,lang){
-  if(!originals.has(node))originals.set(node,node.nodeValue);
-  let value=originals.get(node);
-  if(lang!=='es'){for(let i=0;i<keys.length;i++){const source=keys[i];if(source&&value.includes(source))value=value.split(source).join(labels[lang][i]);}for(const source of Object.keys(extraTranslations)){if(value.includes(source)){const translated=extraTranslations[source][index[lang]-1];if(translated)value=value.split(source).join(translated);}}}
-  if(node.nodeValue!==value)node.nodeValue=value;
+ function originalOf(node){if(!originals.has(node))originals.set(node,node.nodeValue);return originals.get(node);}
+ function fallbackTranslate(value,lang){
+  if(lang==='es')return value;
+  for(let i=0;i<keys.length;i++){const source=keys[i];if(source&&value.includes(source))value=value.split(source).join(labels[lang][i]);}
+  for(const source of Object.keys(extraTranslations)){if(value.includes(source)){const translated=extraTranslations[source][index[lang]-1];if(translated)value=value.split(source).join(translated);}}
+  return value;
  }
+ function collect(root){
+  const out=[];
+  if(root.nodeType===Node.TEXT_NODE){if(root.nodeValue.trim())out.push(root);}
+  else if(root.nodeType===Node.ELEMENT_NODE&&!/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA|INPUT|OPTION)$/i.test(root.tagName)){
+   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT});
+   let n;while((n=w.nextNode()))out.push(n);
+  }
+  return out;
+ }
+ async function translateBatch(nodes,lang,version){
+  const originalsList=nodes.map(originalOf);
+  if(lang==='es'){nodes.forEach((n,i)=>{n.nodeValue=originalsList[i];});return;}
+  const joined=originalsList.join(splitMark);
+  const url='https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl='+encodeURIComponent(lang)+'&dt=t&q='+encodeURIComponent(joined);
+  try{
+   const response=await fetch(url,{method:'GET',mode:'cors',cache:'force-cache'});
+   if(!response.ok)throw new Error('translation service '+response.status);
+   const data=await response.json();
+   const translated=(data[0]||[]).map(part=>part[0]||'').join('');
+   const pieces=translated.split(splitMark);
+   if(pieces.length!==nodes.length)throw new Error('translation boundary mismatch');
+   if(version!==generation||lang!==activeLang)return;
+   nodes.forEach((n,i)=>{n.nodeValue=pieces[i];});
+  }catch(error){
+   if(version!==generation)return;
+   nodes.forEach((n,i)=>{n.nodeValue=fallbackTranslate(originalsList[i],lang);});
+   document.documentElement.dataset.translationFallback='true';
+  }
+ }
+ async function drain(){
+  if(translating||!pending.size)return;
+  translating=true;const version=generation,lang=activeLang;
+  if(observer)observer.disconnect();
+  try{
+   while(pending.size&&version===generation){
+    const batch=[];let chars=0;
+    for(const node of pending){
+     pending.delete(node);const len=originalOf(node).length;
+     if(batch.length&&chars+len>2600){pending.add(node);break;}
+     batch.push(node);chars+=len;
+     if(batch.length>=18)break;
+    }
+    if(batch.length)await translateBatch(batch,lang,version);
+   }
+  }finally{
+   translating=false;
+   if(observer)observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+   if(pending.size)schedule();
+  }
+ }
+ function schedule(){if(scheduled)return;scheduled=true;Promise.resolve().then(()=>{scheduled=false;drain();});}
  function apply(lang,save){
   if(!supported.includes(lang))lang='es';
+  generation++;activeLang=lang;pending.clear();
   if(observer)observer.disconnect();
-  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
-  let node;while((node=walker.nextNode())){if(node.nodeValue.trim())translateNode(node,lang);}
   document.documentElement.lang=lang;select.value=lang;
-  const current=select.options[select.selectedIndex];select.setAttribute('aria-label','Page language: '+(current?current.text:lang));
+  const current=select.options[select.selectedIndex];select.setAttribute('aria-label',({es:'Idioma de la página',en:'Page language',ko:'페이지 언어',ja:'ページの言語',pt:'Idioma da página',th:'ภาษาของหน้าเว็บ',ru:'Язык страницы'})[lang]);
+  const nodes=collect(document.body);
+  nodes.forEach(n=>{originalOf(n);pending.add(n);});
   if(save){try{localStorage.setItem('bts-voting-language',lang);}catch(e){}}
+  document.documentElement.dataset.translationStatus=lang==='es'?'complete':'translating';
   if(observer)observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+  schedule();
  }
  let saved=null;try{saved=localStorage.getItem('bts-voting-language');}catch(e){}
  apply(supported.includes(saved)?saved:detect(),false);
  select.addEventListener('change',()=>apply(select.value,true));
  observer=new MutationObserver(records=>{
-  const lang=select.value;
-  observer.disconnect();
   for(const record of records){
-   if(record.type==='characterData'&&record.target.nodeType===Node.TEXT_NODE&&record.target.nodeValue.trim()){originals.set(record.target,record.target.nodeValue);translateNode(record.target,lang);}
-   for(const added of record.addedNodes||[]){if(added.nodeType===Node.TEXT_NODE){if(added.nodeValue.trim())translateNode(added,lang);}else if(added.nodeType===Node.ELEMENT_NODE){const w=document.createTreeWalker(added,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode()))if(n.nodeValue.trim())translateNode(n,lang);}}
+   if(record.type==='characterData'&&record.target.nodeType===Node.TEXT_NODE&&record.target.nodeValue.trim()){
+    if(!originals.has(record.target))originals.set(record.target,record.target.nodeValue);
+    pending.add(record.target);
+   }
+   for(const added of record.addedNodes||[])collect(added).forEach(n=>{originalOf(n);pending.add(n);});
   }
-  observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+  if(pending.size)schedule();
  });
  observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+
 })();
 </script>
 </body>
