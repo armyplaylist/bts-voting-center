@@ -3064,6 +3064,19 @@ function updateLocalTimes(){
  });
  updateVoteCountdowns();
 }
+function countdownLocale(){
+ const lang=document.documentElement.lang||'es';
+ const words={
+ es:{count:'Cuenta regresiva:',reset:'Reinicio de votos (00:00 KST):',ended:'El plazo indicado ya terminó.',datePassed:'Fecha indicada: hoy o ya pasó.',pending:'La hora oficial sigue pendiente.',until:'hasta la fecha indicada; hora oficial pendiente.',birthdayStart:'Inicio del cumpleaños en tu hora:',closeLocal:'Cierre en tu hora local:',closeZone:'Cierre en tu zona:',deadlineEnded:'Plazo finalizado.',approx:' · hora orientativa',d:'d',h:'h',min:'min',s:'s'},
+ en:{count:'Countdown:',reset:'Vote reset (00:00 KST):',ended:'The stated deadline has passed.',datePassed:'The stated date is today or has passed.',pending:'The official time is still pending.',until:'until the stated date; official time pending.',birthdayStart:'Birthday starts in your local time:',closeLocal:'Deadline in your local time:',closeZone:'Deadline in your time zone:',deadlineEnded:'Voting period ended.',approx:' · approximate time',d:'d',h:'h',min:'min',s:'s'},
+ ko:{count:'카운트다운:',reset:'투표 초기화 (KST 00:00):',ended:'안내된 마감 시간이 지났습니다.',datePassed:'안내된 날짜가 오늘이거나 지났습니다.',pending:'공식 시간은 아직 미정입니다.',until:'안내된 날짜까지; 공식 시간 미정.',birthdayStart:'현지 시간 기준 생일 시작:',closeLocal:'현지 시간 기준 마감:',closeZone:'시간대 기준 마감:',deadlineEnded:'투표 기간이 종료되었습니다.',approx:' · 예상 시간',d:'일',h:'시간',min:'분',s:'초'},
+ ja:{count:'カウントダウン:',reset:'投票リセット (KST 00:00):',ended:'指定された締切は過ぎました。',datePassed:'指定日は今日または過去の日付です。',pending:'公式時刻は未発表です。',until:'指定日まで（公式時刻は未発表）。',birthdayStart:'現地時間での誕生日開始:',closeLocal:'現地時間での締切:',closeZone:'選択した時間帯での締切:',deadlineEnded:'投票期間は終了しました。',approx:' · 目安の時刻',d:'日',h:'時間',min:'分',s:'秒'},
+ pt:{count:'Contagem regressiva:',reset:'Reinício dos votos (00:00 KST):',ended:'O prazo informado já terminou.',datePassed:'A data indicada é hoje ou já passou.',pending:'O horário oficial ainda não foi divulgado.',until:'até a data indicada; horário oficial pendente.',birthdayStart:'Início do aniversário no seu horário:',closeLocal:'Encerramento no seu horário local:',closeZone:'Encerramento no seu fuso horário:',deadlineEnded:'Período de votação encerrado.',approx:' · horário aproximado',d:'d',h:'h',min:'min',s:'s'},
+ th:{count:'นับถอยหลัง:',reset:'รีเซ็ตการโหวต (00:00 KST):',ended:'หมดเขตตามเวลาที่ระบุแล้ว',datePassed:'วันที่ระบุคือวันนี้หรือผ่านไปแล้ว',pending:'ยังไม่มีการยืนยันเวลาอย่างเป็นทางการ',until:'จนถึงวันที่ระบุ; ยังไม่มีเวลาอย่างเป็นทางการ',birthdayStart:'วันเกิดเริ่มตามเวลาท้องถิ่นของคุณ:',closeLocal:'ปิดโหวตตามเวลาท้องถิ่น:',closeZone:'ปิดโหวตตามเขตเวลาของคุณ:',deadlineEnded:'สิ้นสุดช่วงโหวตแล้ว',approx:' · เวลาโดยประมาณ',d:'วัน',h:'ชม.',min:'นาที',s:'วิ.'},
+ ru:{count:'Обратный отсчёт:',reset:'Сброс голосов (00:00 KST):',ended:'Указанный срок уже истёк.',datePassed:'Указанная дата — сегодня или уже прошла.',pending:'Официальное время ещё не объявлено.',until:'до указанной даты; официальное время не объявлено.',birthdayStart:'Начало дня рождения по вашему времени:',closeLocal:'Окончание по вашему местному времени:',closeZone:'Окончание в вашем часовом поясе:',deadlineEnded:'Голосование завершено.',approx:' · примерное время',d:'д',h:'ч',min:'мин',s:'с'}
+ };
+ return words[lang]||words.es;
+}
 function updateResetCountdowns(){
  const now=new Date();
  const kstDate=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
@@ -3072,7 +3085,7 @@ function updateResetCountdowns(){
  const diff=nextReset.getTime()-now.getTime();
  const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
  document.querySelectorAll('[data-reset-countdown="korea-midnight"]').forEach(el=>{
-  el.innerHTML='<strong>Reinicio de votos (00:00 KST):</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s';
+  const w=countdownLocale();el.innerHTML='<strong>'+w.reset+'</strong> '+days+' '+w.d+' · '+pad(hours)+' '+w.h+' · '+pad(mins)+' '+w.min+' · '+pad(secs)+' '+w.s;
  });
 }
 function updateVoteCountdowns(){
@@ -3082,9 +3095,9 @@ function updateVoteCountdowns(){
   const target=s.instant?new Date(s.instant).getTime():Date.UTC(...s.date.split('-').map((v,i)=>i===1?Number(v)-1:Number(v)));
   const diff=target-now.getTime();
   updateUrgentAlert(el.closest('.vote-card'),diff);
-  if(diff<=0){el.innerHTML=s.instant?'El plazo indicado ya terminó.':'<strong>Fecha indicada: hoy o ya pasó.</strong> La hora oficial sigue pendiente.';return;}
+  const w=countdownLocale();if(diff<=0){el.innerHTML=s.instant?w.ended:'<strong>'+w.datePassed+'</strong> '+w.pending;return;}
   const days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
-  el.innerHTML='<strong>Cuenta regresiva:</strong> '+days+' d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s'+(s.instant?'':' <span>hasta la fecha indicada; hora oficial pendiente.</span>');
+  el.innerHTML='<strong>'+w.count+'</strong> '+days+' '+w.d+' · '+pad(hours)+' '+w.h+' · '+pad(mins)+' '+w.min+' · '+pad(secs)+' '+w.s+(s.instant?'':' <span>'+w.until+'</span>');
  });
 }
 // Alterna copies para que cada apertura del composer de X tenga una frase distinta.
@@ -3303,7 +3316,7 @@ updateResetCountdowns();
    let target=new Date(year+'-'+pad(birthday.month)+'-'+pad(birthday.day)+'T00:00:00+09:00');
    if(target<=now)target=new Date((year+1)+'-'+pad(birthday.month)+'-'+pad(birthday.day)+'T00:00:00+09:00');
    const diff=target-now,days=Math.floor(diff/86400000),hours=Math.floor(diff%86400000/3600000),mins=Math.floor(diff%3600000/60000),secs=Math.floor(diff%60000/1000);
-   el.innerHTML='<strong>'+days+'</strong> d · '+pad(hours)+' h · '+pad(mins)+' min · '+pad(secs)+' s<span class="birthday-countdown-local">Inicio del cumpleaños en tu hora: '+formatLocal(target,zone)+'</span>';
+   const w=countdownLocale();el.innerHTML='<strong>'+days+'</strong> '+w.d+' · '+pad(hours)+' '+w.h+' · '+pad(mins)+' '+w.min+' · '+pad(secs)+' '+w.s+'<span class="birthday-countdown-local">'+w.birthdayStart+' '+formatLocal(target,zone)+'</span>';
   });
  }
  tickBirthdayCountdowns();window.__btsRegisterSecondTick(tickBirthdayCountdowns);
@@ -3321,10 +3334,10 @@ updateResetCountdowns();
    if(!Number.isFinite(target))return;
    updateUrgentAlert(el.closest('.birthday-card'),diff);
    const local=format(new Date(target),localZone);
-   if(diff<=0){el.classList.add('is-ended');el.innerHTML='<strong>Plazo finalizado.</strong><br><span>Cierre en tu zona: '+local+'.</span>';return;}
+   const w=countdownLocale();if(diff<=0){el.classList.add('is-ended');el.innerHTML='<strong>'+w.deadlineEnded+'</strong><br><span>'+w.closeZone+' '+local+'.</span>';return;}
    const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000),m=Math.floor(diff%3600000/60000),sec=Math.floor(diff%60000/1000);
-   const approx=el.dataset.approx==='true'?' · hora orientativa':'';
-   el.innerHTML='<strong>Cuenta regresiva:</strong> '+d+' d · '+pad(h)+' h · '+pad(m)+' min · '+pad(sec)+' s<br><span>Cierre en tu hora local: '+local+approx+'</span>';
+   const approx=el.dataset.approx==='true'?w.approx:'';
+   el.innerHTML='<strong>'+w.count+'</strong> '+d+' '+w.d+' · '+pad(h)+' '+w.h+' · '+pad(m)+' '+w.min+' · '+pad(sec)+' '+w.s+'<br><span>'+w.closeLocal+' '+local+approx+'</span>';
   });
  }
  tick();window.__btsRegisterSecondTick(tick);
