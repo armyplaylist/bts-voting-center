@@ -4041,6 +4041,7 @@ function armyInternalEmail(username){
   select.innerHTML = '<option value="">Selecciona una votación</option>' +
    [...campaignRegistry.values()].map(c=>'<option value="'+escapeHtml(c.campaign_key)+'">'+escapeHtml(c.campaign_name)+'</option>').join('');
   if(previous && campaignRegistry.has(previous)) select.value = previous;
+  addCampaignProofLinks();
   if(!campaignRegistry.size){
    select.innerHTML = '<option value="">No hay votaciones disponibles</option>';
    details.textContent = 'Las votaciones aparecerán aquí cuando estén registradas en la agenda.';
@@ -4055,7 +4056,32 @@ function armyInternalEmail(username){
    : 'Cierre exacto pendiente de confirmación oficial. El comprobante se habilitará cuando se registre.';
   details.innerHTML = '<strong>'+escapeHtml(campaign.category)+'</strong><span>ID de referencia: '+escapeHtml(campaign.reference_id)+'</span><span>'+escapeHtml(closeText)+'</span><small>'+escapeHtml(campaign.closure_note || '')+'</small>';
  }
+ function addCampaignProofLinks(){
+  for(const campaign of campaignRegistry.values()){
+   const countdown = document.querySelector('[data-countdown="'+campaign.campaign_key+'"]');
+   const card = countdown?.closest('.vote-card');
+   if(!card || card.querySelector('[data-army-proof-campaign="'+campaign.campaign_key+'"]')) continue;
+   let actions = card.querySelector('.actions');
+   if(!actions){actions=document.createElement('div');actions.className='actions';card.appendChild(actions);}
+   const button=document.createElement('button');
+   button.type='button';button.className='btn secondary';
+   button.dataset.armyProofCampaign=campaign.campaign_key;
+   button.textContent='SUBIR CAPTURAS';
+   actions.appendChild(button);
+  }
+ }
  $('army-campaign-select').addEventListener('change',updateCampaignDetails);
+ document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-army-proof-campaign]');
+  if(!button) return;
+  const key=button.dataset.armyProofCampaign;
+  if(!campaignRegistry.has(key)) return;
+  $('army-campaign-select').value=key;
+  updateCampaignDetails();
+  const accountLink=document.querySelector('a[href="#army-account"]');
+  if(accountLink) accountLink.click();
+  $('army-account').scrollIntoView({behavior:'smooth',block:'start'});
+ });
 
  async function refreshPersonalArea(){
   if(!currentUser) return;
@@ -4087,7 +4113,7 @@ function armyInternalEmail(username){
     }
     const cards = await Promise.all(records.map(async r=>{
      const files = byRecord.get(r.id) || [];
-     const ended = new Date(r.campaign_end_at).getTime() <= Date.now();
+     const ended = !!r.campaign_end_at && new Date(r.campaign_end_at).getTime() <= Date.now();
      const thumbs = await Promise.all(files.map(async file=>{
       const signed = await supabaseClient.storage.from('voting-proofs').createSignedUrl(file.storage_path,3600);
       if(signed.error || !signed.data?.signedUrl) return '';
@@ -4217,6 +4243,7 @@ function armyInternalEmail(username){
  supabaseClient.auth.onAuthStateChange((_event,session)=>{
   Promise.resolve().then(()=>updateSession(session));
  });
+ loadCampaignRegistry().catch(error=>console.error('No se pudo cargar el registro de votaciones:',error));
  supabaseClient.auth.getSession().then(({data,error})=>{
   if(error){message(authMessage,'No pudimos comprobar la sesión. Recarga la página.',true);return;}
   updateSession(data.session);
