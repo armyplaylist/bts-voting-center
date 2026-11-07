@@ -3527,14 +3527,17 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
  const pad=n=>String(n).padStart(2,'0');
  function tick(){
   const diff=target-Date.now();
-  if(diff<=0){el.textContent='¡Ceremonia en curso!';return;}
+  const lang=window.__btsCountdownI18n.current();
+  const live={es:'¡Ceremonia en curso!',en:'Ceremony in progress!',ko:'시상식 진행 중!',ja:'授賞式開催中！',pt:'Cerimônia em andamento!',th:'กำลังถ่ายทอดพิธี!',ru:'Церемония уже идёт!'};
+  if(diff<=0){el.textContent=live[lang]||live.es;return;}
   const days=Math.floor(diff/86400000);
   const hours=Math.floor(diff%86400000/3600000);
   const mins=Math.floor(diff%3600000/60000);
   const secs=Math.floor(diff%60000/1000);
-  el.textContent=days+'d '+pad(hours)+'h '+pad(mins)+'m '+pad(secs)+'s';
+  const unit={es:['d','h','m','s'],en:['d','h','m','s'],ko:['일','시간','분','초'],ja:['日','時間','分','秒'],pt:['d','h','min','s'],th:['วัน','ชม.','นาที','วิ'],ru:['д','ч','мин','с']}[lang]||['d','h','m','s'];
+  el.textContent=days+unit[0]+' '+pad(hours)+unit[1]+' '+pad(mins)+unit[2]+' '+pad(secs)+unit[3];
  }
- tick();window.__btsRegisterSecondTick(tick);
+ tick();window.addEventListener('bts-language-change',tick);window.__btsRegisterSecondTick(tick);
 })();
 </script>
 
