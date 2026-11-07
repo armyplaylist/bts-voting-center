@@ -3647,8 +3647,8 @@ updateResetCountdowns();
  function collect(root){
   const out=[];
   if(root.nodeType===Node.TEXT_NODE){if(root.nodeValue.trim())out.push(root);}
-  else if(root.nodeType===Node.ELEMENT_NODE&&!/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA|INPUT|OPTION)$/i.test(root.tagName)){
-   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT});
+  else if(root.nodeType===Node.ELEMENT_NODE&&!/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA|INPUT)$/i.test(root.tagName)){
+   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(!n.nodeValue.trim())return NodeFilter.FILTER_REJECT;if(n.parentElement&&n.parentElement.closest('#languageSelect'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});
    let n;while((n=w.nextNode()))out.push(n);
   }
   return out;
@@ -3657,7 +3657,7 @@ updateResetCountdowns();
   const originalsList=nodes.map(originalOf);
   if(lang==='es'){nodes.forEach((n,i)=>{n.nodeValue=originalsList[i];});return;}
   const joined=originalsList.join(splitMark);
-  const url='https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl='+encodeURIComponent(lang)+'&dt=t&q='+encodeURIComponent(joined);
+  const url='https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl='+encodeURIComponent(lang)+'&dt=t&q='+encodeURIComponent(joined);
   try{
    const response=await fetch(url,{method:'GET',mode:'cors',cache:'force-cache'});
    if(!response.ok)throw new Error('translation service '+response.status);
@@ -3671,6 +3671,40 @@ updateResetCountdowns();
    if(version!==generation)return;
    nodes.forEach((n,i)=>{n.nodeValue=fallbackTranslate(originalsList[i],lang);});
    document.documentElement.dataset.translationFallback='true';
+  }
+ }
+
+ const attributeOriginals=new WeakMap();
+ const translatableAttributes=['title','aria-label','placeholder','alt'];
+ async function translateAttributes(root,lang,version){
+  const elements=[];
+  if(root&&root.nodeType===Node.ELEMENT_NODE)elements.push(root);
+  if(root&&root.querySelectorAll)elements.push(...root.querySelectorAll('*'));
+  const jobs=[];
+  for(const el of elements){
+   if(el.closest&&el.closest('#languageSelect'))continue;
+   let savedAttrs=attributeOriginals.get(el);if(!savedAttrs){savedAttrs={};attributeOriginals.set(el,savedAttrs);}
+   for(const attr of translatableAttributes){
+    if(!el.hasAttribute(attr))continue;
+    if(savedAttrs[attr]===undefined)savedAttrs[attr]=el.getAttribute(attr);
+    jobs.push({el,attr,original:savedAttrs[attr]});
+   }
+   if(el.matches&&el.matches('input[type="submit"],input[type="button"]')&&el.hasAttribute('value')){
+    if(savedAttrs.value===undefined)savedAttrs.value=el.getAttribute('value');
+    jobs.push({el,attr:'value',original:savedAttrs.value});
+   }
+  }
+  if(lang==='es'){jobs.forEach(j=>j.el.setAttribute(j.attr,j.original));return;}
+  for(let i=0;i<jobs.length;i+=12){
+   const batch=jobs.slice(i,i+12);if(version!==generation)return;
+   const joined=batch.map(j=>j.original).join(splitMark);
+   try{
+    const url='https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl='+encodeURIComponent(lang)+'&dt=t&q='+encodeURIComponent(joined);
+    const response=await fetch(url,{method:'GET',mode:'cors',cache:'force-cache'});if(!response.ok)continue;
+    const data=await response.json();const pieces=(data[0]||[]).map(part=>part[0]||'').join('').split(splitMark);
+    if(pieces.length!==batch.length||version!==generation)continue;
+    batch.forEach((j,k)=>j.el.setAttribute(j.attr,pieces[k]));
+   }catch(e){}
   }
  }
  async function drain(){
@@ -3703,6 +3737,7 @@ updateResetCountdowns();
   const current=select.options[select.selectedIndex];select.setAttribute('aria-label',({es:'Idioma de la página',en:'Page language',ko:'페이지 언어',ja:'ページの言語',pt:'Idioma da página',th:'ภาษาของหน้าเว็บ',ru:'Язык страницы'})[lang]);
   const nodes=collect(document.body);
   nodes.forEach(n=>{originalOf(n);pending.add(n);});
+  translateAttributes(document.body,lang,generation);
   if(save){try{localStorage.setItem('bts-voting-language',lang);}catch(e){}}
   document.documentElement.dataset.translationStatus=lang==='es'?'complete':'translating';
   if(observer)observer.observe(document.body,{subtree:true,childList:true,characterData:true});
@@ -3717,7 +3752,7 @@ updateResetCountdowns();
     if(!originals.has(record.target))originals.set(record.target,record.target.nodeValue);
     pending.add(record.target);
    }
-   for(const added of record.addedNodes||[])collect(added).forEach(n=>{originalOf(n);pending.add(n);});
+   for(const added of record.addedNodes||[]){collect(added).forEach(n=>{originalOf(n);pending.add(n);});translateAttributes(added,activeLang,generation);}
   }
   if(pending.size)schedule();
  });
