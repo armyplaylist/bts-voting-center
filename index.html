@@ -2698,7 +2698,7 @@ h1,h2,h3,h4,
 </style>
 </head>
 <body><main class="wrap">
-<header class="hero">
+<header class="hero" id="top">
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
  <p>Sumérgete en las votaciones, sigue cada fecha límite y nada junto a ARMY para apoyar a BTS.</p>
@@ -2713,8 +2713,7 @@ h1,h2,h3,h4,
 </header>
 <nav aria-label="Navegación principal"><a href="/">Inicio</a><a href="/votaciones/">Votaciones activas</a><a href="/cumpleanos/">Cumpleaños</a><a href="/recoleccion/">Recolección</a><a href="/proximas/">Próximas</a><a href="/finalizadas/">Finalizadas</a><a href="/guia/">Guía</a><a href="/fuentes/">Fuentes</a></nav>
 <script>
-/* En GitHub Pages, las secciones viven dentro de esta única página.
-   En Vercel se conservan las rutas independientes. */
+/* GitHub Pages publica esta versión como una sola página: enlazamos cada sección por ancla. */
 (function(){
   if(location.hostname !== "armyplaylist.github.io") return;
   var targets = {
@@ -2727,23 +2726,10 @@ h1,h2,h3,h4,
     "/guia/": "#guide",
     "/fuentes/": "#sources"
   };
-  function connectSectionLinks(){
-    document.querySelectorAll('nav[aria-label="Navegación principal"] a').forEach(function(link){
-      var target = targets[link.getAttribute("href")];
-      if(!target) return;
-      link.setAttribute("href", target);
-      link.addEventListener("click", function(event){
-        var section = target === "#top" ? document.querySelector(".hero") : document.querySelector(target);
-        if(!section) return;
-        event.preventDefault();
-        section.scrollIntoView({behavior:"smooth",block:"start"});
-        if(target !== "#top") history.replaceState(null,"",target);
-        else history.replaceState(null,"",location.pathname);
-      });
-    });
-  }
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded",connectSectionLinks);
-  else connectSectionLinks();
+  document.querySelectorAll('nav[aria-label="Navegación principal"] a').forEach(function(link){
+    var target = targets[link.getAttribute("href")];
+    if(target) link.setAttribute("href", target);
+  });
 })();
 </script>
 
