@@ -3217,6 +3217,7 @@ addCalendarReminders();
 updateLocalTimes();
 window.__btsRegisterSecondTick(()=>{updateVoteCountdowns();updateResetCountdowns();});
 updateResetCountdowns();
+window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();updateResetCountdowns();});
 
 
 
