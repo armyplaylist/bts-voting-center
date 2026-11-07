@@ -3389,7 +3389,7 @@ updateResetCountdowns();
  };
  const home=document.getElementById('country-time');
  if(!home)return;
- const path=location.pathname.replace(/\\/+$/,'')||'/';
+ let path=location.pathname;while(path.length>1&&path.endsWith('/'))path=path.slice(0,-1);
  const targetId=routes[path]||'country-time';
  const target=document.getElementById(targetId)||home;
  Object.values(routes).forEach(id=>{
@@ -3397,7 +3397,7 @@ updateResetCountdowns();
   if(panel)panel.hidden=panel!==target;
  });
  document.querySelectorAll('nav a').forEach(link=>{
-  const linkPath=link.getAttribute('href').replace(/\\/+$/,'')||'/';
+  let linkPath=link.getAttribute('href');while(linkPath.length>1&&linkPath.endsWith('/'))linkPath=linkPath.slice(0,-1);
   const active=linkPath===path;
   link.classList.toggle('current-view',active);
   if(active)link.setAttribute('aria-current','page');
