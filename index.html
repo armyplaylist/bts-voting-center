@@ -2690,6 +2690,12 @@ h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-
  h1{font-size:clamp(1.8rem,8vw,2.5rem)}
  .section-head h2{font-size:1.35rem}
 }
+
+/* Iconos de línea para identificar visualmente cada sección */
+.section-head h2{display:flex;align-items:center;gap:10px}
+.section-heading-icon{width:34px;height:34px;flex:0 0 34px;display:inline-flex;align-items:center;justify-content:center;border-radius:11px;background:linear-gradient(145deg,#f0e8ff,#fbe9ee);color:#7650a8;box-shadow:inset 0 0 0 1px #e7d9f5}
+.section-heading-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:600px){.section-heading-icon{width:30px;height:30px;flex-basis:30px;border-radius:10px}.section-heading-icon svg{width:17px;height:17px}}
 </style>
 </head>
 <body><main class="wrap">
@@ -2716,7 +2722,7 @@ h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-
  </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
 
 <section class="panel" id="choeaedol">
- <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.7A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11Z"/><path d="M8 12h8M12 8v8"/></svg></span> RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
  <div class="gda-collection-countdown" id="gdaCollectionCountdown" role="status" aria-live="polite">
   <div class="gda-countdown-heading">⏳ CIERRE DIARIO DE RECOLECCIÓN</div>
   <div class="gda-countdown-time" id="gdaCollectionTimer">--:--:--</div>
@@ -2736,7 +2742,7 @@ h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-
 </section>
 
 <section class="panel" id="active">
- <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5M9 19v2h6v-2"/></svg></span> ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
  <div class="cards" id="voteCards">
   <div class="rule-box mama-certificate-link"><div class="priority-certificate-head"><h4>📩 REGISTRO DE CERTIFICADOS MAMA</h4><span class="priority-tag"><span class="priority-star">★</span> PRIORITARIO</span></div><p>Comparte tus certificados de voto en el tracker comunitario de BTS Voting Org.</p><div class="actions"><a class="btn" href="https://btsvote-mama-voting-tracker.vercel.app/" target="_blank" rel="noopener noreferrer">ENVIAR CERTIFICADOS ↗</a></div></div>
   <article class="vote-card" data-kind="group">
@@ -2805,7 +2811,7 @@ h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-
 </section>
 
 <section class="panel" id="birthday-voting">
- <div class="section-head"><div><h2>🎂 BIRTHDAY VOTING · JIN &amp; V</h2></div><span class="pill live">DICIEMBRE 2026</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 11h16v9H4z"/><path d="M4 15h16M8 11V7a2 2 0 0 1 4 0v4M16 11V7a2 2 0 0 0-4 0"/><path d="M8 4v1M16 4v1"/></svg></span> BIRTHDAY VOTING · JIN &amp; V</h2></div><span class="pill live">DICIEMBRE 2026</span></div>
   <div class="birthday-countdown-heading">PRÓXIMOS CUMPLEAÑOS</div>
   <div class="birthday-countdowns" aria-label="Cuenta regresiva para los cumpleaños de Jin y V">
    <article class="birthday-countdown-card"><div class="birthday-countdown-member">JIN</div><div class="birthday-countdown-date">4 DICIEMBRE</div><div class="birthday-countdown-timer" data-birthday="jin"></div></article>
@@ -2848,7 +2854,7 @@ h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-
 </section>
 
 <section class="panel" id="upcoming">
- <div class="section-head"><div><h2>🗓️ UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"/></svg></span> UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
  <div class="upcoming">
   <article class="vote-card" data-kind="group">
  <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-gda" src="https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png" alt="Logotipo de Golden Disc Awards" loading="lazy" decoding="async">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div>
@@ -2868,7 +2874,7 @@ h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-
 </section>
 
 <section class="panel guide-panel" id="guide">
- <div class="section-head"><div><h2>🗳️ HOW TO SUPPORT BTS</h2><p>Una ruta sencilla para participar con información clara.</p></div><span class="pill">GUÍA RÁPIDA</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5z"/><path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20M8 7h8M8 10h6"/></svg></span> HOW TO SUPPORT BTS</h2><p>Una ruta sencilla para participar con información clara.</p></div><span class="pill">GUÍA RÁPIDA</span></div>
  <div class="guide-steps">
   <article class="guide-step"><span>01</span><div><h3>Elige una votación</h3><p>Abre la tarjeta correspondiente y comprueba que la votación siga dentro de su periodo oficial.</p></div></article>
   <article class="guide-step"><span>02</span><div><h3>Lee las reglas</h3><p>Revisa categorías, límites diarios, requisitos de cuenta y posibles restricciones regionales en la plataforma organizadora.</p></div></article>
@@ -2879,7 +2885,7 @@ h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-
 </section>
 
 <section class="panel" id="sources">
- <div class="section-head"><div><h2>🔗 OFFICIAL SOURCES</h2><p>Accesos directos a las plataformas enlazadas en las fichas de votación.</p></div><span class="pill">VERIFICA ANTES DE VOTAR</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l3-3A5 5 0 0 0 13 2.9l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg></span> OFFICIAL SOURCES</h2><p>Accesos directos a las plataformas enlazadas en las fichas de votación.</p></div><span class="pill">VERIFICA ANTES DE VOTAR</span></div>
  <div class="source-grid">
   <a href="https://kdolmaster.tistory.com/1811" target="_blank" rel="noopener"><strong>KDOL · Cumpleaños diciembre</strong><small>Calendario oficial y reglas de la campaña ↗</small></a>
   <a href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener"><strong>MAMA 2026</strong><small>Mnet Plus · plataforma de votación ↗</small></a>
@@ -2892,7 +2898,7 @@ h1,h2,h3,h4,.hero-title,.section-title,.section-head h2,.vote-card h3,.birthday-
 </section>
 
 <section class="panel" id="completed">
- <div class="section-head"><div><h2>✓ COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
+ <div class="section-head"><div><h2><span class="section-heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></span> COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
  <div class="cards">
 <article class="vote-card" data-kind="birthday">
  <div class="card-top"><h3 class="vote-title">Podoal · December Birthday</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
