@@ -2857,6 +2857,21 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 .army-empty{padding:18px;border:1px dashed #d8cce2;border-radius:15px;color:#897d92;text-align:center;font-size:.8rem;font-weight:700;background:#fff9}
 @media(max-width:700px){.army-work-grid{grid-template-columns:1fr}.army-auth-actions>*{flex:1}}
 @media(prefers-reduced-motion:reduce){.army-primary-btn,.army-secondary-btn{transition:none}}
+
+/* Navegación por secciones independientes y panel inferior fijo */
+.account-orb{position:fixed;top:14px;left:14px;z-index:1001;width:64px;height:64px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;text-decoration:none;background:linear-gradient(145deg,#fff,#eee4ff);border:1px solid #d9c7ef;box-shadow:0 7px 22px #39264f2b;color:#69449c}
+.account-orb span{font-size:1.55rem;line-height:1;font-weight:900}
+.account-orb small{font-size:.58rem;font-weight:900}
+.bottom-sections{position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:1000;width:min(760px,calc(100% - 20px));display:flex;justify-content:flex-start;gap:5px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding:8px;border:1px solid #ffffffeb;border-radius:22px;background:#fffdf9ed;backdrop-filter:blur(18px);box-shadow:0 8px 30px #34204730}
+.bottom-sections::-webkit-scrollbar{display:none}
+.bottom-sections a{flex:1 0 66px;min-width:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px 4px;border-radius:14px;text-decoration:none;color:#78648e;font-size:1.12rem;line-height:1}
+.bottom-sections a small{font-size:.62rem;line-height:1.15;font-weight:900;white-space:nowrap}
+.bottom-sections a.active{background:#eee4ff;color:#633a99}
+body{padding-bottom:92px}
+.panel.section-hidden{display:none!important}
+.panel.section-current{animation:section-arrive .2s ease-out}
+@keyframes section-arrive{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.account-orb{top:10px;left:10px;width:56px;height:56px}.account-orb span{font-size:1.35rem}.account-orb small{font-size:.54rem}.bottom-sections{width:calc(100% - 12px);bottom:max(6px,env(safe-area-inset-bottom));padding:6px;gap:3px;border-radius:18px}.bottom-sections a{flex-basis:61px;min-width:58px;padding:7px 2px}.bottom-sections a small{font-size:.57rem}body{padding-bottom:86px}}
 </style>
 
 </head>
@@ -2874,7 +2889,18 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda ARMY</a><a href="#army-account">Mi espacio</a><a href="#active">Votaciones activas</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
+<a class="account-orb" href="#army-account" aria-label="Mi cuenta" title="Mi cuenta"><span aria-hidden="true">♙</span><small>Mi cuenta</small></a>
+<nav class="bottom-sections" aria-label="Secciones principales">
+<a href="#country-time" data-section-link="country-time"><span aria-hidden="true">⌂</span><small>Inicio</small></a>
+<a href="#agenda" data-section-link="agenda"><span aria-hidden="true">▦</span><small>Agenda</small></a>
+<a href="#active" data-section-link="active"><span aria-hidden="true">♡</span><small>Votaciones</small></a>
+<a href="#birthday-voting" data-section-link="birthday-voting"><span aria-hidden="true">✦</span><small>Cumpleaños</small></a>
+<a href="#choeaedol" data-section-link="choeaedol"><span aria-hidden="true">◉</span><small>Recolección</small></a>
+<a href="#upcoming" data-section-link="upcoming"><span aria-hidden="true">◷</span><small>Próximas</small></a>
+<a href="#completed" data-section-link="completed"><span aria-hidden="true">✓</span><small>Finalizadas</small></a>
+<a href="#guide" data-section-link="guide"><span aria-hidden="true">ⓘ</span><small>Guía</small></a>
+<a href="#sources" data-section-link="sources"><span aria-hidden="true">↗</span><small>Fuentes</small></a>
+</nav>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
@@ -4112,5 +4138,42 @@ function armyInternalEmail(username){
 })();
 </script>
 
+
+<script>
+(function(){
+ const sectionIds=['country-time','agenda','army-account','active','birthday-voting','choeaedol','upcoming','completed','guide','sources'];
+ const sections=sectionIds.map(id=>document.getElementById(id)).filter(Boolean);
+ const nav=document.querySelector('.bottom-sections');
+ const links=nav?Array.from(nav.querySelectorAll('[data-section-link]')):[];
+ function showSection(id,updateHash){
+  if(!sectionIds.includes(id)||!document.getElementById(id)) id='country-time';
+  sections.forEach(section=>{
+   const current=section.id===id;
+   section.classList.toggle('section-current',current);
+   section.classList.toggle('section-hidden',!current);
+   section.setAttribute('aria-hidden',current?'false':'true');
+  });
+  links.forEach(link=>{
+   const current=link.dataset.sectionLink===id;
+   link.classList.toggle('active',current);
+   if(current) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
+  });
+  if(updateHash && location.hash!=='#'+id) history.replaceState(null,'','#'+id);
+  window.scrollTo({top:0,behavior:'instant'});
+ }
+ function routeFromHash(){showSection(decodeURIComponent(location.hash.slice(1)),false);}
+ document.addEventListener('click',event=>{
+  const anchor=event.target.closest('a[href^="#"]');
+  if(!anchor)return;
+  const id=decodeURIComponent(anchor.getAttribute('href').slice(1));
+  if(!sectionIds.includes(id))return;
+  event.preventDefault();
+  showSection(id,true);
+ });
+ window.addEventListener('hashchange',routeFromHash);
+ const initial=decodeURIComponent(location.hash.slice(1));
+ showSection(sectionIds.includes(initial)?initial:'country-time',!sectionIds.includes(initial));
+})();
+</script>
 </body>
 </html>
