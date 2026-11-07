@@ -1,0 +1,32 @@
+{
+  "rewrites": [
+    {
+      "source": "/votaciones/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cumpleanos/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/recoleccion/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/proximas/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/finalizadas/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guia/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/fuentes/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
