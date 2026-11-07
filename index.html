@@ -2617,6 +2617,16 @@ body.dark-mode .vote-importance summary{color:#d9c4f0}
 body.dark-mode .vote-importance-body{color:#c7bbd1}
 body.dark-mode .vote-importance-body strong{color:#eadbfa}
 
+
+/* Navegación por secciones: mostrar un contenido a la vez */
+body.section-mode main.wrap>section.panel.section-inactive{display:none!important}
+body.section-mode main.wrap>section.panel.section-active{display:block!important}
+body.section-mode header.hero.section-away{display:none!important}
+body.section-mode main.wrap>nav[aria-label="Navegación principal"]{position:sticky;top:0;z-index:50;background:var(--page-bg,#fff);padding:10px 0;overflow-x:auto;white-space:nowrap}
+body.section-mode main.wrap>nav[aria-label="Navegación principal"] a{display:inline-flex;margin:3px 5px;padding:9px 13px;border-radius:22px;text-decoration:none}
+body.section-mode main.wrap>nav[aria-label="Navegación principal"] a.active{background:#eee4ff;color:#68449c;font-weight:800}
+body.section-mode main.wrap>section.panel.section-active{min-height:55vh}
+
 </style>
 
 <script>
@@ -2956,7 +2966,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
   </div>
  </div>
 </section>
-\n<section class="panel" id="choeaedol">
+<section class="panel" id="choeaedol">
  <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
  <div class="gda-collection-countdown" id="gdaCollectionCountdown" role="status" aria-live="polite">
   <div class="gda-countdown-heading">⏳ CIERRE DIARIO DE RECOLECCIÓN</div>
@@ -4109,6 +4119,29 @@ function armyInternalEmail(username){
   if(error){message(authMessage,'No pudimos comprobar la sesión. Recarga la página.',true);return;}
   updateSession(data.session);
  });
+})();
+</script>
+
+
+<script>
+(function(){
+ const ids=['country-time','agenda','army-account','active','birthday-voting','choeaedol','upcoming','completed','guide','sources'];
+ const nav=document.querySelector('main.wrap>nav[aria-label="Navegación principal"]');
+ const hero=document.querySelector('header.hero');
+ const panels=ids.map(id=>document.getElementById(id)).filter(Boolean);
+ if(!nav||!panels.length)return;
+ document.body.classList.add('section-mode');
+ function show(id,write){
+  if(!ids.includes(id)||!document.getElementById(id))id='country-time';
+  panels.forEach(p=>{const on=p.id===id;p.classList.toggle('section-active',on);p.classList.toggle('section-inactive',!on);p.setAttribute('aria-hidden',on?'false':'true');});
+  nav.querySelectorAll('a[href^="#"]').forEach(a=>{const on=a.getAttribute('href')==='#'+id;a.classList.toggle('active',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  if(hero)hero.classList.toggle('section-away',id!=='country-time');
+  if(write&&location.hash!=='#'+id)history.replaceState(null,'','#'+id);
+  window.scrollTo({top:0,behavior:'instant'});
+ }
+ nav.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1);if(!ids.includes(id))return;e.preventDefault();show(id,true);});
+ window.addEventListener('hashchange',()=>show(decodeURIComponent(location.hash.slice(1)),false));
+ show(decodeURIComponent(location.hash.slice(1))||'country-time',false);
 })();
 </script>
 
