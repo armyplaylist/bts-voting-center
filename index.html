@@ -2883,7 +2883,7 @@ body{padding-bottom:92px}
 .army-avatar-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .army-profile-details>small{color:#82758d;font-size:.7rem;font-weight:700}
 @media(max-width:600px){.army-profile-card{gap:12px}.army-profile-avatar-wrap{width:84px;height:84px;flex-basis:84px}.army-profile-card>#army-logout{width:100%}}
-</style>
+.account-orb #army-account-orb-avatar{width:37px;height:37px;border-radius:50%;object-fit:cover;border:2px solid #d9c7ef}.account-orb #army-account-orb-icon{font-size:1.35rem;line-height:1}</style>
 
 </head>
 <body><main class="wrap">
@@ -2900,7 +2900,7 @@ body{padding-bottom:92px}
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<a class="account-orb" href="#army-account" aria-label="Mi cuenta" title="Mi cuenta"><span aria-hidden="true">♙</span><small>Mi cuenta</small></a>
+<a class="account-orb" href="#army-account" aria-label="Mi cuenta" title="Mi cuenta"><img id="army-account-orb-avatar" alt="" hidden><span id="army-account-orb-icon" aria-hidden="true">♙</span><small>Mi cuenta</small></a>
 <nav class="bottom-sections" aria-label="Secciones principales">
 <a href="#country-time" data-section-link="country-time"><span aria-hidden="true">⌂</span><small>Inicio</small></a>
 <a href="#agenda" data-section-link="agenda"><span aria-hidden="true">▦</span><small>Agenda</small></a>
@@ -3998,7 +3998,8 @@ async function loadAvatar(){
   const signed=await supabaseClient.storage.from('army-profile-photos').createSignedUrl(result.data.avatar_path,3600);
   if(signed.error)throw signed.error;
   img.src=signed.data.signedUrl;img.hidden=false;placeholder.hidden=true;
- }else{img.removeAttribute('src');img.hidden=true;placeholder.hidden=false;}
+  const orb=$('army-account-orb-avatar'),orbIcon=$('army-account-orb-icon');if(orb){orb.src=signed.data.signedUrl;orb.hidden=false;orbIcon.hidden=true;}
+ }else{img.removeAttribute('src');img.hidden=true;placeholder.hidden=false;const orb=$('army-account-orb-avatar'),orbIcon=$('army-account-orb-icon');if(orb){orb.removeAttribute('src');orb.hidden=true;orbIcon.hidden=false;}}
 }
 async function updateSession(session){
  currentUser=session?.user||null;
