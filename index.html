@@ -2704,6 +2704,20 @@ body.dark-mode .twitter-rail-card p,body.dark-mode .twitter-rail-note{color:#c0b
  body{padding-bottom:0!important}
 }
 
+
+@media(max-width:700px){
+ nav.twitter-sidebar>.nav-more-toggle{display:flex!important;flex:1 1 0!important;min-width:0!important;width:auto!important;height:50px!important;min-height:50px!important;max-height:50px!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;padding:4px 1px!important;border:0!important;border-radius:10px!important;background:transparent!important;color:#352b40!important;font:inherit!important}
+ nav.twitter-sidebar>.nav-more-toggle span{font-size:1.25rem!important;line-height:1!important}
+ nav.twitter-sidebar>.nav-more-toggle small{font-size:.58rem!important;white-space:nowrap!important}
+ .nav-more-panel{position:fixed!important;z-index:1199!important;left:10px!important;right:10px!important;bottom:calc(70px + env(safe-area-inset-bottom))!important;transform:none!important;width:auto!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;padding:10px!important;border:1px solid #e7e0ed!important;border-radius:17px!important;background:#fff!important;box-shadow:0 8px 28px #34204730!important}
+ .nav-more-panel[hidden]{display:none!important}
+ .nav-more-panel a{display:flex!important;min-width:0!important;min-height:58px!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;padding:5px!important;border-radius:11px!important;color:#5f4779!important;text-decoration:none!important}
+ .nav-more-panel a span{font-size:1.2rem!important;line-height:1!important}
+ .nav-more-panel a small{font-size:.65rem!important;font-weight:800!important;text-align:center!important}
+ body.dark-mode .nav-more-panel{background:#241e2c!important;border-color:#3b3047!important}
+ body.dark-mode .nav-more-panel a{color:#e6d7f5!important}
+}
+
 </style>
 
 <script>
@@ -3018,8 +3032,16 @@ body{padding-bottom:104px!important}
 <a href="#guide" data-section-link="guide"><span aria-hidden="true">ⓘ</span><small>Guía</small></a>
 <a href="#sources" data-section-link="sources"><span aria-hidden="true">↗</span><small>Fuentes</small></a>
 <a class="twitter-account-link" href="#army-account" data-section-link="army-account"><span aria-hidden="true">♙</span><small>Mi cuenta</small></a>
+<button type="button" class="nav-more-toggle" aria-expanded="false" aria-controls="nav-more-panel"><span aria-hidden="true">•••</span><small>Más</small></button>
 </nav>
-<div class="nav-more-panel" id="nav-more-panel" hidden></div>
+<div class="nav-more-panel" id="nav-more-panel" hidden>
+<a href="#choeaedol" data-section-link="choeaedol"><span>◉</span><small>Recolección</small></a>
+<a href="#upcoming" data-section-link="upcoming"><span>◷</span><small>Próximas</small></a>
+<a href="#completed" data-section-link="completed"><span>✓</span><small>Finalizadas</small></a>
+<a href="#guide" data-section-link="guide"><span>ⓘ</span><small>Guía</small></a>
+<a href="#sources" data-section-link="sources"><span>↗</span><small>Fuentes</small></a>
+<a href="#army-account" data-section-link="army-account"><span>♙</span><small>Mi cuenta</small></a>
+</div>
 <aside class="twitter-right-rail" aria-label="Información complementaria">
   <div class="twitter-rail-card"><h3>ARMY, mantente al día</h3><p>Consulta las votaciones activas, revisa sus fechas límite y vuelve a las fuentes oficiales antes de participar.</p><a href="#active" data-section-link="active">Ver votaciones activas →</a></div>
   <div class="twitter-rail-card"><h3>Accesos rápidos</h3><a href="#agenda" data-section-link="agenda">Agenda ARMY</a><a href="#upcoming" data-section-link="upcoming">Próximas votaciones</a><a href="#guide" data-section-link="guide">Guía de votación</a><a href="#sources" data-section-link="sources">Fuentes oficiales</a></div>
