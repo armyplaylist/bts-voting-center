@@ -2611,7 +2611,7 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#f
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<nav aria-label="Navegación"><a href="#country-time">Inicio</a><a href="#choeaedol">Recolección</a><a href="#active">Votaciones</a><a href="#completed">Finalizadas</a><a href="#birthday-voting">Cumpleaños</a><a href="#guide">Guía</a><a href="#upcoming">Próximas</a><a href="#sources">Fuentes</a></nav>
+<nav aria-label="Navegación"><a href="#country-time">Inicio</a><a href="#choeaedol">Recolección</a><a href="#active">Votaciones</a><a href="#birthday-voting">Cumpleaños</a><a href="#upcoming">Próximas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a><a href="#completed">Finalizadas</a></nav>
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2>🌍 SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
   <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
@@ -2620,6 +2620,24 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#f
   <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
  </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
 
+<section class="panel" id="choeaedol">
+ <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
+ <div class="gda-collection-countdown" id="gdaCollectionCountdown" role="status" aria-live="polite">
+  <div class="gda-countdown-heading">⏳ CIERRE DIARIO DE RECOLECCIÓN</div>
+  <div class="gda-countdown-time" id="gdaCollectionTimer">--:--:--</div>
+  <div class="gda-countdown-status" id="gdaCollectionStatus">Calculando horario KST…</div>
+  <p>23:30–00:00 KST · Recuento de la app</p>
+ </div>
+ <div class="gda-collection-alert"><strong>🏆 ETAPA DE RECOLECCIÓN · GOLDEN DISC AWARDS</strong><p>Estamos reuniendo Ever Hearts para prepararnos para los GDA. Por eso, durante esta etapa dejamos los corazones recibidos en las publicaciones indicadas por las fanbases: cada 100 ❤️ corazones votados en esos posts nos da 10 ❤️ Ever Hearts permanentes.</p><p>📺 También puedes ver los videos que quieras para recolectar más Ever Hearts. ¡Cada aporte nos ayuda a preparar el apoyo a BTS!</p></div>
+ <div class="guide-steps">
+  <article class="guide-step"><span>👥</span><div><h3>¡Consigue 300 amigos!</h3><p>Hagamos crecer nuestra lista y apoyémonos entre ARMY.</p></div></article>
+  <article class="guide-step"><span>💌</span><div><h3>Intercambia corazones con tus amigos</h3><p>Envía corazones diarios a tus amigos y recibe corazones de ellos. Así reúnes corazones diarios para participar en las misiones.</p></div></article>
+  <article class="guide-step"><span>🗳️</span><div><h3>Vota en los posts de las fanbases</h3><p>Los corazones que recibes de tus amigos debes usarlos para votar en las publicaciones indicadas por las fanbases. Por cada 100 ❤️ corazones que votes en esos posts, recibes 10 ❤️ Ever Hearts (votos permanentes).</p></div></article>
+  <article class="guide-step"><span>📺</span><div><h3>Mira los videos que quieras</h3><p>Reproduce los videos disponibles para recolectar Ever Hearts y seguir reuniendo votos permanentes. Puedes elegir los que quieras ver.</p></div></article>
+ </div>
+ <div class="note"><strong>Recuerda:</strong> primero intercambias corazones con tus amigos; después, los corazones que recibes los utilizas para votar en los posts de las fanbases. Cada 100 ❤️ corazones votados en esos posts te dan 10 Ever Hearts permanentes.</div>
+ <div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">CHOEAEDOL · ANDROID ↗</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">CHOEAEDOL · iOS ↗</a></div>
+</section>
 
 <section class="panel" id="active">
  <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
@@ -2684,61 +2702,6 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#f
  
 </section>
 
-<section class="panel" id="completed">
- <div class="section-head"><div><h2>✓ COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
- <div class="cards">
-<article class="vote-card" data-kind="birthday">
- <div class="card-top"><h3 class="vote-title">Podoal · December Birthday</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
- <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span>
- <div class="ranking-line"><b>🏆 RESULTADO FINAL</b><span>V #1 · Jin #2</span></div>
- <p class="field-value"><strong>Resultados:</strong> V terminó en primer lugar y Jin en segundo lugar.</p>
- <div class="local-vote-time"><strong>Estado:</strong> Finalizada · 5 de noviembre de 2026 · 16:59 KST.</div>
- <div class="actions"><a class="btn secondary" href="https://global.podoal.io/app/fandings/670" target="_blank" rel="noopener">CONSULTAR PODOAL ↗</a></div>
-</article>
-<article class="vote-card" data-kind="birthday">
- <div class="card-top"><h3 class="vote-title">UPICK · December Birthday Idol Vote</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
- <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span>
- <div class="local-vote-time"><strong>Estado:</strong> Finalizada · 6 de noviembre de 2026 · 15:00 KST.</div>
- <p class="field-value">El plazo de participación terminó. El resultado final no está publicado en el centro; consulta la plataforma oficial para verificarlo.</p>
- <div class="actions"><a class="btn secondary" href="https://s.u-pick.io/dl/1qboCV4sdeuWoWcUkWTz6n" target="_blank" rel="noopener">CONSULTAR UPICK ↗</a></div>
-</article>
-<article class="vote-card" data-kind="birthday">
- <div class="card-top"><h3 class="vote-title">Giftifan · Brightest Star of December</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
- <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span>
- <div class="local-vote-time"><strong>Estado:</strong> Finalizada · 6 de noviembre de 2026 · 09:00 KST.</div>
- <p class="field-value">El plazo de participación terminó. El resultado final no está publicado en el centro; consulta la plataforma oficial para verificarlo.</p>
- <div class="actions"><a class="btn secondary" href="https://giftifan.page.link/ghth" target="_blank" rel="noopener">CONSULTAR GIFTIFAN ↗</a></div>
-</article>
-
-<article class="vote-card" data-kind="group">
- <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-aaa" src="https://media.nownews.com/nn_media/thumbnail/2026/05/1778832777652-d5ea2437c1db4e37965c3ee01196b765-825x481.webp?unShow=false" alt="Logotipo de Asia Artist Awards" loading="lazy" decoding="async">Asia Artist Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
- <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span><div class="ranking-line"><b>🏆 RESULTADO FINAL</b><span>#2 · BTS · Segundo lugar</span></div><p class="field-value"><strong>Resultado:</strong> BTS terminó en segundo lugar. Votación cerrada; no se aceptan más votos.</p><div class="local-vote-time"><strong>Estado:</strong> Finalizada · 4 de noviembre de 2026.</div>
- <h4>Categorías y nominaciones de BTS</h4><p class="field-value">AAA Popularity Award · Grupo masculino · BTS</p>
-
-</article>
- </div>
-</section>
-
-<section class="panel" id="upcoming">
- <div class="section-head"><div><h2>🗓️ UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
- <div class="upcoming">
-  <article class="vote-card" data-kind="group">
- <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-gda" src="https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png" alt="Logotipo de Golden Disc Awards" loading="lazy" decoding="async">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div>
- <div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking · votación de popularidad pendiente</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
- <div class="countdown vote-countdown" data-countdown="gda">Calculando cuenta regresiva…</div>
- <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Golden Disc CHOEAEDOL Popularity Award · Nominaciones de BTS: pendientes de anuncio a principios de diciembre.</p>
- <h4>Cómo recolectar y usar tus corazones</h4>
- <div class="field-value choeaedol-heart-guide">
-  <p>❤️ <strong>Recolecta Daily Hearts:</strong> inicia sesión cada día, reclama la asistencia y las recompensas, abre Heart Box en las publicaciones, mira anuncios y completa misiones gratuitas.</p>
-  <p>❤️ <strong>Daily Hearts:</strong> úsalos antes de las 23:30 KST, porque caducan diariamente.</p>
-  <p>❤️ <strong>Ever Hearts:</strong> se conservan y no caducan.</p>
-  <p>❤️ <strong>Cuando abra la votación:</strong> entra a Golden Disc → Popularity Award, selecciona BTS si aparece entre los nominados y utiliza tus corazones en BTS como grupo. Los corazones enviados a miembros individuales no cuentan para el total grupal.</p>
- </div>
- <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">APP CHOEAEDOL · ANDROID</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">APP CHOEAEDOL · iOS</a><a class="btn secondary" href="https://www.myloveidol.com/goldendisc/es/" target="_blank" rel="noopener">INFO OFICIAL GDA</a></div>
-</article>
- </div>
-</section>
-
 <section class="panel" id="birthday-voting">
  <div class="section-head"><div><h2>🎂 BIRTHDAY VOTING · JIN &amp; V</h2></div><span class="pill live">DICIEMBRE 2026</span></div>
   <div class="birthday-countdown-heading">PRÓXIMOS CUMPLEAÑOS</div>
@@ -2782,23 +2745,24 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#f
  <p class="note">Las cuentas regresivas muestran la hora local que elegiste al inicio. Los horarios aproximados se indican como orientativos.</p>
 </section>
 
-<section class="panel" id="choeaedol">
- <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
- <div class="gda-collection-countdown" id="gdaCollectionCountdown" role="status" aria-live="polite">
-  <div class="gda-countdown-heading">⏳ CIERRE DIARIO DE RECOLECCIÓN</div>
-  <div class="gda-countdown-time" id="gdaCollectionTimer">--:--:--</div>
-  <div class="gda-countdown-status" id="gdaCollectionStatus">Calculando horario KST…</div>
-  <p>23:30–00:00 KST · Recuento de la app</p>
+<section class="panel" id="upcoming">
+ <div class="section-head"><div><h2>🗓️ UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
+ <div class="upcoming">
+  <article class="vote-card" data-kind="group">
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-gda" src="https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png" alt="Logotipo de Golden Disc Awards" loading="lazy" decoding="async">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div>
+ <div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking · votación de popularidad pendiente</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
+ <div class="countdown vote-countdown" data-countdown="gda">Calculando cuenta regresiva…</div>
+ <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Golden Disc CHOEAEDOL Popularity Award · Nominaciones de BTS: pendientes de anuncio a principios de diciembre.</p>
+ <h4>Cómo recolectar y usar tus corazones</h4>
+ <div class="field-value choeaedol-heart-guide">
+  <p>❤️ <strong>Recolecta Daily Hearts:</strong> inicia sesión cada día, reclama la asistencia y las recompensas, abre Heart Box en las publicaciones, mira anuncios y completa misiones gratuitas.</p>
+  <p>❤️ <strong>Daily Hearts:</strong> úsalos antes de las 23:30 KST, porque caducan diariamente.</p>
+  <p>❤️ <strong>Ever Hearts:</strong> se conservan y no caducan.</p>
+  <p>❤️ <strong>Cuando abra la votación:</strong> entra a Golden Disc → Popularity Award, selecciona BTS si aparece entre los nominados y utiliza tus corazones en BTS como grupo. Los corazones enviados a miembros individuales no cuentan para el total grupal.</p>
  </div>
- <div class="gda-collection-alert"><strong>🏆 ETAPA DE RECOLECCIÓN · GOLDEN DISC AWARDS</strong><p>Estamos reuniendo Ever Hearts para prepararnos para los GDA. Por eso, durante esta etapa dejamos los corazones recibidos en las publicaciones indicadas por las fanbases: cada 100 ❤️ corazones votados en esos posts nos da 10 ❤️ Ever Hearts permanentes.</p><p>📺 También puedes ver los videos que quieras para recolectar más Ever Hearts. ¡Cada aporte nos ayuda a preparar el apoyo a BTS!</p></div>
- <div class="guide-steps">
-  <article class="guide-step"><span>👥</span><div><h3>¡Consigue 300 amigos!</h3><p>Hagamos crecer nuestra lista y apoyémonos entre ARMY.</p></div></article>
-  <article class="guide-step"><span>💌</span><div><h3>Intercambia corazones con tus amigos</h3><p>Envía corazones diarios a tus amigos y recibe corazones de ellos. Así reúnes corazones diarios para participar en las misiones.</p></div></article>
-  <article class="guide-step"><span>🗳️</span><div><h3>Vota en los posts de las fanbases</h3><p>Los corazones que recibes de tus amigos debes usarlos para votar en las publicaciones indicadas por las fanbases. Por cada 100 ❤️ corazones que votes en esos posts, recibes 10 ❤️ Ever Hearts (votos permanentes).</p></div></article>
-  <article class="guide-step"><span>📺</span><div><h3>Mira los videos que quieras</h3><p>Reproduce los videos disponibles para recolectar Ever Hearts y seguir reuniendo votos permanentes. Puedes elegir los que quieras ver.</p></div></article>
+ <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">APP CHOEAEDOL · ANDROID</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">APP CHOEAEDOL · iOS</a><a class="btn secondary" href="https://www.myloveidol.com/goldendisc/es/" target="_blank" rel="noopener">INFO OFICIAL GDA</a></div>
+</article>
  </div>
- <div class="note"><strong>Recuerda:</strong> primero intercambias corazones con tus amigos; después, los corazones que recibes los utilizas para votar en los posts de las fanbases. Cada 100 ❤️ corazones votados en esos posts te dan 10 Ever Hearts permanentes.</div>
- <div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">CHOEAEDOL · ANDROID ↗</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">CHOEAEDOL · iOS ↗</a></div>
 </section>
 
 <section class="panel guide-panel" id="guide">
@@ -2822,6 +2786,41 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#f
   <a href="https://kca.nick.tv/vote/favorite-music-group-or-duo" target="_blank" rel="noopener"><strong>Kids' Choice Awards</strong><small>Nickelodeon · boleta de votación ↗</small></a>
   <a href="https://www.asiaartistawards.com/es/vote?board=artist_group_male" target="_blank" rel="noopener"><strong>Asia Artist Awards</strong><small>AAA · página de votación ↗</small></a>
   <a href="https://www.myloveidol.com/goldendisc/es/" target="_blank" rel="noopener"><strong>Golden Disc Awards</strong><small>CHOEAEDOL / información GDA ↗</small></a>
+ </div>
+</section>
+
+<section class="panel" id="completed">
+ <div class="section-head"><div><h2>✓ COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
+ <div class="cards">
+<article class="vote-card" data-kind="birthday">
+ <div class="card-top"><h3 class="vote-title">Podoal · December Birthday</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
+ <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span>
+ <div class="ranking-line"><b>🏆 RESULTADO FINAL</b><span>V #1 · Jin #2</span></div>
+ <p class="field-value"><strong>Resultados:</strong> V terminó en primer lugar y Jin en segundo lugar.</p>
+ <div class="local-vote-time"><strong>Estado:</strong> Finalizada · 5 de noviembre de 2026 · 16:59 KST.</div>
+ <div class="actions"><a class="btn secondary" href="https://global.podoal.io/app/fandings/670" target="_blank" rel="noopener">CONSULTAR PODOAL ↗</a></div>
+</article>
+<article class="vote-card" data-kind="birthday">
+ <div class="card-top"><h3 class="vote-title">UPICK · December Birthday Idol Vote</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
+ <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span>
+ <div class="local-vote-time"><strong>Estado:</strong> Finalizada · 6 de noviembre de 2026 · 15:00 KST.</div>
+ <p class="field-value">El plazo de participación terminó. El resultado final no está publicado en el centro; consulta la plataforma oficial para verificarlo.</p>
+ <div class="actions"><a class="btn secondary" href="https://s.u-pick.io/dl/1qboCV4sdeuWoWcUkWTz6n" target="_blank" rel="noopener">CONSULTAR UPICK ↗</a></div>
+</article>
+<article class="vote-card" data-kind="birthday">
+ <div class="card-top"><h3 class="vote-title">Giftifan · Brightest Star of December</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
+ <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span>
+ <div class="local-vote-time"><strong>Estado:</strong> Finalizada · 6 de noviembre de 2026 · 09:00 KST.</div>
+ <p class="field-value">El plazo de participación terminó. El resultado final no está publicado en el centro; consulta la plataforma oficial para verificarlo.</p>
+ <div class="actions"><a class="btn secondary" href="https://giftifan.page.link/ghth" target="_blank" rel="noopener">CONSULTAR GIFTIFAN ↗</a></div>
+</article>
+
+<article class="vote-card" data-kind="group">
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-aaa" src="https://media.nownews.com/nn_media/thumbnail/2026/05/1778832777652-d5ea2437c1db4e37965c3ee01196b765-825x481.webp?unShow=false" alt="Logotipo de Asia Artist Awards" loading="lazy" decoding="async">Asia Artist Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
+ <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span><div class="ranking-line"><b>🏆 RESULTADO FINAL</b><span>#2 · BTS · Segundo lugar</span></div><p class="field-value"><strong>Resultado:</strong> BTS terminó en segundo lugar. Votación cerrada; no se aceptan más votos.</p><div class="local-vote-time"><strong>Estado:</strong> Finalizada · 4 de noviembre de 2026.</div>
+ <h4>Categorías y nominaciones de BTS</h4><p class="field-value">AAA Popularity Award · Grupo masculino · BTS</p>
+
+</article>
  </div>
 </section>
 
