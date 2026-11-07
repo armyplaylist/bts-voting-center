@@ -2617,6 +2617,40 @@ body.dark-mode .vote-importance summary{color:#d9c4f0}
 body.dark-mode .vote-importance-body{color:#c7bbd1}
 body.dark-mode .vote-importance-body strong{color:#eadbfa}
 
+
+/* FIX DEFINITIVO: dock inferior compacto, nunca ocupa la altura de la pantalla */
+nav.bottom-sections{
+  box-sizing:border-box!important;
+  height:76px!important;
+  min-height:76px!important;
+  max-height:76px!important;
+  align-content:center!important;
+  align-items:center!important;
+  grid-auto-rows:minmax(0,1fr)!important;
+  padding:6px!important;
+  overflow:hidden!important;
+}
+nav.bottom-sections>a,
+nav.bottom-sections>.nav-more-toggle{
+  box-sizing:border-box!important;
+  height:60px!important;
+  min-height:60px!important;
+  max-height:60px!important;
+  align-self:center!important;
+  justify-self:stretch!important;
+  margin:0!important;
+  padding:5px 2px!important;
+  line-height:1!important;
+}
+nav.bottom-sections>a>span,
+nav.bottom-sections>.nav-more-toggle>span{display:block!important;flex:0 0 auto!important}
+nav.bottom-sections>a>small,
+nav.bottom-sections>.nav-more-toggle>small{display:block!important;flex:0 0 auto!important}
+@media(max-width:600px){
+  nav.bottom-sections{height:72px!important;min-height:72px!important;max-height:72px!important;width:calc(100% - 24px)!important;bottom:max(8px,env(safe-area-inset-bottom))!important}
+  nav.bottom-sections>a,nav.bottom-sections>.nav-more-toggle{height:58px!important;min-height:58px!important;max-height:58px!important}
+}
+
 </style>
 
 <script>
