@@ -2686,6 +2686,81 @@ body.section-mode main.wrap>header.hero.section-away{display:none!important}
  .app-bottom-nav a{font-size:.72rem}
 }
 
+
+/* Rediseño real de interfaz tipo app móvil */
+:root{--vc-purple:#6840b5;--vc-deep:#4e2c91;--vc-lilac:#eee5ff;--vc-soft:#f7f1ff;--vc-ink:#281b3d;--vc-muted:#77688d}
+body{background:linear-gradient(150deg,#f5efff 0%,#eee4fb 55%,#f8f2ff 100%);color:var(--vc-ink);font-family:'DM Sans',Arial,sans-serif}
+main.wrap{width:min(980px,calc(100% - 22px));padding:8px 0 112px}
+header.hero{display:none!important}
+.app-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 4px 14px}
+.app-topbar>a{width:42px;height:42px;flex:0 0 42px;border-radius:50%;display:grid;place-items:center;text-decoration:none;background:#fff;color:#6840b5;box-shadow:0 4px 14px #6840b51c;font-size:20px}
+.app-topbar .app-brand{text-align:center;flex:1;font-family:'Poppins','DM Sans',sans-serif;font-weight:900;font-size:1.35rem;color:#6840b5;line-height:1.05}
+.app-topbar .app-brand small{display:block;font-size:.61rem;letter-spacing:.1em}
+.legacy-section-nav{display:none!important}
+.panel{border:1px solid #fff;border-radius:25px;background:#ffffffdf;box-shadow:0 8px 26px #54377b10;backdrop-filter:blur(14px);padding:18px;margin:8px 0}
+.panel[hidden]{display:none!important}
+.section-head{margin-bottom:16px}
+.section-head h2{font-family:'Poppins','DM Sans',sans-serif;font-size:1.12rem;color:#382151}
+.section-head p{color:var(--vc-muted)}
+.vc-home-welcome{position:relative;overflow:hidden;min-height:180px;padding:20px 19px;margin:-18px -18px 17px;border-radius:24px 24px 20px 20px;background:linear-gradient(135deg,#c8b0f0,#a78add 54%,#7a51be);color:white}
+.vc-home-welcome:before,.vc-home-welcome:after{content:"";position:absolute;border-radius:50%;background:#ffffff20}
+.vc-home-welcome:before{width:210px;height:210px;right:-60px;top:-100px}
+.vc-home-welcome:after{width:130px;height:130px;right:65px;bottom:-95px}
+.vc-home-copy{position:relative;z-index:1}
+.vc-kicker{font-size:.62rem;font-weight:900;letter-spacing:.15em;color:#f4eaff}
+.vc-home-copy h2{font-family:'Poppins',sans-serif;font-size:1.35rem;margin:8px 0 3px;color:#fff}
+.vc-home-copy p{margin:0;color:#f8f2ff;font-size:.84rem}
+.vc-home-art{position:absolute;right:16px;bottom:12px;width:150px;height:62px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:55% 55% 12px 12px;background:linear-gradient(0deg,#55318c88,#ffffff08);color:#fff9}
+.vc-home-art span{font-size:1.4rem;font-weight:1000;letter-spacing:.12em}.vc-home-art b{font-size:1.5rem}
+.vc-feature-card{padding:15px 15px 13px;border:1px solid #eadffc;border-radius:21px;background:linear-gradient(145deg,#fff,#f2eaff);box-shadow:0 6px 18px #57358b12}
+.vc-feature-top{display:flex;align-items:center;justify-content:space-between;color:#6840b5;font-weight:900;font-size:.9rem}
+.vc-feature-top a{font-size:1.7rem;text-decoration:none;color:#6840b5}
+.vc-feature-content{display:flex;align-items:center;gap:14px;padding:10px 0 0}
+.vc-trophy{width:68px;height:68px;flex:0 0 68px;border-radius:50%;display:grid;place-items:center;background:#f5e8ff;font-size:2.1rem;box-shadow:inset 0 0 0 1px #e8d8fa}
+.vc-feature-content strong{font-size:1.02rem}.vc-feature-content p{font-size:.78rem;color:#77658e;margin:3px 0 8px}
+.vc-vote-button{display:inline-flex;gap:12px;align-items:center;padding:8px 16px;border-radius:99px;background:linear-gradient(100deg,#6840b5,#8b5bd0);color:white;text-decoration:none;font-weight:800;font-size:.77rem}
+.vc-summary-head{display:flex;align-items:center;justify-content:space-between;margin:18px 2px 10px}
+.vc-summary-head strong{font-size:.95rem}.vc-summary-head a{font-size:.72rem;color:#78658e;text-decoration:none}
+.vc-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.vc-summary-grid a{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 5px;border-radius:17px;background:linear-gradient(145deg,#eee9ff,#e4dcfb);text-decoration:none;color:#392456;text-align:center}
+.vc-summary-grid a:nth-child(2){background:linear-gradient(145deg,#f9e8f5,#f4dff1)}
+.vc-summary-grid a span{font-size:1.25rem;color:#8455ca}.vc-summary-grid strong{font-size:.9rem}.vc-summary-grid small{font-size:.65rem;color:#76658d}
+.vc-tip-card{display:flex;align-items:center;gap:12px;margin-top:12px;padding:13px;border-radius:18px;background:linear-gradient(100deg,#eee4ff,#e4d5fa);text-decoration:none;color:#35204f}
+.vc-tip-mark{font-size:1.8rem;font-weight:900;color:#6941b3}.vc-tip-card span:nth-child(2){display:grid;gap:3px;flex:1}.vc-tip-card small{font-size:.72rem;color:#66547f;line-height:1.35}.vc-tip-card>b{font-size:1.3rem;color:#6941b3}
+#country-time>.section-head{margin-top:18px}
+#agenda .agenda-today,#agenda .agenda-task,#agenda .agenda-event{border-radius:17px}
+#agenda .agenda-task{background:#f8f4ff;border:1px solid #eee5fa;padding:13px}
+#agenda .agenda-event{background:#fff;border:1px solid #eee5fa;padding:12px}
+#active .vote-card,#upcoming .vote-card,#completed .vote-card{border:1px solid #eee4fa;border-radius:20px;background:linear-gradient(145deg,#fff,#f8f3ff);box-shadow:0 5px 16px #54377b0c}
+#active .vote-card:before{background:linear-gradient(#8b5bd0,#c09be9)}
+#birthday-voting .birthday-card{border:1px solid #eee4fa;border-radius:19px;background:linear-gradient(145deg,#fff,#f8f2ff)}
+#army-account .army-auth-card,#army-account .army-subcard{border:1px solid #eee4fa;border-radius:19px;background:#fff}
+#more-hub .app-more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+#more-hub .app-more-grid a{min-height:108px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;border:1px solid #eee4fa;border-radius:19px;background:linear-gradient(145deg,#fff,#f1e8ff);text-decoration:none;text-align:center;color:#55377c}
+#more-hub .app-more-grid a span{font-size:27px;color:#7048ad}
+#more-hub .app-more-grid a strong{font-size:.83rem}
+#more-hub .app-more-grid a small{font-size:.66rem;color:#87769b;line-height:1.3}
+#more-hub .app-banner{margin-top:17px;padding:23px 15px;border-radius:20px;background:linear-gradient(110deg,#6840b5,#9a70d7);color:#fff;text-align:center;display:grid;gap:5px}
+#more-hub .app-banner strong{font-family:'Poppins',sans-serif;font-size:1.1rem}
+.vc-bottom-nav{position:fixed;z-index:1000;left:50%;bottom:max(9px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(650px,calc(100% - 18px));display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;padding:7px 6px calc(7px + env(safe-area-inset-bottom));border:1px solid #fff;border-radius:23px;background:#fffffff2;box-shadow:0 8px 30px #4d2d7628;backdrop-filter:blur(18px)}
+.vc-bottom-nav a{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 1px;border-radius:16px;text-decoration:none;color:#79688e;font-weight:800}
+.vc-bottom-nav a span{font-size:19px;line-height:1.1}.vc-bottom-nav a small{font-size:.61rem;white-space:nowrap}
+.vc-bottom-nav a.active{background:#eee5ff;color:#6840b5}
+@media(max-width:720px){
+ main.wrap{width:calc(100% - 16px);padding-top:5px;padding-bottom:105px}
+ .panel{padding:15px 13px;border-radius:22px;margin:7px 0}
+ .vc-home-welcome{margin:-15px -13px 14px;padding:18px 15px;min-height:170px}
+ .vc-home-copy h2{font-size:1.22rem}
+ .vc-home-art{right:9px;width:125px}
+ .vc-feature-card{padding:13px}
+ .vc-summary-grid{gap:7px}
+ .vc-summary-grid a{padding:10px 3px}
+ .vc-summary-grid small{font-size:.59rem}
+ #more-hub .app-more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #active .cards{grid-template-columns:1fr}
+}
+@media(min-width:721px){.vc-bottom-nav{bottom:14px}}
+
 </style>
 
 <script>
@@ -2930,7 +3005,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 
 </head>
 <body><main class="wrap">
-<div class="app-topbar"><a href="#army-account" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c.4-4.1 3.5-6.5 8-6.5s7.6 2.4 8 6.5z"/></svg></a><div class="app-brand">BTS<small>VOTING CENTER</small></div><a class="app-notice" href="#agenda" aria-label="Agenda y avisos">♧</a></div>
+<div class="app-topbar"><a href="#army-account" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c.4-4.1 3.5-6.5 8-6.5 8 2.4 8 6.5z"/></svg></a><div class="app-brand">BTS<small>VOTING CENTER</small></div><a class="app-notice" href="#agenda" aria-label="Agenda">♧</a></div>
 
 <header class="hero" id="top">
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
@@ -2945,10 +3020,26 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda</a><a href="#army-account">Mi cuenta</a><a href="#active">Votaciones</a><a href="#birthday-voting">Cumpleaños</a><a href="#more-hub">Más</a></nav>
+<nav class="legacy-section-nav" aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda</a><a href="#army-account">Mi cuenta</a><a href="#active">Votaciones</a><a href="#birthday-voting">Cumpleaños</a><a href="#more-hub">Más</a></nav>
 
 
-<section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
+<section class="panel country-panel" id="country-time">
+ <div class="vc-home-welcome">
+  <div class="vc-home-copy"><span class="vc-kicker">BTS VOTING CENTER</span><h2>Buenos días, ARMY 💜</h2><p>Sigamos apoyando a BTS juntos ✨</p></div>
+  <div class="vc-home-art" aria-hidden="true"><span>ARMY</span><b>♡</b></div>
+ </div>
+ <div class="vc-feature-card">
+  <div class="vc-feature-top"><span>★ Votación en curso</span><a href="#active" aria-label="Ver todas las votaciones">›</a></div>
+  <div class="vc-feature-content"><div class="vc-trophy" aria-hidden="true">🏆</div><div><strong>MAMA 2026</strong><p>¡Tu voto hace la diferencia!</p><a class="vc-vote-button" href="#active">Votar ahora <span>→</span></a></div></div>
+ </div>
+ <div class="vc-summary-head"><strong>Tu centro ARMY</strong><a href="#active">Ver votaciones ›</a></div>
+ <div class="vc-summary-grid">
+  <a href="#active"><span>▣</span><strong id="vc-active-count">—</strong><small>Votaciones activas</small></a>
+  <a href="#birthday-voting"><span>♡</span><strong>Jin + V</strong><small>Cumpleaños</small></a>
+  <a href="#agenda"><span>▦</span><strong>Agenda</strong><small>Fechas importantes</small></a>
+ </div>
+ <a class="vc-tip-card" href="#guide"><span class="vc-tip-mark">Ⅱ</span><span><strong>Tip de hoy</strong><small>¡No olvides revisar las reglas y votar en todas las categorías! 💜</small></span><b>›</b></a>
+<div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
   <option value="America/Mexico_City">🇲🇽 México · Ciudad de México</option><option value="America/Cancun">🇲🇽 México · Cancún</option><option value="America/Chihuahua">🇲🇽 México · Chihuahua</option><option value="America/Mazatlan">🇲🇽 México · Mazatlán</option><option value="America/Tijuana">🇲🇽 México · Tijuana</option><option value="America/Hermosillo">🇲🇽 México · Hermosillo</option>
   <option value="America/Los_Angeles">🇺🇸 Estados Unidos · Los Ángeles</option><option value="America/Denver">🇺🇸 Estados Unidos · Denver</option><option value="America/Chicago">🇺🇸 Estados Unidos · Chicago</option><option value="America/New_York">🇺🇸 Estados Unidos · Nueva York</option><option value="America/Anchorage">🇺🇸 Estados Unidos · Alaska</option><option value="Pacific/Honolulu">🇺🇸 Estados Unidos · Hawái</option><option value="America/Toronto">🇨🇦 Canadá · Toronto</option><option value="America/Vancouver">🇨🇦 Canadá · Vancouver</option>
   <option value="America/Guatemala">🇬🇹 Guatemala</option><option value="America/Belize">🇧🇿 Belice</option><option value="America/Tegucigalpa">🇭🇳 Honduras</option><option value="America/El_Salvador">🇸🇻 El Salvador</option><option value="America/Managua">🇳🇮 Nicaragua</option><option value="America/Costa_Rica">🇨🇷 Costa Rica</option><option value="America/Panama">🇵🇦 Panamá</option><option value="America/Bogota">🇨🇴 Colombia</option><option value="America/Lima">🇵🇪 Perú</option><option value="America/Guayaquil">🇪🇨 Ecuador</option><option value="America/Caracas">🇻🇪 Venezuela</option><option value="America/La_Paz">🇧🇴 Bolivia</option><option value="America/Santiago">🇨🇱 Chile · Santiago</option><option value="America/Argentina/Buenos_Aires">🇦🇷 Argentina</option><option value="America/Montevideo">🇺🇾 Uruguay</option><option value="America/Sao_Paulo">🇧🇷 Brasil · São Paulo</option><option value="America/Asuncion">🇵🇾 Paraguay</option><option value="America/Puerto_Rico">🇵🇷 Puerto Rico</option><option value="America/Santo_Domingo">🇩🇴 República Dominicana</option><option value="America/Havana">🇨🇺 Cuba</option>
@@ -3780,7 +3871,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 <script>
 /* Vercel: secciones independientes mediante anclas, compatibles con las rutas directas. */
 (function(){
- const routes={'/':'country-time','/agenda':'agenda','/votaciones':'active','/cumpleanos':'birthday-voting','/recoleccion':'choeaedol','/proximas':'upcoming','/finalizadas':'completed','/guia':'guide','/fuentes':'sources'};
+ const routes={'/':'country-time','/agenda':'agenda','/votaciones':'active','/cumpleanos':'birthday-voting','/mas':'more-hub','/cuenta':'army-account','/recoleccion':'choeaedol','/proximas':'upcoming','/finalizadas':'completed','/guia':'guide','/fuentes':'sources'};
  const ids=Object.values(routes);
  const home=document.getElementById('country-time');
  if(!home)return;
@@ -4230,6 +4321,22 @@ function armyInternalEmail(username){
  dock.addEventListener('click',e=>{const a=e.target.closest('a[data-app-tab]');if(!a)return;e.preventDefault();const target=nav.querySelector('a[href="#'+a.dataset.appTab+'"]');if(target)target.click();else{history.replaceState(null,'','#'+a.dataset.appTab);window.dispatchEvent(new Event('bts-app-section-change'));}});
  const original=history.replaceState;history.replaceState=function(){const out=original.apply(this,arguments);sync();return out;};
  window.addEventListener('hashchange',sync);window.addEventListener('bts-app-section-change',sync);nav.addEventListener('click',()=>setTimeout(sync,0));sync();
+})();
+</script>
+
+
+<script>
+(function(){
+ const nav=document.querySelector('.legacy-section-nav');if(!nav)return;
+ const tabs=[['country-time','⌂','Inicio'],['agenda','▦','Agenda'],['active','♜','Votaciones'],['birthday-voting','♙','Cumpleaños'],['more-hub','•••','Más']];
+ const dock=document.createElement('nav');dock.className='vc-bottom-nav';dock.setAttribute('aria-label','Navegación inferior');
+ dock.innerHTML=tabs.map(([id,ico,label])=>'<a href="#'+id+'" data-vc-tab="'+id+'"><span aria-hidden="true">'+ico+'</span><small>'+label+'</small></a>').join('');
+ document.body.appendChild(dock);
+ function sync(){let id=decodeURIComponent(location.hash.slice(1));if(!id)id='country-time';dock.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.dataset.vcTab===id));}
+ dock.addEventListener('click',e=>{const a=e.target.closest('a[data-vc-tab]');if(!a)return;e.preventDefault();if(location.hash==='#'+a.dataset.vcTab){window.dispatchEvent(new Event('hashchange'));}else location.hash=a.dataset.vcTab;});
+ window.addEventListener('hashchange',sync);sync();
+ const activeCount=document.querySelectorAll('#voteCards .vote-card').length;
+ const count=document.getElementById('vc-active-count');if(count)count.textContent=activeCount;
 })();
 </script>
 
