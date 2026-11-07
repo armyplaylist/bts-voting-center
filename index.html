@@ -2602,6 +2602,21 @@ body.dark-mode .nav-notification{background:#ff6b83;color:#24131a}
 /* El distintivo PRIORITARIO del desplegable MAMA replica el del registro de certificados */
 body:not(.dark-mode) .mama-live-vote-alert .priority-tag{background:#f0e8f8!important;color:#6840a0!important}
 body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#ff4058!important}
+
+/* Apartado editorial: importancia y alcance de cada votación */
+.vote-importance{margin-top:7px;border:1px solid #e5dced;border-radius:5px;background:#faf8fc;overflow:hidden}
+.vote-importance summary{display:flex;align-items:center;gap:9px;padding:11px 13px;list-style:none;cursor:pointer;color:#62467d;font-size:.78rem;font-weight:800;letter-spacing:.015em}
+.vote-importance summary::-webkit-details-marker{display:none}
+.vote-importance summary:after{content:'＋';margin-left:auto;color:#8a6aa8;font-size:1rem}
+.vote-importance[open] summary:after{content:'−'}
+.vote-importance-body{padding:0 13px 12px;color:#6e6376;font-size:.82rem;line-height:1.65}
+.vote-importance-body p{margin:0}
+.vote-importance-body strong{color:#49345f}
+body.dark-mode .vote-importance{background:#292235;border-color:#4b3c5b}
+body.dark-mode .vote-importance summary{color:#d9c4f0}
+body.dark-mode .vote-importance-body{color:#c7bbd1}
+body.dark-mode .vote-importance-body strong{color:#eadbfa}
+
 </style>
 
 <!-- GoatCounter: estadísticas privadas de visitas -->
