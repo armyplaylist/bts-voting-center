@@ -2627,27 +2627,6 @@ body.section-mode main.wrap>nav[aria-label="Navegación principal"] a{display:in
 body.section-mode main.wrap>nav[aria-label="Navegación principal"] a.active{background:#eee4ff;color:#68449c;font-weight:800}
 body.section-mode main.wrap>section.panel.section-active{min-height:55vh}
 
-
-/* Navegación móvil: barra inferior fija y acceso rápido a la cuenta */
-@media(max-width:700px){
- body.section-mode{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
- body.section-mode main.wrap{width:calc(100% - 20px);padding-top:14px}
- body.section-mode main.wrap>nav[aria-label="Navegación principal"]{display:none!important}
- body.section-mode .hero{padding:25px 17px 20px;margin-top:44px}
- body.section-mode .hero h1{font-size:2.55rem}
- body.section-mode .hero p{font-size:.88rem;line-height:1.5}
- body.section-mode .panel{margin:12px 0;padding:16px;border-radius:13px}
- .mobile-bottom-nav{position:fixed;left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:9998;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:7px 5px;border:1px solid #e6dce9;border-radius:17px;background:rgba(255,255,255,.97);box-shadow:0 8px 28px #251a2430;backdrop-filter:blur(18px)}
- .mobile-bottom-nav button{min-width:0;border:0;border-radius:11px;background:transparent;color:#786b80;padding:7px 1px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:700 10px Arial,sans-serif;cursor:pointer}
- .mobile-bottom-nav button .nav-symbol{font-size:19px;line-height:1}
- .mobile-bottom-nav button.active{background:#f0e8f8;color:#68449c}
- .mobile-account-shortcut{position:fixed;top:10px;left:12px;z-index:9999;width:42px;height:42px;border:1px solid #e4d8ed;border-radius:50%;background:#fff;color:#68449c;box-shadow:0 4px 16px #251a241c;font-size:19px;display:flex;align-items:center;justify-content:center;cursor:pointer}
- .mobile-more-menu{position:fixed;left:12px;right:12px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:9999;padding:9px;border:1px solid #e6dce9;border-radius:15px;background:#fff;box-shadow:0 8px 28px #251a2430;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
- .mobile-more-menu[hidden]{display:none!important}
- .mobile-more-menu button{border:0;border-radius:9px;background:#f8f5fa;color:#554465;text-align:left;padding:12px;font:700 13px Arial,sans-serif}
-}
-@media(min-width:701px){.mobile-bottom-nav,.mobile-account-shortcut,.mobile-more-menu{display:none!important}}
-
 </style>
 
 <script>
@@ -4159,42 +4138,7 @@ function armyInternalEmail(username){
  }
  nav.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1);if(!ids.includes(id))return;e.preventDefault();show(id,true);});
  window.addEventListener('hashchange',()=>show(decodeURIComponent(location.hash.slice(1)),false));
- 
-show(decodeURIComponent(location.hash.slice(1))||'country-time',false);
-})();
-
-/* Controles compactos exclusivos para móvil; reutilizan la navegación existente. */
-(function(){
- const originalNav=document.querySelector('main.wrap>nav[aria-label="Navegación principal"]');
- if(!originalNav)return;
- const links=[...originalNav.querySelectorAll('a[href^="#"]')];
- const target=(id)=>links.find(a=>a.getAttribute('href')==='#'+id);
- const account=document.createElement('button');
- account.type='button';account.className='mobile-account-shortcut';account.setAttribute('aria-label','Mi cuenta');account.title='Mi cuenta';account.textContent='◉';
- account.addEventListener('click',()=>target('army-account')?.click());
- const dock=document.createElement('nav');dock.className='mobile-bottom-nav';dock.setAttribute('aria-label','Navegación móvil');
- const items=[['country-time','⌂','Inicio'],['agenda','▦','Agenda'],['active','♡','Votaciones'],['birthday-voting','✿','Cumpleaños'],['more','＋','Más']];
- items.forEach(([id,symbol,label])=>{
-  const b=document.createElement('button');b.type='button';b.dataset.mobileTarget=id;
-  b.innerHTML='<span class="nav-symbol" aria-hidden="true">'+symbol+'</span><span>'+label+'</span>';
-  b.addEventListener('click',()=>{
-   if(id==='more'){menu.hidden=!menu.hidden;return;}
-   menu.hidden=true;target(id)?.click();refresh();
-  });
-  dock.appendChild(b);
- });
- const menu=document.createElement('div');menu.className='mobile-more-menu';menu.hidden=true;
- [['choeaedol','Recolección'],['upcoming','Próximas'],['completed','Finalizadas'],['guide','Guía'],['sources','Fuentes']].forEach(([id,label])=>{
-  const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>{menu.hidden=true;target(id)?.click();refresh();});menu.appendChild(b);
- });
- function refresh(){
-  const id=decodeURIComponent(location.hash.slice(1))||'country-time';
-  dock.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.mobileTarget===id||(b.dataset.mobileTarget==='more'&&['choeaedol','upcoming','completed','guide','sources'].includes(id))));
- }
- document.body.append(account,dock,menu);
- account.addEventListener('click',()=>{menu.hidden=true;});
- window.addEventListener('hashchange',refresh);
- refresh();
+ show(decodeURIComponent(location.hash.slice(1))||'country-time',false);
 })();
 </script>
 
