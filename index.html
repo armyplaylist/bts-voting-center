@@ -4,10 +4,10 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#8bd8d4">
 <meta name="description" content="BTS Voting Center: votaciones grupales importantes de BTS, fechas límite, horarios y enlaces oficiales.">
-<link rel="canonical" href="https://armyplaylist.github.io/bts-voting-center/">
+<link rel="canonical" href="https://bts-voting-center.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
-<meta property="og:url" content="https://armyplaylist.github.io/bts-voting-center/">
+<meta property="og:url" content="https://bts-voting-center.vercel.app/">
 <meta property="og:site_name" content="BTS VOTING CENTER">
 <meta property="og:title" content="BTS VOTING CENTER | Tu centro de votaciones ARMY">
 <meta property="og:description" content="Encuentra las votaciones grupales de BTS, fechas límite, horarios y enlaces oficiales. Todo lo que ARMY necesita para apoyar a BTS en un solo lugar.">
@@ -3054,7 +3054,7 @@ document.querySelectorAll('a[data-x-copy]').forEach(link=>{
   link.href='https://twitter.com/intent/tweet?text='+encodeURIComponent(copy);
  });
 });
-const votingCenterUrl=new URL('/bts-voting-center/','https://armyplaylist.github.io').href;
+const votingCenterUrl='https://bts-voting-center.vercel.app/';
 document.getElementById('copyCenterLink')?.addEventListener('click',async()=>{
  const button=document.getElementById('copyCenterLink');
  const original='⧉ COPIAR ENLACE';
@@ -3067,7 +3067,7 @@ document.getElementById('copyCenterLink')?.addEventListener('click',async()=>{
   button.textContent='✓ ENLACE COPIADO';button.classList.add('copied');
   window.setTimeout(()=>{button.textContent=original;button.classList.remove('copied');},2600);
  }catch(error){
-  button.textContent='COPIA: armyplaylist.github.io/bts-voting-center/';
+  button.textContent='COPIA: bts-voting-center.vercel.app';
  }
 });
 tzSelect.addEventListener('change',()=>{try{localStorage.setItem(timezoneStorageKey,tzSelect.value);}catch(e){}updateLocalTimes();addCalendarReminders();window.refreshBirthdayCalendarLinks?.();});
