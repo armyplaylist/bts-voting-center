@@ -2627,6 +2627,65 @@ body.section-mode main.wrap>nav[aria-label="Navegación principal"] a{display:in
 body.section-mode main.wrap>nav[aria-label="Navegación principal"] a.active{background:#eee4ff;color:#68449c;font-weight:800}
 body.section-mode main.wrap>section.panel.section-active{min-height:55vh}
 
+
+/* App shell lavanda inspirado en la referencia móvil */
+:root{--app-purple:#6840b5;--app-lilac:#eee5ff;--app-ink:#24183b;--app-muted:#77678f}
+body{background:radial-gradient(ellipse at 15% 0%,#e4d5ff 0,transparent 42%),linear-gradient(145deg,#f7f1ff,#eee5fb 55%,#f8f2ff);color:var(--app-ink);font-family:'DM Sans',Arial,sans-serif}
+.wrap{width:min(1040px,calc(100% - 24px));padding:12px 0 105px}
+.hero{border-radius:28px;background:linear-gradient(145deg,#6840b5,#8e65d2 58%,#b18be5);padding:28px 24px;box-shadow:0 14px 35px #6840b52b}
+.hero:before{display:block;background:#fff2;width:250px;height:250px;right:-95px;top:-120px}
+.hero:after{display:block;background:#fff1;width:180px;height:180px;left:-80px;bottom:-110px}
+h1{font-family:'Poppins','DM Sans',sans-serif;font-size:clamp(2rem,6vw,3.4rem);letter-spacing:-.04em}
+h1 span{color:#f0e7ff;letter-spacing:.08em}
+.era{border:1px solid #ffffff60;border-radius:99px;background:#ffffff18;color:#fff;padding:7px 12px}
+.hero p{color:#f4edff;font-weight:600}
+.hero-stats{gap:8px}.stat{border-radius:15px;background:#ffffff20;border:1px solid #ffffff30}
+nav[aria-label="Navegación principal"]{display:none!important}
+.panel{border:1px solid #fff;border-radius:25px;background:#ffffffd9;box-shadow:0 9px 28px #54377b12;backdrop-filter:blur(14px)}
+.section-head h2{font-family:'Poppins',sans-serif;font-size:1.22rem;color:#35204f}
+.section-head p{color:var(--app-muted)}
+.vote-card,.rank,.upcoming-item{border:1px solid #eee5fb;border-radius:21px;background:linear-gradient(145deg,#fff,#f8f3ff);box-shadow:0 6px 18px #54377b0c}
+.vote-card:before{width:4px;background:linear-gradient(#8b5bd0,#c09be9)}
+.pill{border-radius:99px;background:#efe6ff;color:#6840a7}
+.pill.live{background:#fbe5ef;color:#a13c71}
+.btn{border-radius:99px;background:linear-gradient(100deg,#6840b5,#8b5bd0);box-shadow:none;padding:11px 17px}
+.btn.secondary{background:#f0e8fb;color:#6840a7}
+.filter{border-radius:99px}.filter.active{background:#6840b5}
+.note,.rule-box{border-radius:16px;background:#f8f3ff;border-color:#e8dcfa}
+.member{border-radius:18px}
+.app-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 2px 12px}
+.app-topbar a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;text-decoration:none;background:#fff;color:#6840b5;box-shadow:0 4px 14px #6840b51c;font-size:20px}
+.app-topbar .app-brand{text-align:center;flex:1;font-family:'Poppins',sans-serif;font-weight:900;font-size:1.1rem;color:#6840b5;line-height:1.05}
+.app-topbar .app-brand small{display:block;font-size:.58rem;letter-spacing:.1em}
+.app-topbar .app-notice{background:#f0e8ff}
+.app-bottom-nav{position:fixed;z-index:1000;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(620px,calc(100% - 20px));display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px;padding:8px 7px calc(8px + env(safe-area-inset-bottom));border:1px solid #ffffffed;border-radius:24px;background:#fffF;box-shadow:0 8px 30px #4d2d7628;backdrop-filter:blur(18px)}
+.app-bottom-nav a{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 1px;border-radius:17px;text-decoration:none;color:#79688e;font-size:.61rem;font-weight:800;white-space:nowrap}
+.app-bottom-nav a span{font-size:19px;line-height:1.1}
+.app-bottom-nav a.active{background:#eee5ff;color:#6840b5}
+.app-more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.app-more-grid a{min-height:105px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;border:1px solid #eee4fa;border-radius:20px;background:linear-gradient(145deg,#fff,#f1e8ff);text-decoration:none;text-align:center;color:#55377c}
+.app-more-grid a span{font-size:27px;color:#7048ad}.app-more-grid a strong{font-size:.83rem}.app-more-grid a small{font-size:.66rem;color:#87769b;line-height:1.3}
+.app-banner{margin-top:17px;padding:24px 15px;border-radius:20px;background:linear-gradient(110deg,#6840b5,#9a70d7);color:#fff;text-align:center;display:grid;gap:5px}.app-banner strong{font-family:'Poppins',sans-serif;font-size:1.15rem}.app-banner span{font-size:.8rem;color:#f0e7ff}
+body.section-mode main.wrap>section.panel.section-active{min-height:60vh}
+body.section-mode main.wrap>header.hero.section-away{display:none!important}
+@media(max-width:720px){
+ .wrap{width:calc(100% - 18px);padding-top:7px;padding-bottom:115px}
+ .hero{padding:23px 18px;border-radius:25px}
+ .hero-share{display:none}
+ .panel{margin:10px 0;padding:17px 14px;border-radius:23px}
+ .section-head{align-items:center}
+ .section-head h2{font-size:1.08rem}
+ .cards{grid-template-columns:1fr}
+ .vote-card{padding:16px;border-radius:19px}
+ .app-more-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ranking-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .member-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:721px){
+ .app-bottom-nav{width:min(700px,calc(100% - 40px))}
+ .app-bottom-nav a{font-size:.72rem}
+}
+
 </style>
 
 <script>
@@ -2871,6 +2930,8 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 
 </head>
 <body><main class="wrap">
+<div class="app-topbar"><a href="#army-account" aria-label="Mi cuenta">●</a><div class="app-brand">BTS<small>VOTING CENTER</small></div><a class="app-notice" href="#agenda" aria-label="Agenda y avisos">♧</a></div>
+
 <header class="hero" id="top">
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
@@ -2884,7 +2945,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda ARMY</a><a href="#army-account">Mi espacio</a><a href="#active">Votaciones activas</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
+<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#agenda">Agenda</a><a href="#army-account">Mi cuenta</a><a href="#active">Votaciones</a><a href="#birthday-voting">Cumpleaños</a><a href="#more-hub">Más</a></nav>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
@@ -3172,6 +3233,20 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 
 </article>
  </div>
+</section>
+
+
+<section class="panel app-more-panel" id="more-hub">
+ <div class="section-head"><div><h2>Más herramientas</h2><p>Todo lo que necesitas para organizar tu apoyo a BTS.</p></div><span class="pill">ARMY</span></div>
+ <div class="app-more-grid">
+  <a href="#choeaedol"><span>🎁</span><strong>Recolección</strong><small>Corazones y recursos diarios</small></a>
+  <a href="#upcoming"><span>◷</span><strong>Próximas</strong><small>Votaciones anunciadas</small></a>
+  <a href="#completed"><span>✓</span><strong>Finalizadas</strong><small>Resultados y cierres</small></a>
+  <a href="#guide"><span>▤</span><strong>Guía</strong><small>Cómo apoyar a BTS</small></a>
+  <a href="#sources"><span>↗</span><strong>Fuentes</strong><small>Plataformas oficiales</small></a>
+  <a href="#country-time"><span>◉</span><strong>Zona horaria</strong><small>Configura tu hora local</small></a>
+ </div>
+ <div class="app-banner"> <strong>ARMY, siempre juntos 💜</strong><span>Unidos por BTS, en cada votación.</span></div>
 </section>
 
 <footer class="footer">BTS VOTING CENTER · Información revisada: 4 nov 2026.<br>Consulta siempre las reglas y anuncios en las plataformas oficiales.</footer>
@@ -4122,7 +4197,7 @@ function armyInternalEmail(username){
 
 <script>
 (function(){
- const ids=['country-time','agenda','army-account','active','birthday-voting','choeaedol','upcoming','completed','guide','sources'];
+ const ids=['country-time','agenda','army-account','active','birthday-voting','choeaedol','upcoming','completed','guide','sources','more-hub'];
  const nav=document.querySelector('main.wrap>nav[aria-label="Navegación principal"]');
  const hero=document.querySelector('header.hero');
  const panels=ids.map(id=>document.getElementById(id)).filter(Boolean);
@@ -4139,6 +4214,22 @@ function armyInternalEmail(username){
  nav.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1);if(!ids.includes(id))return;e.preventDefault();show(id,true);});
  window.addEventListener('hashchange',()=>show(decodeURIComponent(location.hash.slice(1)),false));
  show(decodeURIComponent(location.hash.slice(1))||'country-time',false);
+})();
+</script>
+
+
+<script>
+(function(){
+ const nav=document.querySelector('main.wrap>nav[aria-label="Navegación principal"]');
+ if(!nav)return;
+ const items=[['country-time','⌂','Inicio'],['agenda','▦','Agenda'],['active','♜','Votaciones'],['birthday-voting','♙','Cumpleaños'],['more-hub','•••','Más'],['army-account','●','Cuenta']];
+ const dock=document.createElement('nav');dock.className='app-bottom-nav';dock.setAttribute('aria-label','Secciones principales');
+ dock.innerHTML=items.map(([id,icon,label])=>'<a href="#'+id+'" data-app-tab="'+id+'"><span aria-hidden="true">'+icon+'</span>'+label+'</a>').join('');
+ document.body.appendChild(dock);
+ function sync(){const id=(location.hash||'#country-time').slice(1);dock.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.dataset.appTab===id));}
+ dock.addEventListener('click',e=>{const a=e.target.closest('a[data-app-tab]');if(!a)return;e.preventDefault();const target=nav.querySelector('a[href="#'+a.dataset.appTab+'"]');if(target)target.click();else{history.replaceState(null,'','#'+a.dataset.appTab);window.dispatchEvent(new Event('bts-app-section-change'));}});
+ const original=history.replaceState;history.replaceState=function(){const out=original.apply(this,arguments);sync();return out;};
+ window.addEventListener('hashchange',sync);window.addEventListener('bts-app-section-change',sync);nav.addEventListener('click',()=>setTimeout(sync,0));sync();
 })();
 </script>
 
