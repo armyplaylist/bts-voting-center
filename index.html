@@ -2630,6 +2630,43 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#f
 body.dark-mode .tutorial-video{background:#251c32;border-color:#514064;color:#f4eaff}
 body.dark-mode .tutorial-video summary,body.dark-mode .tutorial-video-link{color:#d8bfff}
 body.dark-mode .tutorial-video-note{color:#dfd1ed}
+
+/* Compact birthday countdown cards — colorful celebration palette */
+.birthday-countdowns{gap:9px;margin:0 0 15px}
+.birthday-countdown-card{
+ position:relative;isolation:isolate;overflow:hidden;
+ min-height:92px;padding:10px 12px 9px;
+ border:1px solid #f0c7df;border-radius:15px;
+ background:linear-gradient(125deg,#ffe5ef 0%,#fff0c9 34%,#e8e1ff 68%,#dff6f2 100%)!important;
+ box-shadow:0 4px 12px rgba(111,65,130,.10);
+}
+.birthday-countdown-card:before,.birthday-countdown-card:after{
+ content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none;opacity:.55
+}
+.birthday-countdown-card:before{width:48px;height:48px;right:-12px;top:-19px;background:#ff9fbd}
+.birthday-countdown-card:after{width:34px;height:34px;left:-13px;bottom:-15px;background:#a9a0f2}
+.birthday-countdown-member{font-size:.88rem;letter-spacing:.14em;color:#75418d!important}
+.birthday-countdown-date{margin:2px 0 5px;font-size:.64rem;color:#885d78!important}
+.birthday-countdown-timer{font-size:clamp(.75rem,2vw,.94rem);line-height:1.2;color:#49305f!important}
+.birthday-countdown-timer strong{color:#d34d83!important}
+.birthday-countdown-local{margin-top:3px;font-size:.62rem}
+body.dark-mode .birthday-countdowns .birthday-countdown-card{
+ background:linear-gradient(125deg,#493044 0%,#51402f 34%,#39314f 68%,#294744 100%)!important;
+ border-color:#84617d!important;box-shadow:0 4px 13px #09061155;
+}
+body.dark-mode .birthday-countdowns .birthday-countdown-member{color:#ffd2e7!important}
+body.dark-mode .birthday-countdowns .birthday-countdown-date,
+body.dark-mode .birthday-countdowns .birthday-countdown-local{color:#ead3e8!important}
+body.dark-mode .birthday-countdowns .birthday-countdown-timer{color:#fff0fa!important}
+body.dark-mode .birthday-countdowns .birthday-countdown-timer strong{color:#ff9dbf!important}
+@media(max-width:420px){
+ .birthday-countdowns{gap:7px}
+ .birthday-countdown-card{min-height:84px;padding:9px 7px}
+ .birthday-countdown-member{font-size:.82rem}
+ .birthday-countdown-date{font-size:.6rem}
+ .birthday-countdown-timer{font-size:.72rem}
+}
+
 </style>
 </head>
 <body><main class="wrap">
