@@ -2855,7 +2855,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 .army-proof-thumbs a{display:block;width:76px;height:76px;overflow:hidden;border:1px solid #e3d9eb;border-radius:10px;background:#f5f1f7}
 .army-proof-thumbs img{width:100%;height:100%;object-fit:cover}
 .army-empty{padding:18px;border:1px dashed #d8cce2;border-radius:15px;color:#897d92;text-align:center;font-size:.8rem;font-weight:700;background:#fff9}
-@media(max-width:700px){.army-work-grid{grid-template-columns:1fr}.army-auth-actions>*{flex:1}.army-certificate-card{align-items:flex-start}.army-certificate-card button{width:100%}}
+@media(max-width:700px){.army-work-grid{grid-template-columns:1fr}.army-auth-actions>*{flex:1}}
 @media(prefers-reduced-motion:reduce){.army-primary-btn,.army-secondary-btn{transition:none}}
 </style>
 
@@ -4028,8 +4028,8 @@ function armyInternalEmail(username){
   const details = $('army-campaign-details');
   if(!campaign){details.textContent='Selecciona una votación para consultar su categoría y cierre.';return;}
   const closeText = campaign.closes_at
-   ? (new Date(campaign.closes_at).getTime() <= Date.now() ? 'Votación finalizada' : 'Comprobante disponible automáticamente al finalizar')
-   : 'Cierre exacto pendiente de confirmación oficial. El comprobante se habilitará cuando se registre.';
+   ? (new Date(campaign.closes_at).getTime() <= Date.now() ? 'Votación finalizada' : 'En seguimiento hasta el cierre')
+   : 'Cierre exacto pendiente de confirmación oficial. El estado se actualizará cuando se registre.';
   details.innerHTML = '<strong>'+escapeHtml(campaign.category)+'</strong><span>ID interno de referencia: '+escapeHtml(campaign.reference_id)+'</span><span>'+escapeHtml(closeText)+'</span><small>'+escapeHtml(campaign.closure_note || '')+'</small>';
  }
  function addCampaignProofLinks(){
