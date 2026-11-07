@@ -4091,7 +4091,8 @@ function armyInternalEmail(username){
    await loadCampaignRegistry();
    const certResult = await supabaseClient.rpc('ensure_my_voting_certificates');
    if(certResult.error) throw certResult.error;
-   certificates = new Map((certResult.data || []).map(c => [c.id,c]));
+   const availableCertificates = (certResult.data || []).filter(c=>c.campaign_end_at && new Date(c.campaign_end_at).getTime()<=Date.now());
+   certificates = new Map(availableCertificates.map(c => [c.id,c]));
    const recordsResult = await supabaseClient.from('voting_proof_records')
     .select('id,campaign_key,campaign_reference_id,campaign_name,category,display_name,campaign_end_at,submitted_at')
     .order('submitted_at',{ascending:false});
