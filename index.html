@@ -2843,15 +2843,9 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 .army-member-bar strong{display:block;color:#443054;font-size:.9rem;overflow-wrap:anywhere}
 .army-eyebrow{display:block;margin-bottom:3px;color:#8b76a0;font-size:.65rem;font-weight:900;letter-spacing:.12em}
 .army-work-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:13px}
-.army-certificate-info{display:flex;flex-direction:column;align-items:flex-start}
-.army-certificate-mark{display:grid;place-items:center;width:58px;height:58px;margin:5px 0 12px;border:1px solid #d9c8e9;border-radius:50%;background:#f2eafa;color:#76549b;font-size:1.8rem}
-.army-certificate-info ul{padding-left:19px;margin:0 0 13px;color:#665474;font-size:.79rem;line-height:1.8;font-weight:700}
-.army-disclaimer{margin-top:auto!important;padding:10px 12px;border-radius:12px;background:#f6f1f7;color:#81748a!important;font-size:.7rem!important}
 .army-history-block{margin-top:20px}
 .army-history-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
 .army-history-heading p{margin:0}
-.army-history-list,.army-certificate-list{display:grid;gap:10px}
-.army-history-card,.army-certificate-card{padding:14px;border:1px solid #e7deee;border-radius:16px;background:#fff}
 .army-history-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
 .army-history-top strong{display:block;color:#3e2d50;font-size:.88rem}
 .army-history-meta{margin-top:4px;color:#84778d;font-size:.72rem;font-weight:700;line-height:1.5}
@@ -2860,10 +2854,6 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 .army-proof-thumbs{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
 .army-proof-thumbs a{display:block;width:76px;height:76px;overflow:hidden;border:1px solid #e3d9eb;border-radius:10px;background:#f5f1f7}
 .army-proof-thumbs img{width:100%;height:100%;object-fit:cover}
-.army-certificate-card{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;background:linear-gradient(120deg,#fff,#f5effb)}
-.army-certificate-card strong{display:block;color:#49345e;font-size:.88rem}
-.army-certificate-card small{display:block;margin-top:4px;color:#82758d;font-size:.72rem;font-weight:700}
-.army-certificate-card button{white-space:nowrap}
 .army-empty{padding:18px;border:1px dashed #d8cce2;border-radius:15px;color:#897d92;text-align:center;font-size:.8rem;font-weight:700;background:#fff9}
 @media(max-width:700px){.army-work-grid{grid-template-columns:1fr}.army-auth-actions>*{flex:1}.army-certificate-card{align-items:flex-start}.army-certificate-card button{width:100%}}
 @media(prefers-reduced-motion:reduce){.army-primary-btn,.army-secondary-btn{transition:none}}
@@ -2924,7 +2914,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 
 <section class="panel army-account-panel" id="army-account">
  <div class="section-head">
-  <div><h2>💜 MI ESPACIO ARMY</h2><p>Registra tus capturas de votación, consulta tu historial y conserva tus comprobantes personales.</p></div>
+  <div><h2>💜 MI ESPACIO ARMY</h2><p>Registra tus capturas de votación y consulta tu historial personal.</p></div>
   <span class="pill">ÁREA PERSONAL</span>
  </div>
  <div class="army-privacy-note"><strong>Tu espacio es privado.</strong> Tus capturas y tu historial solo estarán disponibles para la cuenta con la que iniciaste sesión.</div>
@@ -2959,21 +2949,10 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
      <p id="army-proof-message" class="army-feedback" role="status" aria-live="polite"></p>
     </form>
    </div>
-   <div class="army-subcard army-certificate-info">
-    <h3>Comprobantes personales</h3>
-    <div class="army-certificate-mark">✦</div>
-    <p>El sistema detectará el cierre de cada votación y emitirá un solo comprobante por cuenta y campaña.</p>
-    <ul><li>Votación y categoría detectadas</li><li>ID de referencia de la campaña</li><li>Fecha de cierre y emisión</li><li>Código personal único</li></ul>
-    <p class="army-disclaimer">Este documento acredita el registro de capturas en BTS Voting Center. No es un certificado oficial del organizador ni verifica que los votos hayan sido contabilizados.</p>
-   </div>
   </div>
   <div class="army-history-block">
    <div class="army-history-heading"><div><h3>Mi historial</h3><p>Tus participaciones y capturas guardadas.</p></div><span id="army-history-count" class="pill">0 registros</span></div>
    <div id="army-history-list" class="army-history-list"><div class="army-empty">Inicia sesión para consultar tu historial.</div></div>
-  </div>
-  <div class="army-history-block">
-   <div class="army-history-heading"><div><h3>Mis comprobantes</h3><p>Se habilitan automáticamente después de la fecha de finalización registrada.</p></div></div>
-   <div id="army-certificate-list" class="army-certificate-list"><div class="army-empty">Aún no tienes comprobantes emitidos.</div></div>
   </div>
  </div>
 </section>
@@ -3990,9 +3969,7 @@ function armyInternalEmail(username){
  const authMessage = $('army-auth-message');
  const proofMessage = $('army-proof-message');
  const historyList = $('army-history-list');
- const certificateList = $('army-certificate-list');
  let currentUser = null;
- let certificates = new Map();
  let campaignRegistry = new Map();
 
  function escapeHtml(value){
@@ -4025,7 +4002,6 @@ function armyInternalEmail(username){
   } else {
    $('army-member-username').textContent = '';
    historyList.innerHTML = '<div class="army-empty">Inicia sesión para consultar tu historial.</div>';
-   certificateList.innerHTML = '<div class="army-empty">Aún no tienes comprobantes emitidos.</div>';
    $('army-history-count').textContent = '0 registros';
   }
  }
@@ -4086,13 +4062,8 @@ function armyInternalEmail(username){
  async function refreshPersonalArea(){
   if(!currentUser) return;
   historyList.innerHTML = '<div class="army-empty">Cargando tu historial…</div>';
-  certificateList.innerHTML = '<div class="army-empty">Revisando cierres de votación…</div>';
   try{
    await loadCampaignRegistry();
-   const certResult = await supabaseClient.rpc('ensure_my_voting_certificates');
-   if(certResult.error) throw certResult.error;
-   const availableCertificates = (certResult.data || []).filter(c=>c.campaign_end_at && new Date(c.campaign_end_at).getTime()<=Date.now());
-   certificates = new Map(availableCertificates.map(c => [c.id,c]));
    const recordsResult = await supabaseClient.from('voting_proof_records')
     .select('id,campaign_key,campaign_reference_id,campaign_name,category,display_name,campaign_end_at,submitted_at')
     .order('submitted_at',{ascending:false});
@@ -4124,123 +4095,12 @@ function armyInternalEmail(username){
     }));
     historyList.innerHTML = cards.join('');
    }
-   renderCertificates();
   }catch(error){
    console.error('No se pudo cargar el espacio ARMY:',error);
    historyList.innerHTML = '<div class="army-empty">No pudimos cargar tu historial. Intenta actualizar la página.</div>';
-   certificateList.innerHTML = '<div class="army-empty">No pudimos revisar tus comprobantes.</div>';
   }
  }
- function renderCertificates(){
-  const rows = [...certificates.values()].sort((a,b)=>new Date(b.issued_at)-new Date(a.issued_at));
-  if(!rows.length){
-   certificateList.innerHTML = '<div class="army-empty">Aún no hay votaciones finalizadas con capturas registradas.</div>';
-   return;
-  }
-  certificateList.innerHTML = rows.map(c=>'<article class="army-certificate-card"><div><strong>'+escapeHtml(c.campaign_name)+'</strong><small>'+escapeHtml(c.category)+' · '+escapeHtml(c.proof_count)+' captura(s) · Emitido: '+escapeHtml(dateText(c.issued_at))+'</small><small>ID interno de votación: '+escapeHtml(c.campaign_reference_id || c.campaign_key)+' · Código: '+escapeHtml(c.verification_code)+'</small></div><button type="button" class="army-primary-btn" data-certificate-id="'+escapeHtml(c.id)+'">Abrir / guardar PDF</button></article>').join('');
- }
- function openCertificate(c){
-  const win = window.open('','_blank');
-  if(!win){message(proofMessage,'Permite las ventanas emergentes para abrir tu comprobante.',true);return;}
-  const issued = dateText(c.issued_at);
-  const ended = dateText(c.campaign_end_at);
-  const name = escapeHtml(c.display_name);
-  const title = escapeHtml(c.campaign_name);
-  const category = escapeHtml(c.category);
-  const code = escapeHtml(c.verification_code);
-  win.document.open();
-  win.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Comprobante ARMY · ${title}</title><style>
-  @page{size:A4 landscape;margin:0}*{box-sizing:border-box}body{margin:0;background:#f3eef8;color:#30213f;font-family:Arial,sans-serif}.sheet{width:297mm;height:210mm;margin:auto;padding:15mm;background:#fff;position:relative;overflow:hidden}.frame{height:100%;border:2px solid #76559a;padding:13mm 17mm;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}.frame:before{content:"";position:absolute;inset:4mm;border:1px solid #e0d4eb;pointer-events:none}.kicker{font-size:10pt;letter-spacing:4px;color:#8b6aa9;font-weight:bold}.brand{margin:7mm 0 3mm;font-size:25pt;letter-spacing:3px;font-weight:900;color:#39234e}.line{width:35mm;height:2px;background:#b79bcf;margin:3mm auto 6mm}.title{font-family:Georgia,serif;font-size:31pt;color:#4a3260;margin:0 0 4mm}.intro{font-size:11pt;color:#776a80;margin:0}.person{font-family:Georgia,serif;font-size:25pt;color:#6e4a91;margin:7mm 0 2mm}.campaign{font-size:17pt;font-weight:bold;color:#3d2a50;margin:0 0 2mm}.category{font-size:11pt;color:#796c84}.details{display:flex;gap:20mm;margin:9mm 0 0}.detail{min-width:35mm}.detail strong{display:block;font-size:14pt;color:#49335f}.detail span{display:block;margin-top:2mm;font-size:8pt;letter-spacing:1px;color:#91839c;text-transform:uppercase}.footer{margin-top:auto;width:100%;display:flex;justify-content:space-between;align-items:end;gap:10mm;text-align:left}.code{font-family:monospace;font-size:9pt;color:#5f4b71}.disclaimer{max-width:145mm;font-size:7.5pt;line-height:1.4;color:#8d8395;text-align:right}.print{position:fixed;top:12px;right:12px;border:0;border-radius:9px;padding:11px 15px;background:#51356e;color:#fff;font-weight:bold;cursor:pointer}@media print{body{background:#fff}.sheet{margin:0}.print{display:none}}@media screen{.sheet{margin:20px auto;box-shadow:0 8px 35px #34214630}}@media(max-width:700px){.sheet{transform-origin:top left;transform:scale(.5);margin:10px;width:297mm}}
-  </style></head><body><button class="print" onclick="window.print()">Guardar como PDF / Imprimir</button><main class="sheet"><div class="frame"><div class="kicker">BTS VOTING CENTER · REGISTRO PERSONAL</div><div class="brand">ARMY PARTICIPATION</div><div class="line"></div><h1 class="title">Comprobante de participación</h1><p class="intro">Se deja constancia del registro de capturas en el espacio personal de</p><div class="person">${name}</div><div class="campaign">${title}</div><div class="category">${category}</div><div class="details"><div class="detail"><strong>${ended}</strong><span>Fecha de finalización registrada</span></div><div class="detail"><strong>${c.proof_count}</strong><span>Capturas registradas</span></div><div class="detail"><strong>${issued}</strong><span>Fecha de emisión</span></div></div><div class="footer"><div class="code">ID INTERNO DE VOTACIÓN · ${escapeHtml(c.campaign_reference_id || c.campaign_key)}<br>CÓDIGO PERSONAL · ${code}</div><div class="disclaimer">Documento personal generado por BTS Voting Center a partir de las capturas registradas por el usuario. No es un certificado oficial del organizador y no verifica la contabilización de votos.</div></div></div></main></body></html>`);
-  win.document.close();
- }
- authForm.addEventListener('submit',async event=>{
-  event.preventDefault();
-  const action = event.submitter?.dataset.authAction || 'login';
-  const username = $('army-auth-username').value.trim();
-  const password = $('army-auth-password').value;
-  const button = event.submitter;
-  setBusy(button,true,action==='signup'?'Creando cuenta…':'Ingresando…');
-  message(authMessage,'');
-  try{
-   if(action==='signup'){
-    const result = await supabaseClient.functions.invoke('army-username-signup',{
-     body:{username,password},
-     headers:{Authorization:'Bearer '+LEGACY_ANON_KEY}
-    });
-    if(result.error){
-     let detail = result.error.message || 'No pudimos crear la cuenta.';
-     try{const body=await result.error.context?.json();if(body?.error) detail=body.error;}catch(_){}
-     throw new Error(detail);
-    }
-    if(result.data?.error) throw new Error(result.data.error);
-    const login = await supabaseClient.auth.signInWithPassword({email:armyInternalEmail(username),password});
-    if(login.error) throw login.error;
-    message(authMessage,'¡Tu cuenta ARMY está lista! Ya puedes registrar tus capturas.');
-   } else {
-    const result = await supabaseClient.auth.signInWithPassword({email:armyInternalEmail(username),password});
-    if(result.error) throw new Error('No encontramos esa combinación de usuario y contraseña.');
-    message(authMessage,'Sesión iniciada correctamente.');
-   }
-  }catch(error){message(authMessage,error.message || 'No pudimos completar el acceso.',true);}
-  finally{setBusy(button,false);}
- });
- $('army-logout').addEventListener('click',async()=>{
-  const {error}=await supabaseClient.auth.signOut();
-  if(error) message(authMessage,error.message,true);
- });
- proofForm.addEventListener('submit',async event=>{
-  event.preventDefault();
-  if(!currentUser){message(proofMessage,'Inicia sesión para guardar tus capturas.',true);return;}
-  const files = [...$('army-proof-files').files];
-  if(!files.length){message(proofMessage,'Selecciona al menos una captura.',true);return;}
-  const allowed = ['image/jpeg','image/png','image/webp'];
-  if(files.some(f=>!allowed.includes(f.type))){message(proofMessage,'Solo se permiten imágenes JPG, PNG o WEBP.',true);return;}
-  if(files.some(f=>f.size>10*1024*1024)){message(proofMessage,'Cada imagen debe pesar 10 MB o menos.',true);return;}
-  const campaignKey = $('army-campaign-select').value;
-  const campaign = campaignRegistry.get(campaignKey);
-  if(!campaign){message(proofMessage,'Selecciona una votación válida de la lista.',true);return;}
-  const displayName = currentUser.user_metadata?.username || 'ARMY';
-  const button = $('army-proof-submit');
-  setBusy(button,true,'Guardando capturas…');
-  message(proofMessage,'');
-  try{
-   const upsert = await supabaseClient.from('voting_proof_records').upsert({
-    user_id:currentUser.id,campaign_key:campaignKey,display_name:displayName
-   },{onConflict:'user_id,campaign_key'}).select().single();
-   if(upsert.error) throw upsert.error;
-   const record = upsert.data;
-   let saved = 0;
-   for(const file of files){
-    const extension = file.name.split('.').pop().toLowerCase();
-    const path = currentUser.id+'/'+record.id+'/'+crypto.randomUUID()+'.'+extension;
-    const upload = await supabaseClient.storage.from('voting-proofs').upload(path,file,{contentType:file.type,upsert:false});
-    if(upload.error) throw upload.error;
-    const insert = await supabaseClient.from('voting_proof_files').insert({
-     record_id:record.id,user_id:currentUser.id,storage_path:path,
-     original_name:file.name,content_type:file.type,file_size:file.size
-    });
-    if(insert.error){
-     await supabaseClient.storage.from('voting-proofs').remove([path]);
-     throw insert.error;
-    }
-    saved++;
-   }
-   proofForm.reset();
-   message(proofMessage,saved+' captura(s) guardada(s) correctamente en tu historial.');
-   await refreshPersonalArea();
-  }catch(error){
-   console.error('Error al guardar capturas:',error);
-   message(proofMessage,error.message || 'No pudimos guardar tus capturas. Intenta de nuevo.',true);
-   await refreshPersonalArea();
-  }finally{setBusy(button,false);}
- });
- certificateList.addEventListener('click',event=>{
-  const button = event.target.closest('[data-certificate-id]');
-  if(!button) return;
-  const certificate = certificates.get(button.dataset.certificateId);
-  if(certificate) openCertificate(certificate);
- });
+
  supabaseClient.auth.onAuthStateChange((_event,session)=>{
   Promise.resolve().then(()=>updateSession(session));
  });
