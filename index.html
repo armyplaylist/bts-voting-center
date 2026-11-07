@@ -2661,6 +2661,39 @@ body.dark-mode .vote-importance-body strong{color:#eadbfa}
  updateDate();restore();updateEvents();
 })();
 </script>
+<script>
+/* Aviso dinámico de votaciones importantes próximas a cerrar. Fechas en sus zonas oficiales. */
+(function(){
+ const box=document.getElementById('dailyEndingAlert');if(!box)return;
+ const entries=[
+  {id:'mama',name:'MAMA 2026 · Fans’ Choice',end:'2026-11-08T23:59:00+09:00',zone:'Asia/Seoul',zoneLabel:'KST',href:'#active'},
+  {id:'aria',name:'ARIA Awards · #ARIASBTS',end:'2026-11-09T23:59:00+11:00',zone:'Australia/Sydney',zoneLabel:'AEDT',href:'#active'}
+ ];
+ const copy={
+  es:{kicker:'ATENCIÓN · CIERRES PRÓXIMOS',title:'Votaciones importantes por cerrar',intro:'Estas campañas están cerca de finalizar. Revisa las instrucciones y participa antes del cierre.',link:'VER VOTACIONES ACTIVAS ↗',left:'Tiempo restante',soon:'Menos de una hora',empty:'Por ahora no hay votaciones importantes próximas a cerrar.'},
+  en:{kicker:'ATTENTION · CLOSING SOON',title:'Important votes closing soon',intro:'These campaigns are nearing their deadlines. Check the instructions and participate before they close.',link:'VIEW ACTIVE VOTES ↗',left:'Time remaining',soon:'Less than one hour',empty:'No important votes are close to closing right now.'},
+  ko:{kicker:'주의 · 마감 임박',title:'곧 마감되는 주요 투표',intro:'마감이 가까운 캠페인입니다. 종료 전에 안내 사항을 확인하고 참여하세요.',link:'진행 중인 투표 보기 ↗',left:'남은 시간',soon:'1시간 미만',empty:'현재 마감이 임박한 주요 투표가 없습니다.'},
+  ja:{kicker:'お知らせ · 締切間近',title:'まもなく終了する重要な投票',intro:'締切が近づいています。終了前に詳細を確認して参加してください。',link:'開催中の投票を見る ↗',left:'残り時間',soon:'残り1時間未満',empty:'現在、締切間近の重要な投票はありません。'},
+  pt:{kicker:'ATENÇÃO · ENCERRAMENTO PRÓXIMO',title:'Votações importantes perto do fim',intro:'Estas campanhas estão próximas do prazo final. Confira as instruções e participe antes do encerramento.',link:'VER VOTAÇÕES ATIVAS ↗',left:'Tempo restante',soon:'Menos de uma hora',empty:'No momento, não há votações importantes perto do fim.'},
+  th:{kicker:'แจ้งเตือน · ใกล้ปิดโหวต',title:'โหวตสำคัญที่ใกล้สิ้นสุด',intro:'แคมเปญเหล่านี้ใกล้ถึงกำหนดปิดแล้ว โปรดตรวจสอบรายละเอียดและร่วมโหวตก่อนหมดเวลา',link:'ดูการโหวตที่เปิดอยู่ ↗',left:'เวลาที่เหลือ',soon:'น้อยกว่า 1 ชั่วโมง',empty:'ขณะนี้ไม่มีโหวตสำคัญที่ใกล้ปิด'},
+  ru:{kicker:'ВНИМАНИЕ · СКОРО ЗАКРЫТИЕ',title:'Важные голосования скоро завершатся',intro:'Срок этих кампаний подходит к концу. Ознакомьтесь с правилами и проголосуйте до закрытия.',link:'АКТИВНЫЕ ГОЛОСОВАНИЯ ↗',left:'Осталось времени',soon:'Меньше часа',empty:'Сейчас нет важных голосований с близким сроком завершения.'}
+ };
+ const fmt=(ms,lang)=>{if(ms<3600000)return copy[lang].soon;const total=Math.floor(ms/1000),d=Math.floor(total/86400),h=Math.floor(total%86400/3600),m=Math.floor(total%3600/60);return (d?d+'d ':'')+h+'h '+m+'m';};
+ function render(){
+  const lang=(document.getElementById('languageSelect')||{}).value||'es',t=copy[lang]||copy.es,now=Date.now();
+  const active=entries.map(e=>({...e,ms:Date.parse(e.end)-now})).filter(e=>e.ms>0&&e.ms<=48*3600000).sort((a,b)=>a.ms-b.ms);
+  box.hidden=!active.length;
+  if(!active.length)return;
+  document.getElementById('dailyEndingKicker').textContent=t.kicker;
+  document.getElementById('dailyEndingTitle').textContent=t.title;
+  document.getElementById('dailyEndingIntro').textContent=t.intro;
+  document.getElementById('dailyEndingLink').textContent=t.link;
+  document.getElementById('dailyEndingList').innerHTML=active.map(e=>'<a class="daily-ending-item" href="'+e.href+'" style="text-decoration:none;color:inherit"><span><strong>'+e.name+'</strong><small>'+t.left+' · '+e.zoneLabel+'</small></span><span class="daily-ending-time">'+fmt(e.ms,lang)+'</span></a>').join('');
+ }
+ render();setInterval(render,1000);
+ const language=document.getElementById('languageSelect');language&&language.addEventListener('change',render);
+})();
+</script>
 <!-- GoatCounter: estadísticas privadas de visitas -->
 <script>window.goatcounter={path:function(p){return location.host+p;}};</script>
 <script data-goatcounter="https://romi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -2768,6 +2801,23 @@ h1,h2,h3,h4,
 .agenda-footnote{margin:14px 0 0;color:#817783;font-size:.72rem;line-height:1.5}
 @media(max-width:520px){.agenda-event{grid-template-columns:1fr auto;gap:5px 10px}.agenda-date{grid-column:1/-1}.agenda-event div{grid-column:1}.agenda-event a{grid-column:2;grid-row:2}}
 </style>
+<style>
+.daily-ending-alert{margin:18px 0 0;padding:17px 18px;border:1px solid #e8b9c4;border-left:5px solid #c83d5b;border-radius:5px;background:linear-gradient(115deg,#fff2f4,#fff9fb);color:#492c37}
+.daily-ending-alert[hidden]{display:none}
+.daily-ending-kicker{display:flex;align-items:center;gap:8px;color:#a52e4b;font-size:.68rem;font-weight:900;letter-spacing:.1em}
+.daily-ending-dot{width:8px;height:8px;border-radius:50%;background:#d33b5b;box-shadow:0 0 0 4px #f8dce3}
+.daily-ending-alert h3{margin:9px 0 5px;color:#572d3b;font-size:1.05rem}
+.daily-ending-alert>p{margin:0 0 12px;color:#71535d;font-size:.81rem;line-height:1.5}
+.daily-ending-list{display:grid;gap:8px}
+.daily-ending-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;background:#fff;border:1px solid #f0d9df;border-radius:4px}
+.daily-ending-item strong{display:block;font-size:.84rem}.daily-ending-item small{display:block;margin-top:3px;color:#795e67;font-size:.74rem}
+.daily-ending-time{white-space:nowrap;color:#a52e4b;font-size:.78rem;font-weight:900;font-variant-numeric:tabular-nums}
+.daily-ending-link{display:inline-flex;margin-top:13px;color:#8f2944;font-size:.76rem;font-weight:900;text-decoration:none}
+body.dark-mode .daily-ending-alert{background:linear-gradient(115deg,#30202a,#2a202b);border-color:#69404e;border-left-color:#e27c95;color:#f8e9ed}
+body.dark-mode .daily-ending-alert h3{color:#ffe6ec}body.dark-mode .daily-ending-alert>p{color:#e1c9d0}
+body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.dark-mode .daily-ending-item small{color:#e0c4ce}body.dark-mode .daily-ending-time,body.dark-mode .daily-ending-link{color:#ffafc0}
+@media(max-width:480px){.daily-ending-alert{padding:14px}.daily-ending-item{align-items:flex-start}.daily-ending-time{font-size:.72rem}}
+</style>
 </head>
 <body><main class="wrap">
 <header class="hero" id="top">
@@ -2791,7 +2841,14 @@ h1,h2,h3,h4,
   <option value="America/Los_Angeles">🇺🇸 Estados Unidos · Los Ángeles</option><option value="America/Denver">🇺🇸 Estados Unidos · Denver</option><option value="America/Chicago">🇺🇸 Estados Unidos · Chicago</option><option value="America/New_York">🇺🇸 Estados Unidos · Nueva York</option><option value="America/Anchorage">🇺🇸 Estados Unidos · Alaska</option><option value="Pacific/Honolulu">🇺🇸 Estados Unidos · Hawái</option><option value="America/Toronto">🇨🇦 Canadá · Toronto</option><option value="America/Vancouver">🇨🇦 Canadá · Vancouver</option>
   <option value="America/Guatemala">🇬🇹 Guatemala</option><option value="America/Belize">🇧🇿 Belice</option><option value="America/Tegucigalpa">🇭🇳 Honduras</option><option value="America/El_Salvador">🇸🇻 El Salvador</option><option value="America/Managua">🇳🇮 Nicaragua</option><option value="America/Costa_Rica">🇨🇷 Costa Rica</option><option value="America/Panama">🇵🇦 Panamá</option><option value="America/Bogota">🇨🇴 Colombia</option><option value="America/Lima">🇵🇪 Perú</option><option value="America/Guayaquil">🇪🇨 Ecuador</option><option value="America/Caracas">🇻🇪 Venezuela</option><option value="America/La_Paz">🇧🇴 Bolivia</option><option value="America/Santiago">🇨🇱 Chile · Santiago</option><option value="America/Argentina/Buenos_Aires">🇦🇷 Argentina</option><option value="America/Montevideo">🇺🇾 Uruguay</option><option value="America/Sao_Paulo">🇧🇷 Brasil · São Paulo</option><option value="America/Asuncion">🇵🇾 Paraguay</option><option value="America/Puerto_Rico">🇵🇷 Puerto Rico</option><option value="America/Santo_Domingo">🇩🇴 República Dominicana</option><option value="America/Havana">🇨🇺 Cuba</option>
   <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
- </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
+ </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p>
+<div class="daily-ending-alert" id="dailyEndingAlert" hidden aria-live="polite">
+ <div class="daily-ending-kicker"><span class="daily-ending-dot"></span><span id="dailyEndingKicker">ATENCIÓN · CIERRES PRÓXIMOS</span></div>
+ <h3 id="dailyEndingTitle">Votaciones importantes por cerrar</h3>
+ <p id="dailyEndingIntro">Estas campañas están cerca de finalizar. Revisa las instrucciones y participa antes del cierre.</p>
+ <div id="dailyEndingList" class="daily-ending-list"></div>
+ <a class="daily-ending-link" href="#active" id="dailyEndingLink">VER VOTACIONES ACTIVAS ↗</a>
+</div></section>
 
 <section class="panel agenda-panel" id="agenda">
  <div class="section-head"><div><h2>🗓️ AGENDA ARMY</h2><p>Organiza tus tareas de apoyo y consulta las próximas fechas importantes de BTS.</p></div><span class="pill">TU PLAN DEL DÍA</span></div>
