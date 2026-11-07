@@ -2651,6 +2651,59 @@ nav.bottom-sections>.nav-more-toggle>small{display:block!important;flex:0 0 auto
   nav.bottom-sections>a,nav.bottom-sections>.nav-more-toggle{height:58px!important;min-height:58px!important;max-height:58px!important}
 }
 
+
+/* Diseño de tres columnas inspirado en la estructura clásica de Twitter 2022 */
+body{padding-bottom:0!important;background:#f7f5fa!important}
+.wrap{width:min(1280px,100%)!important;max-width:1280px!important;margin:0 auto!important;padding:0 18px!important;display:grid!important;grid-template-columns:220px minmax(0,600px) 300px!important;column-gap:28px!important;align-items:start!important}
+header.hero{grid-column:2!important;grid-row:1!important;margin:18px 0 14px!important;position:relative!important;min-width:0!important}
+nav.twitter-sidebar{grid-column:1!important;grid-row:1 / span 30!important;position:sticky!important;top:12px!important;left:auto!important;bottom:auto!important;transform:none!important;width:100%!important;height:auto!important;max-height:calc(100vh - 24px)!important;min-height:0!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:5px!important;overflow-y:auto!important;overflow-x:hidden!important;padding:8px 4px 14px!important;margin:12px 0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+nav.twitter-sidebar a{width:100%!important;min-width:0!important;min-height:52px!important;height:auto!important;max-height:none!important;flex:0 0 auto!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:18px!important;padding:10px 15px!important;border-radius:28px!important;background:transparent!important;color:#352b40!important;text-decoration:none!important;font-size:1.12rem!important;font-weight:600!important;line-height:1.2!important}
+nav.twitter-sidebar a span{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:28px!important;flex:0 0 28px!important;font-size:1.55rem!important;line-height:1!important}
+nav.twitter-sidebar a small{font-size:1rem!important;line-height:1.2!important;font-weight:600!important;white-space:normal!important}
+nav.twitter-sidebar a:hover{background:#eee8f5!important}
+nav.twitter-sidebar a.active{background:#eee8f5!important;color:#6845a0!important;font-weight:800!important}
+nav.twitter-sidebar a.active small{font-weight:800!important}
+nav.twitter-sidebar .twitter-brand{min-height:58px!important;margin-bottom:8px!important;font-size:1.6rem!important;font-weight:1000!important;color:#6845a0!important}
+nav.twitter-sidebar .twitter-brand span{font-size:1.8rem!important;letter-spacing:-.08em!important}
+nav.twitter-sidebar .twitter-account-link{margin-top:10px!important;border:1px solid #e6deee!important;background:#fff!important}
+.twitter-right-rail{grid-column:3!important;grid-row:1 / span 30!important;position:sticky!important;top:16px!important;align-self:start!important;display:flex!important;flex-direction:column!important;gap:14px!important;margin-top:18px!important;min-width:0!important}
+.twitter-rail-card{padding:18px!important;border-radius:17px!important;background:#f0edf5!important;border:1px solid #ebe5f1!important}
+.twitter-rail-card h3{margin:0 0 10px!important;font-size:1.06rem!important;color:#30243d!important}
+.twitter-rail-card p{margin:0 0 12px!important;font-size:.84rem!important;line-height:1.5!important;color:#6d6375!important}
+.twitter-rail-card a{display:block!important;padding:7px 0!important;color:#69489b!important;text-decoration:none!important;font-size:.86rem!important;font-weight:700!important}
+.twitter-rail-card a+a{border-top:1px solid #e2dce9!important}
+.twitter-rail-note{padding:0 8px!important;color:#8b8292!important;font-size:.72rem!important;line-height:1.5!important}
+.wrap>section.panel{grid-column:2!important;width:100%!important;min-width:0!important;margin:0 0 14px!important}
+.wrap>footer.footer{grid-column:2!important;margin:8px 0 28px!important}
+.account-orb{display:none!important}
+.nav-more-panel{display:none!important}
+.hero.section-away{display:none!important}
+body.dark-mode{background:#17141d!important}
+body.dark-mode nav.twitter-sidebar a{color:#eee7f5!important}
+body.dark-mode nav.twitter-sidebar a:hover,body.dark-mode nav.twitter-sidebar a.active{background:#30263c!important;color:#d7b9ff!important}
+body.dark-mode nav.twitter-sidebar .twitter-account-link,body.dark-mode .twitter-rail-card{background:#241e2c!important;border-color:#3b3047!important}
+body.dark-mode .twitter-rail-card h3{color:#f1eaf7!important}
+body.dark-mode .twitter-rail-card p,body.dark-mode .twitter-rail-note{color:#c0b5ca!important}
+@media(max-width:1050px){
+ .wrap{grid-template-columns:190px minmax(0,680px)!important;column-gap:18px!important;padding:0 12px!important;justify-content:center!important}
+ .twitter-right-rail{display:none!important}
+}
+@media(max-width:700px){
+ .wrap{display:block!important;width:100%!important;padding:0 12px 88px!important}
+ header.hero{margin:12px 0 12px!important;padding:22px 16px!important}
+ nav.twitter-sidebar{position:fixed!important;z-index:1200!important;left:0!important;right:0!important;top:auto!important;bottom:0!important;width:100%!important;height:66px!important;max-height:66px!important;min-height:66px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-around!important;gap:0!important;margin:0!important;padding:5px 4px max(5px,env(safe-area-inset-bottom))!important;border-top:1px solid #e7e0ed!important;background:#ffffffed!important;backdrop-filter:blur(16px)!important;box-shadow:0 -4px 18px #35224412!important;overflow:hidden!important}
+ nav.twitter-sidebar a{width:auto!important;min-width:0!important;min-height:50px!important;height:50px!important;max-height:50px!important;flex:1 1 0!important;flex-direction:column!important;justify-content:center!important;gap:3px!important;padding:4px 1px!important;border-radius:10px!important;font-size:.8rem!important}
+ nav.twitter-sidebar a span{width:auto!important;flex:0 0 auto!important;font-size:1.25rem!important}
+ nav.twitter-sidebar a small{font-size:.58rem!important;line-height:1.05!important;font-weight:700!important;text-align:center!important;white-space:nowrap!important}
+ nav.twitter-sidebar .twitter-brand,nav.twitter-sidebar a:nth-of-type(6),nav.twitter-sidebar a:nth-of-type(7),nav.twitter-sidebar a:nth-of-type(8),nav.twitter-sidebar a:nth-of-type(9),nav.twitter-sidebar a:nth-of-type(10),nav.twitter-sidebar .twitter-account-link{display:none!important}
+ nav.twitter-sidebar a.active{background:#eee8f5!important}
+ .wrap>section.panel{margin:0 0 12px!important;padding:16px!important}
+ .wrap>footer.footer{margin-bottom:12px!important}
+ .twitter-right-rail{display:none!important}
+ .account-orb{display:none!important}
+ body{padding-bottom:0!important}
+}
+
 </style>
 
 <script>
@@ -2953,20 +3006,25 @@ body{padding-bottom:104px!important}
  </div>
 </header>
 <a class="account-orb" href="#army-account" aria-label="Mi cuenta" title="Mi cuenta"><img id="army-account-orb-avatar" alt="" hidden><span id="army-account-orb-icon" aria-hidden="true">♙</span><small>Mi cuenta</small></a>
-<nav class="bottom-sections" aria-label="Secciones principales">
+<nav class="bottom-sections twitter-sidebar" aria-label="Navegación principal">
+<a class="twitter-brand" href="#country-time" data-section-link="country-time" aria-label="BTS Voting Center"><span aria-hidden="true">BTS</span></a>
 <a href="#country-time" data-section-link="country-time"><span aria-hidden="true">⌂</span><small>Inicio</small></a>
 <a href="#agenda" data-section-link="agenda"><span aria-hidden="true">▦</span><small>Agenda</small></a>
 <a href="#active" data-section-link="active"><span aria-hidden="true">♡</span><small>Votaciones</small></a>
 <a href="#birthday-voting" data-section-link="birthday-voting"><span aria-hidden="true">♕</span><small>Cumpleaños</small></a>
-<button type="button" class="nav-more-toggle" aria-expanded="false" aria-controls="nav-more-panel"><span aria-hidden="true">•••</span><small>Más</small></button>
-</nav>
-<div class="nav-more-panel" id="nav-more-panel" hidden>
 <a href="#choeaedol" data-section-link="choeaedol"><span aria-hidden="true">◉</span><small>Recolección</small></a>
 <a href="#upcoming" data-section-link="upcoming"><span aria-hidden="true">◷</span><small>Próximas</small></a>
 <a href="#completed" data-section-link="completed"><span aria-hidden="true">✓</span><small>Finalizadas</small></a>
 <a href="#guide" data-section-link="guide"><span aria-hidden="true">ⓘ</span><small>Guía</small></a>
 <a href="#sources" data-section-link="sources"><span aria-hidden="true">↗</span><small>Fuentes</small></a>
-</div>
+<a class="twitter-account-link" href="#army-account" data-section-link="army-account"><span aria-hidden="true">♙</span><small>Mi cuenta</small></a>
+</nav>
+<div class="nav-more-panel" id="nav-more-panel" hidden></div>
+<aside class="twitter-right-rail" aria-label="Información complementaria">
+  <div class="twitter-rail-card"><h3>ARMY, mantente al día</h3><p>Consulta las votaciones activas, revisa sus fechas límite y vuelve a las fuentes oficiales antes de participar.</p><a href="#active" data-section-link="active">Ver votaciones activas →</a></div>
+  <div class="twitter-rail-card"><h3>Accesos rápidos</h3><a href="#agenda" data-section-link="agenda">Agenda ARMY</a><a href="#upcoming" data-section-link="upcoming">Próximas votaciones</a><a href="#guide" data-section-link="guide">Guía de votación</a><a href="#sources" data-section-link="sources">Fuentes oficiales</a></div>
+  <div class="twitter-rail-note">BTS VOTING CENTER · Un espacio para organizar el apoyo de ARMY.</div>
+</aside>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
