@@ -3460,8 +3460,10 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 </script>
 
 <script>
-/* Cada sección tiene una URL propia. Vercel entrega el documento y aquí se muestra solo la vista solicitada. */
+/* En GitHub Pages se muestran todas las secciones en una sola página y la navegación usa anclas.
+   En Vercel se conserva el comportamiento de rutas independientes. */
 (function(){
+ if(location.hostname === 'armyplaylist.github.io') return;
  const routes={
   '/':'country-time',
   '/votaciones':'active',
@@ -3482,7 +3484,9 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
   if(panel)panel.hidden=panel!==target;
  });
  document.querySelectorAll('nav a').forEach(link=>{
-  let linkPath=link.getAttribute('href');while(linkPath.length>1&&linkPath.endsWith('/'))linkPath=linkPath.slice(0,-1);
+  let linkPath=link.getAttribute('href')||'';
+  if(linkPath.startsWith('#')) return;
+  while(linkPath.length>1&&linkPath.endsWith('/'))linkPath=linkPath.slice(0,-1);
   const active=linkPath===path;
   link.classList.toggle('current-view',active);
   if(active)link.setAttribute('aria-current','page');
@@ -3490,9 +3494,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
  });
  window.scrollTo({top:0,behavior:'instant'});
 })();
-</script>
 
-<script>
 /* GoatCounter: medir navegación entre secciones */
 (function(){
  const labels={
