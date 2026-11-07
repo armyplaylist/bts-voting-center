@@ -2761,6 +2761,17 @@ header.hero{display:none!important}
 }
 @media(min-width:721px){.vc-bottom-nav{bottom:14px}}
 
+
+/* Barra inferior compacta como la referencia */
+.vc-bottom-nav{position:fixed!important;z-index:1000!important;left:50%!important;bottom:max(8px,env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;width:min(620px,calc(100% - 24px))!important;min-height:66px;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center;gap:3px!important;padding:6px 7px!important;border:1px solid #fff!important;border-radius:25px!important;background:rgba(255,255,255,.94)!important;box-shadow:0 5px 24px rgba(79,48,125,.17)!important;backdrop-filter:blur(18px)}
+.vc-bottom-nav a{height:54px;min-width:0;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;padding:4px 1px!important;border-radius:18px!important;text-decoration:none!important;color:#76658e!important;font-weight:600!important}
+.vc-bottom-nav a span{width:22px;height:22px;display:block!important;line-height:1}
+.vc-bottom-nav a svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.vc-bottom-nav a:first-child svg{fill:currentColor;stroke:currentColor}
+.vc-bottom-nav a small{font-size:10px!important;line-height:1.1;white-space:nowrap}
+.vc-bottom-nav a.active{background:#eee5ff!important;color:#6840b5!important}
+@media(max-width:380px){.vc-bottom-nav{width:calc(100% - 16px)!important}.vc-bottom-nav a small{font-size:9px!important}}
+
 </style>
 
 <script>
@@ -4328,9 +4339,15 @@ function armyInternalEmail(username){
 <script>
 (function(){
  const nav=document.querySelector('.legacy-section-nav');if(!nav)return;
- const tabs=[['country-time','⌂','Inicio'],['agenda','▦','Agenda'],['active','♜','Votaciones'],['birthday-voting','♙','Cumpleaños'],['more-hub','•••','Más']];
+ const tabs=[
+  ['country-time','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>','Inicio'],
+  ['agenda','<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M7 3v4M17 3v4M4 9h16M8 13h3M8 17h3"/></svg>','Agenda'],
+  ['active','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v3a5 5 0 0 1-10 0zM7 6H4v2a4 4 0 0 0 4 4M17 6h3v2a4 4 0 0 1-4 4"/></svg>','Votaciones'],
+  ['birthday-voting','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v9H4zM3 12h18M12 12v9M12 12c-5 0-7-1-7-3 0-3 5-2 7 3Zm0 0c5 0 7-1 7-3 0-3-5-2-7 3ZM12 3v4M9 5l3 2 3-2"/></svg>','Cumpleaños'],
+  ['more-hub','<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="5" r="1.5"/><circle cx="12" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="19" r="1.5"/><circle cx="12" cy="19" r="1.5"/><circle cx="19" cy="19" r="1.5"/></svg>','Más']
+ ];
  const dock=document.createElement('nav');dock.className='vc-bottom-nav';dock.setAttribute('aria-label','Navegación inferior');
- dock.innerHTML=tabs.map(([id,ico,label])=>'<a href="#'+id+'" data-vc-tab="'+id+'"><span aria-hidden="true">'+ico+'</span><small>'+label+'</small></a>').join('');
+ dock.innerHTML=tabs.map(([id,ico,label])=>'<a href="#'+id+'" data-vc-tab="'+id+'"><span>'+ico+'</span><small>'+label+'</small></a>').join('');
  document.body.appendChild(dock);
  function sync(){let id=decodeURIComponent(location.hash.slice(1));if(!id)id='country-time';dock.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.dataset.vcTab===id));}
  dock.addEventListener('click',e=>{const a=e.target.closest('a[data-vc-tab]');if(!a)return;e.preventDefault();if(location.hash==='#'+a.dataset.vcTab){window.dispatchEvent(new Event('hashchange'));}else location.hash=a.dataset.vcTab;});
