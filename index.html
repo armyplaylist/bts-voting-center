@@ -2617,6 +2617,138 @@ body.dark-mode .vote-importance summary{color:#d9c4f0}
 body.dark-mode .vote-importance-body{color:#c7bbd1}
 body.dark-mode .vote-importance-body strong{color:#eadbfa}
 
+
+/* REDISEÑO EDITORIAL · estructura visual; no modifica los datos ni los scripts */
+:root{
+ --bg:#f5f3fb;--ink:#20203b;--muted:#686780;--purple:#6550b5;--purple2:#8b79d4;
+ --glass:#fff;--line:#e7e3f2;--shadow:0 10px 28px rgba(37,30,76,.07);
+ --editorial-coral:#d96b78;--editorial-teal:#268b7b;
+}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{background:var(--bg);color:var(--ink);font-family:"Inter","DM Sans",system-ui,sans-serif}
+.wrap{width:min(1240px,calc(100% - 40px));padding:22px 0 52px;display:flex!important;flex-direction:column;gap:0}
+.hero{order:1;text-align:left!important;display:flex;flex-direction:column;align-items:flex-start;gap:0;
+ padding:28px 30px 24px!important;margin:0 0 14px;border:1px solid #e7e0f4;border-radius:24px;
+ color:var(--ink);background:linear-gradient(120deg,#fff 0%,#f0ebfb 100%)!important;
+ box-shadow:0 12px 34px rgba(45,35,88,.07)}
+.hero:before,.hero:after{display:none}
+.hero .era{background:#eee9fa;color:#5c469e;border:1px solid #e1d9f2;letter-spacing:.08em}
+.hero h1,.hero h1 span{font-family:"Space Grotesk","DM Sans",system-ui,sans-serif!important;text-align:left!important;color:#272344!important}
+.hero h1{font-size:clamp(2rem,4.5vw,3.25rem)!important;font-weight:700!important;line-height:1.02!important;letter-spacing:-.055em!important;margin:13px 0 5px!important}
+.hero h1 span{font-size:.43em!important;font-weight:600!important;letter-spacing:.17em!important;margin-top:7px!important;color:#6550b5!important}
+.hero p{max-width:650px;margin:8px 0 0!important;color:#66627d!important;font-size:.98rem;line-height:1.55}
+#themeToggle{position:absolute;top:20px;right:190px;margin:0!important;min-height:42px;padding:0 14px!important;border-radius:12px!important;
+ background:#fff!important;color:#403568!important;border:1px solid #ded7ee!important;font:700 .78rem "Inter",sans-serif!important}
+.language-control{position:absolute!important;top:20px!important;right:20px!important;margin:0!important;min-height:42px;padding:0 12px!important;
+ border:1px solid #ded7ee!important;border-radius:12px!important;background:#fff!important;color:#403568!important;box-shadow:none!important}
+.hero .hero-share{margin-top:18px!important;gap:9px}
+.hero .hero-share a,.hero .hero-share button{min-height:42px;border-radius:12px;padding:0 15px;font:700 .78rem "Inter",sans-serif}
+.hero .hero-share-x{background:#292641;color:#fff;box-shadow:none}
+.hero .hero-share-copy{background:#fff;color:#51417e;border:1px solid #ded7ee}
+nav{order:2;position:sticky;top:8px;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
+ margin:0 0 14px;padding:8px;border:1px solid #e7e3f2;border-radius:16px;background:rgba(255,255,255,.94);
+ box-shadow:0 6px 20px rgba(37,30,76,.06);scrollbar-width:thin;backdrop-filter:blur(16px)}
+nav a{flex:0 0 auto;white-space:nowrap;padding:11px 14px;border-radius:11px;color:#514b70;font:650 .82rem "Inter",sans-serif}
+nav a:hover,nav a.active{background:#eee9fb;color:#4d3c93}
+#country-time{order:3}
+#active{order:4}
+#birthday-voting{order:5}
+#choeaedol{order:6}
+#upcoming{order:7}
+#completed{order:8}
+#guide{order:9}
+#sources{order:10}
+.footer{order:11}
+.panel{margin:0 0 14px!important;padding:clamp(20px,3vw,30px)!important;border:1px solid #e8e4f1!important;border-radius:22px!important;
+ background:#fff!important;box-shadow:0 8px 26px rgba(37,30,76,.045)!important;backdrop-filter:none!important}
+.section-head{align-items:center;margin-bottom:20px}
+.section-head h2{font-family:"Space Grotesk","DM Sans",sans-serif;font-size:clamp(1.18rem,2vw,1.5rem);font-weight:700;letter-spacing:-.025em;color:#282543}
+.section-head p{font-size:.88rem;color:#74718a;line-height:1.5}
+.pill{padding:6px 10px;background:#f0edfa;color:#5a4b91;font-size:.7rem;letter-spacing:.025em}
+.pill.live{background:#fff0f1;color:#a43e50}
+.pill.soon{background:#f1edfb;color:#6650a4}
+.cards{gap:16px}
+.vote-card{padding:20px;border:1px solid #eae6f2;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(40,32,76,.045);gap:12px}
+.vote-card:before{width:4px;background:#a18cda}
+.vote-card h3{font-family:"Space Grotesk","DM Sans",sans-serif;font-size:1.08rem;line-height:1.3;color:#292542}
+.vote-card .description,.vote-card .field-value{color:#686780;line-height:1.58}
+.deadline{background:#fff1f2;color:#963e50}
+.countdown{color:#50437f}
+.countdown strong{color:#b84d60}
+.btn{min-height:42px;padding:10px 15px;border-radius:11px;background:#6550b5;box-shadow:none;font:700 .8rem "Inter",sans-serif}
+.btn:hover{background:#5743a5}
+.btn.secondary{background:#f2eff9;color:#57447f;box-shadow:none}
+.complete-toggle{min-height:44px;border-radius:11px}
+.rule-box{border-color:#e7e2f0;border-radius:14px;background:#faf9fd}
+.tutorial-video{border-color:#e7e2f0;border-radius:14px;background:#faf9fd}
+.home-shortcuts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px;padding-top:18px;border-top:1px solid #eeebf4}
+.home-shortcuts-heading{grid-column:1/-1;color:#77738b;font-size:.7rem;font-weight:800;letter-spacing:.11em}
+.home-shortcuts a{display:flex;flex-direction:column;gap:4px;min-width:0;padding:13px;border:1px solid #ebe7f3;border-radius:14px;background:#fbfaff;text-decoration:none;transition:background .18s,border-color .18s}
+.home-shortcuts a:hover{background:#f1edfb;border-color:#d8cfee}
+.home-shortcuts a span{color:#8b79c5;font-size:.68rem;font-weight:800}
+.home-shortcuts a strong{color:#302b50;font-size:.84rem}
+.home-shortcuts a small{color:#77738b;font-size:.72rem;line-height:1.35}
+#country-time .time-select{min-height:48px;border:1px solid #dcd7e9;border-radius:12px;background:#fff;color:#302b50;font:600 .9rem "Inter",sans-serif}
+#country-time .note{background:#f7f5fc;color:#66627d;border:1px solid #ebe7f3}
+#active .mama-certificate-link{grid-column:1/-1}
+#active .vote-card{min-width:0}
+#birthday-voting .birthday-grid{gap:14px}
+#upcoming .upcoming{gap:14px}
+#completed .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+section[id]{scroll-margin-top:92px}
+a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #7d68c4!important;outline-offset:3px!important}
+button,select,.filter,.btn,nav a{touch-action:manipulation}
+@media(min-width:1000px){
+ #country-time{display:block}
+ #country-time .section-head{align-items:flex-start}
+ #country-time .time-select{max-width:100%}
+}
+@media(max-width:760px){
+ .wrap{width:calc(100% - 22px);padding:11px 0 34px}
+ .hero{padding:20px 18px!important;border-radius:19px}
+ #themeToggle,.language-control{position:static!important;display:inline-flex;align-self:flex-start;margin:13px 8px 0 0!important;max-width:100%}
+ .language-control{margin-right:0!important}
+ .hero .hero-share{display:flex;flex-wrap:wrap;margin-top:14px!important}
+ .hero .hero-share a,.hero .hero-share button{flex:1 1 145px}
+ nav{top:4px;margin-bottom:10px;border-radius:13px}
+ nav a{padding:11px 12px;font-size:.78rem}
+ .panel{padding:18px!important;border-radius:17px!important;margin-bottom:10px!important}
+ .section-head{align-items:flex-start;gap:9px;margin-bottom:15px}
+ .home-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .cards,#completed .cards{grid-template-columns:1fr}
+ .vote-card{padding:17px}
+ .filters,.birthday-filters{flex-wrap:nowrap!important;overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:7px;scrollbar-width:thin}
+ .filters>* ,.birthday-filters>*{flex:0 0 auto}
+ .actions .btn{flex:1 1 140px}
+}
+@media(max-width:420px){
+ .wrap{width:calc(100% - 16px)}
+ .hero h1{font-size:2rem!important}
+ .hero p{font-size:.88rem}
+ .home-shortcuts a{padding:11px}
+ .home-shortcuts a strong{font-size:.8rem}
+ .section-head h2{font-size:1.12rem}
+}
+body.dark-mode{--bg:#171522;--ink:#f1edf9;--muted:#b8b1ca;background:#171522;color:#f1edf9}
+body.dark-mode .hero{background:linear-gradient(120deg,#272239,#322a48)!important;border-color:#48405d}
+body.dark-mode .hero h1,body.dark-mode .hero h1 span{color:#f1edff!important}
+body.dark-mode .hero p{color:#c9c2d9!important}
+body.dark-mode .hero .era{background:#403653;color:#e5d9ff;border-color:#5b4d74}
+body.dark-mode .panel,body.dark-mode .vote-card{background:#242135!important;border-color:#423b56!important;color:#eee9f8}
+body.dark-mode .section-head h2,body.dark-mode .vote-card h3,body.dark-mode .home-shortcuts a strong{color:#f0ebfa}
+body.dark-mode .section-head p,body.dark-mode .vote-card .description,body.dark-mode .vote-card .field-value,body.dark-mode .home-shortcuts a small{color:#bdb5cf}
+body.dark-mode nav{background:rgba(35,31,52,.96);border-color:#48405d}
+body.dark-mode nav a{color:#d4cbe8}
+body.dark-mode nav a:hover,body.dark-mode nav a.active{background:#403653;color:#fff}
+body.dark-mode .home-shortcuts{border-color:#48405d}
+body.dark-mode .home-shortcuts a,body.dark-mode #country-time .note{background:#2c2740;border-color:#49415f}
+body.dark-mode .home-shortcuts a span{color:#b4a2e7}
+body.dark-mode .home-shortcuts a small{color:#bdb5cf}
+body.dark-mode #country-time .time-select,body.dark-mode .language-control,body.dark-mode #themeToggle{background:#302a43!important;color:#f1eafa!important;border-color:#554b6b!important}
+body.dark-mode .rule-box,body.dark-mode .tutorial-video{background:#2c2740;border-color:#49415f;color:#ded6ed}
+body.dark-mode .btn.secondary{background:#403653;color:#eee8f8}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
 </style>
 
 <!-- GoatCounter: estadísticas privadas de visitas -->
@@ -2734,7 +2866,17 @@ h1,h2,h3,h4,
   <option value="America/Los_Angeles">🇺🇸 Estados Unidos · Los Ángeles</option><option value="America/Denver">🇺🇸 Estados Unidos · Denver</option><option value="America/Chicago">🇺🇸 Estados Unidos · Chicago</option><option value="America/New_York">🇺🇸 Estados Unidos · Nueva York</option><option value="America/Anchorage">🇺🇸 Estados Unidos · Alaska</option><option value="Pacific/Honolulu">🇺🇸 Estados Unidos · Hawái</option><option value="America/Toronto">🇨🇦 Canadá · Toronto</option><option value="America/Vancouver">🇨🇦 Canadá · Vancouver</option>
   <option value="America/Guatemala">🇬🇹 Guatemala</option><option value="America/Belize">🇧🇿 Belice</option><option value="America/Tegucigalpa">🇭🇳 Honduras</option><option value="America/El_Salvador">🇸🇻 El Salvador</option><option value="America/Managua">🇳🇮 Nicaragua</option><option value="America/Costa_Rica">🇨🇷 Costa Rica</option><option value="America/Panama">🇵🇦 Panamá</option><option value="America/Bogota">🇨🇴 Colombia</option><option value="America/Lima">🇵🇪 Perú</option><option value="America/Guayaquil">🇪🇨 Ecuador</option><option value="America/Caracas">🇻🇪 Venezuela</option><option value="America/La_Paz">🇧🇴 Bolivia</option><option value="America/Santiago">🇨🇱 Chile · Santiago</option><option value="America/Argentina/Buenos_Aires">🇦🇷 Argentina</option><option value="America/Montevideo">🇺🇾 Uruguay</option><option value="America/Sao_Paulo">🇧🇷 Brasil · São Paulo</option><option value="America/Asuncion">🇵🇾 Paraguay</option><option value="America/Puerto_Rico">🇵🇷 Puerto Rico</option><option value="America/Santo_Domingo">🇩🇴 República Dominicana</option><option value="America/Havana">🇨🇺 Cuba</option>
   <option value="Europe/London">🇬🇧 Reino Unido</option><option value="Europe/Madrid">🇪🇸 España · Madrid</option><option value="Atlantic/Canary">🇪🇸 España · Canarias</option><option value="Europe/Paris">🇫🇷 Francia</option><option value="Europe/Berlin">🇩🇪 Alemania</option><option value="Europe/Rome">🇮🇹 Italia</option><option value="Europe/Amsterdam">🇳🇱 Países Bajos</option><option value="Europe/Brussels">🇧🇪 Bélgica</option><option value="Europe/Zurich">🇨🇭 Suiza</option><option value="Europe/Lisbon">🇵🇹 Portugal</option><option value="Europe/Athens">🇬🇷 Grecia</option><option value="Europe/Istanbul">🇹🇷 Turquía</option><option value="Europe/Moscow">🇷🇺 Rusia · Moscú</option><option value="Africa/Cairo">🇪🇬 Egipto</option><option value="Africa/Johannesburg">🇿🇦 Sudáfrica</option><option value="Africa/Lagos">🇳🇬 Nigeria</option><option value="Africa/Nairobi">🇰🇪 Kenia</option><option value="Asia/Dubai">🇦🇪 Emiratos Árabes Unidos</option><option value="Asia/Riyadh">🇸🇦 Arabia Saudita</option><option value="Asia/Kolkata">🇮🇳 India</option><option value="Asia/Dhaka">🇧🇩 Bangladés</option><option value="Asia/Bangkok">🇹🇭 Tailandia</option><option value="Asia/Jakarta">🇮🇩 Indonesia · Yakarta</option><option value="Asia/Singapore">🇸🇬 Singapur</option><option value="Asia/Kuala_Lumpur">🇲🇾 Malasia</option><option value="Asia/Manila">🇵🇭 Filipinas</option><option value="Asia/Hong_Kong">🇭🇰 Hong Kong</option><option value="Asia/Shanghai">🇨🇳 China</option><option value="Asia/Taipei">🇹🇼 Taiwán</option><option value="Asia/Seoul">🇰🇷 Corea del Sur</option><option value="Asia/Tokyo">🇯🇵 Japón</option><option value="Asia/Ho_Chi_Minh">🇻🇳 Vietnam</option><option value="Asia/Kathmandu">🇳🇵 Nepal</option><option value="Australia/Perth">🇦🇺 Australia · Perth</option><option value="Australia/Adelaide">🇦🇺 Australia · Adelaida</option><option value="Australia/Sydney">🇦🇺 Australia · Sídney</option><option value="Pacific/Auckland">🇳🇿 Nueva Zelanda</option><option value="Pacific/Fiji">🇫🇯 Fiyi</option>
- </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p></section>
+ </select><label for="timeFormatSelect" style="display:block;margin:14px 0 7px;font-size:.82rem;font-weight:900">Formato de hora</label><select class="time-select" id="timeFormatSelect"><option value="12">12 horas · AM / PM</option><option value="24" selected>24 horas · 00:00–23:59</option></select><p class="note" style="margin-bottom:0">Hora local actual: <strong id="localNow">--:--:--</strong> · <span id="localDate">Selecciona tu zona.</span></p>
+<div class="home-shortcuts" aria-label="Accesos rápidos">
+ <div class="home-shortcuts-heading">ACCESOS RÁPIDOS</div>
+ <a href="#active"><span>01</span><strong>Votaciones activas</strong><small>Consulta campañas y plazos</small></a>
+ <a href="#birthday-voting"><span>02</span><strong>Cumpleaños</strong><small>Campañas de Jin y V</small></a>
+ <a href="#choeaedol"><span>03</span><strong>Recolección</strong><small>Prepara Ever Hearts</small></a>
+ <a href="#upcoming"><span>04</span><strong>Próximas</strong><small>Eventos anunciados</small></a>
+ <a href="#completed"><span>05</span><strong>Finalizadas</strong><small>Consulta resultados</small></a>
+ <a href="#guide"><span>06</span><strong>Guía</strong><small>Cómo participar</small></a>
+ <a href="#sources"><span>07</span><strong>Fuentes</strong><small>Plataformas oficiales</small></a>
+</div></section>
 
 <section class="panel" id="choeaedol">
  <div class="section-head"><div><h2>RECOLECCIÓN</h2><p>Reúne Ever Hearts para apoyar a BTS en los Golden Disc Awards.</p></div><span class="pill">CHOEAEDOL</span></div>
