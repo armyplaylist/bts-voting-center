@@ -2772,6 +2772,13 @@ header.hero{display:none!important}
 .vc-bottom-nav a.active{background:#eee5ff!important;color:#6840b5!important}
 @media(max-width:380px){.vc-bottom-nav{width:calc(100% - 16px)!important}.vc-bottom-nav a small{font-size:9px!important}}
 
+
+#appBackButton .account-icon{display:block;fill:currentColor}
+#appBackButton .back-icon{display:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#appBackButton.is-back .account-icon{display:none}
+#appBackButton.is-back .back-icon{display:block}
+#appBackButton.is-back{background:#eee5ff;color:#6840b5}
+
 </style>
 
 <script>
@@ -3016,7 +3023,7 @@ body.dark-mode .daily-ending-item{background:#382832;border-color:#65414e}body.d
 
 </head>
 <body><main class="wrap">
-<div class="app-topbar"><a href="#army-account" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c.4-4.1 3.5-6.5 8-6.5 8 2.4 8 6.5z"/></svg></a><div class="app-brand">BTS<small>VOTING CENTER</small></div><a class="app-notice" href="#agenda" aria-label="Agenda">♧</a></div>
+<div class="app-topbar"><a id="appBackButton" href="#army-account" aria-label="Mi cuenta"><svg class="account-icon" viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c.4-4.1 3.5-6.5 8-6.5s7.6 2.4 8 6.5z"/></svg><svg class="back-icon" viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="m15 18-6-6 6-6M9 12h11"/></svg></a><div class="app-brand">BTS<small>VOTING CENTER</small></div><a class="app-notice" href="#agenda" aria-label="Agenda">♧</a></div>
 
 <header class="hero" id="top">
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
@@ -4339,6 +4346,18 @@ function armyInternalEmail(username){
 <script>
 (function(){
  const nav=document.querySelector('.legacy-section-nav');if(!nav)return;
+ const backButton=document.getElementById('appBackButton');
+ function updateBackButton(){
+  if(!backButton)return;
+  const current=(location.hash||'#country-time').slice(1);
+  const isHome=current==='country-time';
+  backButton.classList.toggle('is-back',!isHome);
+  backButton.setAttribute('aria-label',isHome?'Mi cuenta':'Volver al inicio');
+  backButton.href=isHome?'#army-account':'#country-time';
+ }
+ if(backButton){backButton.addEventListener('click',e=>{const current=(location.hash||'#country-time').slice(1);if(current!=='country-time'){e.preventDefault();location.hash='country-time';}});}
+ window.addEventListener('hashchange',updateBackButton);
+ updateBackButton();
  const tabs=[
   ['country-time','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>','Inicio'],
   ['agenda','<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M7 3v4M17 3v4M4 9h16M8 13h3M8 17h3"/></svg>','Agenda'],
