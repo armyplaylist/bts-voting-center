@@ -2604,7 +2604,7 @@ body:not(.dark-mode) .mama-live-vote-alert .priority-tag{background:#f0e8f8!impo
 body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#ff4058!important}
 
 /* Aviso prioritario MAMA · visible sobre la navegación */
-.mama-priority-notice{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 14px;padding:15px 18px;border:1px solid #efc4cb;border-left:5px solid #c93650;border-radius:16px;background:linear-gradient(110deg,#fff1f3,#fff9fa);color:#702b3b;box-shadow:0 6px 18px rgba(173,49,76,.09)}
+.mama-priority-notice{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 16px;padding:18px 22px;border:1px solid #e4d5f5;border-left:5px solid #9a70c8;border-radius:16px;background:linear-gradient(115deg,#f8f1ff 0%,#fff 58%,#f3f7ff 100%);color:#49365f;box-shadow:0 7px 22px rgba(105,73,145,.10)}.mama-priority-copy{display:flex;flex-direction:column;gap:7px;min-width:0}.mama-priority-copy strong{font-size:.76rem;letter-spacing:.13em;color:#8054ad;font-weight:900}.mama-priority-copy span{font-size:.9rem;line-height:1.55;font-weight:650}.mama-notice-close{flex:none;align-self:flex-start;width:32px;height:32px;border:0;border-radius:50%;background:rgba(128,84,173,.10);color:#76519b;font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .2s}.mama-notice-close:hover{background:rgba(128,84,173,.2);transform:scale(1.06)}
 .mama-priority-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
 .mama-priority-copy strong{font-size:.82rem;letter-spacing:.035em;color:#a32643}
 .mama-priority-copy span{font-size:.8rem;line-height:1.45;font-weight:700}
@@ -2618,7 +2618,7 @@ body.dark-mode .mama-priority-notice{background:#382530;border-color:#714250;col
 body.dark-mode .mama-priority-copy strong,body.dark-mode .mama-live-priority h4{color:#ffb8c5}
 body.dark-mode .mama-priority-notice a{background:#a83c57;color:#fff}
 body.dark-mode .mama-live-priority{background:#392733;border-color:#714250}
-@media(max-width:600px){.mama-priority-notice{align-items:flex-start;flex-direction:column;padding:13px 14px}.mama-priority-notice a{width:100%;text-align:center}}
+@media(max-width:600px){.mama-priority-notice{align-items:flex-start;flex-direction:row;padding:15px 14px;gap:10px}.mama-priority-copy span{font-size:.84rem}.mama-notice-close{width:29px;height:29px}}
 
 /* Controles superiores integrados al encabezado */
 .hero .hero-controls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px auto 0}
@@ -2754,14 +2754,14 @@ h1,h2,h3,h4,
 .mama-priority-notice .mama-priority-copy{max-width:760px}
 .priority-tag,body.dark-mode .priority-tag,.mama-live-vote-alert .priority-tag,body.dark-mode .mama-live-vote-alert .priority-tag{background:#7048ad!important;color:#fff!important;border:0!important}
 .priority-tag .priority-star,body.dark-mode .priority-tag .priority-star,.mama-live-vote-alert .priority-tag .priority-star,body.dark-mode .mama-live-vote-alert .priority-tag .priority-star{color:#ff4058!important}
-@media(max-width:650px){.mama-priority-notice{align-items:flex-start;flex-direction:column;padding:13px 16px}.mama-priority-notice a{align-self:flex-start}}
+@media(max-width:650px){.mama-priority-notice{align-items:flex-start;flex-direction:row;padding:15px 16px;gap:10px}.mama-priority-copy span{font-size:.84rem}.mama-notice-close{width:29px;height:29px}}
 .birthday-history-card{min-width:0}
 </style>
 </head>
 <body>
-<aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
- <div class="mama-priority-copy"><strong>★ MUY IMPORTANTE · MAMA 2026</strong><span>La votación en vivo por el Daesang será el 20 de noviembre. No te pierdas esta etapa decisiva para BTS.</span></div>
- <a href="?section=proximas#mama-live-vote">VER VOTACIÓN EN VIVO ↗</a>
+<aside class="mama-priority-notice" role="status" aria-label="Anuncio">
+ <div class="mama-priority-copy"><strong>ANUNCIO</strong><span>El 20 de noviembre se decide el Daesang en la votación en vivo. Esta etapa define todo y cada voto cuenta. ¡No los dejes solos en la recta final! 💜🗳️</span></div>
+ <button class="mama-notice-close" type="button" aria-label="Cerrar anuncio" onclick="this.closest('.mama-priority-notice').remove()">×</button>
 </aside>
 <main class="wrap">
 <header class="hero" id="top">
