@@ -2648,6 +2648,22 @@ body.dark-mode .mama-countdown-value{color:#e4c5ff}
 /* High-contrast priority label in light mode */
 body:not(.dark-mode) .mama-live-priority .priority-tag{background:#4f267f!important;color:#ffffff!important;border:1px solid #4f267f!important;box-shadow:0 3px 10px #4f267f2b}
 body:not(.dark-mode) .mama-live-priority .priority-tag .priority-star{color:#ffffff!important}
+
+/* Universal flip-clock style for every live countdown */
+.bts-clock-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(5px,1.5vw,10px);width:100%;margin:8px 0 4px}
+.bts-clock-unit{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(8px,2vw,15px) 3px;border:1px solid rgba(255,255,255,.62);border-radius:clamp(10px,2vw,16px);background:linear-gradient(145deg,rgba(255,255,255,.68),rgba(255,255,255,.24));box-shadow:0 4px 12px rgba(65,49,115,.09),inset 0 1px 0 rgba(255,255,255,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.bts-clock-number{font-family:"Space Grotesk",system-ui,sans-serif;font-size:clamp(1.25rem,5.2vw,2.45rem);font-weight:800;line-height:1.05;letter-spacing:-.045em;font-variant-numeric:tabular-nums;color:#fff;text-shadow:0 1px 5px rgba(54,42,110,.22)}
+.bts-clock-label{margin-top:5px;font-size:clamp(.52rem,1.65vw,.76rem);font-weight:800;letter-spacing:.045em;text-transform:uppercase;color:rgba(255,255,255,.92);text-align:center}
+.bts-clock-prefix{display:block;margin-bottom:5px}
+.bts-clock-suffix{display:block;margin-top:6px}
+.vote-countdown:has(.bts-clock-grid),.bday-countdown:has(.bts-clock-grid),.birthday-countdown-timer:has(.bts-clock-grid),.gda-countdown-time:has(.bts-clock-grid),.mama-countdown-value:has(.bts-clock-grid),[data-reset-countdown]:has(.bts-clock-grid){display:block!important;width:100%;max-width:100%;padding:12px!important;border-radius:16px!important}
+.mama-countdown-panel .mama-countdown-value:has(.bts-clock-grid){font-size:inherit!important}
+.bts-clock-ended{font-weight:800}
+body.dark-mode .bts-clock-unit{background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.06));border-color:rgba(255,255,255,.2);box-shadow:0 4px 12px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.1)}
+body.dark-mode .bts-clock-number{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.3)}
+body.dark-mode .bts-clock-label{color:#eee4ff}
+@media(max-width:380px){.bts-clock-grid{gap:5px}.bts-clock-unit{padding:8px 2px}.bts-clock-number{font-size:clamp(1.05rem,5vw,1.5rem)}.bts-clock-label{font-size:.48rem;letter-spacing:0}}
+
 </style>
 
 <!-- GoatCounter: estadísticas privadas de visitas -->
@@ -3794,5 +3810,39 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 
 })();
 </script>
+
+<script>
+/* Render every countdown with four responsive glass clock tiles. */
+(function(){
+ const selectors='.vote-countdown,.bday-countdown,.birthday-countdown-timer,[data-birthday],.gda-countdown-time,.mama-countdown-value,.mama-mini-countdown,[data-reset-countdown],.reset-countdown';
+ const unitPattern='días?|dias?|days?|d|horas?|hours?|h|minutos?|minutes?|mins?|min|m|segundos?|seconds?|secs?|sec|s|일|시간|분|초|日|時間|分|秒|д|ч|мин|с|ชม\\.|นาที|วิ';
+ const labels={es:['DÍAS','HORAS','MINUTOS','SEGUNDOS'],en:['DAYS','HOURS','MINUTES','SECONDS'],pt:['DIAS','HORAS','MINUTOS','SEGUNDOS'],ko:['일','시간','분','초'],ja:['日','時間','分','秒'],ru:['ДНИ','ЧАСЫ','МИНУТЫ','СЕКУНДЫ'],th:['วัน','ชั่วโมง','นาที','วินาที']};
+ function decorate(el){
+  if(!el||el.classList.contains('is-ended'))return;
+  const raw=el.textContent||'';
+  if(!raw.trim()||el.dataset.btsClockRaw===raw)return;
+  const re=new RegExp('\\d+\\s*(?:'+unitPattern+')','gi');
+  const matches=[...raw.matchAll(re)].slice(0,4);
+  if(matches.length!==4)return;
+  const lang=(window.__btsCountdownI18n&&window.__btsCountdownI18n.current&&window.__btsCountdownI18n.current())||'es';
+  const names=labels[lang]||labels.es;
+  const first=matches[0].index,last=matches[3].index+matches[3][0].length;
+  const prefix=raw.slice(0,first).trim(),suffix=raw.slice(last).trim();
+  const nums=matches.map(m=>m[0].match(/\\d+/)[0]);
+  el.dataset.btsClockRaw=raw;
+  el.innerHTML='';
+  if(prefix){const p=document.createElement('span');p.className='bts-clock-prefix';p.textContent=prefix;el.appendChild(p);}
+  const grid=document.createElement('span');grid.className='bts-clock-grid';
+  nums.forEach((num,i)=>{const tile=document.createElement('span');tile.className='bts-clock-unit';const value=document.createElement('span');value.className='bts-clock-number';value.textContent=num;const label=document.createElement('span');label.className='bts-clock-label';label.textContent=names[i];tile.append(value,label);grid.appendChild(tile);});
+  el.appendChild(grid);
+  if(suffix){const s=document.createElement('span');s.className='bts-clock-suffix';s.textContent=suffix;el.appendChild(s);}
+ }
+ function scan(root){if(root.nodeType===1&&root.matches&&root.matches(selectors))decorate(root);if(root.querySelectorAll)root.querySelectorAll(selectors).forEach(decorate);}
+ function start(){scan(document);const observer=new MutationObserver(records=>records.forEach(record=>{if(record.type==='childList')record.addedNodes.forEach(node=>{if(node.nodeType===1)scan(node);});else if(record.type==='characterData'){const target=record.target.parentElement?.closest(selectors);if(target)decorate(target);}}));observer.observe(document.body,{subtree:true,childList:true,characterData:true});}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+ window.addEventListener('bts-language-change',()=>document.querySelectorAll(selectors).forEach(el=>{delete el.dataset.btsClockRaw;decorate(el);}));
+})();
+</script>
+
 </body>
 </html>
