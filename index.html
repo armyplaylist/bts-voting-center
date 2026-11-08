@@ -2602,6 +2602,23 @@ body.dark-mode .nav-notification{background:#ff6b83;color:#24131a}
 /* El distintivo PRIORITARIO del desplegable MAMA replica el del registro de certificados */
 body:not(.dark-mode) .mama-live-vote-alert .priority-tag{background:#f0e8f8!important;color:#6840a0!important}
 body:not(.dark-mode) .mama-live-vote-alert .priority-tag .priority-star{color:#ff4058!important}
+
+/* Aviso prioritario MAMA · visible sobre la navegación */
+.mama-priority-notice{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 14px;padding:15px 18px;border:1px solid #efc4cb;border-left:5px solid #c93650;border-radius:16px;background:linear-gradient(110deg,#fff1f3,#fff9fa);color:#702b3b;box-shadow:0 6px 18px rgba(173,49,76,.09)}
+.mama-priority-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.mama-priority-copy strong{font-size:.82rem;letter-spacing:.035em;color:#a32643}
+.mama-priority-copy span{font-size:.8rem;line-height:1.45;font-weight:700}
+.mama-priority-notice a{flex:none;padding:10px 13px;border-radius:10px;background:#a92d49;color:#fff;text-decoration:none;font-size:.75rem;font-weight:900}
+.mama-priority-notice a:hover{background:#8f203a}
+.mama-live-card{border:2px solid #e9c4cb!important;box-shadow:0 8px 22px rgba(173,49,76,.09)!important}
+.mama-live-card:before{background:linear-gradient(#c93650,#e88b98)!important}
+.mama-live-priority{margin:2px 0 4px;padding:10px 12px;border-radius:12px;background:#fff0f2;border:1px solid #f1cbd2}
+.mama-live-priority h4{color:#a32643}
+body.dark-mode .mama-priority-notice{background:#382530;border-color:#714250;color:#f4dce2}
+body.dark-mode .mama-priority-copy strong,body.dark-mode .mama-live-priority h4{color:#ffb8c5}
+body.dark-mode .mama-priority-notice a{background:#a83c57;color:#fff}
+body.dark-mode .mama-live-priority{background:#392733;border-color:#714250}
+@media(max-width:600px){.mama-priority-notice{align-items:flex-start;flex-direction:column;padding:13px 14px}.mama-priority-notice a{width:100%;text-align:center}}
 </style>
 
 <!-- GoatCounter: estadísticas privadas de visitas -->
@@ -2711,6 +2728,10 @@ h1,h2,h3,h4,
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
+<aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
+ <div class="mama-priority-copy"><strong>★ MUY IMPORTANTE · MAMA 2026</strong><span>La votación en vivo por el Daesang será el 20 de noviembre. No te pierdas esta etapa decisiva para BTS.</span></div>
+ <a href="?section=proximas#mama-live-vote">VER VOTACIÓN EN VIVO ↗</a>
+</aside>
 <nav aria-label="Navegación principal"><a href="?section=inicio">Inicio</a><a href="?section=votaciones">Votaciones activas</a><a href="?section=cumpleanos">Cumpleaños</a><a href="?section=recoleccion">Recolección</a><a href="?section=proximas">Próximas</a><a href="?section=finalizadas">Finalizadas</a><a href="?section=guia">Guía</a><a href="?section=fuentes">Fuentes</a></nav>
 
 
@@ -2744,39 +2765,8 @@ h1,h2,h3,h4,
 <section class="panel" id="active">
  <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
  <div class="cards" id="voteCards">
-  <div class="rule-box mama-certificate-link"><div class="priority-certificate-head"><h4>📩 REGISTRO DE CERTIFICADOS MAMA</h4><span class="priority-tag"><span class="priority-star">★</span> PRIORITARIO</span></div><p>Comparte tus certificados de voto en el tracker comunitario de BTS Voting Org.</p><div class="actions"><a class="btn" href="https://btsvote-mama-voting-tracker.vercel.app/" target="_blank" rel="noopener noreferrer">ENVIAR CERTIFICADOS ↗</a></div></div>
-  <article class="vote-card" data-kind="group">
- <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mama" src="https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg" alt="Logotipo de MAMA Awards" loading="lazy" decoding="async">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
- <details class="mama-live-details">
-  <summary class="mama-live-summary"><span>★ VOTACIÓN EN VIVO · 20 NOVIEMBRE</span><span class="mama-mini-countdown" id="mamaLiveMiniCountdown">Calculando…</span></summary>
-  <div class="rule-box x-rule mama-live-vote-alert" style="margin:10px 0;border-width:2px;border-left:6px solid #d93655;background:linear-gradient(110deg,#fff2f4,#fff9fb)">
-   <div class="priority-certificate-head"><h4 style="margin:0">★ FECHA CLAVE · VOTACIÓN EN VIVO</h4><span class="priority-tag"><span class="priority-star">★</span> PRIORITARIO</span></div>
-   <p><strong>20 DE NOVIEMBRE DE 2026 · DURANTE LA TRANSMISIÓN EN VIVO</strong></p>
-   <p>La votación en vivo para <strong>VISA Fans’ Choice of the Year (DAESANG)</strong> se realizará durante la ceremonia del 20 de noviembre. El programa comienza a las <strong>18:00 KST</strong>; la hora exacta de apertura del voto se anunciará durante la transmisión. Mantén Mnet Plus listo y sigue los avisos oficiales.</p>
-  </div>
-  <div class="rule-box mama-vote-criteria" style="margin:10px 0">
-   <h4>CRITERIOS DE VOTACIÓN · BTS</h4>
-   <p><strong>🏆 BONSANG · Fans’ Choice Male</strong></p>
-   <p>• Mnet Plus: <strong>90%</strong> del resultado.<br>• X: <strong>10%</strong> del resultado.</p>
-   <p><strong>👑 DAESANG · VISA Fans’ Choice of the Year</strong></p>
-   <p>• Votación de Mnet Plus: <strong>90%</strong>.<br>• Votación en X: <strong>10%</strong>.<br>• Votación en vivo por Mnet Plus: <strong>10% adicional</strong>, según los criterios publicados para el Daesang.</p>
-   <p><strong>Importante:</strong> el voto en vivo corresponde al Daesang; no sustituye los votos diarios de la ronda Fans’ Choice. Revisa las instrucciones que aparezcan en Mnet Plus durante la ceremonia.</p>
-   <p style="font-size:.72rem">Criterios publicados para Fans’ Choice Male/Female y VISA Fans’ Choice of the Year.</p>
-  </div>
- </details>
- <button class="complete-toggle" type="button" data-complete-vote="mama" aria-pressed="false">□ MARCAR COMO COMPLETADA</button><div class="ranking-line"><b>🏆 RANKING</b><span>#1 masculino · ronda 2 (tracker comunitario; sin conteo público)</span></div><div class="local-vote-time" data-vote-time="mama"><strong>Reinicio diario:</strong> 00:00 KST. <strong>Cierre:</strong> 8 nov · 23:59 KST (fecha por confirmar dentro de Mnet Plus).</div>
- <div class="countdown vote-countdown" data-countdown="mama">Calculando cuenta regresiva…</div>
-  <div class="vote-countdown reset-countdown" data-reset-countdown="korea-midnight"><strong>Reinicio de votos:</strong> calculando…</div>
- <h4>Categorías y nominaciones de BTS</h4><p class="field-value">Fans' Choice (Bonsang) · VISA Fans' Choice of the Year (Daesang)</p>
- <h4>Cómo votar</h4><p class="field-value">Mnet Plus: abre la app, entra a 2026 MAMA AWARDS → FANS’ CHOICE, selecciona BTS y confirma el voto. X: publica desde una cuenta pública con <b>#2026MAMAVOTE #BTS</b>.</p>
- <details class="tutorial-video">
-  <summary>▶ VER TUTORIAL · MAMA 2026 / MNET PLUS + X</summary>
-  <div class="tutorial-video-frame"><iframe src="https://www.youtube-nocookie.com/embed/ZCBLUrKju4g" title="Tutorial de votación MAMA 2026 en Mnet Plus y X" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-  <p class="tutorial-video-note">Tutorial comunitario publicado en septiembre de 2026. Comprueba siempre las reglas vigentes en Mnet Plus antes de votar.</p>
-  <a class="tutorial-video-link" href="https://www.youtube.com/watch?v=ZCBLUrKju4g" target="_blank" rel="noopener noreferrer">Abrir video en YouTube ↗</a>
- </details>
- <h4>Link a app o web</h4><div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener">APP MNET PLUS</a><a class="btn secondary" data-x-copy="mama" href="https://twitter.com/intent/tweet?text=I%27m%20voting%20for%20BTS%20at%20%232026MAMAVOTE%20%23BTS" target="_blank" rel="noopener">PUBLICAR EN X</a></div>
-</article>
+  
+  
   <article class="vote-card" data-kind="group">
  <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-aria" src="https://images.squarespace-cdn.com/content/v1/6522859ed74b6e6f6d350faf/1ea4ee1b-9617-4d21-8235-be6acab6d157/aria.png" alt="Logotipo de ARIA Awards" loading="lazy" decoding="async">ARIA Awards <span>2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
  <button class="complete-toggle" type="button" data-complete-vote="aria" aria-pressed="false">□ MARCAR COMO COMPLETADA</button><div class="ranking-line"><b>🏆 RANKING</b><span>Sin clasificación pública · BTS está nominado</span></div><div class="local-vote-time" data-vote-time="aria"><strong>Cierre:</strong> 9 nov · 23:59 AEDT. Reinicio diario no publicado.</div>
@@ -2856,7 +2846,21 @@ h1,h2,h3,h4,
 <section class="panel" id="upcoming">
  <div class="section-head"><div><h2>🗓️ UPCOMING VOTING</h2><p>Próximos eventos anunciados; se añadirán fechas exactas cuando el organizador las publique.</p></div><span class="pill soon">PRÓXIMAMENTE</span></div>
  <div class="upcoming">
-  <article class="vote-card" data-kind="group">
+  <article class="vote-card mama-live-card" id="mama-live-vote" data-kind="group">
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mama" src="https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg" alt="Logotipo de MAMA Awards" loading="lazy" decoding="async">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
+ <div class="priority-certificate-head mama-live-priority"><h4 style="margin:0">★ VOTACIÓN EN VIVO · DAESANG</h4><span class="priority-tag"><span class="priority-star">★</span> MUY IMPORTANTE</span></div>
+ <div class="local-vote-time"><strong>20 DE NOVIEMBRE DE 2026 · 18:00 KST</strong><br>Durante la ceremonia. La hora exacta de apertura del voto se anunciará durante la transmisión.</div>
+ <p class="field-value">Esta es la votación en vivo para <strong>VISA Fans’ Choice of the Year</strong>, el Daesang de MAMA. Es una etapa independiente de la ronda diaria de Fans’ Choice, que ya finalizó.</p>
+ <div class="rule-box mama-vote-criteria">
+  <h4>¿QUÉ ESTÁ EN JUEGO?</h4>
+  <p>El <strong>VISA Fans’ Choice of the Year</strong> es uno de los grandes premios Daesang de MAMA. El apoyo de ARMY durante la votación en vivo puede ser decisivo para BTS.</p>
+  <p>La votación en vivo se realizará mediante <strong>Mnet Plus</strong> durante la ceremonia. Mantén la aplicación lista y sigue las instrucciones oficiales que aparezcan en pantalla.</p>
+  <p><strong>Importante:</strong> esta votación en vivo corresponde al Daesang; no reabre ni sustituye la ronda diaria que terminó el 8 de noviembre.</p>
+ </div>
+ <h4>Plataforma oficial</h4>
+ <div class="actions"><a class="btn" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener noreferrer">ABRIR MNET PLUS ↗</a></div>
+</article>
+ <article class="vote-card" data-kind="group">
  <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-gda" src="https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png" alt="Logotipo de Golden Disc Awards" loading="lazy" decoding="async">41st Golden Disc Awards <span>(GDA 2027)</span></h3><span class="pill">BTS · GRUPAL</span></div>
  <div class="ranking-line"><b>🏆 RANKING</b><span>Aún no hay ranking · votación de popularidad pendiente</span></div><div class="local-vote-time" data-vote-time="gda"><strong>Caducidad Daily Hearts:</strong> 23:30 KST. <strong>Votación prevista:</strong> 8 dic 2026–3 ene 2027 KST; cierre exacto pendiente.</div>
  <div class="countdown vote-countdown" data-countdown="gda">Calculando cuenta regresiva…</div>
@@ -2900,6 +2904,15 @@ h1,h2,h3,h4,
 <section class="panel" id="completed">
  <div class="section-head"><div><h2>✓ COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
  <div class="cards">
+<article class="vote-card" data-kind="group">
+ <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mama" src="https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg" alt="Logotipo de MAMA Awards" loading="lazy" decoding="async">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
+ <span class="pill" aria-label="Votación finalizada">✓ RONDA DIARIA FINALIZADA</span>
+ <div class="ranking-line"><b>🏆 SEGUIMIENTO</b><span>#1 masculino · ronda 2 (tracker comunitario; sin conteo público)</span></div>
+ <p class="field-value">La fase diaria de <strong>Fans’ Choice</strong> terminó. El resultado oficial final no está publicado en esta ficha, por lo que no se asigna una posición definitiva.</p>
+ <div class="local-vote-time"><strong>Estado:</strong> Finalizada · 8 de noviembre de 2026 · 23:59 KST.</div>
+ <p class="field-value">La votación en vivo por el Daesang <strong>VISA Fans’ Choice of the Year</strong> es una etapa separada y permanece en Próximas votaciones.</p>
+ <div class="actions"><a class="btn secondary" href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener noreferrer">CONSULTAR MAMA 2026 ↗</a></div>
+</article>
 <article class="vote-card" data-kind="birthday">
  <div class="card-top"><h3 class="vote-title">Podoal · December Birthday</h3><span class="pill">JIN + V · COMPARTIDA</span></div>
  <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span>
