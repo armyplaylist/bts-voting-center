@@ -3100,6 +3100,45 @@ body.dark-mode #birthday-voting .birthday-countdown-timer strong{color:#ff9fc6!i
 }
 </style>
 
+
+<style id="birthday-countdown-larger-text">
+/* Make Jin and V birthday countdowns easier to read without covering decorations */
+#birthday-voting .birthday-countdown-timer .bts-clock-grid{
+  gap:clamp(12px,2.2vw,22px)!important;
+  margin:12px 0 8px!important;
+}
+#birthday-voting .birthday-countdown-timer .bts-clock-number{
+  font-size:clamp(1.12rem,3vw,1.5rem)!important;
+  line-height:1.12!important;
+  font-weight:850!important;
+}
+#birthday-voting .birthday-countdown-timer .bts-clock-label{
+  margin-top:5px!important;
+  font-size:clamp(.58rem,1.4vw,.7rem)!important;
+  line-height:1.15!important;
+  letter-spacing:.035em!important;
+}
+#birthday-voting .birthday-countdown-timer{
+  line-height:1.5!important;
+}
+@media(max-width:760px){
+  #birthday-voting .birthday-countdown-timer .bts-clock-grid{
+    gap:clamp(12px,5vw,24px)!important;
+  }
+  #birthday-voting .birthday-countdown-timer .bts-clock-number{
+    font-size:clamp(1.2rem,5vw,1.55rem)!important;
+  }
+  #birthday-voting .birthday-countdown-timer .bts-clock-label{
+    font-size:clamp(.6rem,2.7vw,.72rem)!important;
+  }
+}
+@media(max-width:350px){
+  #birthday-voting .birthday-countdown-timer .bts-clock-grid{gap:9px!important}
+  #birthday-voting .birthday-countdown-timer .bts-clock-number{font-size:1.08rem!important}
+  #birthday-voting .birthday-countdown-timer .bts-clock-label{font-size:.54rem!important}
+}
+</style>
+
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
