@@ -4793,5 +4793,31 @@ body.dark-mode .vote-card,body.dark-mode .vote-card[data-palette]{
 }
 </style>
 
+
+<style id="final-remove-voting-card-accent">
+/* El acento lateral se estaba dibujando como sombra interior en reglas de mayor especificidad */
+html body .cards .vote-card,
+html body .cards .vote-card[data-palette],
+html body:not(.dark-mode) .cards .vote-card[data-palette],
+html body.dark-mode .cards .vote-card[data-palette]{
+  border-left:0!important;
+  box-shadow:0 7px 20px rgba(55,35,75,.055)!important;
+}
+html body .cards .vote-card::before,
+html body .cards .vote-card:before,
+html body .cards .vote-card[data-palette]::before,
+html body .cards .vote-card[data-palette]:before,
+html body:not(.dark-mode) .cards .vote-card[data-palette]::before,
+html body:not(.dark-mode) .cards .vote-card[data-palette]:before,
+html body.dark-mode .cards .vote-card[data-palette]::before,
+html body.dark-mode .cards .vote-card[data-palette]:before{
+  display:none!important;
+  content:none!important;
+  width:0!important;
+  background:none!important;
+  opacity:0!important;
+}
+</style>
+
 </body>
 </html>
