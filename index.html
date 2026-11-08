@@ -16,7 +16,7 @@
       var style=document.createElement("style");
       style.textContent='#new-version-notice{position:relative;z-index:9999;background:#24172f;color:#fff;padding:12px 16px;font-family:"DM Sans",Arial,sans-serif}#new-version-notice .new-version-inner{max-width:1120px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}#new-version-notice span{display:flex;flex-direction:column;gap:3px}#new-version-notice strong{font-size:14px}#new-version-notice small{font-size:12px;color:#e3d8ed;line-height:1.4}#new-version-notice a{flex:none;padding:9px 12px;border-radius:7px;background:#eadcf8;color:#38224e;text-decoration:none;font-size:12px;font-weight:800}#new-version-notice button{border:0;background:transparent;color:#fff;font-size:22px;cursor:pointer;padding:2px 5px}@media(max-width:600px){#new-version-notice .new-version-inner{align-items:flex-start;flex-wrap:wrap}#new-version-notice a{order:3}#new-version-notice button{margin-left:auto;position:absolute;right:8px;top:6px}#new-version-notice strong{padding-right:22px}}';
       document.head.appendChild(style);
-      document.body.insertBefore(bar,document.body.firstChild);
+      var announcement=document.querySelector(".mama-priority-notice"); if(announcement&&announcement.parentNode===document.body) document.body.insertBefore(bar,announcement.nextSibling); else document.body.insertBefore(bar,document.body.firstChild);
       bar.querySelector("button").addEventListener("click",function(){bar.remove();style.remove();});
     }
     if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",addNotice);
@@ -2713,8 +2713,21 @@ h1,h2,h3,h4,
   font-family:'Poppins',sans-serif !important;
 }
 </style>
+<style id="bts-top-announcement-theme-fix">
+.mama-priority-notice{width:100%;margin:0 0 14px!important;padding:14px max(18px,calc((100% - 1080px)/2));border:0;border-bottom:1px solid #efc4cb;border-left:0;border-radius:0;box-shadow:0 4px 14px rgba(173,49,76,.08)}
+.mama-priority-notice .mama-priority-copy{max-width:760px}
+.priority-tag,body.dark-mode .priority-tag,.mama-live-vote-alert .priority-tag,body.dark-mode .mama-live-vote-alert .priority-tag{background:#7048ad!important;color:#fff!important;border:0!important}
+.priority-tag .priority-star,body.dark-mode .priority-tag .priority-star,.mama-live-vote-alert .priority-tag .priority-star,body.dark-mode .mama-live-vote-alert .priority-tag .priority-star{color:#ff4058!important}
+@media(max-width:650px){.mama-priority-notice{align-items:flex-start;flex-direction:column;padding:13px 16px}.mama-priority-notice a{align-self:flex-start}}
+.birthday-history-card{min-width:0}
+</style>
 </head>
-<body><main class="wrap">
+<body>
+<aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
+ <div class="mama-priority-copy"><strong>★ MUY IMPORTANTE · MAMA 2026</strong><span>La votación en vivo por el Daesang será el 20 de noviembre. No te pierdas esta etapa decisiva para BTS.</span></div>
+ <a href="?section=proximas#mama-live-vote">VER VOTACIÓN EN VIVO ↗</a>
+</aside>
+<main class="wrap">
 <header class="hero" id="top">
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
@@ -2728,10 +2741,7 @@ h1,h2,h3,h4,
   <button class="hero-share-copy" id="copyCenterLink" type="button">⧉ COPIAR ENLACE</button>
  </div>
 </header>
-<aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
- <div class="mama-priority-copy"><strong>★ MUY IMPORTANTE · MAMA 2026</strong><span>La votación en vivo por el Daesang será el 20 de noviembre. No te pierdas esta etapa decisiva para BTS.</span></div>
- <a href="?section=proximas#mama-live-vote">VER VOTACIÓN EN VIVO ↗</a>
-</aside>
+
 <nav aria-label="Navegación principal"><a href="?section=inicio">Inicio</a><a href="?section=votaciones">Votaciones activas</a><a href="?section=cumpleanos">Cumpleaños</a><a href="?section=recoleccion">Recolección</a><a href="?section=proximas">Próximas</a><a href="?section=finalizadas">Finalizadas</a><a href="?section=guia">Guía</a><a href="?section=fuentes">Fuentes</a></nav>
 
 
