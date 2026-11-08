@@ -2872,6 +2872,63 @@ body.dark-mode .birthday-countdown-timer .bts-clock-unit{background:#342b3d!impo
 body.dark-mode #birthday-voting .birthday-countdown-timer .bts-clock-number{color:#d2b8ff!important}
 body.dark-mode #birthday-voting .birthday-countdown-timer .bts-clock-label{color:#c2b3d0!important}
 </style>
+
+<style id="birthday-countdowns-page-fit">
+/* Ajuste de los contadores de cumpleaños al ancho real de la página */
+#birthday-voting .birthday-countdowns{
+  width:100%;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:stretch;
+  gap:clamp(8px,1.8vw,14px);
+}
+#birthday-voting .birthday-countdown-card{
+  min-width:0;
+  width:100%;
+  box-sizing:border-box;
+  padding:clamp(10px,1.8vw,16px);
+  overflow:hidden;
+}
+#birthday-voting .birthday-countdown-member,
+#birthday-voting .birthday-countdown-date,
+#birthday-voting .birthday-countdown-local{
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+#birthday-voting .birthday-countdown-timer .bts-clock-grid{
+  gap:clamp(6px,1.4vw,12px)!important;
+}
+@media(max-width:560px){
+  #birthday-voting .birthday-countdowns{
+    grid-template-columns:minmax(0,1fr);
+    gap:10px;
+  }
+  #birthday-voting .birthday-countdown-card{
+    padding:12px 10px;
+  }
+  #birthday-voting .birthday-countdown-timer .bts-clock-grid{
+    flex-wrap:nowrap!important;
+    gap:clamp(9px,4vw,18px)!important;
+  }
+  #birthday-voting .birthday-countdown-timer .bts-clock-number{
+    font-size:clamp(.82rem,4vw,1rem)!important;
+  }
+  #birthday-voting .birthday-countdown-timer .bts-clock-label{
+    font-size:clamp(.48rem,2.2vw,.58rem)!important;
+  }
+}
+@media(max-width:350px){
+  #birthday-voting .birthday-countdown-timer .bts-clock-grid{
+    gap:7px!important;
+  }
+  #birthday-voting .birthday-countdown-timer .bts-clock-number{
+    font-size:.78rem!important;
+  }
+  #birthday-voting .birthday-countdown-timer .bts-clock-label{
+    font-size:.44rem!important;
+  }
+}
+</style>
+
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
