@@ -4772,5 +4772,26 @@ button:focus-visible,.hero-share-x:focus-visible,.hero-share-copy:focus-visible{
 }
 </style>
 
+
+<style id="remove-voting-card-left-accent">
+/* Quitar definitivamente la franja saturada del lado izquierdo de las tarjetas de votación */
+.vote-card,.vote-card[data-palette],
+.vote-card[data-palette="aria"],.vote-card[data-palette="mma"],
+.vote-card[data-palette="kca"],.vote-card[data-palette="gda"],
+.vote-card[data-palette="mama"],.vote-card[data-palette="aaa"]{
+  border-left:0!important;
+  box-shadow:0 5px 18px rgba(35,25,50,.07)!important;
+}
+.vote-card::before,.vote-card:before,
+.vote-card[data-palette]::before,.vote-card[data-palette]:before{
+  display:none!important;content:none!important;
+  width:0!important;opacity:0!important;background:transparent!important;
+}
+body.dark-mode .vote-card,body.dark-mode .vote-card[data-palette]{
+  border-left:0!important;
+  box-shadow:0 6px 20px rgba(0,0,0,.18)!important;
+}
+</style>
+
 </body>
 </html>
