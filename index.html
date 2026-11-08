@@ -2964,6 +2964,97 @@ body.dark-mode #birthday-voting .birthday-countdown-timer .bts-clock-label{color
 }
 </style>
 
+
+<style id="birthday-countdowns-party-theme">
+/* Jin & V: tarjetas festivas de cumpleaños; el contador conserva sus datos sin cajas internas */
+#birthday-voting .birthday-countdown-card{
+  position:relative!important;
+  isolation:isolate;
+  padding:18px 16px!important;
+  border:1px solid #ead5f4!important;
+  border-radius:20px!important;
+  background:
+    radial-gradient(circle at 94% 12%,#ffb8d2 0 23px,transparent 24px),
+    radial-gradient(circle at 8% 92%,#c7f2e7 0 17px,transparent 18px),
+    linear-gradient(135deg,#fff0f6 0%,#f5eaff 52%,#fff8d9 100%)!important;
+  box-shadow:0 8px 20px rgba(111,66,147,.13),inset 0 1px 0 #fff!important;
+  overflow:hidden!important;
+}
+#birthday-voting .birthday-countdown-card:before{
+  content:"✦  ✧  •  ✦";
+  position:absolute;
+  z-index:-1;
+  top:8px;
+  right:12px;
+  color:#c17bb7;
+  font-size:13px;
+  letter-spacing:5px;
+  opacity:.75;
+}
+#birthday-voting .birthday-countdown-card:after{
+  content:"🎈";
+  position:absolute;
+  left:12px;
+  bottom:8px;
+  font-size:19px;
+  opacity:.8;
+}
+#birthday-voting .birthday-countdown-card:nth-child(2){
+  border-color:#cfe5f4!important;
+  background:
+    radial-gradient(circle at 94% 12%,#a9ddf5 0 23px,transparent 24px),
+    radial-gradient(circle at 8% 92%,#ffe49d 0 17px,transparent 18px),
+    linear-gradient(135deg,#eaf7ff 0%,#f0edff 52%,#eafff5 100%)!important;
+}
+#birthday-voting .birthday-countdown-card:nth-child(2):before{color:#70a9cf}
+#birthday-voting .birthday-countdown-card:nth-child(2):after{content:"🎉"}
+#birthday-voting .birthday-countdown-member{
+  color:#873d83!important;
+  font-size:1.12rem!important;
+  text-shadow:0 1px 0 #fff;
+}
+#birthday-voting .birthday-countdown-card:nth-child(2) .birthday-countdown-member{color:#356e9b!important}
+#birthday-voting .birthday-countdown-date{
+  display:inline-block;
+  margin:5px 0 10px!important;
+  padding:5px 12px;
+  border-radius:999px;
+  background:#ffffffb8;
+  color:#94558c!important;
+}
+#birthday-voting .birthday-countdown-card:nth-child(2) .birthday-countdown-date{color:#477fa5!important}
+#birthday-voting .birthday-countdown-timer{
+  position:relative;
+  z-index:1;
+  color:#57366f!important;
+  font-weight:800!important;
+  line-height:1.8!important;
+}
+#birthday-voting .birthday-countdown-timer strong{color:#df568b!important}
+#birthday-voting .birthday-countdown-local{
+  color:#755d80!important;
+  font-weight:650!important;
+}
+body.dark-mode #birthday-voting .birthday-countdown-card{
+  border-color:#694b79!important;
+  background:linear-gradient(135deg,#39243f,#302b50 55%,#46344d)!important;
+  box-shadow:0 8px 20px #0005,inset 0 1px #ffffff16!important;
+}
+body.dark-mode #birthday-voting .birthday-countdown-card:nth-child(2){
+  border-color:#416780!important;
+  background:linear-gradient(135deg,#203b50,#302b50 55%,#24483f)!important;
+}
+body.dark-mode #birthday-voting .birthday-countdown-member,
+body.dark-mode #birthday-voting .birthday-countdown-card:nth-child(2) .birthday-countdown-member{color:#f4c5e8!important;text-shadow:none}
+body.dark-mode #birthday-voting .birthday-countdown-card:nth-child(2) .birthday-countdown-member{color:#bce4ff!important}
+body.dark-mode #birthday-voting .birthday-countdown-date,
+body.dark-mode #birthday-voting .birthday-countdown-card:nth-child(2) .birthday-countdown-date{background:#ffffff18;color:#f0c8e9!important}
+body.dark-mode #birthday-voting .birthday-countdown-card:nth-child(2) .birthday-countdown-date{color:#c5e8ff!important}
+body.dark-mode #birthday-voting .birthday-countdown-timer,
+body.dark-mode #birthday-voting .birthday-countdown-local{color:#f4e8ff!important}
+body.dark-mode #birthday-voting .birthday-countdown-timer strong{color:#ff9fc6!important}
+</style>
+
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
