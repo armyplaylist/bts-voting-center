@@ -3280,6 +3280,32 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 
 
 (function(){
+ const source=document.getElementById("birthday-campaigns");
+ const target=document.querySelector("#completed .cards");
+ if(!source||!target)return;
+ source.querySelectorAll(".birthday-card").forEach(function(card){
+  const timer=card.querySelector("[data-deadline]");
+  const deadline=timer?Date.parse(timer.getAttribute("data-deadline")):NaN;
+  if(!Number.isFinite(deadline)||deadline>Date.now())return;
+  card.classList.remove("birthday-card");
+  card.classList.add("vote-card","birthday-history-card");
+  card.dataset.kind="birthday";
+  const meta=card.querySelector(".birthday-meta");
+  const status=document.createElement("span");
+  status.className="pill";
+  status.setAttribute("aria-label","Votación finalizada");
+  status.textContent="✓ VOTACIÓN TERMINADA";
+  if(meta)meta.insertAdjacentElement("afterend",status);
+  else card.insertBefore(status,card.firstChild);
+  if(timer){timer.classList.add("is-ended");timer.textContent="Votación finalizada";}
+  card.querySelectorAll(".actions a").forEach(function(link){
+   link.textContent=link.textContent.replace(/^VOTAR/i,"CONSULTAR");
+  });
+  target.appendChild(card);
+ });
+})();
+
+(function(){
  const cards=[...document.querySelectorAll('.birthday-card')];
  const filters=[...document.querySelectorAll('[data-bday-filter]')];
  const total=document.getElementById('birthdayResults');
