@@ -4369,7 +4369,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
    const pieces=translated.split(splitMark);
    if(pieces.length!==nodes.length)throw new Error('translation boundary mismatch');
    if(version!==generation||lang!==activeLang)return;
-   nodes.forEach((n,i)=>{n.nodeValue=pieces[i].replace(/\\bbts\\b/gi,'BTS');});
+   nodes.forEach((n,i)=>{n.nodeValue=pieces[i].replace(/\bbts\b/gi,'BTS');});
   }catch(error){
    if(version!==generation)return;
    nodes.forEach((n,i)=>{n.nodeValue=fallbackTranslate(originalsList[i],lang);});
