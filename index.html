@@ -4691,5 +4691,24 @@ body.dark-mode .vote-card,body.dark-mode .vote-card[data-palette],body.dark-mode
 })();
 </script>
 
+
+<style id="bts-motion-visible-fix">
+@keyframes btsTitleFloat{0%,100%{transform:translateY(0);text-shadow:0 0 0 rgba(255,218,239,0)}50%{transform:translateY(-5px);text-shadow:0 0 22px rgba(255,218,239,.62)}}
+@keyframes btsBadgeGlow{0%,100%{box-shadow:0 0 0 0 rgba(255,220,240,0);filter:brightness(1)}50%{box-shadow:0 0 0 7px rgba(255,220,240,.18);filter:brightness(1.16)}}
+@keyframes btsLogoFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-3deg)}}
+@keyframes btsNoticeShimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+@keyframes btsLiveGlow{0%,100%{box-shadow:0 0 0 0 rgba(225,64,91,.08);transform:scale(1)}50%{box-shadow:0 0 0 6px rgba(225,64,91,.16);transform:scale(1.035)}}
+.hero h1{animation:btsTitleFloat 3.2s ease-in-out infinite!important;transform-origin:center}
+.hero .era{animation:btsBadgeGlow 2.2s ease-in-out infinite!important}
+.vote-logo-inline,.vote-card .logo-aria,.vote-card .logo-mma,.vote-card .logo-kca,.vote-card .logo-gda,.vote-card .logo-mama{animation:btsLogoFloat 3s ease-in-out infinite!important;transform-origin:center}
+.vote-card .pill.live,.pill.live{animation:btsLiveGlow 2.1s ease-in-out infinite!important}
+.mama-priority-notice{background-size:200% 200%;animation:btsNoticeShimmer 7s linear infinite}
+.hero-share-x,.hero-share-copy,.btn{transition:transform .25s ease,box-shadow .25s ease,filter .25s ease!important}
+.hero-share-x:hover,.hero-share-copy:hover,.btn:hover{transform:translateY(-3px) scale(1.025)!important;box-shadow:0 9px 22px rgba(83,46,110,.22)!important}
+@media(prefers-reduced-motion:reduce){
+ .hero h1,.hero .era,.vote-logo-inline,.vote-card .logo-aria,.vote-card .logo-mma,.vote-card .logo-kca,.vote-card .logo-gda,.vote-card .logo-mama,.vote-card .pill.live,.pill.live,.mama-priority-notice{animation:none!important}
+}
+</style>
+
 </body>
 </html>
