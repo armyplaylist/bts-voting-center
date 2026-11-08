@@ -2761,7 +2761,7 @@ h1,h2,h3,h4,
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
  <div class="mama-priority-copy"><strong>★ MUY IMPORTANTE · MAMA 2026</strong><span>La votación en vivo por el Daesang será el 20 de noviembre. No te pierdas esta etapa decisiva para BTS.</span></div>
- <a href="?section=proximas">VER VOTACIÓN EN VIVO ↗</a>
+ <a href="?section=proximas#mama-live-vote">VER VOTACIÓN EN VIVO ↗</a>
 </aside>
 <main class="wrap">
 <header class="hero" id="top">
@@ -3569,6 +3569,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
    if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
   });
   window.scrollTo({top:0,behavior:'instant'});
+  if(location.hash==='#mama-live-vote')requestAnimationFrame(()=>document.getElementById('mama-live-vote')?.scrollIntoView({behavior:'smooth',block:'start'}));
   return;
  }
  const routes={'/':'country-time','/votaciones':'active','/cumpleanos':'birthday-voting','/recoleccion':'choeaedol','/proximas':'upcoming','/finalizadas':'completed','/guia':'guide','/fuentes':'sources'};
