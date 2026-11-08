@@ -2864,7 +2864,7 @@ body:not(.dark-mode) .birthday-card[data-palette] .birthday-tag{
 <style id="professional-voting-brand-system">
 
 /* PROFESSIONAL BRAND SYSTEM — restrained color, clear hierarchy */
-.vote-card[data-palette="aria"],.birthday-card[data-palette="aria"]{--brand:#9A741E;--brand-soft:#F7F0DD;--brand-pale:#FFF9EA;--brand-ink:#49370F;}
+.vote-card[data-palette="aria"],.birthday-card[data-palette="aria"]{--brand:#294785;--brand-soft:#E9EEF9;--brand-pale:#F5F7FD;--brand-ink:#1F2F55;}
 .vote-card[data-palette="mma"],.birthday-card[data-palette="mma"]{--brand:#9A4B91;--brand-soft:#F5EAF3;--brand-pale:#FFF6FD;--brand-ink:#51284D;}
 .vote-card[data-palette="kca"],.birthday-card[data-palette="kca"]{--brand:#C65C22;--brand-soft:#F8EDE5;--brand-pale:#FFF7F0;--brand-ink:#663016;}
 .vote-card[data-palette="gda"],.birthday-card[data-palette="gda"]{--brand:#9A7928;--brand-soft:#F5F0DF;--brand-pale:#FFFAEA;--brand-ink:#4D3D16;}
@@ -4147,6 +4147,25 @@ body:not(.dark-mode) #mama-live-vote.mama-live-card{
   border:0!important;
   box-shadow:inset 4px 0 0 #7652b5,0 8px 24px rgba(65,48,130,.10)!important;
 }
+</style>
+<style id="aria-royal-palette">
+
+/* ARIA — royal palette: deep blue with restrained crimson accents */
+body:not(.dark-mode) .vote-card[data-palette="aria"],
+body:not(.dark-mode) .birthday-card[data-palette="aria"]{
+  background:linear-gradient(125deg,#F2F5FC 0%,#E8EEF9 62%,#F9EEF1 100%)!important;
+  box-shadow:inset 4px 0 0 #294785,0 5px 18px rgba(35,25,50,.055)!important;
+}
+body.dark-mode .vote-card[data-palette="aria"],
+body.dark-mode .birthday-card[data-palette="aria"]{
+  background:linear-gradient(125deg,#1C2945 0%,#202B43 65%,#38232F 100%)!important;
+  box-shadow:inset 4px 0 0 #7795D4,0 6px 20px rgba(0,0,0,.17)!important;
+}
+.vote-card[data-palette="aria"] .card-top .pill,
+.birthday-card[data-palette="aria"] .birthday-tag{
+  border-color:#A84B5B!important;
+}
+
 </style>
 </body>
 </html>
