@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BTS Voting Center//MAMA Live Voting//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:mama-2026-live-voting-bts-voting-center@armyplaylist.github.io
+DTSTAMP:20261108T000000Z
+DTSTART:20261120T090000Z
+SUMMARY:MAMA 2026 - VISA Fans' Choice of the Year LIVE VOTING
+DESCRIPTION:Daesang live voting during the MAMA 2026 ceremony. The exact voting opening time will be announced during the broadcast. Check Mnet Plus: https://www.mnetplus.world/event/en/2026-mama
+LOCATION:Mnet Plus
+URL:https://www.mnetplus.world/event/en/2026-mama
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow: MAMA 2026 live voting
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:MAMA 2026 live voting begins at 18:00 KST
+END:VALARM
+END:VEVENT
+END:VCALENDAR
