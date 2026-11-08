@@ -4256,5 +4256,13 @@ body.dark-mode .mama-priority-copy strong,body.dark-mode .mama-priority-notice a
 body.dark-mode .mama-notice-close{background:rgba(242,169,185,.12)!important;color:#ffd8e0!important}
 @media(max-width:600px){.mama-priority-notice{width:calc(100% - 24px)!important;margin:8px auto 12px!important;padding:9px 10px!important;gap:8px!important}.mama-priority-copy span{font-size:11.5px!important}.mama-priority-notice a{font-size:9.5px!important}}
 </style>
+
+<style id="remove-card-side-stripes">
+/* Tarjetas limpias: sin franjas ni bordes laterales de color */
+.vote-card::before,.vote-card:before,.birthday-card::before,.birthday-card:before{display:none!important;content:none!important;}
+.vote-card,.vote-card[data-palette],.birthday-card,.birthday-card[data-palette]{border-left:1px solid var(--card-border,#e8e1ee)!important;box-shadow:0 7px 20px rgba(55,35,75,.055)!important;}
+.vote-card[data-palette],.birthday-card[data-palette]{box-shadow:0 7px 20px rgba(55,35,75,.055)!important;}
+body.dark-mode .vote-card,body.dark-mode .vote-card[data-palette],body.dark-mode .birthday-card,body.dark-mode .birthday-card[data-palette]{box-shadow:0 7px 20px rgba(0,0,0,.16)!important;}
+</style>
 </body>
 </html>
