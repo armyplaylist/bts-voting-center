@@ -3346,6 +3346,40 @@ body.dark-mode #choeaedol .gda-collection-countdown{background:linear-gradient(1
 body.dark-mode #choeaedol .gda-collection-alert,body.dark-mode #choeaedol .guide-step{background:#FFFFFF12!important;color:#FFF2F4!important;border-color:#9B6874!important;}
 body.dark-mode #choeaedol .note{background:#51452C!important;color:#FFF1D1!important;border-color:#C5A85C!important;}
 </style>
+
+<style id="bts-motion-refresh">
+/* BTS Voting Center — movimiento sutil y accesible */
+@keyframes btsHeroGlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes btsEraTwinkle{0%,100%{opacity:.55;transform:scale(.85) rotate(0)}50%{opacity:1;transform:scale(1.16) rotate(18deg)}}
+@keyframes btsLiveBreath{0%,100%{box-shadow:0 0 0 0 rgba(213,46,77,0)}50%{box-shadow:0 0 0 5px rgba(213,46,77,.09)}}
+@keyframes btsSoftFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes btsReveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero{background-size:180% 180%;animation:btsHeroGlow 22s ease-in-out infinite}
+.era{position:relative}
+.era:after{content:"✦";display:inline-block;margin-left:3px;color:#ffe5a8;animation:btsEraTwinkle 2.8s ease-in-out infinite}
+.hero h1 span{text-shadow:0 0 24px rgba(255,211,227,.22)}
+nav a{position:relative;transition:color .22s ease,background .22s ease,transform .22s ease}
+nav a:after{content:"";position:absolute;left:10%;right:10%;bottom:4px;height:2px;border-radius:9px;background:linear-gradient(90deg,#b78ae2,#e77d9d);transform:scaleX(0);transform-origin:center;transition:transform .22s ease}
+nav a:hover{transform:translateY(-1px)}
+nav a:hover:after,nav a:focus-visible:after{transform:scaleX(1)}
+.vote-card,.birthday-card,.rank,.clock-box,.upcoming-item,.member,.btn,.theme-toggle,.hero-share-x,.hero-share-copy{transition:transform .24s ease,box-shadow .24s ease,filter .24s ease}
+.vote-card:hover,.birthday-card:hover,.rank:hover,.clock-box:hover,.upcoming-item:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(69,43,92,.12)!important}
+.vote-card .pill.live{animation:btsLiveBreath 2.8s ease-in-out infinite}
+.btn:hover,.hero-share-x:hover,.hero-share-copy:hover,.theme-toggle:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.member:hover{transform:translateY(-4px) scale(1.015)}
+.section-head h2{transition:color .2s ease}
+.bts-reveal{opacity:0;transform:translateY(16px)}
+.bts-reveal.is-visible{animation:btsReveal .62s cubic-bezier(.2,.7,.2,1) both}
+@media(hover:none){.vote-card:hover,.birthday-card:hover,.rank:hover,.clock-box:hover,.upcoming-item:hover,.member:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){
+ .hero{animation:none!important;background-size:100% 100%!important}
+ .era:after,.vote-card .pill.live{animation:none!important}
+ .bts-reveal{opacity:1!important;transform:none!important}
+ .bts-reveal.is-visible{animation:none!important}
+ .vote-card,.birthday-card,.rank,.clock-box,.upcoming-item,.member,.btn,nav a{transition:none!important}
+}
+</style>
+
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Anuncio">
@@ -4642,5 +4676,20 @@ body.dark-mode .mama-notice-close{background:rgba(242,169,185,.12)!important;col
 .vote-card[data-palette],.birthday-card[data-palette]{box-shadow:0 7px 20px rgba(55,35,75,.055)!important;}
 body.dark-mode .vote-card,body.dark-mode .vote-card[data-palette],body.dark-mode .birthday-card,body.dark-mode .birthday-card[data-palette]{box-shadow:0 7px 20px rgba(0,0,0,.16)!important;}
 </style>
+
+<script id="bts-motion-observer">
+(function(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var targets=document.querySelectorAll('.panel,.vote-card,.birthday-card,.rank,.clock-box,.upcoming-item');
+  if(!('IntersectionObserver' in window)){targets.forEach(function(el){el.classList.add('is-visible');});return;}
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -28px 0px'});
+  targets.forEach(function(el){el.classList.add('bts-reveal');observer.observe(el);});
+})();
+</script>
+
 </body>
 </html>
