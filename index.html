@@ -3157,7 +3157,7 @@ body.dark-mode #birthday-voting .birthday-countdown-timer strong{color:#ff9fc6!i
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
  <div class="mama-priority-copy"><strong>★ MUY IMPORTANTE · MAMA 2026</strong><span>El 20 de noviembre se decide el Daesang en la votación en vivo. Esta etapa define todo y cada voto cuenta. ¡No los dejes solos en la recta final! 💜🗳️</span></div>
- <a href="https://mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener noreferrer">VER VOTACIÓN EN VIVO ↗</a>
+ <a href="#mama-live-vote">VER VOTACIÓN EN VIVO ↗</a>
 </aside>
 <main class="wrap">
 <header class="hero" id="top">
@@ -3958,7 +3958,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
  function render(){
   let path=location.pathname;while(path.length>1&&path.endsWith('/'))path=path.slice(0,-1);
   const hash=decodeURIComponent(location.hash.slice(1));
-  const targetId=ids.includes(hash)?hash:(routes[path]||'country-time');
+  const targetId=hash==='mama-live-vote'?'upcoming':(ids.includes(hash)?hash:(routes[path]||'country-time'));
   ids.forEach(id=>{const panel=document.getElementById(id);if(panel)panel.hidden=id!==targetId;});
   document.querySelectorAll('nav a').forEach(link=>{
    const active=link.getAttribute('href')==='#'+targetId;
@@ -3966,6 +3966,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
    if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
   });
   window.scrollTo({top:0,behavior:'instant'});
+  if(hash==='mama-live-vote')requestAnimationFrame(()=>document.getElementById('mama-live-vote')?.scrollIntoView({behavior:'smooth',block:'start'}));
  }
  render();
  window.addEventListener('hashchange',render);
