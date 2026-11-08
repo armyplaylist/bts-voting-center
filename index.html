@@ -3814,7 +3814,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
 <script>
 /* Render every countdown with four responsive glass clock tiles. */
 (function(){
- const selectors='.vote-countdown,.bday-countdown,.birthday-countdown-timer,[data-birthday],.gda-countdown-time,.mama-countdown-value,.mama-mini-countdown,[data-reset-countdown],.reset-countdown';
+ const selectors='.vote-countdown,.bday-countdown,.birthday-countdown-timer,[data-birthday],#gdaCollectionTimer,.gda-countdown-time,.mama-countdown-value,.mama-mini-countdown,[data-reset-countdown],.reset-countdown';
  const unitPattern='días?|dias?|days?|d|horas?|hours?|h|minutos?|minutes?|mins?|min|m|segundos?|seconds?|secs?|sec|s|일|시간|분|초|日|時間|分|秒|д|ч|мин|с|ชม\\.|นาที|วิ';
  const labels={es:['DÍAS','HORAS','MINUTOS','SEGUNDOS'],en:['DAYS','HOURS','MINUTES','SECONDS'],pt:['DIAS','HORAS','MINUTOS','SEGUNDOS'],ko:['일','시간','분','초'],ja:['日','時間','分','秒'],ru:['ДНИ','ЧАСЫ','МИНУТЫ','СЕКУНДЫ'],th:['วัน','ชั่วโมง','นาที','วินาที']};
  function decorate(el){
@@ -3828,7 +3828,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
   const names=labels[lang]||labels.es;
   const first=matches[0].index,last=matches[3].index+matches[3][0].length;
   const prefix=raw.slice(0,first).trim(),suffix=raw.slice(last).trim();
-  const nums=matches.map(m=>m[0].match(/\\d+/)[0]);
+  const nums=matches.map(m=>{const found=m[0].match(/\d+/);return found?found[0]:'00';});
   el.dataset.btsClockRaw=raw;
   el.innerHTML='';
   if(prefix){const p=document.createElement('span');p.className='bts-clock-prefix';p.textContent=prefix;el.appendChild(p);}
