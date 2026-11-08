@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#281641"/><stop offset=".58" stop-color="#49245f"/><stop offset="1" stop-color="#743b70"/></linearGradient><linearGradient id="orb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e7caff"/><stop offset="1" stop-color="#f4aebe"/></linearGradient></defs>
+<rect width="1200" height="630" rx="0" fill="url(#bg)"/>
+<circle cx="1080" cy="70" r="230" fill="#e8b6e9" opacity=".10"/><circle cx="80" cy="590" r="270" fill="#a88ce9" opacity=".13"/>
+<path d="M0 485 Q300 390 610 500 T1200 440 V630 H0Z" fill="#fff" opacity=".035"/>
+<rect x="88" y="88" width="1024" height="454" rx="34" fill="#fff" opacity=".055" stroke="#fff" stroke-opacity=".16"/>
+<g transform="translate(150 170)"><circle cx="54" cy="54" r="54" fill="url(#orb)"/><path d="M27 29h17l10 16 10-16h17v50H64V55L54 70 44 55v24H27Z" fill="#38204f"/></g>
+<text x="150" y="355" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="68" font-weight="800" letter-spacing="1">BTS VOTING CENTER</text>
+<text x="154" y="415" fill="#eadcf8" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="500">Todo lo que ARMY necesita para apoyar a BTS</text>
+<rect x="154" y="463" width="330" height="48" rx="24" fill="#f1dffb"/><text x="319" y="495" text-anchor="middle" fill="#412456" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700">VOTACIONES · HORARIOS · GUÍAS</text>
+<text x="1045" y="500" text-anchor="end" fill="#eadcf8" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600">@lightjjk</text>
+</svg>
