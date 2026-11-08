@@ -3257,6 +3257,87 @@ body:not(.dark-mode) .birthday-card[data-palette] .birthday-tag{
 }
 
 </style>
+<style id="professional-voting-brand-system">
+
+/* PROFESSIONAL BRAND SYSTEM — restrained color, clear hierarchy */
+.vote-card[data-palette="aria"],.birthday-card[data-palette="aria"]{--brand:#9A741E;--brand-soft:#F7F0DD;--brand-pale:#FFF9EA;--brand-ink:#49370F;}
+.vote-card[data-palette="mma"],.birthday-card[data-palette="mma"]{--brand:#9A4B91;--brand-soft:#F5EAF3;--brand-pale:#FFF6FD;--brand-ink:#51284D;}
+.vote-card[data-palette="kca"],.birthday-card[data-palette="kca"]{--brand:#C65C22;--brand-soft:#F8EDE5;--brand-pale:#FFF7F0;--brand-ink:#663016;}
+.vote-card[data-palette="gda"],.birthday-card[data-palette="gda"]{--brand:#9A7928;--brand-soft:#F5F0DF;--brand-pale:#FFFAEA;--brand-ink:#4D3D16;}
+.vote-card[data-palette="aaa"],.birthday-card[data-palette="aaa"]{--brand:#A63B43;--brand-soft:#F7E9E8;--brand-pale:#FFF5F4;--brand-ink:#5C2026;}
+.vote-card[data-palette="mama"],.birthday-card[data-palette="mama"]{--brand:#7652B5;--brand-soft:#F0EAF8;--brand-pale:#FAF6FF;--brand-ink:#3F2B67;}
+.vote-card[data-palette="idolchamp"],.birthday-card[data-palette="idolchamp"]{--brand:#B84E70;--brand-soft:#F7E9EE;--brand-pale:#FFF5F8;--brand-ink:#60283B;}
+.vote-card[data-palette="my1pick"],.birthday-card[data-palette="my1pick"]{--brand:#4773B8;--brand-soft:#EAF0F9;--brand-pale:#F5F8FF;--brand-ink:#263F68;}
+.vote-card[data-palette="starvibe"],.birthday-card[data-palette="starvibe"]{--brand:#7651B0;--brand-soft:#F0EAF8;--brand-pale:#FAF6FF;--brand-ink:#402B62;}
+.vote-card[data-palette="picnic"],.birthday-card[data-palette="picnic"]{--brand:#27877D;--brand-soft:#E7F3F1;--brand-pale:#F3FBF9;--brand-ink:#174D48;}
+.vote-card[data-palette="fanplus"],.birthday-card[data-palette="fanplus"]{--brand:#7252AC;--brand-soft:#EEEAF6;--brand-pale:#F8F5FD;--brand-ink:#3E2D61;}
+.vote-card[data-palette="fannstar"],.birthday-card[data-palette="fannstar"]{--brand:#A17A25;--brand-soft:#F5F0E1;--brand-pale:#FFFAED;--brand-ink:#534016;}
+.vote-card[data-palette="kdol"],.birthday-card[data-palette="kdol"]{--brand:#B64D83;--brand-soft:#F6EAF1;--brand-pale:#FFF5FA;--brand-ink:#5D2943;}
+.vote-card[data-palette="icpolls"],.birthday-card[data-palette="icpolls"]{--brand:#397AA8;--brand-soft:#E8F1F7;--brand-pale:#F4FAFE;--brand-ink:#244A65;}
+.vote-card[data-palette="dailyduck"],.birthday-card[data-palette="dailyduck"]{--brand:#95801C;--brand-soft:#F5F1DF;--brand-pale:#FFFCEB;--brand-ink:#4F4510;}
+.vote-card[data-palette="podoal"],.birthday-card[data-palette="podoal"]{--brand:#367A59;--brand-soft:#E9F2EC;--brand-pale:#F5FBF6;--brand-ink:#234D38;}
+.vote-card[data-palette="upick"],.birthday-card[data-palette="upick"]{--brand:#7952B0;--brand-soft:#F0EAF7;--brand-pale:#FAF6FF;--brand-ink:#422D63;}
+.vote-card[data-palette="giftifan"],.birthday-card[data-palette="giftifan"]{--brand:#B44F7C;--brand-soft:#F6EAF0;--brand-pale:#FFF5F9;--brand-ink:#5D2940;}
+body:not(.dark-mode) .vote-card[data-palette],
+body:not(.dark-mode) .birthday-card[data-palette]{
+  position:relative!important;
+  background:linear-gradient(150deg,var(--brand-pale) 0%,var(--brand-soft) 100%)!important;
+  background-color:var(--brand-soft)!important;
+  border:1px solid color-mix(in srgb,var(--brand) 25%,#ffffff)!important;
+  border-top:4px solid var(--brand)!important;
+  border-left:1px solid color-mix(in srgb,var(--brand) 25%,#ffffff)!important;
+  border-radius:16px!important;
+  box-shadow:0 4px 14px rgba(35,25,50,.055)!important;
+}
+body:not(.dark-mode) .vote-card[data-palette]:before,
+body:not(.dark-mode) .birthday-card[data-palette]:before{
+  width:3px!important;background:var(--brand)!important;opacity:.8!important;
+}
+body:not(.dark-mode) .vote-card[data-palette] :is(h3,h4,.vote-title),
+body:not(.dark-mode) .birthday-card[data-palette] h3{
+  color:var(--brand-ink)!important;
+}
+body:not(.dark-mode) .vote-card[data-palette] .card-top .pill,
+body:not(.dark-mode) .birthday-card[data-palette] .birthday-tag{
+  background:var(--brand-soft)!important;
+  color:var(--brand-ink)!important;
+  border:1px solid color-mix(in srgb,var(--brand) 24%,white)!important;
+}
+body:not(.dark-mode) .vote-card[data-palette] :is(.rule-box,.vote-countdown,.deadline),
+body:not(.dark-mode) .birthday-card[data-palette] :is(.birthday-meta,.bday-countdown){
+  background:rgba(255,255,255,.68)!important;
+  border:1px solid color-mix(in srgb,var(--brand) 17%,white)!important;
+  border-radius:11px!important;
+}
+body:not(.dark-mode) .vote-card[data-palette] .actions .btn:not(.secondary),
+body:not(.dark-mode) .birthday-card[data-palette] .actions .btn:not(.secondary){
+  background:var(--brand)!important;border-color:var(--brand)!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;
+  box-shadow:none!important;border-radius:9px!important;
+}
+body:not(.dark-mode) .vote-card[data-palette] .actions .btn.secondary,
+body:not(.dark-mode) .birthday-card[data-palette] .actions .btn.secondary{
+  background:transparent!important;border-color:color-mix(in srgb,var(--brand) 40%,white)!important;
+  color:var(--brand-ink)!important;-webkit-text-fill-color:var(--brand-ink)!important;
+}
+body.dark-mode .vote-card[data-palette],body.dark-mode .birthday-card[data-palette]{
+  background:linear-gradient(150deg,color-mix(in srgb,var(--brand) 17%,#211d29),#211d29 75%)!important;
+  border:1px solid color-mix(in srgb,var(--brand) 40%,#44394e)!important;
+  border-top:4px solid var(--brand)!important;
+  border-radius:16px!important;box-shadow:0 5px 18px rgba(0,0,0,.16)!important;
+}
+body.dark-mode .vote-card[data-palette]:before,body.dark-mode .birthday-card[data-palette]:before{
+  width:3px!important;background:var(--brand)!important;
+}
+body.dark-mode .vote-card[data-palette] :is(h3,h4,.vote-title),
+body.dark-mode .birthday-card[data-palette] h3{color:#F5EFFA!important}
+body.dark-mode .vote-card[data-palette] :is(.rule-box,.vote-countdown,.deadline),
+body.dark-mode .birthday-card[data-palette] :is(.birthday-meta,.bday-countdown){
+  background:rgba(255,255,255,.055)!important;
+  border:1px solid color-mix(in srgb,var(--brand) 28%,#44394e)!important;
+}
+
+</style>
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Anuncio">
