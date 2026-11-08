@@ -3055,6 +3055,51 @@ body.dark-mode #birthday-voting .birthday-countdown-local{color:#f4e8ff!importan
 body.dark-mode #birthday-voting .birthday-countdown-timer strong{color:#ff9fc6!important}
 </style>
 
+
+<style id="birthday-decor-never-cover-text">
+/* Birthday confetti stays behind every label and countdown value */
+#birthday-voting .birthday-countdown-card{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+}
+#birthday-voting .birthday-countdown-card > *{
+  position:relative!important;
+  z-index:2!important;
+}
+#birthday-voting .birthday-countdown-card:before,
+#birthday-voting .birthday-countdown-card:after{
+  z-index:0!important;
+  pointer-events:none!important;
+  user-select:none!important;
+}
+#birthday-voting .birthday-countdown-card:before{
+  top:7px!important;
+  right:9px!important;
+  font-size:11px!important;
+  letter-spacing:3px!important;
+  opacity:.42!important;
+}
+#birthday-voting .birthday-countdown-card:after{
+  left:auto!important;
+  right:10px!important;
+  bottom:7px!important;
+  font-size:15px!important;
+  opacity:.48!important;
+}
+#birthday-voting .birthday-countdown-member,
+#birthday-voting .birthday-countdown-date,
+#birthday-voting .birthday-countdown-timer,
+#birthday-voting .birthday-countdown-local{
+  position:relative!important;
+  z-index:2!important;
+  text-shadow:none!important;
+}
+#birthday-voting .birthday-countdown-date{
+  max-width:calc(100% - 34px)!important;
+}
+</style>
+
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Aviso importante de MAMA 2026">
