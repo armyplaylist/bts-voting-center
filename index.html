@@ -4732,5 +4732,45 @@ body.dark-mode .rank,body.dark-mode .clock-box,body.dark-mode .upcoming-item{
 }
 </style>
 
+
+<style id="interactive-button-motion">
+/* Microanimaciones para que cada control responda al usuario */
+.btn,.filter,.member,button,.hero-share-x,.hero-share-copy{
+  transition:transform .22s cubic-bezier(.2,.8,.2,1),
+             box-shadow .22s ease,filter .22s ease,
+             background-color .22s ease!important;
+  transform:translateZ(0);
+  -webkit-tap-highlight-color:transparent;
+}
+.btn,.hero-share-x,.hero-share-copy{position:relative;overflow:hidden}
+.btn::after,.hero-share-x::after,.hero-share-copy::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.25) 48%,transparent 70%);
+  transform:translateX(-130%);transition:transform .55s ease;
+}
+.btn:hover::after,.hero-share-x:hover::after,.hero-share-copy:hover::after{transform:translateX(130%)}
+.btn:hover,.filter:hover,.member:hover,button:hover,.hero-share-x:hover,.hero-share-copy:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.045);
+}
+.btn:active,.filter:active,.member:active,button:active,
+.hero-share-x:active,.hero-share-copy:active{
+  transform:translateY(1px) scale(.97)!important;
+  filter:brightness(.97);
+  transition-duration:.08s!important;
+}
+.btn:focus-visible,.filter:focus-visible,.member:focus-visible,
+button:focus-visible,.hero-share-x:focus-visible,.hero-share-copy:focus-visible{
+  outline:3px solid rgba(145,105,205,.48)!important;
+  outline-offset:3px;
+}
+@media(prefers-reduced-motion:reduce){
+  .btn,.filter,.member,button,.hero-share-x,.hero-share-copy,
+  .btn::after,.hero-share-x::after,.hero-share-copy::after{
+    transition:none!important;animation:none!important;
+  }
+}
+</style>
+
 </body>
 </html>
