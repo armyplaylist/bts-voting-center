@@ -2797,6 +2797,40 @@ body.dark-mode .vote-card[data-palette] .vote-title,body.dark-mode .vote-card[da
 body.dark-mode .vote-card[data-palette] .rule-box{background:rgba(255,255,255,.06)!important;color:#f5efff!important;border-color:color-mix(in srgb,var(--brand2) 40%,#393044)!important}
 body.dark-mode .vote-card[data-palette] .rule-box p{color:#eee7fa!important}
 body.dark-mode .vote-card[data-palette] .card-top .pill,body.dark-mode .birthday-card[data-palette] .birthday-tag{background:color-mix(in srgb,var(--brand) 32%,#211b30)!important;color:#fff!important;border-color:color-mix(in srgb,var(--brand2) 55%,#393044)!important}
+
+/* Refuerzo visual: cada tarjeta debe distinguirse claramente en móvil */
+.vote-card[data-palette],.birthday-card[data-palette]{
+  border:1px solid var(--brand)!important;
+  border-left:5px solid var(--brand)!important;
+  background-color:var(--brand-soft)!important;
+  background-image:linear-gradient(135deg,var(--brand-wash) 0%,#ffffff 92%)!important;
+  box-shadow:0 5px 18px rgba(40,28,70,.10)!important;
+}
+.vote-card[data-palette="aria"]{--brand:#a77a18;--brand-wash:#f5e5b6;--brand-soft:#fff8e7}
+.vote-card[data-palette="mma"]{--brand:#a34b9e;--brand-wash:#f0c9e7;--brand-soft:#fff0fa}
+.vote-card[data-palette="kca"]{--brand:#d65b16;--brand-wash:#ffd2a5;--brand-soft:#fff3e6}
+.vote-card[data-palette="gda"]{--brand:#a98228;--brand-wash:#f0dda0;--brand-soft:#fff8e4}
+.vote-card[data-palette="aaa"]{--brand:#ad293c;--brand-wash:#f4c2a7;--brand-soft:#fff0ed}
+.vote-card[data-palette="mama"]{--brand:#7551bd;--brand-wash:#e8c4e9;--brand-soft:#f8efff}
+.birthday-card[data-palette="idolchamp"]{--brand:#c94c70;--brand-wash:#f6c0ce;--brand-soft:#fff0f4}
+.birthday-card[data-palette="my1pick"]{--brand:#426fbd;--brand-wash:#c5d8ff;--brand-soft:#eff5ff}
+.birthday-card[data-palette="starvibe"]{--brand:#7044b8;--brand-wash:#dbc4f5;--brand-soft:#f6efff}
+.birthday-card[data-palette="picnic"]{--brand:#21877e;--brand-wash:#b9e8dc;--brand-soft:#eafaf6}
+.birthday-card[data-palette="fanplus"]{--brand:#6844b8;--brand-wash:#d7c7f7;--brand-soft:#f5f0ff}
+.birthday-card[data-palette="fannstar"]{--brand:#9a762e;--brand-wash:#ead69b;--brand-soft:#fff8e5}
+.birthday-card[data-palette="kdol"]{--brand:#c33e82;--brand-wash:#f5bfda;--brand-soft:#fff0f7}
+.birthday-card[data-palette="icpolls"]{--brand:#3476ad;--brand-wash:#c1e0f7;--brand-soft:#eff8ff}
+.birthday-card[data-palette="dailyduck"]{--brand:#8c7917;--brand-wash:#eee39b;--brand-soft:#fffbe7}
+.birthday-card[data-palette="podoal"]{--brand:#287b58;--brand-wash:#bfe5ce;--brand-soft:#effaf2}
+.birthday-card[data-palette="upick"]{--brand:#7543b5;--brand-wash:#dec6f3;--brand-soft:#f7f0ff}
+.birthday-card[data-palette="giftifan"]{--brand:#c44c83;--brand-wash:#f5c3d9;--brand-soft:#fff1f7}
+body.dark-mode .vote-card[data-palette],body.dark-mode .birthday-card[data-palette]{
+  background-color:#211b30!important;
+  background-image:linear-gradient(135deg,color-mix(in srgb,var(--brand) 28%,#211b30),#211b30 88%)!important;
+  border-color:var(--brand)!important;
+  border-left-color:var(--brand)!important;
+}
+
 </style>
 </head>
 <body>
