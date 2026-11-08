@@ -4710,5 +4710,27 @@ body.dark-mode .vote-card,body.dark-mode .vote-card[data-palette],body.dark-mode
 }
 </style>
 
+
+<style id="cards-without-borders">
+/* Superficies limpias: se eliminan los marcos de las tarjetas sin alterar sus paletas */
+.vote-card,.vote-card[data-palette],
+.birthday-card,.birthday-card[data-palette],
+.rank,.clock-box,.upcoming-item,
+#mama-live-vote.mama-live-card{
+  border:0!important;
+  outline:0!important;
+}
+.vote-card,.vote-card[data-palette],
+.birthday-card,.birthday-card[data-palette],
+.rank,.clock-box,.upcoming-item{
+  box-shadow:0 7px 20px rgba(55,35,75,.055)!important;
+}
+body.dark-mode .vote-card,body.dark-mode .vote-card[data-palette],
+body.dark-mode .birthday-card,body.dark-mode .birthday-card[data-palette],
+body.dark-mode .rank,body.dark-mode .clock-box,body.dark-mode .upcoming-item{
+  box-shadow:0 7px 20px rgba(0,0,0,.16)!important;
+}
+</style>
+
 </body>
 </html>
