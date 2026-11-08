@@ -2619,6 +2619,25 @@ body.dark-mode .mama-priority-copy strong,body.dark-mode .mama-live-priority h4{
 body.dark-mode .mama-priority-notice a{background:#a83c57;color:#fff}
 body.dark-mode .mama-live-priority{background:#392733;border-color:#714250}
 @media(max-width:600px){.mama-priority-notice{align-items:flex-start;flex-direction:column;padding:13px 14px}.mama-priority-notice a{width:100%;text-align:center}}
+
+/* Controles superiores integrados al encabezado */
+.hero .hero-controls{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px auto 0}
+.hero .hero-controls .theme-toggle{margin:0}
+.hero .hero-controls .language-control{position:static;z-index:auto;display:inline-flex;align-items:center;gap:7px;margin:0;padding:10px 14px;border:1px solid #ffffff45;border-radius:999px;background:#ffffff12;color:#fff;font-weight:850;font-size:.78rem;box-shadow:inset 0 1px #ffffff18;backdrop-filter:blur(10px)}
+.hero .hero-controls .language-control select{max-width:170px;border:0;outline:0;background:transparent;color:inherit;font:inherit;font-weight:800;cursor:pointer}
+.hero .hero-controls .language-control select option{background:#241a32;color:#fff}
+body.dark-mode .hero .hero-controls .language-control{background:#ffffff12;color:#fff;border-color:#ffffff35}
+.mama-countdown-panel{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:15px 0;padding:15px 17px;border:1px solid #e4cde9;border-radius:16px;background:linear-gradient(120deg,#fff5f8,#f7f0ff);color:#4b315f}
+.mama-countdown-copy{display:flex;flex-direction:column;gap:5px}
+.mama-countdown-label{font-size:.75rem;font-weight:900;letter-spacing:.08em;color:#8b3c72}
+.mama-countdown-value{font-size:clamp(1.15rem,3.2vw,1.65rem);font-weight:950;font-variant-numeric:tabular-nums;letter-spacing:.025em;color:#62358e}
+.mama-calendar-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mama-calendar-actions .btn{min-height:40px;padding:9px 14px;font-size:.76rem}
+body.dark-mode .mama-countdown-panel{background:linear-gradient(120deg,#302035,#29223d);border-color:#63486e;color:#f4e9ff}
+body.dark-mode .mama-countdown-label{color:#f0a6c7}
+body.dark-mode .mama-countdown-value{color:#e4c5ff}
+@media(max-width:520px){.hero .hero-controls{gap:8px}.hero .hero-controls>*{flex:1 1 auto}.hero .hero-controls .language-control{justify-content:center}.mama-countdown-panel{align-items:flex-start}.mama-calendar-actions{width:100%}.mama-calendar-actions .btn{flex:1 1 100%}}
+
 </style>
 
 <!-- GoatCounter: estadísticas privadas de visitas -->
@@ -2647,10 +2666,7 @@ body.dark-mode .mama-live-priority{background:#392733;border-color:#714250}
 .timezone-globe svg{display:block;width:100%;height:100%}
 
 /* Selector de idioma accesible, integrado con los controles principales */
-.language-control{position:fixed;top:14px;right:14px;z-index:1200;display:inline-flex;align-items:center;justify-content:center;gap:7px;margin:0;padding:9px 13px;border:1px solid rgba(105,75,160,.22);border-radius:999px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);color:#513b78;font-weight:850;font-size:.78rem;box-shadow:0 5px 18px rgba(65,42,100,.13)}
-.language-control select{max-width:190px;border:0;outline:0;background:transparent;color:inherit;font:inherit;font-weight:800;cursor:pointer}
-.language-control select option{background:#fff;color:#493568}
-@media(max-width:420px){.language-control{top:10px;right:10px;font-size:.72rem;padding:8px 10px}.language-control select{max-width:125px}}
+/* El selector de idioma ahora forma parte del encabezado superior. */
 
 /* Tutoriales de votación integrados */
 .tutorial-video{margin:15px 0;padding:12px 14px;border:1px solid #ded2f0;border-radius:16px;background:linear-gradient(135deg,#f8f4ff,#fff8fb);color:#513b72}
@@ -2732,8 +2748,10 @@ h1,h2,h3,h4,
   <div class="era">💜 ARIRANG ERA · 2026 ❤️</div>
  <h1>BTS <span>VOTING CENTER</span></h1>
  <p>Sumérgete en las votaciones, sigue cada fecha límite y nada junto a ARMY para apoyar a BTS.</p>
- <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">🌙 MODO OSCURO</button>
- <label class="language-control" aria-label="Seleccionar idioma"><span aria-hidden="true">🌐</span><span class="language-label">IDIOMA</span><select id="languageSelect" aria-label="Idioma de la página"><option value="es">Español</option><option value="en">English</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="pt">Português (Brasil)</option><option value="th">ไทย</option><option value="ru">Русский</option></select></label>
+ <div class="hero-controls">
+  <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false">🌙 MODO OSCURO</button>
+  <label class="language-control" aria-label="Seleccionar idioma"><span aria-hidden="true">🌐</span><span class="language-label">IDIOMA</span><select id="languageSelect" aria-label="Idioma de la página"><option value="es">Español</option><option value="en">English</option><option value="ko">한국어</option><option value="ja">日本語</option><option value="pt">Português (Brasil)</option><option value="th">ไทย</option><option value="ru">Русский</option></select></label>
+ </div>
 
 
  <div class="hero-share" aria-label="Comparte BTS Voting Center">
@@ -2860,6 +2878,13 @@ h1,h2,h3,h4,
  <div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mama" src="https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg" alt="Logotipo de MAMA Awards" loading="lazy" decoding="async">Mnet Asian Music Awards <span>(MAMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
  <div class="priority-certificate-head mama-live-priority"><h4 style="margin:0">★ VOTACIÓN EN VIVO · DAESANG</h4><span class="priority-tag"><span class="priority-star">★</span> MUY IMPORTANTE</span></div>
  <div class="local-vote-time"><strong>20 DE NOVIEMBRE DE 2026 · 18:00 KST</strong><br>Durante la ceremonia. La hora exacta de apertura del voto se anunciará durante la transmisión.</div>
+ <div class="mama-countdown-panel" aria-live="off">
+  <div class="mama-countdown-copy"><span class="mama-countdown-label">CUENTA REGRESIVA · MAMA LIVE VOTING</span><strong class="mama-countdown-value" id="mamaLiveMiniCountdown">Calculando…</strong><span>20 nov 2026 · 18:00 KST</span></div>
+  <div class="mama-calendar-actions">
+   <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=MAMA%202026%20%E2%80%94%20VISA%20Fans%E2%80%99%20Choice%20of%20the%20Year%20%28LIVE%20VOTING%29&dates=20261120T090000Z/20261120T090000Z&details=VISA%20Fans%E2%80%99%20Choice%20of%20the%20Year%20Daesang%20live%20voting%20during%20the%20MAMA%202026%20ceremony.%20The%20exact%20opening%20time%20will%20be%20announced%20during%20the%20broadcast.%20Check%20Mnet%20Plus%3A%20https%3A%2F%2Fwww.mnetplus.world%2Fevent%2Fen%2F2026-mama&location=Mnet%20Plus" target="_blank" rel="noopener noreferrer">＋ GOOGLE CALENDAR</a>
+   <a class="btn secondary" href="./mama-live-voting.ics" download="mama-live-voting.ics">↓ DESCARGAR CALENDARIO</a>
+  </div>
+ </div>
  <p class="field-value">Esta es la votación en vivo para <strong>VISA Fans’ Choice of the Year</strong>, el Daesang de MAMA. Es una etapa independiente de la ronda diaria de Fans’ Choice, que ya finalizó.</p>
  <div class="rule-box mama-vote-criteria">
   <h4>¿QUÉ ESTÁ EN JUEGO?</h4>
