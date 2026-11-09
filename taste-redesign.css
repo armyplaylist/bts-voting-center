@@ -81,3 +81,32 @@ nav a:hover{background:#f0e8f8!important;color:#55347d!important;transform:trans
  *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
  .bts-reveal{opacity:1!important;transform:none!important}
 }
+
+/* Night mode: preserve the same hierarchy with a deep-plum canvas. */
+body.dark-mode{
+ --bg:#17131f!important;--ink:#f3edf8!important;--muted:#b5a9c2!important;
+ --purple:#a98bd0!important;--purple2:#c1a9df!important;--red:#ef8aa3!important;
+ --glass:#241d2d!important;--line:#3c3048!important;--shadow:0 12px 34px rgba(0,0,0,.22)!important;
+ background:radial-gradient(ellipse at 8% 0%,rgba(111,76,145,.2) 0,transparent 34rem),radial-gradient(ellipse at 100% 18%,rgba(133,62,92,.13) 0,transparent 30rem),#17131f!important;
+ color:#f3edf8!important;
+}
+body.dark-mode .panel{background:rgba(37,29,46,.9)!important;border-color:#3a2e46!important;box-shadow:0 12px 34px rgba(0,0,0,.2)!important}
+body.dark-mode .section-head h2,body.dark-mode .vote-card h3,body.dark-mode .member span{color:#f4edf8!important}
+body.dark-mode .section-head p,body.dark-mode .vote-card .meta,body.dark-mode .vote-card .field-value,body.dark-mode .vote-card .description{color:#b9adca!important}
+body.dark-mode nav{background:rgba(36,28,45,.9)!important;border-color:#453653!important}
+body.dark-mode nav a{color:#c8b8d8!important}
+body.dark-mode nav a:hover{background:#382b46!important;color:#fff!important}
+body.dark-mode .vote-card,body.dark-mode .vote-card[data-palette],body.dark-mode .birthday-card,body.dark-mode .birthday-card[data-palette],body.dark-mode .rank,body.dark-mode .clock-box,body.dark-mode .upcoming-item{background:linear-gradient(145deg,#2b2235,#241d2d)!important;color:#f3edf8!important;box-shadow:0 8px 24px rgba(0,0,0,.2)!important}
+body.dark-mode .vote-card h4,body.dark-mode .clock-time,body.dark-mode .time-row .local{color:#c6a9e5!important}
+body.dark-mode .ranking-line,body.dark-mode .time-row,body.dark-mode .rule-box,body.dark-mode .vote-countdown{background:#34283f!important;color:#e3d7ed!important}
+body.dark-mode .local-vote-time,body.dark-mode .note{background:#382630!important;color:#f0cbd6!important}
+body.dark-mode .pill{background:#3a2d48!important;color:#ddc9ef!important}
+body.dark-mode .pill.live{background:#4a2937!important;color:#ffc0d0!important}
+body.dark-mode .filter{background:#2b2235!important;border-color:#4a3b58!important;color:#d0c1df!important}
+body.dark-mode .filter.active{background:#8060aa!important;color:#fff!important}
+body.dark-mode .member{background:#2b2235!important;color:#e9def3!important}
+body.dark-mode .member:hover,body.dark-mode .member.active{background:#3c2d4c!important}
+body.dark-mode .member span{color:#eee4f7!important}
+body.dark-mode .deadline{background:#482a37!important;color:#ffc0d0!important}
+body.dark-mode .btn.secondary{background:#432b39!important;color:#ffc2d0!important}
+body.dark-mode .footer{color:#a99ab5!important}
