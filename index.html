@@ -3440,7 +3440,13 @@ body.dark-mode #duckad-itoty-2026 .itoty-countdown small{color:#e4c9f3}
  tick();if(window.__btsRegisterSecondTick)window.__btsRegisterSecondTick(tick);else window.setInterval(tick,1000);
 })();
 </script>
-\n<style id="mama-notice-light-button-fix">\n/* Botón del anuncio MAMA: contraste legible en tema claro */\nbody:not(.dark-mode) .mama-priority-notice .mama-priority-copy a{background:#a92d49!important;color:#fff!important;border:1px solid #8f203a!important;text-decoration:none!important;text-shadow:none!important;opacity:1!important}\nbody:not(.dark-mode) .mama-priority-notice .mama-priority-copy a:hover{background:#8f203a!important;color:#fff!important}\n</style>\n</head>
+
+<style id="mama-notice-light-button-fix">
+/* Botón del anuncio MAMA: contraste legible en tema claro */
+body:not(.dark-mode) .mama-priority-notice .mama-priority-copy a{background:#a92d49!important;color:#fff!important;border:1px solid #8f203a!important;text-decoration:none!important;text-shadow:none!important;opacity:1!important}
+body:not(.dark-mode) .mama-priority-notice .mama-priority-copy a:hover{background:#8f203a!important;color:#fff!important}
+</style>
+</head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Anuncio">
  <div class="mama-priority-copy"><strong>ANUNCIO</strong><span>El 20 de noviembre se decide el Daesang en la votación en vivo. Esta etapa define todo y cada voto cuenta. ¡No los dejes solos en la recta final! 💜🗳️</span><a href="#mama-live-vote">VER DETALLES Y HORARIOS ↗</a></div>
@@ -4440,7 +4446,9 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
  const index={es:0,en:1,ko:2,ja:3,pt:4,th:5,ru:6};
  const originals=new WeakMap();
  let observer=null, activeLang='es', translating=false, pending=new Set(), scheduled=false, generation=0;
- const splitMark='\n|||BTS_VOTING_TRANSLATION_BOUNDARY_8492|||\n';
+ const splitMark='
+|||BTS_VOTING_TRANSLATION_BOUNDARY_8492|||
+';
  function detect(){
   const prefs=[...(navigator.languages||[]),navigator.language||''];
   for(const pref of prefs){const p=(pref||'').toLowerCase(),lang=p.split('-')[0],region=(p.split('-')[1]||'').toUpperCase();if(supported.includes(lang))return lang;if(region==='BR')return 'pt';}
