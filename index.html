@@ -3410,6 +3410,36 @@ body.dark-mode #duckad-itoty-2026 .itoty-guide strong,
 body.dark-mode #duckad-itoty-2026 .rule-box:not(.itoty-guide) h4{color:#ead8ff!important}
 </style>
 
+<style id="itoty-live-countdown-style">
+#duckad-itoty-2026 .itoty-countdown-wrap{padding:15px;border-radius:14px;background:linear-gradient(120deg,#e3edff,#f9e3f0 52%,#eae3ff);color:#43345f;text-align:center}
+#duckad-itoty-2026 .itoty-countdown-label{font-size:.72rem;font-weight:900;letter-spacing:.09em;color:#60449a;margin-bottom:11px}
+#duckad-itoty-2026 .itoty-countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#duckad-itoty-2026 .itoty-countdown span{display:flex;flex-direction:column;gap:3px;padding:10px 4px;border-radius:10px;background:#ffffffc9}
+#duckad-itoty-2026 .itoty-countdown strong{font-family:"Space Grotesk",sans-serif;font-size:clamp(1.25rem,4vw,1.8rem);line-height:1.1;color:#6547a0;font-variant-numeric:tabular-nums}
+#duckad-itoty-2026 .itoty-countdown small{font-size:.61rem;font-weight:900;letter-spacing:.08em;color:#8c659d}
+#duckad-itoty-2026 #itoty-countdown-status{margin:10px 0 0;font-size:.76rem;font-weight:800;color:#684b87}
+body.dark-mode #duckad-itoty-2026 .itoty-countdown-wrap{background:linear-gradient(120deg,#263b61,#56344f 55%,#382d61);color:#fff}
+body.dark-mode #duckad-itoty-2026 .itoty-countdown-label,body.dark-mode #duckad-itoty-2026 #itoty-countdown-status{color:#f2dcff}
+body.dark-mode #duckad-itoty-2026 .itoty-countdown span{background:#ffffff18}
+body.dark-mode #duckad-itoty-2026 .itoty-countdown strong{color:#f3d8ff}
+body.dark-mode #duckad-itoty-2026 .itoty-countdown small{color:#e4c9f3}
+@media(max-width:380px){#duckad-itoty-2026 .itoty-countdown{gap:5px}#duckad-itoty-2026 .itoty-countdown span{padding:9px 2px}}
+</style>
+<script id="itoty-live-countdown-script">
+(function(){
+ const target=new Date('2026-12-14T23:59:59+09:00').getTime();
+ const ids=['itoty-days','itoty-hours','itoty-minutes','itoty-seconds'];
+ const pad=n=>String(n).padStart(2,'0');
+ function tick(){
+  const box=document.getElementById('itoty-countdown');if(!box)return;
+  const diff=target-Date.now();
+  if(diff<=0){ids.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';});const status=document.getElementById('itoty-countdown-status');if(status)status.textContent='La votación ha finalizado.';return;}
+  const values=[Math.floor(diff/86400000),Math.floor(diff%86400000/3600000),Math.floor(diff%3600000/60000),Math.floor(diff%60000/1000)];
+  values.forEach((value,index)=>{const el=document.getElementById(ids[index]);if(el)el.textContent=index===0?String(value):pad(value);});
+ }
+ tick();if(window.__btsRegisterSecondTick)window.__btsRegisterSecondTick(tick);else window.setInterval(tick,1000);
+})();
+</script>
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Anuncio">
@@ -3471,6 +3501,7 @@ body.dark-mode #duckad-itoty-2026 .rule-box:not(.itoty-guide) h4{color:#ead8ff!i
    <p class="meta">DUCKAD · 2026 BEST BOY GROUP OF THE YEAR</p>
    <p class="description">Vota por BTS en la categoría Best Boy Group of the Year. La votación es global y el 100% de los votos de fans determina a los ganadores.</p>
    <div class="local-vote-time"><strong>CIERRE OFICIAL · 14 DE DICIEMBRE DE 2026</strong><br>11:59:59 p. m. (KST) · <strong>8:59:59 a. m. en México (hora centro)</strong><br>La votación termina al mismo instante en ambas zonas horarias.</div>
+   <div class="itoty-countdown-wrap"><div class="itoty-countdown-label">⏳ CUENTA REGRESIVA · CIERRE DE VOTACIÓN</div><div class="itoty-countdown" id="itoty-countdown" role="timer" aria-live="off"><span><strong id="itoty-days">--</strong><small>DÍAS</small></span><span><strong id="itoty-hours">--</strong><small>HORAS</small></span><span><strong id="itoty-minutes">--</strong><small>MIN</small></span><span><strong id="itoty-seconds">--</strong><small>SEG</small></span></div><p id="itoty-countdown-status">Tiempo restante para apoyar a BTS.</p></div>
    <div class="rule-box"><h4>🏆 PREMIOS</h4><p>El grupo ganador recibirá un trofeo oficial y un anuncio en Times Square, Nueva York. Los tres fans que más votos hayan emitido por cada ganador tendrán sus nicknames grabados en el trofeo.</p></div>
    <div class="rule-box itoty-guide"><h4>GUÍA RÁPIDA PARA VOTAR</h4><ol><li>Abre DUCKAD e inicia sesión o crea una cuenta.</li><li>Entra a la campaña <strong>THE IDOL TROPHY OF THE YEAR 2026</strong>.</li><li>Selecciona la categoría <strong>2026 Best Boy Group of the Year</strong>.</li><li>Busca y selecciona <strong>BTS</strong>.</li><li>Completa las votaciones disponibles en la app y revisa el ranking para confirmar que tu apoyo se refleje.</li></ol><p>También puedes consultar el ranking global desde el botón de abajo.</p></div>
    <div class="actions"><a class="btn" href="https://duckad2020.com/appredirect.html" target="_blank" rel="noopener noreferrer">VOTAR EN DUCKAD ↗</a><a class="btn secondary" href="https://www.kpopgp.com/index.php?lang=en&amp;page=vote&amp;vote=a17c09d9-d5b3-11f1-9097-d20db3fa50fa" target="_blank" rel="noopener noreferrer">VER RANKING ↗</a></div>
