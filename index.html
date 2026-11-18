@@ -4957,5 +4957,74 @@ html body.dark-mode .cards .vote-card[data-palette]:before{
 }
 </style>
 
+
+<style id="voting-category-labels">
+.campaign-type-tag{display:inline-flex;align-items:center;align-self:flex-start;gap:6px;width:max-content;max-width:100%;padding:6px 9px;border-radius:4px;background:#eee8f4;color:#563d6b;font:800 .66rem/1.35 Arial,Helvetica,sans-serif;letter-spacing:.045em;text-transform:uppercase}
+.campaign-type-tag.official{background:#e7f2e9;color:#286345}
+.campaign-type-tag.advertising{background:#f8e9ed;color:#922d46}
+.campaign-type-tag.magazine{background:#e9eef9;color:#3e5686}
+.campaign-type-tag.ranking{background:#f1edf6;color:#67527b}
+.campaign-type-tag.promotional{background:#f9eee0;color:#89531e}
+.campaign-type-note{margin:0;padding:9px 11px;border-left:3px solid #b72d43;background:#faf5f6;color:#66545b;font-size:.76rem;line-height:1.5;font-weight:600}
+.classification-legend{margin:12px 0 18px;padding:12px 14px;border:1px solid #e6dfe2;border-radius:5px;background:#fff;color:#594d5d}
+.classification-legend summary{cursor:pointer;font-size:.82rem;font-weight:800}
+.classification-legend .legend-items{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.classification-legend p{margin:10px 0 0;color:#766e78;font-size:.77rem;line-height:1.5}
+body.dark-mode .campaign-type-tag{background:#3c3345;color:#eee5f7}
+body.dark-mode .campaign-type-tag.official{background:#203e32;color:#bce8cf}
+body.dark-mode .campaign-type-tag.advertising{background:#482a35;color:#ffd4df}
+body.dark-mode .campaign-type-tag.magazine{background:#293751;color:#d4e2ff}
+body.dark-mode .campaign-type-tag.ranking{background:#3b3347;color:#e8d9f6}
+body.dark-mode .campaign-type-tag.promotional{background:#493a28;color:#ffe0b0}
+body.dark-mode .campaign-type-note{background:#30272e;color:#eadce0;border-color:#dc7185}
+body.dark-mode .classification-legend{background:#29232e;border-color:#4b4054;color:#eee7f3}
+body.dark-mode .classification-legend p{color:#c3b8cb}
+</style>
+<details class="classification-legend" id="voting-classification">
+ <summary>ℹ️ Cómo se clasifican los reconocimientos y las votaciones</summary>
+ <div class="legend-items">
+  <span class="campaign-type-tag official">Premio musical oficial</span>
+  <span class="campaign-type-tag advertising">Premio de anuncios</span>
+  <span class="campaign-type-tag magazine">Premio de revista</span>
+  <span class="campaign-type-tag ranking">Ranking / encuesta</span>
+  <span class="campaign-type-tag promotional">Trofeo + campaña promocional</span>
+ </div>
+ <p>Los premios de anuncios y de revistas son campañas promocionales o editoriales; no son premios musicales oficiales. Los rankings y encuestas miden participación o popularidad y tampoco equivalen a una premiación oficial. La etiqueta de cada tarjeta indica el tipo de reconocimiento ofrecido.</p>
+</details>
+<script id="classify-voting-campaigns">
+(function(){
+ const cards=document.querySelectorAll('.vote-card,.birthday-card');
+ const officialNames=['mama','melon music awards','golden disc awards','asia artist awards','kids’ choice awards',"kids' choice awards",'aria awards'];
+ function classify(card){
+  const title=(card.querySelector('h3,.vote-title')?.textContent||'').toLowerCase();
+  const body=(card.textContent||'').toLowerCase();
+  if(/magazine|revista|portada|cover story/.test(title+' '+body)) return {type:'magazine',label:'Premio de revista',note:'Campaña editorial o promocional: aparecer en una revista o publicación no es un premio musical oficial.'};
+  if(/the idol trophy of the year|duckad/.test(title)) return {type:'promotional',label:'Trofeo + campaña promocional',note:'Es una campaña de votación con reconocimiento promocional y publicidad; no es una ceremonia oficial de premios musicales.'};
+  if(/kdol/.test(title) || (/ranking|popularity ranking|popularidad/.test(title) && (card.dataset.bday || card.dataset.kind==='birthday'))) return {type:'ranking',label:'Ranking / encuesta',note:'Es un ranking de popularidad o participación; no equivale a un premio musical oficial.'};
+  if(card.classList.contains('birthday-card') || card.dataset.bday || card.dataset.kind==='birthday') return {type:'advertising',label:'Premio de anuncios',note:'Es una campaña promocional de cumpleaños o publicidad; no es un premio musical oficial.'};
+  if(officialNames.some(name=>title.includes(name)) || ['mama','mma','aaa','aria','kca'].includes(card.dataset.palette)) return {type:'official',label:'Premio musical oficial',note:'Votación vinculada a una ceremonia o premiación musical oficial. La categoría y las reglas dependen de la organización.'};
+  if(/magazine|revista|portada|cover story/.test(body)) return {type:'magazine',label:'Premio de revista',note:'Campaña editorial o promocional: aparecer en una revista o publicación no es un premio musical oficial.'};
+  if(/advert|anuncio|billboard|pantalla|subway ad|birthday ad|celebration ad/.test(title+' '+body)) return {type:'advertising',label:'Premio de anuncios',note:'El reconocimiento consiste en publicidad o promoción; no es un premio musical oficial.'};
+  if(/ranking|encuesta|popularity/.test(title)) return {type:'ranking',label:'Ranking / encuesta',note:'Es un ranking de popularidad o participación; no equivale a un premio musical oficial.'};
+  return null;
+ }
+ cards.forEach(card=>{
+  if(card.querySelector('.campaign-type-tag'))return;
+  const result=classify(card);if(!result)return;
+  const tag=document.createElement('span');
+  tag.className='campaign-type-tag '+result.type;
+  tag.textContent=result.label;
+  tag.setAttribute('aria-label','Tipo de reconocimiento: '+result.label);
+  const anchor=card.querySelector('.card-top')||card.querySelector('.birthday-tag')||card.querySelector('h3')||card.firstElementChild;
+  if(anchor && anchor.parentNode===card) anchor.insertAdjacentElement('afterend',tag);
+  else card.insertBefore(tag,card.firstChild);
+  const note=document.createElement('p');
+  note.className='campaign-type-note';
+  note.textContent=result.note;
+  tag.insertAdjacentElement('afterend',note);
+ });
+})();
+</script>
+
 </body>
 </html>
