@@ -3504,7 +3504,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
  </div>
 </header>
 
-<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#official-voting">Oficiales</a><a href="#unofficial-voting">No oficiales</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
+<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#official-voting">Oficiales</a><a href="#unofficial-voting">No oficiales</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#army">ARMY</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
@@ -3532,6 +3532,52 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
  <div class="note"><strong>Recuerda:</strong> primero intercambias corazones con tus amigos; después, los corazones que recibes los utilizas para votar en los posts de las fanbases. Cada 100 ❤️ corazones votados en esos posts te dan 10 Ever Hearts permanentes.</div>
 
  <div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">CHOEAEDOL · ANDROID ↗</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">CHOEAEDOL · iOS ↗</a></div>
+</section>
+
+<section class="panel army-panel" id="army">
+ <div class="section-head"><div><h2>ARMY · TU PERFIL</h2><p>Registra el intercambio diario de corazones con tus amigos de Choeaedol.</p></div><span class="pill">3 ❤️ POR AMIGO / DÍA</span></div>
+ <div class="army-intro"><strong>Un espacio independiente para ARMY.</strong><span>Tu certificado se revisa en este dispositivo y se descarta. No se sube ni se guarda la imagen.</span></div>
+ <div class="army-auth" id="armyAuth">
+  <div class="army-auth-copy"><h3>Entra a tu cuenta ARMY</h3><p>Usa un nombre de usuario y contraseña. No necesitas correo electrónico.</p></div>
+  <form id="armyAuthForm" class="army-form">
+   <label>Nombre de usuario<input id="armyUsername" name="username" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" required placeholder="Ej. purplearmy"></label>
+   <label>Contraseña<input id="armyPassword" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" required placeholder="Mínimo 8 caracteres"></label>
+   <div class="army-actions"><button class="btn" type="submit" id="armyLoginButton">Iniciar sesión</button><button class="btn secondary" type="button" id="armySignupButton">Crear cuenta</button></div>
+   <p class="army-message" id="armyAuthMessage" role="status" aria-live="polite"></p>
+  </form>
+ </div>
+ <div class="army-dashboard" id="armyDashboard" hidden>
+  <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
+  <div class="army-stats">
+   <div><span>Amigos registrados</span><strong id="armyFriendStat">0</strong></div>
+   <div><span>Objetivo diario</span><strong id="armyTargetStat">0 ❤️</strong></div>
+   <div><span>Corazones registrados</span><strong id="armyTotalStat">0 ❤️</strong></div>
+  </div>
+  <div class="army-block">
+   <h3>1 · Tu lista de amigos</h3><p>Indica cuántos amigos tienes en Choeaedol. El objetivo se calcula como 3 corazones por cada amigo.</p>
+   <form id="armyFriendsForm" class="army-inline-form"><label for="armyFriendCount">Número de amigos</label><input id="armyFriendCount" type="number" min="1" max="1000" step="1" required><button class="btn" type="submit">Guardar cantidad</button></form>
+  </div>
+  <div class="army-block army-certificate-block">
+   <h3>2 · Verifica tu certificado de Choeaedol</h3>
+   <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
+   <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
+   <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
+  </div>
+  <div class="army-block" id="armyDailyBlock" hidden>
+   <h3>3 · Confirma tus corazones diarios</h3>
+   <div class="army-daily-target"><span>Tu objetivo de hoy</span><strong id="armyDailyTarget">0 ❤️</strong><small id="armyDailyFormula">3 corazones × 0 amigos</small></div>
+   <form id="armyDailyForm">
+    <label class="army-confirm"><input id="armyConfirmAll" type="checkbox" required><span>Confirmo que hoy envié 3 corazones a cada uno de mis amigos de Choeaedol.</span></label>
+    <button class="btn" type="submit" id="armySubmitDaily">Registrar cumplimiento de hoy</button>
+    <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
+   </form>
+  </div>
+  <div class="army-block">
+   <h3>Historial diario</h3><p>Los registros se guardan por fecha de Corea del Sur (KST). Solo se permite un registro por día.</p>
+   <div id="armyHistory" class="army-history"><p class="army-muted">Aún no hay registros.</p></div>
+  </div>
+ </div>
+ <p class="army-privacy">Privacidad: el certificado no se envía a Supabase, no se almacena en archivos y no aparece en tu perfil. Solo se guarda el resultado de tu registro diario, la cantidad de amigos declarada y la fecha. La revisión del formato no certifica la autenticidad del documento ni verifica automáticamente los envíos en Choeaedol.</p>
 </section>
 
 <section class="panel" id="official-voting">
@@ -5264,6 +5310,154 @@ section>p,.section-description,.section-intro{font-size:.9rem;line-height:1.5}
  .campaign-type-note{padding:7px 9px!important;font-size:.68rem!important}
 }
 </style>
+
+
+<style id="army-section-styles">
+.army-panel{scroll-margin-top:18px}.army-intro{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:16px;border-left:3px solid #8b65b5;background:#f5f0fa;color:#554364;font-size:.84rem}.army-intro span{color:#756b7b;font-size:.78rem}.army-auth,.army-dashboard{padding:18px;border:1px solid #e6dfe2;border-radius:8px;background:#fff}.army-auth-copy h3,.army-block h3,.army-profile-head h3{margin:0 0 5px;color:#38264a;font-size:1.04rem}.army-auth-copy p,.army-block>p,.army-profile-head p{margin:0 0 13px;color:#756b7b;font-size:.82rem;line-height:1.5}.army-form{display:grid;gap:12px;max-width:520px}.army-form label,.army-inline-form label{display:grid;gap:6px;color:#584767;font-size:.8rem;font-weight:800}.army-form input,.army-inline-form input{width:100%;min-height:42px;padding:10px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-actions{display:flex;gap:9px;flex-wrap:wrap}.army-message{min-height:18px;margin:0;color:#8a3450;font-size:.78rem}.army-dashboard[hidden],.army-block[hidden],.army-auth[hidden]{display:none!important}.army-profile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ece5ee}.army-eyebrow{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9277a7}.army-profile-head h3{margin:4px 0}.army-profile-head p{margin:0}.army-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}.army-stats>div{padding:12px;border:1px solid #e8e0ed;border-radius:6px;background:#faf8fc}.army-stats span,.army-daily-target span{display:block;color:#766c7b;font-size:.7rem;font-weight:700}.army-stats strong{display:block;margin-top:5px;color:#61427f;font-size:1.18rem;font-weight:900}.army-block{padding:16px 0;border-top:1px solid #eee8f0}.army-block:first-of-type{border-top:0}.army-inline-form{display:flex;align-items:end;gap:10px;flex-wrap:wrap}.army-inline-form label{flex:1;min-width:150px}.army-inline-form input{max-width:180px}.army-upload{display:flex;align-items:center;gap:12px;padding:14px;border:1px dashed #bda8cf;border-radius:7px;background:#faf7fc;cursor:pointer;color:#63477d}.army-upload>span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#eee5f5;font-size:1.4rem}.army-upload strong,.army-upload small{display:block}.army-upload small{margin-top:3px;color:#81758a;font-size:.7rem}.army-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.army-verify-status{margin-top:10px;padding:10px 12px;border-radius:5px;background:#f5f1f7;color:#6b5c73;font-size:.78rem;line-height:1.5}.army-verify-status.ok{background:#edf7f0;color:#27623c}.army-verify-status.error{background:#fbefef;color:#92394a}.army-daily-target{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0;padding:13px;background:#f5f0fa;border-radius:6px}.army-daily-target strong{font-size:1.25rem;color:#654184}.army-daily-target small{color:#766b7c}.army-confirm{display:flex;align-items:flex-start;gap:9px;margin:12px 0;color:#5d5363;font-size:.82rem;line-height:1.45}.army-confirm input{margin-top:3px;accent-color:#76509b}.army-history{display:grid;gap:7px}.army-history-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;font-size:.78rem}.army-history-item strong{color:#60407e}.army-muted{color:#807684;font-size:.78rem}.army-privacy{margin:14px 0 0;color:#7c727e;font-size:.72rem;line-height:1.55}
+body.dark-mode .army-intro,body.dark-mode .army-auth,body.dark-mode .army-dashboard,body.dark-mode .army-stats>div,body.dark-mode .army-upload,body.dark-mode .army-history-item{background:#2b2630;border-color:#4b4054;color:#eee7f3}body.dark-mode .army-auth-copy h3,body.dark-mode .army-block h3,body.dark-mode .army-profile-head h3{color:#eee7f3}body.dark-mode .army-form label,body.dark-mode .army-inline-form label,body.dark-mode .army-confirm{color:#ddd2e4}body.dark-mode .army-form input,body.dark-mode .army-inline-form input{background:#211d25;border-color:#5b4d63;color:#fff}body.dark-mode .army-verify-status{background:#342c3a;color:#e6d9ed}body.dark-mode .army-verify-status.ok{background:#203a2b;color:#c6ebd1}body.dark-mode .army-verify-status.error{background:#482c35;color:#ffd9df}body.dark-mode .army-daily-target{background:#342b3b}body.dark-mode .army-stats strong,body.dark-mode .army-history-item strong,body.dark-mode .army-daily-target strong{color:#d9c1f4}body.dark-mode .army-block>p,body.dark-mode .army-profile-head p,body.dark-mode .army-intro span,body.dark-mode .army-privacy,body.dark-mode .army-muted{color:#c7bdcb}
+@media(max-width:560px){.army-stats{grid-template-columns:1fr 1fr}.army-profile-head{align-items:flex-start;flex-wrap:wrap}.army-inline-form{align-items:stretch}.army-inline-form label,.army-inline-form input{max-width:none}.army-inline-form .btn{width:100%}}
+</style>
+
+
+<script type="module" id="army-section-app">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+const SUPABASE_URL = "https://kerhrpdrmxkffelufgbh.supabase.co";
+const SUPABASE_KEY = "sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC";
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const $ = (id) => document.getElementById(id);
+const authBox=$("armyAuth"), dashboard=$("armyDashboard"), authForm=$("armyAuthForm");
+let currentUser=null, currentUsername="", approvedForToday=false, tesseractWorker=null;
+const usernameEmail = (name) => "army_"+name.trim().toLowerCase()+"@accounts.invalid";
+function kstDate(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
+function prettyKstDate(date){return new Intl.DateTimeFormat("es-MX",{timeZone:"Asia/Seoul",day:"numeric",month:"long",year:"numeric"}).format(new Date(date+"T12:00:00+09:00"));}
+function message(id,text,type=""){const el=$(id);el.textContent=text;el.className=(el.id==="armyVerifyStatus"?"army-verify-status":"army-message")+(type?" "+type:"");}
+function setAuthMode(loading){$("armyLoginButton").disabled=loading;$("armySignupButton").disabled=loading;}
+async function loadProfile(){
+ const [{data:usernameRow,error:uErr},{data:profile,error:pErr}] = await Promise.all([
+  supabase.from("army_usernames").select("username,created_at").eq("user_id",currentUser.id).single(),
+  supabase.from("army_profiles").select("friend_count,country_code,created_at").eq("user_id",currentUser.id).maybeSingle()
+ ]);
+ if(uErr) throw uErr;
+ currentUsername=usernameRow.username;
+ if(!profile){const {error}=await supabase.from("army_profiles").insert({user_id:currentUser.id,friend_count:0});if(error)throw error;}
+ $("armyProfileName").textContent="@"+currentUsername;
+ $("armyMemberSince").textContent="Miembro desde "+new Intl.DateTimeFormat("es-MX",{dateStyle:"medium"}).format(new Date(usernameRow.created_at));
+ $("armyFriendCount").value=profile?.friend_count??0;
+ await loadHistory();
+ dashboard.hidden=false;authBox.hidden=true;
+}
+async function loadHistory(){
+ const [{data:profile,error:pErr},{data:logs,error:lErr}] = await Promise.all([
+  supabase.from("army_profiles").select("friend_count").eq("user_id",currentUser.id).single(),
+  supabase.from("army_heart_daily_logs").select("log_date,friend_count,hearts_required,submitted_at").eq("user_id",currentUser.id).order("log_date",{ascending:false}).limit(30)
+ ]);
+ if(pErr)throw pErr;if(lErr)throw lErr;
+ const friends=profile.friend_count||0;
+ $("armyFriendCount").value=friends;
+ $("armyFriendStat").textContent=friends.toLocaleString("es-MX");
+ $("armyTargetStat").textContent=(friends*3).toLocaleString("es-MX")+" ❤️";
+ $("armyDailyTarget").textContent=(friends*3).toLocaleString("es-MX")+" ❤️";
+ $("armyDailyFormula").textContent="3 corazones × "+friends.toLocaleString("es-MX")+" amigos";
+ $("armyTotalStat").textContent=(logs||[]).reduce((n,x)=>n+x.hearts_required,0).toLocaleString("es-MX")+" ❤️";
+ const today=kstDate(), done=(logs||[]).some(x=>x.log_date===today);
+ $("armyDailyBlock").hidden=!approvedForToday||friends<1||done;
+ if(done){message("armyVerifyStatus","Tu registro de hoy ya está completo. Vuelve mañana después de verificar tu certificado.","ok");approvedForToday=false;}
+ $("armyHistory").innerHTML="";
+ if(!logs?.length){$("armyHistory").innerHTML='<p class="army-muted">Aún no hay registros.</p>';return;}
+ for(const log of logs){
+  const row=document.createElement("div");row.className="army-history-item";
+  const left=document.createElement("span");left.textContent=prettyKstDate(log.log_date)+" · "+log.friend_count+" amigos";
+  const right=document.createElement("strong");right.textContent=log.hearts_required.toLocaleString("es-MX")+" ❤️";
+  row.append(left,right);$("armyHistory").append(row);
+ }
+}
+async function showSession(session){
+ currentUser=session.user;approvedForToday=false;
+ await loadProfile();
+}
+authForm.addEventListener("submit",async(event)=>{
+ event.preventDefault();setAuthMode(true);message("armyAuthMessage","Iniciando sesión…");
+ const username=$("armyUsername").value.trim(),password=$("armyPassword").value;
+ try{
+  const {data,error}=await supabase.auth.signInWithPassword({email:usernameEmail(username),password});
+  if(error)throw error;await showSession(data.session);
+ }catch(e){message("armyAuthMessage",e.message||"No pudimos iniciar sesión.");}
+ finally{setAuthMode(false);}
+});
+$("armySignupButton").addEventListener("click",async()=>{
+ const username=$("armyUsername").value.trim(),password=$("armyPassword").value;
+ if(!/^[A-Za-z0-9][A-Za-z0-9._-]{2,19}$/.test(username)){message("armyAuthMessage","El usuario debe tener entre 3 y 20 caracteres: letras, números, punto, guion o guion bajo.");return;}
+ if(password.length<8||password.length>72){message("armyAuthMessage","La contraseña debe tener entre 8 y 72 caracteres.");return;}
+ setAuthMode(true);message("armyAuthMessage","Creando tu cuenta…");
+ try{
+  const {data,error}=await supabase.functions.invoke("army-username-signup",{body:{username,password}});
+  if(error)throw error;if(data?.error)throw new Error(data.error);
+  const login=await supabase.auth.signInWithPassword({email:usernameEmail(username),password});
+  if(login.error)throw login.error;await showSession(login.data.session);
+ }catch(e){message("armyAuthMessage",e.message||"No pudimos crear la cuenta.");}
+ finally{setAuthMode(false);}
+});
+$("armyLogoutButton").addEventListener("click",async()=>{await supabase.auth.signOut();currentUser=null;currentUsername="";approvedForToday=false;dashboard.hidden=true;authBox.hidden=false;message("armyAuthMessage","Has cerrado sesión.");});
+$("armyFriendsForm").addEventListener("submit",async(event)=>{
+ event.preventDefault();if(!currentUser)return;
+ const count=Number($("armyFriendCount").value);
+ if(!Number.isInteger(count)||count<1||count>1000){message("armyDailyMessage","Indica entre 1 y 1000 amigos.");return;}
+ const {error}=await supabase.from("army_profiles").upsert({user_id:currentUser.id,friend_count:count,updated_at:new Date().toISOString()},{onConflict:"user_id"});
+ if(error){message("armyDailyMessage",error.message);return;}
+ await loadHistory();message("armyDailyMessage","Cantidad de amigos actualizada.");
+});
+$("armyCertificate").addEventListener("change",async(event)=>{
+ const input=event.target,file=input.files?.[0];if(!file)return;
+ approvedForToday=false;$("armyDailyBlock").hidden=true;
+ const clear=()=>{input.value="";};
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>8*1024*1024){message("armyVerifyStatus","Formato no admitido. Usa JPG, PNG o WEBP de máximo 8 MB.","error");clear();return;}
+ message("armyVerifyStatus","Revisando formato y texto del certificado… Esto puede tardar unos segundos.");
+ try{
+  const bitmap=await createImageBitmap(file),ratio=bitmap.width/bitmap.height;
+  if(bitmap.width<500||bitmap.height<800||ratio<0.48||ratio>0.66)throw new Error("La imagen no tiene el formato vertical del certificado de referencia.");
+  if(!tesseractWorker){
+   const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js");
+   tesseractWorker=await mod.createWorker("eng");
+  }
+  const result=await tesseractWorker.recognize(bitmap);
+  const raw=(result.data.text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
+  const required=["voting certificate","voter name","voting date","voted hearts","choeaedol","bts"];
+  const missing=required.filter(token=>!raw.includes(token));
+  if(missing.length)throw new Error("No coincide con el certificado de referencia. Faltan textos: "+missing.join(", ")+".");
+  const nameMatch=raw.includes(currentUsername.toLowerCase());
+  if(!nameMatch)throw new Error("El nombre del certificado no coincide con tu usuario ARMY (@"+currentUsername+").");
+  const months={january:"01",february:"02",march:"03",april:"04",may:"05",june:"06",july:"07",august:"08",september:"09",october:"10",november:"11",december:"12"};
+  let certDate=null;
+  const dateRegex=new RegExp("("+Object.keys(months).join("|")+")\\s+(\\d{1,2})[,]?\\s+(\\d{4})","i");
+  const dm=raw.match(dateRegex);
+  if(dm)certDate=dm[3]+"-"+months[dm[1].toLowerCase()]+"-"+String(dm[2]).padStart(2,"0");
+  if(!certDate||certDate!==kstDate())throw new Error("La fecha del certificado debe ser la fecha de hoy en Corea (KST): "+kstDate()+".");
+  bitmap.close();approvedForToday=true;
+  const friends=Number($("armyFriendCount").value)||0;
+  if(friends<1)throw new Error("Guarda primero cuántos amigos tienes para calcular tu objetivo diario.");
+  $("armyDailyTarget").textContent=(friends*3).toLocaleString("es-MX")+" ❤️";
+  $("armyDailyFormula").textContent="3 corazones × "+friends.toLocaleString("es-MX")+" amigos";
+  $("armyDailyBlock").hidden=false;
+  message("armyVerifyStatus","Certificado aprobado por coincidencia de formato, usuario y fecha KST. La imagen no se guardó.","ok");
+ }catch(e){approvedForToday=false;message("armyVerifyStatus",e.message||"No pudimos revisar el certificado.","error");}
+ finally{clear();}
+});
+$("armyDailyForm").addEventListener("submit",async(event)=>{
+ event.preventDefault();if(!currentUser||!approvedForToday){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}
+ if(!$("armyConfirmAll").checked){message("armyDailyMessage","Confirma que enviaste 3 corazones a cada amigo.");return;}
+ const friends=Number($("armyFriendCount").value);
+ if(!Number.isInteger(friends)||friends<1){message("armyDailyMessage","Guarda primero tu número de amigos.");return;}
+ $("armySubmitDaily").disabled=true;message("armyDailyMessage","Guardando registro…");
+ try{
+  const {error}=await supabase.from("army_heart_daily_logs").insert({user_id:currentUser.id,log_date:kstDate(),friend_count:friends,confirmed_all_friends:true});
+  if(error){if(error.code==="23505")throw new Error("Ya registraste tus corazones de hoy (KST).");throw error;}
+  approvedForToday=false;$("armyConfirmAll").checked=false;await loadHistory();message("armyDailyMessage","¡Registro diario guardado! Objetivo cumplido: "+(friends*3).toLocaleString("es-MX")+" corazones.");
+ }catch(e){message("armyDailyMessage",e.message||"No pudimos guardar el registro.");}
+ finally{$("armySubmitDaily").disabled=false;}
+});
+const {data:{session}}=await supabase.auth.getSession();
+if(session){try{await showSession(session);}catch(e){await supabase.auth.signOut();message("armyAuthMessage","No pudimos cargar tu perfil. Intenta iniciar sesión otra vez.");}}
+</script>
 
 </body>
 </html>
