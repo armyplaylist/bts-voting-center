@@ -5078,29 +5078,30 @@ body.dark-mode .campaign-benefit-box h4{color:#d9c1f4}
   'ASIA ARTIST AWARDS':'ASIA ARTIST AWARDS',
   "NICKELODEON KIDS' CHOICE AWARDS":'KIDS’ CHOICE AWARDS'
  };
+ const favicon=(domain)=>'https://www.google.com/s2/favicons?domain='+encodeURIComponent(domain)+'&sz=128';
  const logoAssets=[
-  {match:/THE IDOL TROPHY OF THE YEAR|DUCKAD/i,src:'https://www.duckad2020.com/favicon.ico',alt:'Logotipo de DUCKAD'},
-  {match:/MUSIC AWARDS JAPAN/i,src:'https://www.musicawardsjapan.com/favicon.ico',alt:'Logotipo de Music Awards Japan'},
-  {match:/CHANNEL R RADIO/i,src:'https://listen.channelrradio.com/favicon.ico',alt:'Logotipo de Channel R Radio'},
-  {match:/FANPLUS/i,src:'https://fanplus.co.kr/favicon.ico',alt:'Logotipo de Fanplus'},
-  {match:/MNET PLUS/i,src:'https://www.mnetplus.world/favicon.ico',alt:'Logotipo de Mnet Plus'},
-  {match:/FANNSTAR/i,src:'https://www.fannstar.com/favicon.ico',alt:'Logotipo de FANNSTAR'},
-  {match:/KDOL/i,src:'https://kdol.me/favicon.ico',alt:'Logotipo de KDOL'},
-  {match:/DAILYDUCK/i,src:'https://dailyduck.com/favicon.ico',alt:'Logotipo de DailyDuck'},
+  {match:/THE IDOL TROPHY OF THE YEAR|DUCKAD/i,src:favicon('duckad2020.com'),alt:'Logotipo de DUCKAD'},
+  {match:/MUSIC AWARDS JAPAN/i,src:favicon('usen.oshireq.com'),alt:'Logotipo de Music Awards Japan / USEN'},
+  {match:/CHANNEL R RADIO/i,src:favicon('listen.channelrradio.com'),alt:'Logotipo de Channel R Radio'},
+  {match:/FANPLUS/i,src:favicon('fanplus.co.kr'),alt:'Logotipo de Fanplus'},
+  {match:/MNET PLUS/i,src:favicon('mnetplus.world'),alt:'Logotipo de Mnet Plus'},
+  {match:/FANNSTAR/i,src:favicon('fannstar.tf.co.kr'),alt:'Logotipo de FANNSTAR'},
+  {match:/KDOL/i,src:favicon('kdol.me'),alt:'Logotipo de KDOL'},
+  {match:/DAILYDUCK/i,src:favicon('dailyduck.com'),alt:'Logotipo de DailyDuck'},
   {match:/GOLDEN DISC/i,src:'https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Bogor/o/1764058879741-GDA_Logo/j1keexh7xwvb2xi.png',alt:'Logotipo de Golden Disc Awards'},
   {match:/MELON MUSIC AWARDS/i,src:'https://t1.kakaocdn.net/kakaoent_com/admin/editor/edb7a1b5019700001.png',alt:'Logotipo de Melon Music Awards'},
   {match:/ARIA AWARDS/i,src:'https://images.squarespace-cdn.com/content/v1/6522859ed74b6e6f6d350faf/1ea4ee1b-9617-4d21-8235-be6acab6d157/aria.png',alt:'Logotipo de ARIA Awards'},
   {match:/MAMA|MNET ASIAN MUSIC/i,src:'https://static.mnetjp.com/res/news/1767193200/nmim696f451ab10c4.jpg',alt:'Logotipo de MAMA Awards'},
   {match:/ASIA ARTIST AWARDS/i,src:'https://media.nownews.com/nn_media/thumbnail/2026/05/1778832777652-d5ea2437c1db4e37965c3ee01196b765-825x481.webp?unShow=false',alt:'Logotipo de Asia Artist Awards'},
-  {match:/KIDS.? CHOICE/i,src:'https://www.nick.com/favicon.ico',alt:'Logotipo de Nickelodeon Kids Choice Awards'},
-  {match:/PODOAL/i,src:'https://podoal.com/favicon.ico',alt:'Logotipo de Podoal'},
-  {match:/UPICK/i,src:'https://upick.io/favicon.ico',alt:'Logotipo de UPICK'},
-  {match:/GIFTIFAN/i,src:'https://giftifan.com/favicon.ico',alt:'Logotipo de Giftifan'},
-  {match:/IDOL CHAMP/i,src:'https://idolchamp.com/favicon.ico',alt:'Logotipo de Idol Champ'},
-  {match:/MY1PICK/i,src:'https://my1pick.com/favicon.ico',alt:'Logotipo de My1pick'},
-  {match:/STARVIBE/i,src:'https://starvibe.co.kr/favicon.ico',alt:'Logotipo de Starvibe'},
-  {match:/PICNIC/i,src:'https://picnic-app.com/favicon.ico',alt:'Logotipo de Picnic'},
-  {match:/IC POLLS/i,src:'https://icpolls.com/favicon.ico',alt:'Logotipo de IC POLLS'}
+  {match:/KIDS.? CHOICE/i,src:favicon('kca.nick.tv'),alt:'Logotipo de Nickelodeon Kids Choice Awards'},
+  {match:/PODOAL/i,src:favicon('global.podoal.io'),alt:'Logotipo de Podoal'},
+  {match:/UPICK/i,src:favicon('u-pick.io'),alt:'Logotipo de UPICK'},
+  {match:/GIFTIFAN/i,src:favicon('giftifan.page.link'),alt:'Logotipo de Giftifan'},
+  {match:/IDOL CHAMP/i,src:favicon('idolchamp.com'),alt:'Logotipo de Idol Champ'},
+  {match:/MY1PICK/i,src:favicon('my1pick.com'),alt:'Logotipo de My1pick'},
+  {match:/STARVIBE/i,src:favicon('starvibe.fun'),alt:'Logotipo de Starvibe'},
+  {match:/PICNIC/i,src:favicon('picnic.fan'),alt:'Logotipo de Picnic'},
+  {match:/IC POLLS/i,src:favicon('icpolls.com'),alt:'Logotipo de IC POLLS'}
  ];
  function clean(s){return (s||'').replace(/\s+/g,' ').trim();}
  function initials(s){return clean(s).split(/\s+/).filter(Boolean).slice(0,3).map(x=>x[0]).join('').toUpperCase();}
