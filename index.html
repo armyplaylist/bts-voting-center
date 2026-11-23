@@ -3541,7 +3541,7 @@ body.army-profile-view #army.army-panel{display:block!important}
 </section>
 
 <section class="panel army-panel" id="army">
- <div class="section-head"><div><h2>ARMY · TU PERFIL</h2><p>Registra el intercambio diario de corazones con tus amigos de Choeaedol.</p></div><span class="pill">3 ❤️ POR AMIGO / DÍA</span></div>
+ <div class="section-head"><div><h2>ARMY · TU PERFIL</h2><p>Registra tus votos de Choeaedol mediante certificados diarios.</p></div></div>
  <div class="army-intro"><strong>Un espacio independiente para ARMY.</strong><span>Tu certificado se revisa en este dispositivo y se descarta. No se sube ni se guarda la imagen.</span></div>
  <div class="army-auth" id="armyAuth">
   <div class="army-auth-copy"><h3>Entra a tu cuenta ARMY</h3><p>Usa un nombre de usuario y contraseña. No necesitas correo electrónico.</p></div>
@@ -3554,8 +3554,7 @@ body.army-profile-view #army.army-panel{display:block!important}
  </div>
  <div class="army-dashboard" id="armyDashboard" hidden>
   <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
-  <div id="armyVoterAccounts" class="army-voter-accounts" hidden aria-live="polite"></div>
-  <div class="army-stats"><div><span>Votos para BTS registrados</span><strong id="armyBtsVotesStat">0</strong></div></div>
+   <div class="army-stats"><div><span>Votos para BTS registrados</span><strong id="armyBtsVotesStat">0</strong></div></div>
   <div id="armyMemberVotes" class="army-member-votes" aria-live="polite"></div>
   <div class="army-block army-certificate-block">
    <h3>1 · Verifica tu certificado de Choeaedol</h3>
@@ -5365,14 +5364,6 @@ async function loadHistory(){
  for(const item of memberTotals){const card=document.createElement("div");card.className="army-member-vote";const name=document.createElement("span");name.textContent=item.name;const total=document.createElement("b");total.textContent=item.total.toLocaleString("es-MX");card.append(name,total);memberBox.append(card);}
  const today=kstDate();
  $("armyDailyBlock").hidden=!approvedForToday;
- const namedLogs=(logs||[]).filter(x=>x.voter_name&&x.voter_name.trim());
- const distinctVoters=[...new Set(namedLogs.map(x=>x.voter_name.trim()))];
- const accountBox=$("armyVoterAccounts");accountBox.innerHTML="";
- if(distinctVoters.length){
-  const heading=document.createElement("strong");heading.textContent="Cuentas de Choeaedol registradas:";accountBox.append(heading);
-  for(const name of distinctVoters){const tag=document.createElement("span");tag.className="army-voter-tag";tag.textContent="@"+name;accountBox.append(tag);}
-  accountBox.hidden=false;
- }else accountBox.hidden=true;
  $("armyHistory").innerHTML="";
  if(!logs?.length){$("armyHistory").innerHTML='<p class="army-muted">Aún no hay registros.</p>';return;}
  for(const log of logs){
