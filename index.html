@@ -3466,11 +3466,11 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
  const target=Date.UTC(2026,11,18);
  function tick(){
   const box=document.getElementById('channelr-date-countdown');if(!box)return;
-  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Los_Angeles',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
   const p=Object.fromEntries(parts.filter(x=>x.type!=='literal').map(x=>[x.type,Number(x.value)]));
   const today=Date.UTC(p.year,p.month-1,p.day),days=Math.round((target-today)/86400000);
-  if(days>0)box.textContent='⏳ FALTAN '+days+' DÍAS PARA LA FECHA DE CIERRE · KST';
-  else if(days===0)box.textContent='📅 CIERRE HOY · LA HORA EXACTA NO ESTÁ PUBLICADA';
+  if(days>0)box.textContent='⏳ FALTAN '+days+' DÍAS PARA EL 18 DE DICIEMBRE · HORA DEL PACÍFICO (EE. UU.)';
+  else if(days===0)box.textContent='📅 CIERRE HOY · HORA DEL PACÍFICO (EE. UU.)';
   else box.textContent='FECHA DE CIERRE TRANSCURRIDA · CONFIRMA EL ESTADO EN LA WEB OFICIAL';
  }
  tick();window.__btsRegisterSecondTick(tick);
