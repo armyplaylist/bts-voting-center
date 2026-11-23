@@ -3481,6 +3481,12 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
  tick();if(window.__btsRegisterSecondTick)window.__btsRegisterSecondTick(tick);else{window.addEventListener('load',tick);setInterval(tick,1000);}
 })();
 </script>
+
+<style id="army-profile-only-view">
+/* Mi perfil es una vista independiente: no forma parte del recorrido de las demás secciones. */
+#army.army-panel{display:none!important}
+body.army-profile-view #army.army-panel{display:block!important}
+</style>
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Anuncio prioritario">
@@ -5484,5 +5490,19 @@ const {data:{session}}=await supabase.auth.getSession();
 if(session){try{await showSession(session);}catch(e){await supabase.auth.signOut();message("armyAuthMessage","No pudimos cargar tu perfil. Intenta iniciar sesión otra vez.");}}
 </script>
 
+
+<script id="army-profile-view-navigation">
+(function(){
+ function syncArmyProfileView(){
+  const show=window.location.hash==="#army";
+  document.body.classList.toggle("army-profile-view",show);
+  const profile=document.getElementById("army");
+  if(show&&profile){requestAnimationFrame(()=>profile.scrollIntoView({behavior:"auto",block:"start"}));}
+ }
+ window.addEventListener("hashchange",syncArmyProfileView);
+ document.addEventListener("DOMContentLoaded",syncArmyProfileView);
+ syncArmyProfileView();
+})();
+</script>
 </body>
 </html>
