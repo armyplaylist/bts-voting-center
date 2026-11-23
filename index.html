@@ -5427,8 +5427,10 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const bitmap=await createImageBitmap(file),ratio=bitmap.width/bitmap.height;
   if(bitmap.width<600||bitmap.height<800||ratio<0.72||ratio>0.78)throw new Error("La imagen no tiene la proporción del certificado de referencia (aprox. 900 × 1200).");
   if(!tesseractWorker){
-   const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js");
-   tesseractWorker=await mod.createWorker("eng");
+   const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/+esm");
+   const createWorker=mod.createWorker||mod.default?.createWorker;
+   if(typeof createWorker!=="function")throw new Error("No se pudo cargar el lector del certificado. Recarga la página e inténtalo de nuevo.");
+   tesseractWorker=await createWorker("eng");
   }
   const canvas=document.createElement("canvas");canvas.width=bitmap.width;canvas.height=bitmap.height;
   canvas.getContext("2d").drawImage(bitmap,0,0);bitmap.close();
