@@ -3554,8 +3554,34 @@ body.army-profile-view #army.army-panel{display:block!important}
  </div>
  <div class="army-dashboard" id="armyDashboard" hidden>
   <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
+  <div class="army-block army-edit-profile">
+   <button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button>
+   <form id="armyEditProfileForm" class="army-country-form" hidden>
+    <label for="armyCountrySelect">Seleccionar país</label>
+    <select id="armyCountrySelect" required><option value="">Selecciona tu país</option></select>
+    <button class="btn" type="submit" id="armySaveCountry">Guardar país</button>
+    <p class="army-message" id="armyCountryMessage" role="status" aria-live="polite"></p>
+   </form>
+   <p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p>
+  </div>
    <div class="army-stats"><div><span>Votos para BTS registrados</span><strong id="armyBtsVotesStat">0</strong></div></div>
   <div id="armyMemberVotes" class="army-member-votes" aria-live="polite"></div>
+  <section class="army-block army-world-map" aria-labelledby="armyWorldMapTitle">
+   <h3 id="armyWorldMapTitle">ARMY por el mundo</h3>
+   <div class="army-map-locked" id="armyMapLocked">
+    <strong>Mapa mundial 3D bloqueado</strong>
+    <p>Se desbloquea cuando la comunidad alcance 1,000 votos acumulados para BTS.</p>
+    <div class="army-map-progress"><span id="armyMapProgressBar"></span></div>
+    <p class="army-map-progress-label"><strong id="armyMapTotal">0</strong> / 1,000 votos para BTS</p>
+   </div>
+   <div id="armyMapUnlocked" hidden>
+    <p class="army-map-description">Participación por país según los votos registrados en certificados ARMY.</p>
+    <div id="armyGlobeStatus" class="army-map-status" role="status">Preparando el mapa mundial…</div>
+    <div id="armyGlobe" class="army-globe" aria-label="Globo terráqueo 3D con participación de ARMY por país"></div>
+    <h4 class="army-chart-title">Ranking mundial por votos</h4>
+    <ol id="armyCountryRanking" class="army-country-ranking"></ol>
+   </div>
+  </section>
   <div class="army-block army-certificate-block">
    <h3>1 · Verifica tu certificado de Choeaedol</h3>
    <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
@@ -5321,8 +5347,9 @@ section>p,.section-description,.section-intro{font-size:.9rem;line-height:1.5}
 .army-panel{scroll-margin-top:18px}.army-intro{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:16px;border-left:3px solid #8b65b5;background:#f5f0fa;color:#554364;font-size:.84rem}.army-intro span{color:#756b7b;font-size:.78rem}.army-auth,.army-dashboard{padding:18px;border:1px solid #e6dfe2;border-radius:8px;background:#fff}.army-auth-copy h3,.army-block h3,.army-profile-head h3{margin:0 0 5px;color:#38264a;font-size:1.04rem}.army-auth-copy p,.army-block>p,.army-profile-head p{margin:0 0 13px;color:#756b7b;font-size:.82rem;line-height:1.5}.army-form{display:grid;gap:12px;max-width:520px}.army-form label,.army-inline-form label{display:grid;gap:6px;color:#584767;font-size:.8rem;font-weight:800}.army-form input,.army-inline-form input{width:100%;min-height:42px;padding:10px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-actions{display:flex;gap:9px;flex-wrap:wrap}.army-message{min-height:18px;margin:0;color:#8a3450;font-size:.78rem}.army-dashboard[hidden],.army-block[hidden],.army-auth[hidden]{display:none!important}.army-profile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ece5ee}.army-eyebrow{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9277a7}.army-profile-head h3{margin:4px 0}.army-profile-head p{margin:0}.army-voter-accounts{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px 0 4px;padding:10px 12px;border:1px solid #e8e0ed;border-radius:7px;background:#faf8fc;color:#61427f;font-size:.76rem}.army-voter-accounts[hidden]{display:none!important}.army-voter-accounts strong{font-weight:850}.army-voter-tag{display:inline-flex;padding:4px 8px;border-radius:999px;background:#eee5f5;color:#61427f;font-weight:750}.army-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}.army-stats>div{padding:12px;border:1px solid #e8e0ed;border-radius:6px;background:#faf8fc}.army-stats span,.army-daily-target span{display:block;color:#766c7b;font-size:.7rem;font-weight:700}.army-stats strong{display:block;margin-top:5px;color:#61427f;font-size:1.18rem;font-weight:900}.army-block{padding:16px 0;border-top:1px solid #eee8f0}.army-block:first-of-type{border-top:0}.army-inline-form{display:flex;align-items:end;gap:10px;flex-wrap:wrap}.army-inline-form label{flex:1;min-width:150px}.army-inline-form input{max-width:180px}.army-upload{display:flex;align-items:center;gap:12px;padding:14px;border:1px dashed #bda8cf;border-radius:7px;background:#faf7fc;cursor:pointer;color:#63477d}.army-upload>span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#eee5f5;font-size:1.4rem}.army-upload strong,.army-upload small{display:block}.army-upload small{margin-top:3px;color:#81758a;font-size:.7rem}.army-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.army-verify-status{margin-top:10px;padding:10px 12px;border-radius:5px;background:#f5f1f7;color:#6b5c73;font-size:.78rem;line-height:1.5}.army-verify-status.ok{background:#edf7f0;color:#27623c}.army-verify-status.error{background:#fbefef;color:#92394a}.army-daily-target{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0;padding:13px;background:#f5f0fa;border-radius:6px}.army-daily-target strong{font-size:1.25rem;color:#654184}.army-daily-target small{color:#766b7c}.army-confirm{display:flex;align-items:flex-start;gap:9px;margin:12px 0;color:#5d5363;font-size:.82rem;line-height:1.45}.army-confirm input{margin-top:3px;accent-color:#76509b}.army-history{display:grid;gap:7px}.army-history-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;font-size:.78rem}.army-history-item strong{color:#60407e}.army-muted{color:#807684;font-size:.78rem}.army-chart-title{margin:16px 0 8px;color:#655075;font-size:.78rem}.army-weekly-chart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;align-items:end;min-height:116px;padding:12px 8px 8px;border:1px solid #ece6ef;border-radius:6px;background:#fbfafc}.army-chart-day{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:5px;min-width:0;height:100px}.army-chart-bar{width:min(100%,25px);min-height:3px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#b89bd8,#725093)}.army-chart-day strong{font-size:.62rem;color:#665575}.army-chart-day small{font-size:.62rem;color:#84798a}.army-privacy{margin:14px 0 0;color:#7c727e;font-size:.72rem;line-height:1.55}
 body.dark-mode .army-intro,body.dark-mode .army-auth,body.dark-mode .army-dashboard,body.dark-mode .army-stats>div,body.dark-mode .army-upload,body.dark-mode .army-history-item{background:#2b2630;border-color:#4b4054;color:#eee7f3}body.dark-mode .army-auth-copy h3,body.dark-mode .army-block h3,body.dark-mode .army-profile-head h3{color:#eee7f3}body.dark-mode .army-form label,body.dark-mode .army-inline-form label,body.dark-mode .army-confirm{color:#ddd2e4}body.dark-mode .army-form input,body.dark-mode .army-inline-form input{background:#211d25;border-color:#5b4d63;color:#fff}body.dark-mode .army-verify-status{background:#342c3a;color:#e6d9ed}body.dark-mode .army-verify-status.ok{background:#203a2b;color:#c6ebd1}body.dark-mode .army-verify-status.error{background:#482c35;color:#ffd9df}body.dark-mode .army-daily-target{background:#342b3b}body.dark-mode .army-stats strong,body.dark-mode .army-history-item strong,body.dark-mode .army-daily-target strong{color:#d9c1f4}body.dark-mode .army-weekly-chart{background:#24202a;border-color:#4b4054}body.dark-mode .army-chart-title{color:#d9c1f4}body.dark-mode .army-chart-day strong,body.dark-mode .army-chart-day small{color:#c8bbd1}body.dark-mode .army-block>p,body.dark-mode .army-profile-head p,body.dark-mode .army-intro span,body.dark-mode .army-privacy,body.dark-mode .army-muted{color:#c7bdcb}
 @media(max-width:560px){.army-stats{grid-template-columns:1fr 1fr}.army-profile-head{align-items:flex-start;flex-wrap:wrap}.army-inline-form{align-items:stretch}.army-inline-form label,.army-inline-form input{max-width:none}.army-inline-form .btn{width:100%}}
+.army-country-form{display:flex;align-items:end;gap:9px;flex-wrap:wrap;margin-top:12px}.army-country-form[hidden]{display:none!important}.army-country-form label{display:grid;gap:6px;min-width:190px;flex:1;color:#584767;font-size:.8rem;font-weight:800}.army-country-form select{min-height:42px;width:100%;padding:9px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-country-current{margin:8px 0 0;color:#756b7b;font-size:.75rem}.army-world-map{margin-top:14px}.army-map-locked{padding:15px;border:1px solid #e8e0ed;border-radius:7px;background:#faf8fc;color:#59476a}.army-map-locked strong{display:block;color:#61427f}.army-map-locked p{margin:7px 0;color:#756b7b;font-size:.78rem}.army-map-progress{height:9px;overflow:hidden;border-radius:99px;background:#e9e1ef}.army-map-progress span{display:block;width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#a98acb,#68438e);transition:width .3s}.army-map-progress-label{display:flex;justify-content:space-between;gap:8px}.army-map-description,.army-map-status{font-size:.76rem;color:#756b7b}.army-globe{width:100%;height:390px;overflow:hidden;border-radius:9px;background:#100d19}.army-map-status{padding:7px 0}.army-country-ranking{display:grid;gap:6px;padding-left:25px}.army-country-ranking li{padding:8px 10px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;color:#59476a;font-size:.78rem}.army-country-ranking li strong{float:right;color:#60407e}.army-country-ranking li::marker{font-weight:900;color:#80609f}body.dark-mode .army-country-form label,body.dark-mode .army-country-current,body.dark-mode .army-map-description,body.dark-mode .army-map-status{color:#d4c8dc}body.dark-mode .army-country-form select{background:#211d25;border-color:#5b4d63;color:#fff}body.dark-mode .army-map-locked,body.dark-mode .army-country-ranking li{background:#2b2630;border-color:#4b4054;color:#eee7f3}body.dark-mode .army-map-locked strong,body.dark-mode .army-country-ranking li strong{color:#d9c1f4}
+@media(max-width:560px){.army-country-form{align-items:stretch}.army-country-form label{min-width:100%}.army-country-form .btn{width:100%}.army-globe{height:320px}}
 </style>
-
 
 <script type="module" id="army-section-app">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
@@ -5332,11 +5359,83 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = (id) => document.getElementById(id);
 const authBox=$("armyAuth"), dashboard=$("armyDashboard"), authForm=$("armyAuthForm");
 let currentUser=null, currentUsername="", approvedForToday=false, approvedCertificateHash=null, approvedCertificateDate=null, approvedVotedHearts=null, approvedVoterName=null, approvedTargetMember=null, tesseractWorker=null;
+const armyCountries=[["AF","Afganistán"],["AL","Albania"],["DZ","Argelia"],["AD","Andorra"],["AO","Angola"],["AG","Antigua y Barbuda"],["AR","Argentina"],["AM","Armenia"],["AU","Australia"],["AT","Austria"],["AZ","Azerbaiyán"],["BS","Bahamas"],["BH","Baréin"],["BD","Bangladés"],["BB","Barbados"],["BY","Bielorrusia"],["BE","Bélgica"],["BZ","Belice"],["BJ","Benín"],["BT","Bután"],["BO","Bolivia"],["BA","Bosnia y Herzegovina"],["BW","Botsuana"],["BR","Brasil"],["BN","Brunéi"],["BG","Bulgaria"],["BF","Burkina Faso"],["BI","Burundi"],["CV","Cabo Verde"],["KH","Camboya"],["CM","Camerún"],["CA","Canadá"],["CF","República Centroafricana"],["TD","Chad"],["CL","Chile"],["CN","China"],["CO","Colombia"],["KM","Comoras"],["CG","Congo"],["CD","República Democrática del Congo"],["CR","Costa Rica"],["CI","Costa de Marfil"],["HR","Croacia"],["CU","Cuba"],["CY","Chipre"],["CZ","Chequia"],["DK","Dinamarca"],["DJ","Yibuti"],["DM","Dominica"],["DO","República Dominicana"],["EC","Ecuador"],["EG","Egipto"],["SV","El Salvador"],["GQ","Guinea Ecuatorial"],["ER","Eritrea"],["EE","Estonia"],["SZ","Esuatini"],["ET","Etiopía"],["FJ","Fiyi"],["FI","Finlandia"],["FR","Francia"],["GA","Gabón"],["GM","Gambia"],["GE","Georgia"],["DE","Alemania"],["GH","Ghana"],["GR","Grecia"],["GD","Granada"],["GT","Guatemala"],["GN","Guinea"],["GW","Guinea-Bisáu"],["GY","Guyana"],["HT","Haití"],["HN","Honduras"],["HU","Hungría"],["IS","Islandia"],["IN","India"],["ID","Indonesia"],["IR","Irán"],["IQ","Irak"],["IE","Irlanda"],["IL","Israel"],["IT","Italia"],["JM","Jamaica"],["JP","Japón"],["JO","Jordania"],["KZ","Kazajistán"],["KE","Kenia"],["KI","Kiribati"],["KP","Corea del Norte"],["KR","Corea del Sur"],["KW","Kuwait"],["KG","Kirguistán"],["LA","Laos"],["LV","Letonia"],["LB","Líbano"],["LS","Lesoto"],["LR","Liberia"],["LY","Libia"],["LI","Liechtenstein"],["LT","Lituania"],["LU","Luxemburgo"],["MG","Madagascar"],["MW","Malaui"],["MY","Malasia"],["MV","Maldivas"],["ML","Malí"],["MT","Malta"],["MH","Islas Marshall"],["MR","Mauritania"],["MU","Mauricio"],["MX","México"],["FM","Micronesia"],["MD","Moldavia"],["MC","Mónaco"],["MN","Mongolia"],["ME","Montenegro"],["MA","Marruecos"],["MZ","Mozambique"],["MM","Myanmar"],["NA","Namibia"],["NR","Nauru"],["NP","Nepal"],["NL","Países Bajos"],["NZ","Nueva Zelanda"],["NI","Nicaragua"],["NE","Níger"],["NG","Nigeria"],["MK","Macedonia del Norte"],["NO","Noruega"],["OM","Omán"],["PK","Pakistán"],["PW","Palaos"],["PA","Panamá"],["PG","Papúa Nueva Guinea"],["PY","Paraguay"],["PE","Perú"],["PH","Filipinas"],["PL","Polonia"],["PT","Portugal"],["QA","Catar"],["RO","Rumanía"],["RU","Rusia"],["RW","Ruanda"],["KN","San Cristóbal y Nieves"],["LC","Santa Lucía"],["VC","San Vicente y las Granadinas"],["WS","Samoa"],["SM","San Marino"],["ST","Santo Tomé y Príncipe"],["SA","Arabia Saudita"],["SN","Senegal"],["RS","Serbia"],["SC","Seychelles"],["SL","Sierra Leona"],["SG","Singapur"],["SK","Eslovaquia"],["SI","Eslovenia"],["SB","Islas Salomón"],["SO","Somalia"],["ZA","Sudáfrica"],["SS","Sudán del Sur"],["ES","España"],["LK","Sri Lanka"],["SD","Sudán"],["SR","Surinam"],["SE","Suecia"],["CH","Suiza"],["SY","Siria"],["TW","Taiwán"],["TJ","Tayikistán"],["TZ","Tanzania"],["TH","Tailandia"],["TL","Timor Oriental"],["TG","Togo"],["TO","Tonga"],["TT","Trinidad y Tobago"],["TN","Túnez"],["TR","Turquía"],["TM","Turkmenistán"],["TV","Tuvalu"],["UG","Uganda"],["UA","Ucrania"],["AE","Emiratos Árabes Unidos"],["GB","Reino Unido"],["US","Estados Unidos"],["UY","Uruguay"],["UZ","Uzbekistán"],["VU","Vanuatu"],["VA","Ciudad del Vaticano"],["VE","Venezuela"],["VN","Vietnam"],["YE","Yemen"],["ZM","Zambia"],["ZW","Zimbabue"],["XK","Kosovo"]];
 const usernameEmail = (name) => "army_"+name.trim().toLowerCase()+"@accounts.invalid";
 function kstDate(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
 function prettyKstDate(date){return new Intl.DateTimeFormat("es-MX",{timeZone:"Asia/Seoul",day:"numeric",month:"long",year:"numeric"}).format(new Date(date+"T12:00:00+09:00"));}
 function message(id,text,type=""){const el=$(id);el.textContent=text;el.className=(el.id==="armyVerifyStatus"?"army-verify-status":"army-message")+(type?" "+type:"");}
 function setAuthMode(loading){$("armyLoginButton").disabled=loading;$("armySignupButton").disabled=loading;}
+let armyGlobeInstance=null, armyGlobeReady=false;
+function fillCountryOptions(){
+ const select=$("armyCountrySelect");
+ if(select.options.length>1)return;
+ for(const [code,name] of armyCountries){const option=document.createElement("option");option.value=code;option.textContent=name;select.append(option);}
+}
+async function loadCountryMap(){
+ const [{data:stats,error:statsError},{data:rows,error:rowsError}]=await Promise.all([
+  supabase.from("army_vote_map_stats").select("total_bts_votes").eq("id",1).maybeSingle(),
+  supabase.from("army_country_vote_totals").select("country_code,total_votes").order("total_votes",{ascending:false})
+ ]);
+ if(statsError)throw statsError;if(rowsError)throw rowsError;
+ const total=Number(stats?.total_bts_votes||0),unlocked=total>=1000;
+ $("armyMapTotal").textContent=total.toLocaleString("es-MX");
+ $("armyMapProgressBar").style.width=Math.min(100,total/10)+"%";
+ $("armyMapLocked").hidden=unlocked;
+ $("armyMapUnlocked").hidden=!unlocked;
+ if(!unlocked)return;
+ const ranking=(rows||[]).map(row=>({code:row.country_code,total:Number(row.total_votes||0),country:armyCountries.find(x=>x[0]===row.country_code)?.[1]||row.country_code}));
+ const rankingEl=$("armyCountryRanking");rankingEl.innerHTML="";
+ if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay votos asociados a un país. Selecciona tu país en Editar perfil para que tus próximos registros sumen al ranking.";rankingEl.append(li);}
+ ranking.forEach((item,index)=>{const li=document.createElement("li");li.append(document.createTextNode(item.country));const strong=document.createElement("strong");strong.textContent=item.total.toLocaleString("es-MX")+" votos";li.append(strong);rankingEl.append(li);});
+ await renderArmyGlobe(ranking);
+}
+async function renderArmyGlobe(ranking){
+ const container=$("armyGlobe");if(!container)return;
+ if(!armyGlobeReady){
+  try{
+   $("armyGlobeStatus").textContent="Cargando mapa 3D…";
+   const [globeModule,worldResponse]=await Promise.all([
+    import("https://esm.sh/globe.gl@2.45.0"),
+    fetch("https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson")
+   ]);
+   if(!worldResponse.ok)throw new Error("No se pudo cargar la cartografía mundial.");
+   const world=await worldResponse.json();
+   const GlobeFactory=globeModule.default||globeModule;
+   armyGlobeInstance=GlobeFactory()(container)
+    .backgroundColor("#100d19")
+    .showAtmosphere(true).atmosphereColor("#9c7ac0").atmosphereAltitude(0.18)
+    .globeImageUrl("https://unpkg.com/three-globe/example/img/earth-night.jpg")
+    .polygonsData(world.features||[])
+    .polygonAltitude(0.008)
+    .polygonCapColor(feature=>{const code=feature.properties?.ISO_A2||feature.properties?.iso_a2;return ranking.some(x=>x.code===code)?"rgba(174,132,218,0.72)":"rgba(91,78,110,0.35)";})
+    .polygonSideColor(()=>"rgba(80,65,100,0.18)")
+    .polygonStrokeColor(()=>"rgba(205,185,225,0.45)")
+    .polygonLabel(feature=>{const code=feature.properties?.ISO_A2||feature.properties?.iso_a2;const row=ranking.find(x=>x.code===code);return row?row.country+": "+row.total.toLocaleString("es-MX")+" votos":(feature.properties?.ADMIN||"");})
+    .width(Math.max(280,container.clientWidth)).height(container.clientHeight||390);
+   armyGlobeReady=true;
+   $("armyGlobeStatus").textContent="Mapa mundial desbloqueado. Los países con participación aparecen resaltados.";
+   setTimeout(()=>{if(armyGlobeInstance)armyGlobeInstance.width(Math.max(280,container.clientWidth));},120);
+  }catch(error){$("armyGlobeStatus").textContent="No se pudo cargar la vista 3D en este momento. El ranking por país sigue disponible.";}
+ }else if(armyGlobeInstance){
+  armyGlobeInstance.polygonCapColor(feature=>{const code=feature.properties?.ISO_A2||feature.properties?.iso_a2;return ranking.some(x=>x.code===code)?"rgba(174,132,218,0.72)":"rgba(91,78,110,0.35)";});
+ }
+}
+$("armyEditProfileToggle").addEventListener("click",()=>{
+ const form=$("armyEditProfileForm"),open=form.hidden;form.hidden=!open;$("armyEditProfileToggle").setAttribute("aria-expanded",String(open));
+});
+$("armyEditProfileForm").addEventListener("submit",async(event)=>{
+ event.preventDefault();const countryCode=$("armyCountrySelect").value;
+ if(!countryCode){message("armyCountryMessage","Selecciona un país para continuar.");return;}
+ $("armySaveCountry").disabled=true;message("armyCountryMessage","Guardando país…");
+ try{
+  const {error}=await supabase.from("army_profiles").update({country_code:countryCode}).eq("user_id",currentUser.id);
+  if(error)throw error;
+  $("armyCountryCurrent").textContent="País seleccionado: "+(armyCountries.find(x=>x[0]===countryCode)?.[1]||countryCode);
+  message("armyCountryMessage","País guardado correctamente.","ok");
+  await loadCountryMap();
+ }catch(error){message("armyCountryMessage",error.message||"No pudimos guardar el país.");}
+ finally{$("armySaveCountry").disabled=false;}
+});
 async function loadProfile(){
  const [{data:usernameRow,error:uErr},{data:profile,error:pErr}] = await Promise.all([
   supabase.from("army_usernames").select("username,created_at").eq("user_id",currentUser.id).single(),
@@ -5345,10 +5444,13 @@ async function loadProfile(){
  if(uErr) throw uErr;
  currentUsername=usernameRow.username;
  if(!profile){const {error}=await supabase.from("army_profiles").insert({user_id:currentUser.id,friend_count:0});if(error)throw error;}
+ const countryCode=profile?.country_code||"";
+ $("armyCountrySelect").value=countryCode;
+ $("armyCountryCurrent").textContent=countryCode?"País seleccionado: "+(armyCountries.find(x=>x[0]===countryCode)?.[1]||countryCode):"País sin seleccionar.";
  $("armyProfileName").textContent="@"+currentUsername;
  $("armyMemberSince").textContent="Miembro desde "+new Intl.DateTimeFormat("es-MX",{dateStyle:"medium"}).format(new Date(usernameRow.created_at));
- 
  await loadHistory();
+ await loadCountryMap();
  dashboard.hidden=false;authBox.hidden=true;
 }
 async function loadHistory(){
@@ -5482,6 +5584,7 @@ $("armyDailyForm").addEventListener("submit",async(event)=>{
  }catch(e){message("armyDailyMessage",e.message||"No pudimos guardar el registro.");}
  finally{$("armySubmitDaily").disabled=false;}
 });
+fillCountryOptions();
 const {data:{session}}=await supabase.auth.getSession();
 if(session){try{await showSession(session);}catch(e){await supabase.auth.signOut();message("armyAuthMessage","No pudimos cargar tu perfil. Intenta iniciar sesión otra vez.");}}
 </script>
