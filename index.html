@@ -3863,7 +3863,8 @@ window.__btsRegisterSecondTick(updateGdaCollectionCountdown);
 function updateSectionNotificationBadges(){
  const definitions=[
   {id:'choeaedol',count:document.querySelectorAll('#choeaedol .gda-collection-alert').length,label:'Aviso de recolección GDA'},
-  {id:'active',count:document.querySelectorAll('#active .urgent-vote-alert').length,label:'Votaciones que cierran en menos de 24 horas'},
+  {id:'official-voting',count:document.querySelectorAll('#official-voting .urgent-vote-alert').length,label:'Votaciones oficiales que cierran en menos de 24 horas'},
+  {id:'unofficial-voting',count:document.querySelectorAll('#unofficial-voting .urgent-vote-alert').length,label:'Votaciones no oficiales que cierran en menos de 24 horas'},
   {id:'birthday-voting',count:document.querySelectorAll('#birthday-voting .urgent-vote-alert').length,label:'Votaciones de cumpleaños que cierran en menos de 24 horas'}
  ];
  definitions.forEach(({id,count,label})=>{
@@ -4271,7 +4272,8 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
   const t=(el.textContent||'').toLowerCase();
   if(el.matches('nav a')){
    const href=el.getAttribute('href')||'';
-   if(href==='#active')return t.includes('votaciones')?'trophy':'home';
+   if(href==='#official-voting')return 'trophy';
+   if(href==='#unofficial-voting')return 'megaphone';
    if(href==='#completed')return 'check';
    if(href==='#birthday-voting')return 'cake';
    if(href==='#guide')return 'book';
