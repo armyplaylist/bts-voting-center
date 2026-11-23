@@ -5033,7 +5033,8 @@ body.dark-mode .classification-legend p{color:#c3b8cb}
   tag.className='campaign-type-tag '+result.type;
   tag.textContent=result.label;
   tag.setAttribute('aria-label','Tipo de reconocimiento: '+result.label);
-  const anchor=card.querySelector('.card-top')||card.querySelector('.birthday-tag')||card.querySelector('h3')||card.firstElementChild;
+  const brandRow=card.querySelector('.campaign-card-brand');
+  const anchor=brandRow||card.querySelector('.card-top')||card.querySelector('.birthday-tag')||card.querySelector('h3')||card.firstElementChild;
   if(anchor && anchor.parentNode===card) anchor.insertAdjacentElement('afterend',tag);
   else card.insertBefore(tag,card.firstChild);
   const note=document.createElement('p');
@@ -5048,15 +5049,18 @@ body.dark-mode .classification-legend p{color:#c3b8cb}
 <style id="uniform-campaign-card-structure">
 /* Estructura compartida: identidad de campaña y bloque de premio/beneficio */
 .campaign-card-brand{display:flex;align-items:center;gap:12px;margin:0 0 13px;padding:0 0 12px;border-bottom:1px solid rgba(125,100,145,.16);min-height:54px}
-.campaign-card-brand .campaign-brand-logo{width:54px;height:54px;min-width:54px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:9px;background:#f1edf5;color:#563b70;font-size:13px;font-weight:900;letter-spacing:-.04em;text-align:center}
-.campaign-card-brand .campaign-brand-logo img{display:block;width:100%;height:100%;object-fit:contain;padding:4px}
+.campaign-card-brand .campaign-brand-logo{width:58px;height:58px;min-width:58px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #e8e0ef;border-radius:10px;background:#fff;color:#563b70;font-size:13px;font-weight:900;letter-spacing:-.04em;text-align:center}
+.campaign-card-brand .campaign-brand-logo img{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;padding:5px;background:#fff}
+.campaign-card-brand .campaign-brand-logo.campaign-logo-fallback{background:#f1edf5;color:#563b70}
+body.dark-mode .campaign-card-brand .campaign-brand-logo{background:#fff;color:#563b70;border-color:#e8e0ef}
+body.dark-mode .campaign-card-brand .campaign-brand-logo img{background:#fff}
 .campaign-card-brand .campaign-brand-name{font-size:.78rem;font-weight:850;letter-spacing:.035em;line-height:1.25;color:inherit}
 .campaign-card-brand .campaign-brand-sub{display:block;margin-top:3px;font-size:.66rem;font-weight:600;opacity:.7;letter-spacing:.04em}
 .campaign-benefit-box{margin:14px 0;padding:12px 14px;border-radius:8px;background:#f7f4fa;border:1px solid #e8e0ef}
 .campaign-benefit-box h4{margin:0 0 7px!important;font-size:.72rem!important;letter-spacing:.055em;color:#654582}
 .campaign-benefit-box p{margin:0!important;font-size:.8rem;line-height:1.55}
 body.dark-mode .campaign-card-brand{border-color:rgba(210,190,225,.18)}
-body.dark-mode .campaign-card-brand .campaign-brand-logo{background:#393044;color:#f0e4ff}
+
 body.dark-mode .campaign-benefit-box{background:#302938;border-color:#51445d}
 body.dark-mode .campaign-benefit-box h4{color:#d9c1f4}
 </style>
@@ -5088,8 +5092,12 @@ body.dark-mode .campaign-benefit-box h4{color:#d9c1f4}
   brandRow.className='campaign-card-brand';
   const logo=document.createElement('div');
   logo.className='campaign-brand-logo';
-  if(existing){const img=existing.cloneNode(true);img.removeAttribute('class');logo.appendChild(img);existing.remove();}
-  else {logo.textContent=initials(brand);}
+  if(existing){
+   const img=existing.cloneNode(true);img.removeAttribute('class');img.removeAttribute('width');img.removeAttribute('height');
+   img.alt=brand+' logo';img.loading='eager';img.decoding='async';
+   img.addEventListener('error',function(){logo.textContent=initials(brand);logo.classList.add('campaign-logo-fallback');},{once:true});
+   logo.appendChild(img);existing.remove();
+  } else {logo.textContent=initials(brand);logo.classList.add('campaign-logo-fallback');}
   const name=document.createElement('div');
   name.className='campaign-brand-name';
   name.textContent=brand;
