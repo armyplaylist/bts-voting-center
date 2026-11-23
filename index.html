@@ -5132,5 +5132,57 @@ body.dark-mode .campaign-benefit-box h4{color:#d9c1f4}
 })();
 </script>
 
+
+<style id="uniform-voting-countdown-size">
+/* Todas las cuentas regresivas de votaciones usan la misma escala visual que Channel R. */
+.vote-card .vote-countdown:has(.bts-clock-grid),
+.vote-card .countdown:has(.bts-clock-grid),
+.vote-card .bday-countdown:has(.bts-clock-grid),
+.vote-card .gda-countdown-time:has(.bts-clock-grid),
+.vote-card .mama-countdown-value:has(.bts-clock-grid),
+.vote-card [data-reset-countdown]:has(.bts-clock-grid),
+.vote-card .reset-countdown:has(.bts-clock-grid),
+.vote-card .itoty-countdown-wrap,
+#birthday-voting .birthday-countdown-timer:has(.bts-clock-grid) {
+  width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+}
+.vote-card .bts-clock-grid,
+#birthday-voting .birthday-countdown-timer .bts-clock-grid,
+.vote-card .itoty-countdown {
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:6px!important;width:100%!important;
+}
+.vote-card .bts-clock-unit,
+#birthday-voting .birthday-countdown-timer .bts-clock-unit,
+.vote-card .itoty-countdown>span {
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:3px!important;min-width:0!important;min-height:49px!important;padding:7px 3px!important;
+  box-sizing:border-box!important;border-radius:9px!important;background:#ffffffc9!important;
+}
+.vote-card .bts-clock-number,
+#birthday-voting .birthday-countdown-timer .bts-clock-number,
+.vote-card .itoty-countdown strong {
+  display:block!important;font-size:1.1rem!important;line-height:1.1!important;font-weight:900!important;
+  font-variant-numeric:tabular-nums!important;
+}
+.vote-card .bts-clock-label,
+#birthday-voting .birthday-countdown-timer .bts-clock-label,
+.vote-card .itoty-countdown small {
+  display:block!important;margin:0!important;font-size:.62rem!important;line-height:1.1!important;
+  font-weight:800!important;letter-spacing:.02em!important;text-align:center!important;
+}
+body.dark-mode .vote-card .bts-clock-unit,
+body.dark-mode #birthday-voting .birthday-countdown-timer .bts-clock-unit,
+body.dark-mode .vote-card .itoty-countdown>span {
+  background:#ffffff18!important;
+}
+@media(max-width:420px){
+ .vote-card .bts-clock-grid,#birthday-voting .birthday-countdown-timer .bts-clock-grid,.vote-card .itoty-countdown{gap:5px!important}
+ .vote-card .bts-clock-unit,#birthday-voting .birthday-countdown-timer .bts-clock-unit,.vote-card .itoty-countdown>span{min-height:46px!important;padding:6px 2px!important}
+ .vote-card .bts-clock-number,#birthday-voting .birthday-countdown-timer .bts-clock-number,.vote-card .itoty-countdown strong{font-size:1.02rem!important}
+ .vote-card .bts-clock-label,#birthday-voting .birthday-countdown-timer .bts-clock-label,.vote-card .itoty-countdown small{font-size:.57rem!important}
+}
+</style>
+
 </body>
 </html>
