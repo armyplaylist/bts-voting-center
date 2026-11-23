@@ -3459,22 +3459,24 @@ body.dark-mode .voting-category-head p{color:#d0c4dc!important}
 body.dark-mode .voting-category-count{background:#49385f!important;color:#f1e5ff!important}
 </style>
 <style id="channelr-date-countdown-style">
-#channel-r-awards-2026 .channelr-date-countdown{padding:11px 13px;border:1px solid #e4d8f3;border-radius:12px;background:linear-gradient(110deg,#f3edff,#fff5f7);color:#684b91;font-size:.82rem;font-weight:900;line-height:1.5}
+#channel-r-awards-2026 .channelr-date-countdown{padding:11px 13px;border:1px solid #e4d8f3;border-radius:12px;background:linear-gradient(110deg,#f3edff,#fff5f7);color:#684b91;font-size:.82rem;font-weight:900;line-height:1.5}#channel-r-awards-2026 .channelr-date-countdown{display:grid;gap:5px}#channel-r-awards-2026 .channelr-countdown-value{font-size:1.05rem;font-weight:900}#channel-r-awards-2026 .channelr-date-countdown small{font-size:.7rem;font-weight:600;opacity:.85}
 body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263d!important;border-color:#66527b!important;color:#f0e3ff!important}
 </style>
 <script id="channelr-date-countdown-script">
 (function(){
- const target=Date.UTC(2026,11,18);
  function tick(){
-  const box=document.getElementById('channelr-date-countdown');if(!box)return;
-  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Los_Angeles',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const box=document.getElementById('channel-r-awards-2026 #channelr-date-countdown');if(!box)return;
+  const zone=box.dataset.closeZone||'America/Los_Angeles',date=box.dataset.closeDate;
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
   const p=Object.fromEntries(parts.filter(x=>x.type!=='literal').map(x=>[x.type,Number(x.value)]));
-  const today=Date.UTC(p.year,p.month-1,p.day),days=Math.round((target-today)/86400000);
-  if(days>0)box.textContent='⏳ FALTAN '+days+' DÍAS PARA EL 18 DE DICIEMBRE · HORA DEL PACÍFICO (EE. UU.)';
-  else if(days===0)box.textContent='📅 CIERRE HOY · HORA DEL PACÍFICO (EE. UU.)';
-  else box.textContent='FECHA DE CIERRE TRANSCURRIDA · CONFIRMA EL ESTADO EN LA WEB OFICIAL';
+  const today=Date.UTC(p.year,p.month-1,p.day),[y,m,d]=date.split('-').map(Number),target=Date.UTC(y,m-1,d);
+  const days=Math.round((target-today)/86400000),value=box.querySelector('.channelr-countdown-value');if(!value)return;
+  if(days>1)value.textContent='⏳ '+days+' DÍAS RESTANTES';
+  else if(days===1)value.textContent='⏳ 1 DÍA RESTANTE';
+  else if(days===0)value.textContent='📅 CIERRE HOY';
+  else value.textContent='FECHA TRANSCURRIDA · CONFIRMA EL ESTADO EN LA WEB OFICIAL';
  }
- tick();window.__btsRegisterSecondTick(tick);
+ tick();if(window.__btsRegisterSecondTick)window.__btsRegisterSecondTick(tick);else window.addEventListener('load',tick);
 })();
 </script>
 </head>
@@ -3558,7 +3560,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
   <div class="cards" id="unofficialVoteCards">
    <article class="vote-card" id="channel-r-awards-2026" data-kind="group" data-palette="channelr"><div class="card-top"><h3 class="vote-title">Channel R Radio Awards 2026</h3><span class="pill live">● VOTACIÓN ABIERTA</span></div>
    <p class="meta">CHANNEL R RADIO · PREMIOS ANUALES DE MÚSICA</p>
-   <div class="channelr-date-countdown" id="channelr-date-countdown" role="timer" aria-live="off">Calculando días para el 18 de diciembre…</div>
+   <div class="channelr-date-countdown" id="channelr-date-countdown" role="timer" aria-live="off" data-close-date="2026-12-18" data-close-zone="America/Los_Angeles"><strong>CUENTA REGRESIVA · CIERRE 18 DE DICIEMBRE</strong><span class="channelr-countdown-value">Calculando…</span><small>Hora exacta de cierre no publicada · hora del Pacífico</small></div>
    <div class="rule-box"><h4>💜 NOMINACIONES DE BTS</h4><ul><li><strong>Mejor Grupo:</strong> BTS</li><li><strong>Mejor Álbum:</strong> ARIRANG</li><li><strong>Mejor Canción:</strong> SWIM</li></ul></div>
    <div class="rule-box"><h4>🗳️ CÓMO VOTAR</h4><ol><li>Abre la página oficial de votación.</li><li>Entra en cada una de las tres categorías.</li><li>Selecciona BTS, ARIRANG o SWIM, según corresponda, y envía tu voto.</li><li>Regresa al día siguiente para volver a votar.</li></ol><p><strong>Usuarios gratuitos:</strong> 1 voto por categoría al día. No necesitas registrarte ni iniciar sesión: puedes votar como invitado.</p><p><strong>Miembros de Channel R+:</strong> 4 votos por categoría al día. Channel R+ ofrece una prueba gratuita de 7 días y después cuesta <strong>$0.99 USD al mes</strong>. La suscripción es opcional.</p></div>
    <div class="rule-box"><h4>📻 BENEFICIO EXTRA DE CHANNEL R+</h4><p>Los suscriptores también pueden solicitar que se reproduzca <strong>BTS - SWIM</strong> en la radio una vez por hora.</p></div>
