@@ -156,6 +156,7 @@ nav a:hover{background:none;color:#a22b42}
 
 .vote-countdown{padding:10px 12px;border:1px solid #e8e0e4;border-left:3px solid #49305f;border-radius:3px;background:#faf8f8;color:#49305f;font-size:.82rem;font-variant-numeric:tabular-nums}
 .vote-countdown strong{font-weight:800}
+.vote-countdown-no-deadline{background:#f4f0f6;color:#65556f;border-left-color:#a18eaf;font-size:.78rem;line-height:1.5}.vote-countdown-no-deadline strong{font-size:.7rem;letter-spacing:.05em;color:#725d80}body.dark-mode .vote-countdown-no-deadline{background:#302a36;color:#e2d8e8;border-color:#766783}body.dark-mode .vote-countdown-no-deadline strong{color:#e2c9f4}
 /* Y2K clean-cute palette */
 :root{--bg:#f8f6fa;--ink:#17131d;--muted:#716a79;--purple:#6840a0;--purple2:#9a78c8;--red:#d52e4d;--red2:#f06b83;--glass:#fff;--line:#e6dfea;--shadow:0 8px 24px #29143d12}
 body{font-family:"DM Sans",Arial,sans-serif;background-color:#f8f6fa;background-image:radial-gradient(ellipse at 8% 4%,#eadcf8 0,transparent 26rem),radial-gradient(ellipse at 95% 28%,#f8dfe5 0,transparent 23rem);color:#17131d}
@@ -3546,6 +3547,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
     <p class="meta">MUSIC AWARDS JAPAN · CAMPAÑA DE SOLICITUDES MUSICALES</p>
     <p class="description">Las solicitudes de reproducción enviadas a través de USEN contribuyen a determinar las nominaciones y a elegir a los ganadores de Music Awards Japan 2027. Cada solicitud cuenta como apoyo para impulsar la canción vinculada a BTS.</p>
     <div class="rule-box"><h4>📻 CÓMO PARTICIPAR</h4><ol><li>Abre el enlace oficial de solicitud de USEN.</li><li>Inicia sesión con tu cuenta de USEN o crea una si aún no tienes.</li><li>Envía una solicitud de reproducción desde el navegador o la aplicación.</li><li>Repite el proceso respetando el límite diario permitido.</li></ol><p><strong>Participación:</strong> cualquier persona puede enviar solicitudes. Se requiere una cuenta de USEN y se permiten hasta <strong>24 solicitudes al día</strong>.</p></div>
+    <div class="vote-countdown vote-countdown-no-deadline" role="status"><strong>CIERRE NO ANUNCIADO</strong><br>No hay una fecha oficial de cierre publicada; por eso no se muestra una cuenta regresiva estimada.</div>
     <div class="actions"><a class="btn" href="https://usen.oshireq.com/song/6858285" target="_blank" rel="noopener noreferrer">ENVIAR SOLICITUD EN USEN ↗</a></div>
    </article>
   </div>
@@ -3952,7 +3954,7 @@ function updateVoteCountdowns(){
  const now=new Date();
  document.querySelectorAll('[data-countdown]').forEach(el=>{
   const s=voteSchedule[el.dataset.countdown];if(!s)return;
-  const target=s.instant?new Date(s.instant).getTime():Date.UTC(...s.date.split('-').map((v,i)=>i===1?Number(v)-1:Number(v)));
+  const target=s.instant?new Date(s.instant).getTime():(s.zone==='Asia/Seoul'?new Date(s.date+'T23:59:59+09:00').getTime():Date.UTC(...s.date.split('-').map((v,i)=>i===1?Number(v)-1:Number(v))));
   const diff=target-now.getTime();
   updateUrgentAlert(el.closest('.vote-card'),diff);
   if(diff<=0){const w=window.__btsCountdownI18n.words();el.innerHTML=s.instant?w.ended:'<strong>'+w.datePassed+'</strong> '+w.pending;return;}
