@@ -3651,7 +3651,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
 </section>
 
 <section class="panel guide-panel" id="guide">
- <div class="section-head"><div><h2>🗳️ HOW TO SUPPORT BTS</h2><p>Una ruta sencilla para participar con información clara.</p></div><span class="pill">GUÍA RÁPIDA</span></div>
+ <div class="section-head"><div><h2>HOW TO SUPPORT BTS</h2><p>Una ruta sencilla para participar con información clara.</p></div><span class="pill">GUÍA RÁPIDA</span></div>
  <div class="guide-steps">
   <article class="guide-step"><span>01</span><div><h3>Elige una votación</h3><p>Abre la tarjeta correspondiente y comprueba que la votación siga dentro de su periodo oficial.</p></div></article>
   <article class="guide-step"><span>02</span><div><h3>Lee las reglas</h3><p>Revisa categorías, límites diarios, requisitos de cuenta y posibles restricciones regionales en la plataforma organizadora.</p></div></article>
@@ -3662,7 +3662,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
 </section>
 
 <section class="panel" id="sources">
- <div class="section-head"><div><h2>🔗 OFFICIAL SOURCES</h2><p>Accesos directos a las plataformas enlazadas en las fichas de votación.</p></div><span class="pill">VERIFICA ANTES DE VOTAR</span></div>
+ <div class="section-head"><div><h2>OFFICIAL SOURCES</h2><p>Accesos directos a las plataformas enlazadas en las fichas de votación.</p></div><span class="pill">VERIFICA ANTES DE VOTAR</span></div>
  <div class="source-grid">
   <a href="https://kdolmaster.tistory.com/1811" target="_blank" rel="noopener"><strong>KDOL · Cumpleaños diciembre</strong><small>Calendario oficial y reglas de la campaña ↗</small></a>
   <a href="https://www.mnetplus.world/event/en/2026-mama" target="_blank" rel="noopener"><strong>MAMA 2026</strong><small>Mnet Plus · plataforma de votación ↗</small></a>
@@ -3676,7 +3676,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
 </section>
 
 <section class="panel" id="completed">
- <div class="section-head"><div><h2>✓ COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
+ <div class="section-head"><div><h2>COMPLETED VOTING</h2><p>Resultados finales de las votaciones cerradas.</p></div><span class="pill">HISTORIAL</span></div>
  <div class="cards">
 <article class="vote-card" data-kind="group" data-palette="mma"><div class="card-top"><h3 class="vote-title"><img class="vote-logo-inline logo-mma" src="https://t1.kakaocdn.net/kakaoent_com/admin/editor/edb7a1b5019700001.png" alt="Logotipo de Melon Music Awards" loading="lazy" decoding="async">Melon Music Awards <span>(MMA) 2026</span></h3><span class="pill">BTS · GRUPAL</span></div>
  <span class="pill" aria-label="Votación finalizada">✓ VOTACIÓN TERMINADA</span><div class="ranking-line"><b>🏆 RESULTADO</b><span>Resultado oficial pendiente de publicación</span></div><div class="local-vote-time"><strong>Estado:</strong> Finalizada · 13 de noviembre de 2026 · 23:59 KST.</div>
@@ -5082,7 +5082,7 @@ body.dark-mode .campaign-benefit-box h4{color:#d9c1f4}
   brandRow.className='campaign-card-brand';
   const logo=document.createElement('div');
   logo.className='campaign-brand-logo';
-  if(existing){const img=existing.cloneNode(true);img.removeAttribute('class');logo.appendChild(img);}
+  if(existing){const img=existing.cloneNode(true);img.removeAttribute('class');logo.appendChild(img);existing.remove();}
   else {logo.textContent=initials(brand);}
   const name=document.createElement('div');
   name.className='campaign-brand-name';
