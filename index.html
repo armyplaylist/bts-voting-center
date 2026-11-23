@@ -3457,6 +3457,25 @@ body.dark-mode .voting-category-head h3{color:#eadcff!important}
 body.dark-mode .voting-category-head p{color:#d0c4dc!important}
 body.dark-mode .voting-category-count{background:#49385f!important;color:#f1e5ff!important}
 </style>
+<style id="channelr-date-countdown-style">
+#channel-r-awards-2026 .channelr-date-countdown{padding:11px 13px;border:1px solid #e4d8f3;border-radius:12px;background:linear-gradient(110deg,#f3edff,#fff5f7);color:#684b91;font-size:.82rem;font-weight:900;line-height:1.5}
+body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263d!important;border-color:#66527b!important;color:#f0e3ff!important}
+</style>
+<script id="channelr-date-countdown-script">
+(function(){
+ const target=Date.UTC(2026,11,18);
+ function tick(){
+  const box=document.getElementById('channelr-date-countdown');if(!box)return;
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const p=Object.fromEntries(parts.filter(x=>x.type!=='literal').map(x=>[x.type,Number(x.value)]));
+  const today=Date.UTC(p.year,p.month-1,p.day),days=Math.round((target-today)/86400000);
+  if(days>0)box.textContent='⏳ FALTAN '+days+' DÍAS PARA LA FECHA DE CIERRE · KST';
+  else if(days===0)box.textContent='📅 CIERRE HOY · LA HORA EXACTA NO ESTÁ PUBLICADA';
+  else box.textContent='FECHA DE CIERRE TRANSCURRIDA · CONFIRMA EL ESTADO EN LA WEB OFICIAL';
+ }
+ tick();window.__btsRegisterSecondTick(tick);
+})();
+</script>
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Anuncio prioritario">
@@ -3536,6 +3555,7 @@ body.dark-mode .voting-category-count{background:#49385f!important;color:#f1e5ff
    <p class="meta">CHANNEL R RADIO · PREMIOS ANUALES DE MÚSICA</p>
    <p class="description"><strong>BTS YA ESTÁ NOMINADO.</strong> Ahora apoyemos al grupo en las categorías disponibles de artistas, canciones, álbumes y videos.</p>
    <div class="local-vote-time"><strong>CIERRE PUBLICADO · VIERNES 18 DE DICIEMBRE DE 2026</strong><br>La página oficial no especifica la hora ni la zona horaria de cierre.</div>
+   <div class="channelr-date-countdown" id="channelr-date-countdown" role="timer" aria-live="off">Calculando días para la fecha de cierre…</div>
    <div class="rule-box"><h4>🗳️ CÓMO VOTAR POR BTS</h4><ol><li>Abre Channel R Radio Awards e inicia sesión.</li><li>Entra en las categorías donde BTS o sus lanzamientos estén nominados.</li><li>Selecciona a BTS y confirma tu voto en cada categoría disponible.</li><li>Vuelve cada día para participar de nuevo.</li></ol><p>La modalidad gratuita permite participar una vez al día. Channel R+ ofrece votos adicionales mediante una suscripción opcional.</p></div>
    <div class="actions"><a class="btn" href="https://listen.channelrradio.com/vote" target="_blank" rel="noopener noreferrer">VOTAR POR BTS ↗</a><a class="btn secondary" href="https://listen.channelrradio.com/awards" target="_blank" rel="noopener noreferrer">VER PREMIOS ↗</a></div>
   </article>
