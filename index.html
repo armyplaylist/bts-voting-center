@@ -3554,6 +3554,7 @@ body.army-profile-view #army.army-panel{display:block!important}
  </div>
  <div class="army-dashboard" id="armyDashboard" hidden>
   <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
+  <div id="armyVoterAccounts" class="army-voter-accounts" hidden aria-live="polite"></div>
   <div class="army-stats">
    <div><span>Amigos registrados</span><strong id="armyFriendStat">0</strong></div>
    <div><span>Objetivo diario</span><strong id="armyTargetStat">0 ❤️</strong></div>
@@ -5328,7 +5329,7 @@ section>p,.section-description,.section-intro{font-size:.9rem;line-height:1.5}
 
 
 <style id="army-section-styles">
-.army-panel{scroll-margin-top:18px}.army-intro{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:16px;border-left:3px solid #8b65b5;background:#f5f0fa;color:#554364;font-size:.84rem}.army-intro span{color:#756b7b;font-size:.78rem}.army-auth,.army-dashboard{padding:18px;border:1px solid #e6dfe2;border-radius:8px;background:#fff}.army-auth-copy h3,.army-block h3,.army-profile-head h3{margin:0 0 5px;color:#38264a;font-size:1.04rem}.army-auth-copy p,.army-block>p,.army-profile-head p{margin:0 0 13px;color:#756b7b;font-size:.82rem;line-height:1.5}.army-form{display:grid;gap:12px;max-width:520px}.army-form label,.army-inline-form label{display:grid;gap:6px;color:#584767;font-size:.8rem;font-weight:800}.army-form input,.army-inline-form input{width:100%;min-height:42px;padding:10px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-actions{display:flex;gap:9px;flex-wrap:wrap}.army-message{min-height:18px;margin:0;color:#8a3450;font-size:.78rem}.army-dashboard[hidden],.army-block[hidden],.army-auth[hidden]{display:none!important}.army-profile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ece5ee}.army-eyebrow{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9277a7}.army-profile-head h3{margin:4px 0}.army-profile-head p{margin:0}.army-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}.army-stats>div{padding:12px;border:1px solid #e8e0ed;border-radius:6px;background:#faf8fc}.army-stats span,.army-daily-target span{display:block;color:#766c7b;font-size:.7rem;font-weight:700}.army-stats strong{display:block;margin-top:5px;color:#61427f;font-size:1.18rem;font-weight:900}.army-block{padding:16px 0;border-top:1px solid #eee8f0}.army-block:first-of-type{border-top:0}.army-inline-form{display:flex;align-items:end;gap:10px;flex-wrap:wrap}.army-inline-form label{flex:1;min-width:150px}.army-inline-form input{max-width:180px}.army-upload{display:flex;align-items:center;gap:12px;padding:14px;border:1px dashed #bda8cf;border-radius:7px;background:#faf7fc;cursor:pointer;color:#63477d}.army-upload>span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#eee5f5;font-size:1.4rem}.army-upload strong,.army-upload small{display:block}.army-upload small{margin-top:3px;color:#81758a;font-size:.7rem}.army-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.army-verify-status{margin-top:10px;padding:10px 12px;border-radius:5px;background:#f5f1f7;color:#6b5c73;font-size:.78rem;line-height:1.5}.army-verify-status.ok{background:#edf7f0;color:#27623c}.army-verify-status.error{background:#fbefef;color:#92394a}.army-daily-target{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0;padding:13px;background:#f5f0fa;border-radius:6px}.army-daily-target strong{font-size:1.25rem;color:#654184}.army-daily-target small{color:#766b7c}.army-confirm{display:flex;align-items:flex-start;gap:9px;margin:12px 0;color:#5d5363;font-size:.82rem;line-height:1.45}.army-confirm input{margin-top:3px;accent-color:#76509b}.army-history{display:grid;gap:7px}.army-history-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;font-size:.78rem}.army-history-item strong{color:#60407e}.army-muted{color:#807684;font-size:.78rem}.army-chart-title{margin:16px 0 8px;color:#655075;font-size:.78rem}.army-weekly-chart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;align-items:end;min-height:116px;padding:12px 8px 8px;border:1px solid #ece6ef;border-radius:6px;background:#fbfafc}.army-chart-day{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:5px;min-width:0;height:100px}.army-chart-bar{width:min(100%,25px);min-height:3px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#b89bd8,#725093)}.army-chart-day strong{font-size:.62rem;color:#665575}.army-chart-day small{font-size:.62rem;color:#84798a}.army-privacy{margin:14px 0 0;color:#7c727e;font-size:.72rem;line-height:1.55}
+.army-panel{scroll-margin-top:18px}.army-intro{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:16px;border-left:3px solid #8b65b5;background:#f5f0fa;color:#554364;font-size:.84rem}.army-intro span{color:#756b7b;font-size:.78rem}.army-auth,.army-dashboard{padding:18px;border:1px solid #e6dfe2;border-radius:8px;background:#fff}.army-auth-copy h3,.army-block h3,.army-profile-head h3{margin:0 0 5px;color:#38264a;font-size:1.04rem}.army-auth-copy p,.army-block>p,.army-profile-head p{margin:0 0 13px;color:#756b7b;font-size:.82rem;line-height:1.5}.army-form{display:grid;gap:12px;max-width:520px}.army-form label,.army-inline-form label{display:grid;gap:6px;color:#584767;font-size:.8rem;font-weight:800}.army-form input,.army-inline-form input{width:100%;min-height:42px;padding:10px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-actions{display:flex;gap:9px;flex-wrap:wrap}.army-message{min-height:18px;margin:0;color:#8a3450;font-size:.78rem}.army-dashboard[hidden],.army-block[hidden],.army-auth[hidden]{display:none!important}.army-profile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ece5ee}.army-eyebrow{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9277a7}.army-profile-head h3{margin:4px 0}.army-profile-head p{margin:0}.army-voter-accounts{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px 0 4px;padding:10px 12px;border:1px solid #e8e0ed;border-radius:7px;background:#faf8fc;color:#61427f;font-size:.76rem}.army-voter-accounts[hidden]{display:none!important}.army-voter-accounts strong{font-weight:850}.army-voter-tag{display:inline-flex;padding:4px 8px;border-radius:999px;background:#eee5f5;color:#61427f;font-weight:750}.army-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}.army-stats>div{padding:12px;border:1px solid #e8e0ed;border-radius:6px;background:#faf8fc}.army-stats span,.army-daily-target span{display:block;color:#766c7b;font-size:.7rem;font-weight:700}.army-stats strong{display:block;margin-top:5px;color:#61427f;font-size:1.18rem;font-weight:900}.army-block{padding:16px 0;border-top:1px solid #eee8f0}.army-block:first-of-type{border-top:0}.army-inline-form{display:flex;align-items:end;gap:10px;flex-wrap:wrap}.army-inline-form label{flex:1;min-width:150px}.army-inline-form input{max-width:180px}.army-upload{display:flex;align-items:center;gap:12px;padding:14px;border:1px dashed #bda8cf;border-radius:7px;background:#faf7fc;cursor:pointer;color:#63477d}.army-upload>span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#eee5f5;font-size:1.4rem}.army-upload strong,.army-upload small{display:block}.army-upload small{margin-top:3px;color:#81758a;font-size:.7rem}.army-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.army-verify-status{margin-top:10px;padding:10px 12px;border-radius:5px;background:#f5f1f7;color:#6b5c73;font-size:.78rem;line-height:1.5}.army-verify-status.ok{background:#edf7f0;color:#27623c}.army-verify-status.error{background:#fbefef;color:#92394a}.army-daily-target{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0;padding:13px;background:#f5f0fa;border-radius:6px}.army-daily-target strong{font-size:1.25rem;color:#654184}.army-daily-target small{color:#766b7c}.army-confirm{display:flex;align-items:flex-start;gap:9px;margin:12px 0;color:#5d5363;font-size:.82rem;line-height:1.45}.army-confirm input{margin-top:3px;accent-color:#76509b}.army-history{display:grid;gap:7px}.army-history-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;font-size:.78rem}.army-history-item strong{color:#60407e}.army-muted{color:#807684;font-size:.78rem}.army-chart-title{margin:16px 0 8px;color:#655075;font-size:.78rem}.army-weekly-chart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;align-items:end;min-height:116px;padding:12px 8px 8px;border:1px solid #ece6ef;border-radius:6px;background:#fbfafc}.army-chart-day{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:5px;min-width:0;height:100px}.army-chart-bar{width:min(100%,25px);min-height:3px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#b89bd8,#725093)}.army-chart-day strong{font-size:.62rem;color:#665575}.army-chart-day small{font-size:.62rem;color:#84798a}.army-privacy{margin:14px 0 0;color:#7c727e;font-size:.72rem;line-height:1.55}
 body.dark-mode .army-intro,body.dark-mode .army-auth,body.dark-mode .army-dashboard,body.dark-mode .army-stats>div,body.dark-mode .army-upload,body.dark-mode .army-history-item{background:#2b2630;border-color:#4b4054;color:#eee7f3}body.dark-mode .army-auth-copy h3,body.dark-mode .army-block h3,body.dark-mode .army-profile-head h3{color:#eee7f3}body.dark-mode .army-form label,body.dark-mode .army-inline-form label,body.dark-mode .army-confirm{color:#ddd2e4}body.dark-mode .army-form input,body.dark-mode .army-inline-form input{background:#211d25;border-color:#5b4d63;color:#fff}body.dark-mode .army-verify-status{background:#342c3a;color:#e6d9ed}body.dark-mode .army-verify-status.ok{background:#203a2b;color:#c6ebd1}body.dark-mode .army-verify-status.error{background:#482c35;color:#ffd9df}body.dark-mode .army-daily-target{background:#342b3b}body.dark-mode .army-stats strong,body.dark-mode .army-history-item strong,body.dark-mode .army-daily-target strong{color:#d9c1f4}body.dark-mode .army-weekly-chart{background:#24202a;border-color:#4b4054}body.dark-mode .army-chart-title{color:#d9c1f4}body.dark-mode .army-chart-day strong,body.dark-mode .army-chart-day small{color:#c8bbd1}body.dark-mode .army-block>p,body.dark-mode .army-profile-head p,body.dark-mode .army-intro span,body.dark-mode .army-privacy,body.dark-mode .army-muted{color:#c7bdcb}
 @media(max-width:560px){.army-stats{grid-template-columns:1fr 1fr}.army-profile-head{align-items:flex-start;flex-wrap:wrap}.army-inline-form{align-items:stretch}.army-inline-form label,.army-inline-form input{max-width:none}.army-inline-form .btn{width:100%}}
 </style>
@@ -5341,7 +5342,7 @@ const SUPABASE_KEY = "sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = (id) => document.getElementById(id);
 const authBox=$("armyAuth"), dashboard=$("armyDashboard"), authForm=$("armyAuthForm");
-let currentUser=null, currentUsername="", approvedForToday=false, approvedCertificateHash=null, approvedCertificateDate=null, approvedVotedHearts=null, tesseractWorker=null;
+let currentUser=null, currentUsername="", approvedForToday=false, approvedCertificateHash=null, approvedCertificateDate=null, approvedVotedHearts=null, approvedVoterName=null, tesseractWorker=null;
 const usernameEmail = (name) => "army_"+name.trim().toLowerCase()+"@accounts.invalid";
 function kstDate(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
 function prettyKstDate(date){return new Intl.DateTimeFormat("es-MX",{timeZone:"Asia/Seoul",day:"numeric",month:"long",year:"numeric"}).format(new Date(date+"T12:00:00+09:00"));}
@@ -5364,7 +5365,7 @@ async function loadProfile(){
 async function loadHistory(){
  const [{data:profile,error:pErr},{data:logs,error:lErr}] = await Promise.all([
   supabase.from("army_profiles").select("friend_count").eq("user_id",currentUser.id).single(),
-  supabase.from("army_heart_daily_logs").select("log_date,friend_count,hearts_required,voted_hearts,submitted_at").eq("user_id",currentUser.id).order("log_date",{ascending:false}).limit(30)
+  supabase.from("army_heart_daily_logs").select("log_date,friend_count,hearts_required,voted_hearts,voter_name,submitted_at").eq("user_id",currentUser.id).order("log_date",{ascending:false}).limit(500)
  ]);
  if(pErr)throw pErr;if(lErr)throw lErr;
  const friends=profile.friend_count||0;
@@ -5375,26 +5376,34 @@ async function loadHistory(){
  $("armyDailyFormula").textContent="3 corazones × "+friends.toLocaleString("es-MX")+" amigos";
  $("armyTotalStat").textContent=(logs||[]).reduce((n,x)=>n+x.hearts_required,0).toLocaleString("es-MX")+" ❤️";
  $("armyBtsVotesStat").textContent=(logs||[]).reduce((n,x)=>n+(x.voted_hearts||0),0).toLocaleString("es-MX");
- const today=kstDate(), done=(logs||[]).some(x=>x.log_date===today);
- $("armyDailyBlock").hidden=!approvedForToday||friends<1||done;
- if(done){message("armyVerifyStatus","Tu registro de hoy ya está completo. Vuelve mañana después de verificar tu certificado.","ok");approvedForToday=false;}
+ const today=kstDate();
+ $("armyDailyBlock").hidden=!approvedForToday||friends<1;
+ const namedLogs=(logs||[]).filter(x=>x.voter_name&&x.voter_name.trim());
+ const distinctVoters=[...new Set(namedLogs.map(x=>x.voter_name.trim()))];
+ const accountBox=$("armyVoterAccounts");accountBox.innerHTML="";
+ if(distinctVoters.length){
+  const primary=[...namedLogs].sort((a,b)=>new Date(a.submitted_at)-new Date(b.submitted_at))[0]?.voter_name?.trim();
+  const heading=document.createElement("strong");heading.textContent=distinctVoters.length>1?"También vota desde otras cuentas:":"Cuenta de Choeaedol:";accountBox.append(heading);
+  for(const name of distinctVoters){const tag=document.createElement("span");tag.className="army-voter-tag";tag.textContent="@"+name+(name===primary?" · principal":"");accountBox.append(tag);}
+  accountBox.hidden=false;
+ }else accountBox.hidden=true;
  $("armyHistory").innerHTML="";
  if(!logs?.length){$("armyHistory").innerHTML='<p class="army-muted">Aún no hay registros.</p>';return;}
  for(const log of logs){
   const row=document.createElement("div");row.className="army-history-item";
-  const left=document.createElement("span");left.textContent=prettyKstDate(log.log_date)+" · "+log.friend_count+" amigos";
+  const left=document.createElement("span");left.textContent=prettyKstDate(log.log_date)+" · "+log.friend_count+" amigos"+(log.voter_name?" · @"+log.voter_name:"");
   const right=document.createElement("strong");right.textContent=log.hearts_required.toLocaleString("es-MX")+" ❤️ · BTS: "+(log.voted_hearts||0).toLocaleString("es-MX")+" votos";
   row.append(left,right);$("armyHistory").append(row);
  }
  const chart=$("armyWeeklyChart");chart.innerHTML="";
  const todayDate=new Date(today+"T12:00:00Z"), week=[];
  for(let i=6;i>=0;i--){const d=new Date(todayDate);d.setUTCDate(d.getUTCDate()-i);week.push(d.toISOString().slice(0,10));}
- const weekLogs=week.map(date=>(logs||[]).find(x=>x.log_date===date)||null);
- const max=Math.max(1,...weekLogs.filter(Boolean).map(x=>x.hearts_required));
+ const weekLogs=week.map(date=>(logs||[]).filter(x=>x.log_date===date).reduce((sum,x)=>sum+x.hearts_required,0));
+ const max=Math.max(1,...weekLogs);
  week.forEach((date,i)=>{
   const log=weekLogs[i],day=document.createElement("div");day.className="army-chart-day";
-  const value=document.createElement("strong");value.textContent=log?log.hearts_required.toLocaleString("es-MX"):"—";
-  const bar=document.createElement("div");bar.className="army-chart-bar";bar.style.height=(log?Math.max(8,Math.round(log.hearts_required/max*62)):3)+"px";
+  const value=document.createElement("strong");value.textContent=log?log.toLocaleString("es-MX"):"—";
+  const bar=document.createElement("div");bar.className="army-chart-bar";bar.style.height=(log?Math.max(8,Math.round(log/max*62)):3)+"px";
   const label=document.createElement("small");label.textContent=new Intl.DateTimeFormat("es-MX",{timeZone:"Asia/Seoul",weekday:"short"}).format(new Date(date+"T12:00:00+09:00")).replace(".","");
   day.append(value,bar,label);chart.append(day);
  });
@@ -5436,7 +5445,7 @@ $("armyFriendsForm").addEventListener("submit",async(event)=>{
 });
 $("armyCertificate").addEventListener("change",async(event)=>{
  const input=event.target,file=input.files?.[0];if(!file)return;
- approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;$("armyDailyBlock").hidden=true;
+ approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;$("armyDailyBlock").hidden=true;
  const clear=()=>{input.value="";};
  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>8*1024*1024){message("armyVerifyStatus","Formato no admitido. Usa JPG, PNG o WEBP de máximo 8 MB.","error");clear();return;}
  message("armyVerifyStatus","Revisando formato, fecha KST y duplicados… Esto puede tardar unos segundos.");
@@ -5457,6 +5466,13 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const raw=(result.data.text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
   const required=["voting certificate","voter name","voting date","voted hearts","choeaedol","bts"];
   const missing=required.filter(token=>!raw.includes(token));
+  const ocrLines=(result.data.text||"").split(/\\r?\\n/).map(line=>line.trim()).filter(Boolean);
+  const voterLineIndex=ocrLines.findIndex(line=>/voter\\s*name/i.test(line));
+  const voterLine=voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*voter\\s*name\\s*[:：]?/i,"").trim():"";
+  const voterRaw=voterLine||(voterLineIndex>=0?ocrLines[voterLineIndex+1]||"":"");
+  const voterNameMatch=voterRaw.match(/[A-Za-z0-9][A-Za-z0-9_.-]{1,30}/);
+  const certificateVoterName=voterNameMatch?voterNameMatch[0].trim():null;
+  if(!certificateVoterName)throw new Error("No pudimos leer el usuario de “Voter Name”. Intenta subir una imagen más nítida.");
   const votedHeartsMatch=(result.data.text||"").match(/voted\s*hearts\s*[:=\-]?\s*([0-9][0-9,]*)/i);
   const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN;
   if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos leer la cantidad exacta de “Voted Hearts”. Intenta subir una imagen más nítida.");
@@ -5467,30 +5483,33 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const dm=raw.match(dateRegex);
   if(dm)certDate=dm[3]+"-"+months[dm[1].toLowerCase()]+"-"+String(dm[2]).padStart(2,"0");
   if(!certDate||certDate!==kstDate())throw new Error("La fecha del certificado debe ser la fecha de hoy en Corea (KST): "+kstDate()+".");
+  const {data:todayVoters,error:todayVotersError}=await supabase.from("army_heart_daily_logs").select("voter_name").eq("user_id",currentUser.id).eq("log_date",certDate);
+  if(todayVotersError)throw todayVotersError;
+  if((todayVoters||[]).some(x=>(x.voter_name||"").trim().toLowerCase()===certificateVoterName.toLowerCase()))throw new Error("Ya registraste un certificado de @"+certificateVoterName+" para hoy. Puedes subir otro si pertenece a un usuario distinto de Choeaedol.");
   bitmap.close();
   const friends=Number($("armyFriendCount").value)||0;
   if(friends<1)throw new Error("Guarda primero cuántos amigos tienes para calcular tu objetivo diario.");
   $("armyDailyTarget").textContent=(friends*3).toLocaleString("es-MX")+" ❤️";
   $("armyDailyFormula").textContent="3 corazones × "+friends.toLocaleString("es-MX")+" amigos";
   $("armyVotedHeartsValue").textContent=certificateVotedHearts.toLocaleString("es-MX");
-  approvedVotedHearts=certificateVotedHearts;
+  approvedVotedHearts=certificateVotedHearts;approvedVoterName=certificateVoterName;
   approvedCertificateHash=candidateCertificateHash;approvedCertificateDate=certDate;approvedForToday=true;
   $("armyDailyBlock").hidden=false;
-  message("armyVerifyStatus","Certificado aprobado. La fecha corresponde al día KST actual y se comprobará que no se haya usado antes al guardar.","ok");
- }catch(e){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;message("armyVerifyStatus",e.message||"No pudimos revisar el certificado.","error");}
+  message("armyVerifyStatus","Certificado aprobado para @"+certificateVoterName+". Se registrará dentro de tu mismo perfil de la página.","ok");
+ }catch(e){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;message("armyVerifyStatus",e.message||"No pudimos revisar el certificado.","error");}
  finally{clear();}
 });
 $("armyDailyForm").addEventListener("submit",async(event)=>{
  event.preventDefault();if(!currentUser||!approvedForToday||!approvedCertificateHash||approvedVotedHearts===null){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}
- if(approvedCertificateDate!==kstDate()){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;$("armyDailyBlock").hidden=true;message("armyVerifyStatus","El día KST cambió. Sube el certificado correspondiente al nuevo día.","error");return;}
+ if(approvedCertificateDate!==kstDate()){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;$("armyDailyBlock").hidden=true;message("armyVerifyStatus","El día KST cambió. Sube el certificado correspondiente al nuevo día.","error");return;}
  if(!$("armyConfirmAll").checked){message("armyDailyMessage","Confirma que enviaste 3 corazones a cada amigo.");return;}
  const friends=Number($("armyFriendCount").value);
  if(!Number.isInteger(friends)||friends<1){message("armyDailyMessage","Guarda primero tu número de amigos.");return;}
  $("armySubmitDaily").disabled=true;message("armyDailyMessage","Guardando registro…");
  try{
-  const {error}=await supabase.from("army_heart_daily_logs").insert({user_id:currentUser.id,log_date:kstDate(),friend_count:friends,confirmed_all_friends:true,certificate_sha256:approvedCertificateHash,voted_hearts:approvedVotedHearts});
+  const {error}=await supabase.from("army_heart_daily_logs").insert({user_id:currentUser.id,log_date:kstDate(),friend_count:friends,confirmed_all_friends:true,certificate_sha256:approvedCertificateHash,voted_hearts:approvedVotedHearts,voter_name:approvedVoterName});
   if(error){if(error.code==="23505"){const detail=[error.message,error.details,error.hint].join(" ");if(detail.includes("army_heart_daily_logs_certificate_sha256_uidx"))throw new Error("Este certificado ya fue registrado. No se puede reutilizar, aunque se cambie el nombre del archivo.");throw new Error("Ya registraste tus corazones de hoy (KST).");}throw error;}
-  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;$("armyConfirmAll").checked=false;await loadHistory();message("armyDailyMessage","¡Registro diario guardado! Objetivo cumplido: "+(friends*3).toLocaleString("es-MX")+" corazones.");
+  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;$("armyConfirmAll").checked=false;await loadHistory();message("armyDailyMessage","¡Registro diario guardado! Objetivo cumplido: "+(friends*3).toLocaleString("es-MX")+" corazones.");
  }catch(e){message("armyDailyMessage",e.message||"No pudimos guardar el registro.");}
  finally{$("armySubmitDaily").disabled=false;}
 });
