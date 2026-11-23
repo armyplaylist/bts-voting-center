@@ -3504,7 +3504,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
  </div>
 </header>
 
-<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#official-voting">Oficiales</a><a href="#unofficial-voting">No oficiales</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#army">ARMY</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
+<nav aria-label="Navegación principal"><a href="#country-time">Inicio</a><a href="#official-voting">Oficiales</a><a href="#unofficial-voting">No oficiales</a><a href="#birthday-voting">Cumpleaños</a><a href="#choeaedol">Recolección</a><a href="#army">Mi perfil</a><a href="#upcoming">Próximas</a><a href="#completed">Finalizadas</a><a href="#guide">Guía</a><a href="#sources">Fuentes</a></nav>
 
 
 <section class="panel country-panel" id="country-time"><div class="section-head"><div><h2><span class="timezone-globe" aria-hidden="true"><svg viewBox="0 0 40 40" role="img"><circle cx="20" cy="20" r="17" fill="#f0eaff" stroke="#7650b5" stroke-width="1.8"/><path d="M7.8 14.2 11 10.5l5.2-2.1 2.2 2.1-1.4 3.1-3.4 1.2-1.2 3.4-3.2-.5zM18.2 17.1l3-2.2 3.7.8 2.2 3.2-1.7 2.4.5 3.5-2.4 3.8-2.7-1.2-.7-4.2-2.5-2.2zM27.4 8.8l3.8 1.5 2 3.1-2.4 2.3-3.5-1.4-1.1-3zM8.2 25.3l3.4 1.1 1.3 3.4-2.1 2.1-2.2-2.8z" fill="#865bc4"/><path d="M3 20h34M20 3c5 4.8 7.3 10.4 7.3 17S25 32.2 20 37M20 3c-5 4.8-7.3 10.4-7.3 17S15 32.2 20 37" fill="none" stroke="#b39ad9" stroke-width="1" opacity=".9"/></svg></span> SELECCIONA TU PAÍS O ZONA HORARIA</h2><p>Elige tu país y, si tiene varias zonas horarias, tu ciudad o región. Convertiremos los horarios al inicio de cada votación.</p></div><span class="pill">TU HORA LOCAL</span></div><label for="timezoneSelect" style="display:block;margin-bottom:7px;font-size:.82rem;font-weight:900">País o zona horaria</label><select class="time-select" id="timezoneSelect">
@@ -3534,50 +3534,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
  <div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">CHOEAEDOL · ANDROID ↗</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">CHOEAEDOL · iOS ↗</a></div>
 </section>
 
-<section class="panel army-panel" id="army">
- <div class="section-head"><div><h2>ARMY · TU PERFIL</h2><p>Registra el intercambio diario de corazones con tus amigos de Choeaedol.</p></div><span class="pill">3 ❤️ POR AMIGO / DÍA</span></div>
- <div class="army-intro"><strong>Un espacio independiente para ARMY.</strong><span>Tu certificado se revisa en este dispositivo y se descarta. No se sube ni se guarda la imagen.</span></div>
- <div class="army-auth" id="armyAuth">
-  <div class="army-auth-copy"><h3>Entra a tu cuenta ARMY</h3><p>Usa un nombre de usuario y contraseña. No necesitas correo electrónico.</p></div>
-  <form id="armyAuthForm" class="army-form">
-   <label>Nombre de usuario<input id="armyUsername" name="username" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" required placeholder="Ej. purplearmy"></label>
-   <label>Contraseña<input id="armyPassword" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" required placeholder="Mínimo 8 caracteres"></label>
-   <div class="army-actions"><button class="btn" type="submit" id="armyLoginButton">Iniciar sesión</button><button class="btn secondary" type="button" id="armySignupButton">Crear cuenta</button></div>
-   <p class="army-message" id="armyAuthMessage" role="status" aria-live="polite"></p>
-  </form>
- </div>
- <div class="army-dashboard" id="armyDashboard" hidden>
-  <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
-  <div class="army-stats">
-   <div><span>Amigos registrados</span><strong id="armyFriendStat">0</strong></div>
-   <div><span>Objetivo diario</span><strong id="armyTargetStat">0 ❤️</strong></div>
-   <div><span>Corazones registrados</span><strong id="armyTotalStat">0 ❤️</strong></div>
-  </div>
-  <div class="army-block">
-   <h3>1 · Tu lista de amigos</h3><p>Indica cuántos amigos tienes en Choeaedol. El objetivo se calcula como 3 corazones por cada amigo.</p>
-   <form id="armyFriendsForm" class="army-inline-form"><label for="armyFriendCount">Número de amigos</label><input id="armyFriendCount" type="number" min="1" max="1000" step="1" required><button class="btn" type="submit">Guardar cantidad</button></form>
-  </div>
-  <div class="army-block army-certificate-block">
-   <h3>2 · Verifica tu certificado de Choeaedol</h3>
-   <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
-   <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
-   <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
-  </div>
-  <div class="army-block" id="armyDailyBlock" hidden>
-   <h3>3 · Confirma tus corazones diarios</h3>
-   <div class="army-daily-target"><span>Tu objetivo de hoy</span><strong id="armyDailyTarget">0 ❤️</strong><small id="armyDailyFormula">3 corazones × 0 amigos</small></div>
-   <form id="armyDailyForm">
-    <label class="army-confirm"><input id="armyConfirmAll" type="checkbox" required><span>Confirmo que hoy envié 3 corazones a cada uno de mis amigos de Choeaedol.</span></label>
-    <button class="btn" type="submit" id="armySubmitDaily">Registrar cumplimiento de hoy</button>
-    <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
-   </form>
-  </div>
-  <div class="army-block">
-   <h3>Historial diario</h3><p>Los registros se guardan por fecha de Corea del Sur (KST). Solo se permite un registro por día.</p>
-   <div id="armyHistory" class="army-history"><p class="army-muted">Aún no hay registros.</p></div><h4 class="army-chart-title">Actividad de los últimos 7 días</h4><div id="armyWeeklyChart" class="army-weekly-chart" aria-label="Gráfica de corazones registrados en los últimos siete días"></div>
-  </div>
- </div>
-</section>
+
 
 <section class="panel" id="official-voting">
   <div class="section-head"><div><h2>VOTACIONES OFICIALES</h2><p>Premios que entregan un trofeo o galardón al ganador.</p></div><span class="pill live">● EN CURSO</span></div>
@@ -3818,6 +3775,53 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
 </section>
 
 <footer class="footer">BTS VOTING CENTER · Información revisada: 8 nov 2026.<br>Made by @lightjjk</footer>
+
+
+<section class="panel army-panel" id="army">
+ <div class="section-head"><div><h2>ARMY · TU PERFIL</h2><p>Registra el intercambio diario de corazones con tus amigos de Choeaedol.</p></div><span class="pill">3 ❤️ POR AMIGO / DÍA</span></div>
+ <div class="army-intro"><strong>Un espacio independiente para ARMY.</strong><span>Tu certificado se revisa en este dispositivo y se descarta. No se sube ni se guarda la imagen.</span></div>
+ <div class="army-auth" id="armyAuth">
+  <div class="army-auth-copy"><h3>Entra a tu cuenta ARMY</h3><p>Usa un nombre de usuario y contraseña. No necesitas correo electrónico.</p></div>
+  <form id="armyAuthForm" class="army-form">
+   <label>Nombre de usuario<input id="armyUsername" name="username" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" required placeholder="Ej. purplearmy"></label>
+   <label>Contraseña<input id="armyPassword" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" required placeholder="Mínimo 8 caracteres"></label>
+   <div class="army-actions"><button class="btn" type="submit" id="armyLoginButton">Iniciar sesión</button><button class="btn secondary" type="button" id="armySignupButton">Crear cuenta</button></div>
+   <p class="army-message" id="armyAuthMessage" role="status" aria-live="polite"></p>
+  </form>
+ </div>
+ <div class="army-dashboard" id="armyDashboard" hidden>
+  <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
+  <div class="army-stats">
+   <div><span>Amigos registrados</span><strong id="armyFriendStat">0</strong></div>
+   <div><span>Objetivo diario</span><strong id="armyTargetStat">0 ❤️</strong></div>
+   <div><span>Corazones registrados</span><strong id="armyTotalStat">0 ❤️</strong></div>
+  </div>
+  <div class="army-block">
+   <h3>1 · Tu lista de amigos</h3><p>Indica cuántos amigos tienes en Choeaedol. El objetivo se calcula como 3 corazones por cada amigo.</p>
+   <form id="armyFriendsForm" class="army-inline-form"><label for="armyFriendCount">Número de amigos</label><input id="armyFriendCount" type="number" min="1" max="1000" step="1" required><button class="btn" type="submit">Guardar cantidad</button></form>
+  </div>
+  <div class="army-block army-certificate-block">
+   <h3>2 · Verifica tu certificado de Choeaedol</h3>
+   <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
+   <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
+   <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
+  </div>
+  <div class="army-block" id="armyDailyBlock" hidden>
+   <h3>3 · Confirma tus corazones diarios</h3>
+   <div class="army-daily-target"><span>Tu objetivo de hoy</span><strong id="armyDailyTarget">0 ❤️</strong><small id="armyDailyFormula">3 corazones × 0 amigos</small></div>
+   <form id="armyDailyForm">
+    <label class="army-confirm"><input id="armyConfirmAll" type="checkbox" required><span>Confirmo que hoy envié 3 corazones a cada uno de mis amigos de Choeaedol.</span></label>
+    <button class="btn" type="submit" id="armySubmitDaily">Registrar cumplimiento de hoy</button>
+    <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
+   </form>
+  </div>
+  <div class="army-block">
+   <h3>Historial diario</h3><p>Los registros se guardan por fecha de Corea del Sur (KST). Solo se permite un registro por día.</p>
+   <div id="armyHistory" class="army-history"><p class="army-muted">Aún no hay registros.</p></div><h4 class="army-chart-title">Actividad de los últimos 7 días</h4><div id="armyWeeklyChart" class="army-weekly-chart" aria-label="Gráfica de corazones registrados en los últimos siete días"></div>
+  </div>
+ </div>
+</section>
+
 </main>
 <script>
 // Navegación nativa por anclas: mantiene todos los apartados visibles.
