@@ -3534,6 +3534,51 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
  <div class="actions"><a class="btn" href="https://play.google.com/store/apps/details?id=net.ib.mn" target="_blank" rel="noopener">CHOEAEDOL · ANDROID ↗</a><a class="btn secondary" href="https://apps.apple.com/mx/app/kpop-idol-mi-%C3%ADdolo-choeaedol/id1131995698" target="_blank" rel="noopener">CHOEAEDOL · iOS ↗</a></div>
 </section>
 
+<section class="panel army-panel" id="army">
+ <div class="section-head"><div><h2>ARMY · TU PERFIL</h2><p>Registra el intercambio diario de corazones con tus amigos de Choeaedol.</p></div><span class="pill">3 ❤️ POR AMIGO / DÍA</span></div>
+ <div class="army-intro"><strong>Un espacio independiente para ARMY.</strong><span>Tu certificado se revisa en este dispositivo y se descarta. No se sube ni se guarda la imagen.</span></div>
+ <div class="army-auth" id="armyAuth">
+  <div class="army-auth-copy"><h3>Entra a tu cuenta ARMY</h3><p>Usa un nombre de usuario y contraseña. No necesitas correo electrónico.</p></div>
+  <form id="armyAuthForm" class="army-form">
+   <label>Nombre de usuario<input id="armyUsername" name="username" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" required placeholder="Ej. purplearmy"></label>
+   <label>Contraseña<input id="armyPassword" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" required placeholder="Mínimo 8 caracteres"></label>
+   <div class="army-actions"><button class="btn" type="submit" id="armyLoginButton">Iniciar sesión</button><button class="btn secondary" type="button" id="armySignupButton">Crear cuenta</button></div>
+   <p class="army-message" id="armyAuthMessage" role="status" aria-live="polite"></p>
+  </form>
+ </div>
+ <div class="army-dashboard" id="armyDashboard" hidden>
+  <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
+  <div class="army-stats">
+   <div><span>Amigos registrados</span><strong id="armyFriendStat">0</strong></div>
+   <div><span>Objetivo diario</span><strong id="armyTargetStat">0 ❤️</strong></div>
+   <div><span>Corazones registrados</span><strong id="armyTotalStat">0 ❤️</strong></div>
+  </div>
+  <div class="army-block">
+   <h3>1 · Tu lista de amigos</h3><p>Indica cuántos amigos tienes en Choeaedol. El objetivo se calcula como 3 corazones por cada amigo.</p>
+   <form id="armyFriendsForm" class="army-inline-form"><label for="armyFriendCount">Número de amigos</label><input id="armyFriendCount" type="number" min="1" max="1000" step="1" required><button class="btn" type="submit">Guardar cantidad</button></form>
+  </div>
+  <div class="army-block army-certificate-block">
+   <h3>2 · Verifica tu certificado de Choeaedol</h3>
+   <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
+   <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
+   <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
+  </div>
+  <div class="army-block" id="armyDailyBlock" hidden>
+   <h3>3 · Confirma tus corazones diarios</h3>
+   <div class="army-daily-target"><span>Tu objetivo de hoy</span><strong id="armyDailyTarget">0 ❤️</strong><small id="armyDailyFormula">3 corazones × 0 amigos</small></div>
+   <form id="armyDailyForm">
+    <label class="army-confirm"><input id="armyConfirmAll" type="checkbox" required><span>Confirmo que hoy envié 3 corazones a cada uno de mis amigos de Choeaedol.</span></label>
+    <button class="btn" type="submit" id="armySubmitDaily">Registrar cumplimiento de hoy</button>
+    <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
+   </form>
+  </div>
+  <div class="army-block">
+   <h3>Historial diario</h3><p>Los registros se guardan por fecha de Corea del Sur (KST). Solo se permite un registro por día.</p>
+   <div id="armyHistory" class="army-history"><p class="army-muted">Aún no hay registros.</p></div><h4 class="army-chart-title">Actividad de los últimos 7 días</h4><div id="armyWeeklyChart" class="army-weekly-chart" aria-label="Gráfica de corazones registrados en los últimos siete días"></div>
+  </div>
+ </div>
+</section>
+
 
 
 <section class="panel" id="official-voting">
@@ -3777,50 +3822,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
 
 
 
-<section class="panel army-panel" id="army">
- <div class="section-head"><div><h2>ARMY · TU PERFIL</h2><p>Registra el intercambio diario de corazones con tus amigos de Choeaedol.</p></div><span class="pill">3 ❤️ POR AMIGO / DÍA</span></div>
- <div class="army-intro"><strong>Un espacio independiente para ARMY.</strong><span>Tu certificado se revisa en este dispositivo y se descarta. No se sube ni se guarda la imagen.</span></div>
- <div class="army-auth" id="armyAuth">
-  <div class="army-auth-copy"><h3>Entra a tu cuenta ARMY</h3><p>Usa un nombre de usuario y contraseña. No necesitas correo electrónico.</p></div>
-  <form id="armyAuthForm" class="army-form">
-   <label>Nombre de usuario<input id="armyUsername" name="username" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" required placeholder="Ej. purplearmy"></label>
-   <label>Contraseña<input id="armyPassword" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" required placeholder="Mínimo 8 caracteres"></label>
-   <div class="army-actions"><button class="btn" type="submit" id="armyLoginButton">Iniciar sesión</button><button class="btn secondary" type="button" id="armySignupButton">Crear cuenta</button></div>
-   <p class="army-message" id="armyAuthMessage" role="status" aria-live="polite"></p>
-  </form>
- </div>
- <div class="army-dashboard" id="armyDashboard" hidden>
-  <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
-  <div class="army-stats">
-   <div><span>Amigos registrados</span><strong id="armyFriendStat">0</strong></div>
-   <div><span>Objetivo diario</span><strong id="armyTargetStat">0 ❤️</strong></div>
-   <div><span>Corazones registrados</span><strong id="armyTotalStat">0 ❤️</strong></div>
-  </div>
-  <div class="army-block">
-   <h3>1 · Tu lista de amigos</h3><p>Indica cuántos amigos tienes en Choeaedol. El objetivo se calcula como 3 corazones por cada amigo.</p>
-   <form id="armyFriendsForm" class="army-inline-form"><label for="armyFriendCount">Número de amigos</label><input id="armyFriendCount" type="number" min="1" max="1000" step="1" required><button class="btn" type="submit">Guardar cantidad</button></form>
-  </div>
-  <div class="army-block army-certificate-block">
-   <h3>2 · Verifica tu certificado de Choeaedol</h3>
-   <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
-   <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
-   <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
-  </div>
-  <div class="army-block" id="armyDailyBlock" hidden>
-   <h3>3 · Confirma tus corazones diarios</h3>
-   <div class="army-daily-target"><span>Tu objetivo de hoy</span><strong id="armyDailyTarget">0 ❤️</strong><small id="armyDailyFormula">3 corazones × 0 amigos</small></div>
-   <form id="armyDailyForm">
-    <label class="army-confirm"><input id="armyConfirmAll" type="checkbox" required><span>Confirmo que hoy envié 3 corazones a cada uno de mis amigos de Choeaedol.</span></label>
-    <button class="btn" type="submit" id="armySubmitDaily">Registrar cumplimiento de hoy</button>
-    <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
-   </form>
-  </div>
-  <div class="army-block">
-   <h3>Historial diario</h3><p>Los registros se guardan por fecha de Corea del Sur (KST). Solo se permite un registro por día.</p>
-   <div id="armyHistory" class="army-history"><p class="army-muted">Aún no hay registros.</p></div><h4 class="army-chart-title">Actividad de los últimos 7 días</h4><div id="armyWeeklyChart" class="army-weekly-chart" aria-label="Gráfica de corazones registrados en los últimos siete días"></div>
-  </div>
- </div>
-</section>
+
 
 </main>
 
