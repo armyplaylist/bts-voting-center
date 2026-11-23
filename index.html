@@ -5426,7 +5426,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
  message("armyVerifyStatus","Revisando formato y texto del certificado… Esto puede tardar unos segundos.");
  try{
   const bitmap=await createImageBitmap(file),ratio=bitmap.width/bitmap.height;
-  if(bitmap.width<500||bitmap.height<800||ratio<0.68||ratio>0.82)throw new Error("La imagen no tiene el formato vertical del certificado de referencia.");
+  if(bitmap.width<500||bitmap.height<900||ratio<0.42||ratio>0.48)throw new Error("La imagen no tiene la proporción vertical del certificado de referencia (aprox. 720 × 1600).");
   if(!tesseractWorker){
    const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js");
    tesseractWorker=await mod.createWorker("eng");
@@ -5435,11 +5435,9 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   canvas.getContext("2d").drawImage(bitmap,0,0);bitmap.close();
   const result=await tesseractWorker.recognize(canvas);
   const raw=(result.data.text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
-  const required=["voting certificate","voter name","voting date","voted hearts","choeaedol"];
+  const required=["voting certificate","voter name","voting date","voted hearts","choeaedol","bts"];
   const missing=required.filter(token=>!raw.includes(token));
   if(missing.length)throw new Error("No coincide con el certificado de referencia. Faltan textos: "+missing.join(", ")+".");
-  const nameMatch=raw.includes(currentUsername.toLowerCase());
-  if(!nameMatch)throw new Error("El nombre del certificado no coincide con tu usuario ARMY (@"+currentUsername+").");
   const months={january:"01",february:"02",march:"03",april:"04",may:"05",june:"06",july:"07",august:"08",september:"09",october:"10",november:"11",december:"12"};
   let certDate=null;
   const dateRegex=new RegExp("("+Object.keys(months).join("|")+")\\s+(\\d{1,2})[,]?\\s+(\\d{4})","i");
