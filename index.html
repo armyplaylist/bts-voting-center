@@ -5325,7 +5325,7 @@ const SUPABASE_KEY = "sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = (id) => document.getElementById(id);
 const authBox=$("armyAuth"), dashboard=$("armyDashboard"), authForm=$("armyAuthForm");
-let currentUser=null, currentUsername="", approvedForToday=false, tesseractWorker=null;
+let currentUser=null, currentUsername="", approvedForToday=false, approvedCertificateHash=null, approvedCertificateDate=null, tesseractWorker=null;
 const usernameEmail = (name) => "army_"+name.trim().toLowerCase()+"@accounts.invalid";
 function kstDate(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
 function prettyKstDate(date){return new Intl.DateTimeFormat("es-MX",{timeZone:"Asia/Seoul",day:"numeric",month:"long",year:"numeric"}).format(new Date(date+"T12:00:00+09:00"));}
@@ -5408,7 +5408,7 @@ $("armySignupButton").addEventListener("click",async()=>{
  }catch(e){message("armyAuthMessage",e.message||"No pudimos crear la cuenta.");}
  finally{setAuthMode(false);}
 });
-$("armyLogoutButton").addEventListener("click",async()=>{await supabase.auth.signOut();currentUser=null;currentUsername="";approvedForToday=false;dashboard.hidden=true;authBox.hidden=false;message("armyAuthMessage","Has cerrado sesión.");});
+$("armyLogoutButton").addEventListener("click",async()=>{await supabase.auth.signOut();currentUser=null;currentUsername="";approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;dashboard.hidden=true;authBox.hidden=false;message("armyAuthMessage","Has cerrado sesión.");});
 $("armyFriendsForm").addEventListener("submit",async(event)=>{
  event.preventDefault();if(!currentUser)return;
  const count=Number($("armyFriendCount").value);
@@ -5419,11 +5419,13 @@ $("armyFriendsForm").addEventListener("submit",async(event)=>{
 });
 $("armyCertificate").addEventListener("change",async(event)=>{
  const input=event.target,file=input.files?.[0];if(!file)return;
- approvedForToday=false;$("armyDailyBlock").hidden=true;
+ approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;$("armyDailyBlock").hidden=true;
  const clear=()=>{input.value="";};
  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>8*1024*1024){message("armyVerifyStatus","Formato no admitido. Usa JPG, PNG o WEBP de máximo 8 MB.","error");clear();return;}
- message("armyVerifyStatus","Revisando formato y texto del certificado… Esto puede tardar unos segundos.");
+ message("armyVerifyStatus","Revisando formato, fecha KST y duplicados… Esto puede tardar unos segundos.");
  try{
+  const digest=await crypto.subtle.digest("SHA-256",await file.arrayBuffer());
+  const candidateCertificateHash=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,"0")).join("");
   const bitmap=await createImageBitmap(file),ratio=bitmap.width/bitmap.height;
   if(bitmap.width<600||bitmap.height<800||ratio<0.72||ratio>0.78)throw new Error("La imagen no tiene la proporción del certificado de referencia (aprox. 900 × 1200).");
   if(!tesseractWorker){
@@ -5445,26 +5447,28 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const dm=raw.match(dateRegex);
   if(dm)certDate=dm[3]+"-"+months[dm[1].toLowerCase()]+"-"+String(dm[2]).padStart(2,"0");
   if(!certDate||certDate!==kstDate())throw new Error("La fecha del certificado debe ser la fecha de hoy en Corea (KST): "+kstDate()+".");
-  bitmap.close();approvedForToday=true;
+  bitmap.close();
   const friends=Number($("armyFriendCount").value)||0;
   if(friends<1)throw new Error("Guarda primero cuántos amigos tienes para calcular tu objetivo diario.");
   $("armyDailyTarget").textContent=(friends*3).toLocaleString("es-MX")+" ❤️";
   $("armyDailyFormula").textContent="3 corazones × "+friends.toLocaleString("es-MX")+" amigos";
+  approvedCertificateHash=candidateCertificateHash;approvedCertificateDate=certDate;approvedForToday=true;
   $("armyDailyBlock").hidden=false;
-  message("armyVerifyStatus","Certificado aprobado por coincidencia de formato, usuario y fecha KST. La imagen no se guardó.","ok");
- }catch(e){approvedForToday=false;message("armyVerifyStatus",e.message||"No pudimos revisar el certificado.","error");}
+  message("armyVerifyStatus","Certificado aprobado. La fecha corresponde al día KST actual y se comprobará que no se haya usado antes al guardar.","ok");
+ }catch(e){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;message("armyVerifyStatus",e.message||"No pudimos revisar el certificado.","error");}
  finally{clear();}
 });
 $("armyDailyForm").addEventListener("submit",async(event)=>{
- event.preventDefault();if(!currentUser||!approvedForToday){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}
+ event.preventDefault();if(!currentUser||!approvedForToday||!approvedCertificateHash){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}
+ if(approvedCertificateDate!==kstDate()){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;$("armyDailyBlock").hidden=true;message("armyVerifyStatus","El día KST cambió. Sube el certificado correspondiente al nuevo día.","error");return;}
  if(!$("armyConfirmAll").checked){message("armyDailyMessage","Confirma que enviaste 3 corazones a cada amigo.");return;}
  const friends=Number($("armyFriendCount").value);
  if(!Number.isInteger(friends)||friends<1){message("armyDailyMessage","Guarda primero tu número de amigos.");return;}
  $("armySubmitDaily").disabled=true;message("armyDailyMessage","Guardando registro…");
  try{
-  const {error}=await supabase.from("army_heart_daily_logs").insert({user_id:currentUser.id,log_date:kstDate(),friend_count:friends,confirmed_all_friends:true});
-  if(error){if(error.code==="23505")throw new Error("Ya registraste tus corazones de hoy (KST).");throw error;}
-  approvedForToday=false;$("armyConfirmAll").checked=false;await loadHistory();message("armyDailyMessage","¡Registro diario guardado! Objetivo cumplido: "+(friends*3).toLocaleString("es-MX")+" corazones.");
+  const {error}=await supabase.from("army_heart_daily_logs").insert({user_id:currentUser.id,log_date:kstDate(),friend_count:friends,confirmed_all_friends:true,certificate_sha256:approvedCertificateHash});
+  if(error){if(error.code==="23505"){const detail=[error.message,error.details,error.hint].join(" ");if(detail.includes("army_heart_daily_logs_certificate_sha256_uidx"))throw new Error("Este certificado ya fue registrado. No se puede reutilizar, aunque se cambie el nombre del archivo.");throw new Error("Ya registraste tus corazones de hoy (KST).");}throw error;}
+  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;$("armyConfirmAll").checked=false;await loadHistory();message("armyDailyMessage","¡Registro diario guardado! Objetivo cumplido: "+(friends*3).toLocaleString("es-MX")+" corazones.");
  }catch(e){message("armyDailyMessage",e.message||"No pudimos guardar el registro.");}
  finally{$("armySubmitDaily").disabled=false;}
 });
