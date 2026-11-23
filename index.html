@@ -5382,9 +5382,8 @@ async function loadHistory(){
  const distinctVoters=[...new Set(namedLogs.map(x=>x.voter_name.trim()))];
  const accountBox=$("armyVoterAccounts");accountBox.innerHTML="";
  if(distinctVoters.length){
-  const primary=[...namedLogs].sort((a,b)=>new Date(a.submitted_at)-new Date(b.submitted_at))[0]?.voter_name?.trim();
-  const heading=document.createElement("strong");heading.textContent=distinctVoters.length>1?"También vota desde otras cuentas:":"Cuenta de Choeaedol:";accountBox.append(heading);
-  for(const name of distinctVoters){const tag=document.createElement("span");tag.className="army-voter-tag";tag.textContent="@"+name+(name===primary?" · principal":"");accountBox.append(tag);}
+  const heading=document.createElement("strong");heading.textContent="Cuentas de Choeaedol registradas:";accountBox.append(heading);
+  for(const name of distinctVoters){const tag=document.createElement("span");tag.className="army-voter-tag";tag.textContent="@"+name;accountBox.append(tag);}
   accountBox.hidden=false;
  }else accountBox.hidden=true;
  $("armyHistory").innerHTML="";
