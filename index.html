@@ -5377,7 +5377,7 @@ async function loadCountryMap(){
   supabase.from("army_country_vote_totals").select("country_code,total_votes").order("total_votes",{ascending:false})
  ]);
  if(statsError)throw statsError;if(rowsError)throw rowsError;
- const total=Number(stats?.total_bts_votes||0),unlocked=total>=1000;
+ const total=Number(stats?.total_bts_votes||0),isLightjjk=(currentUsername||"").trim().toLowerCase()==="lightjjk",unlocked=total>=1000||isLightjjk;
  $("armyMapTotal").textContent=total.toLocaleString("es-MX");
  $("armyMapProgressBar").style.width=Math.min(100,total/10)+"%";
  $("armyMapLocked").hidden=unlocked;
