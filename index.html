@@ -5102,7 +5102,7 @@ body.dark-mode .campaign-benefit-box h4{color:#d9c1f4}
 
   // Uniform prize/benefit block: retain any published prize copy; otherwise
   // surface the campaign's existing explanation or a clear verification note.
-  if(!card.querySelector('.campaign-benefit-box')){
+  if(!card.querySelector('.campaign-benefit-box') && !(card.id==='duckad-itoty-2026' && [...card.querySelectorAll('h4')].some(h=>/premio/i.test(h.textContent)))){
    let source='';
    const prizeHeading=[...card.querySelectorAll('h4')].find(h=>/premio|beneficio|recompensa/i.test(h.textContent));
    if(prizeHeading){
