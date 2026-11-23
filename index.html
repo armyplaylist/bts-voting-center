@@ -5425,7 +5425,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
  message("armyVerifyStatus","Revisando formato y texto del certificado… Esto puede tardar unos segundos.");
  try{
   const bitmap=await createImageBitmap(file),ratio=bitmap.width/bitmap.height;
-  if(bitmap.width<500||bitmap.height<900||ratio<0.42||ratio>0.48)throw new Error("La imagen no tiene la proporción vertical del certificado de referencia (aprox. 720 × 1600).");
+  if(bitmap.width<600||bitmap.height<800||ratio<0.72||ratio>0.78)throw new Error("La imagen no tiene la proporción del certificado de referencia (aprox. 900 × 1200).");
   if(!tesseractWorker){
    const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.esm.min.js");
    tesseractWorker=await mod.createWorker("eng");
