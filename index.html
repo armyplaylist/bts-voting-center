@@ -3465,7 +3465,7 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
 <script id="channelr-date-countdown-script">
 (function(){
  function tick(){
-  const box=document.getElementById('channel-r-awards-2026 #channelr-date-countdown');if(!box)return;
+  const box=document.getElementById('channelr-date-countdown');if(!box)return;
   const zone=box.dataset.closeZone||'America/Los_Angeles',date=box.dataset.closeDate;
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
   const p=Object.fromEntries(parts.filter(x=>x.type!=='literal').map(x=>[x.type,Number(x.value)]));
