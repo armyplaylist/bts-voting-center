@@ -3446,6 +3446,17 @@ body.dark-mode #duckad-itoty-2026 .itoty-countdown small{color:#e4c9f3}
 body:not(.dark-mode) .mama-priority-notice .mama-priority-copy a{background:#a92d49!important;color:#fff!important;border:1px solid #8f203a!important;text-decoration:none!important;text-shadow:none!important;opacity:1!important}
 body:not(.dark-mode) .mama-priority-notice .mama-priority-copy a:hover{background:#8f203a!important;color:#fff!important}
 </style>
+<style id="voting-category-sections">
+.voting-category{margin-top:18px}
+.voting-category-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:13px 15px;border:1px solid #e4d8f2;border-radius:16px;background:linear-gradient(110deg,#f5efff,#fff)}
+.voting-category-head h3{margin:0;color:#55377c;font-size:1rem;font-weight:900;letter-spacing:.01em}
+.voting-category-head p{margin:4px 0 0;color:#81718f;font-size:.78rem;font-weight:700;line-height:1.45}
+.voting-category-count{padding:5px 9px;border-radius:99px;background:#eee5fb;color:#684b91;font-size:.68rem;font-weight:900;white-space:nowrap}
+body.dark-mode .voting-category-head{background:#292333!important;border-color:#51445f!important}
+body.dark-mode .voting-category-head h3{color:#eadcff!important}
+body.dark-mode .voting-category-head p{color:#d0c4dc!important}
+body.dark-mode .voting-category-count{background:#49385f!important;color:#f1e5ff!important}
+</style>
 </head>
 <body>
 <aside class="mama-priority-notice" role="status" aria-label="Anuncio prioritario">
@@ -3501,8 +3512,10 @@ body:not(.dark-mode) .mama-priority-notice .mama-priority-copy a:hover{backgroun
 
 <section class="panel" id="active">
  <div class="section-head"><div><h2>🔴 ACTIVE VOTING</h2><p>Rankings y horarios locales al inicio de cada votación.</p></div><span class="pill live">● EN CURSO</span></div>
- <div class="cards" id="voteCards">
-  <article class="vote-card" id="duckad-itoty-2026" data-kind="group" data-palette="gda">
+ <div class="voting-category">
+  <div class="voting-category-head"><div><h3>🏆 VOTACIONES OFICIALES</h3><p>Premios que entregan un trofeo o galardón al ganador.</p></div><span class="voting-category-count">1 VOTACIÓN</span></div>
+  <div class="cards" id="officialVoteCards">
+   <article class="vote-card" id="duckad-itoty-2026" data-kind="group" data-palette="gda">
    <div class="card-top"><h3 class="vote-title">THE IDOL TROPHY OF THE YEAR 2026</h3><span class="pill live">● VOTACIÓN ABIERTA</span></div>
    <p class="meta">DUCKAD · 2026 BEST BOY GROUP OF THE YEAR</p>
    <p class="description">Vota por BTS en la categoría Best Boy Group of the Year. La votación es global y el 100% de los votos de fans determina a los ganadores.</p>
@@ -3513,7 +3526,12 @@ body:not(.dark-mode) .mama-priority-notice .mama-priority-copy a:hover{backgroun
    <div class="rule-box itoty-guide"><h4>🎟️ CÓMO CONSEGUIR VTS EN DUCKAD</h4><ol><li>Abre la pestaña <strong>TICKET</strong> y completa el registro de asistencia diario desde el banner correspondiente.</li><li>Revisa las secciones de <strong>Get VTS</strong> y reclama las recompensas disponibles; algunas son por orden de llegada.</li><li>Entra a <strong>News</strong>, abre artículos y sigue las instrucciones hasta completar la recompensa.</li><li>Participa en anuncios, videos, banners, encuestas y misiones que aparezcan en la pestaña TICKET.</li><li>Comprueba que los VTS se hayan añadido a tu saldo antes de votar.</li></ol><p>Los VTS tienen una vigencia de <strong>90 días</strong>. Comprar tickets es opcional; puedes reunirlos mediante las actividades gratuitas disponibles. Las recompensas y cantidades pueden variar.</p><p><a href="https://www.duckad2020.com/home/index.php" target="_blank" rel="noopener noreferrer">Consultar la guía oficial de DUCKAD ↗</a></p></div>
    <div class="actions"><a class="btn" href="https://duckad2020.com/appredirect.html" target="_blank" rel="noopener noreferrer">VOTAR EN DUCKAD ↗</a><a class="btn secondary" href="https://www.kpopgp.com/index.php?lang=en&amp;page=vote&amp;vote=a17c09d9-d5b3-11f1-9097-d20db3fa50fa" target="_blank" rel="noopener noreferrer">VER RANKING ↗</a></div>
   </article>
-  <article class="vote-card" id="channel-r-awards-2026" data-kind="group" data-palette="channelr">
+  </div>
+ </div>
+ <div class="voting-category">
+  <div class="voting-category-head"><div><h3>📣 VOTACIONES NO OFICIALES</h3><p>Encuestas y campañas que ofrecen títulos, anuncios, difusión u otros beneficios, sin trofeo confirmado.</p></div><span class="voting-category-count">1 VOTACIÓN</span></div>
+  <div class="cards" id="unofficialVoteCards">
+   <article class="vote-card" id="channel-r-awards-2026" data-kind="group" data-palette="channelr">
    <div class="card-top"><h3 class="vote-title">Channel R Radio Awards 2026</h3><span class="pill live">● VOTACIÓN ABIERTA</span></div>
    <p class="meta">CHANNEL R RADIO · PREMIOS ANUALES DE MÚSICA</p>
    <p class="description"><strong>BTS YA ESTÁ NOMINADO.</strong> Ahora apoyemos al grupo en las categorías disponibles de artistas, canciones, álbumes y videos.</p>
@@ -3521,14 +3539,7 @@ body:not(.dark-mode) .mama-priority-notice .mama-priority-copy a:hover{backgroun
    <div class="rule-box"><h4>🗳️ CÓMO VOTAR POR BTS</h4><ol><li>Abre Channel R Radio Awards e inicia sesión.</li><li>Entra en las categorías donde BTS o sus lanzamientos estén nominados.</li><li>Selecciona a BTS y confirma tu voto en cada categoría disponible.</li><li>Vuelve cada día para participar de nuevo.</li></ol><p>La modalidad gratuita permite participar una vez al día. Channel R+ ofrece votos adicionales mediante una suscripción opcional.</p></div>
    <div class="actions"><a class="btn" href="https://listen.channelrradio.com/vote" target="_blank" rel="noopener noreferrer">VOTAR POR BTS ↗</a><a class="btn secondary" href="https://listen.channelrradio.com/awards" target="_blank" rel="noopener noreferrer">VER PREMIOS ↗</a></div>
   </article>
- 
-  
-  
-  
-  
-  
-  
-
+  </div>
  </div>
  
 </section>
