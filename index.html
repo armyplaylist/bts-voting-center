@@ -3553,7 +3553,11 @@ body.army-profile-view #army.army-panel{display:block!important}
   </form>
  </div>
  <div class="army-dashboard" id="armyDashboard" hidden>
-  <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
+  <div class="army-ig-profile">
+  <div class="army-ig-cover" id="armyCoverFrame"><img id="armyCoverImage" alt="Encabezado del perfil" hidden></div>
+  <div class="army-ig-avatar-row"><div class="army-ig-avatar"><span id="armyAvatarFallback">A</span><img id="armyAvatarImage" alt="Foto de perfil" hidden></div></div>
+ </div>
+ <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
   <div class="army-block army-edit-profile">
    <button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button>
    <form id="armyEditProfileForm" class="army-country-form" hidden>
@@ -3561,6 +3565,15 @@ body.army-profile-view #army.army-panel{display:block!important}
     <select id="armyCountrySelect" required><option value="">Selecciona tu país</option></select>
     <button class="btn" type="submit" id="armySaveCountry">Guardar país</button>
     <p class="army-message" id="armyCountryMessage" role="status" aria-live="polite"></p>
+    <div class="army-ig-photo-edit">
+     <div><strong>Foto de perfil</strong><small>Elige una imagen de tu galería</small></div>
+     <button type="button" class="btn secondary" id="armyChooseAvatar">Cambiar foto</button>
+     <input id="armyAvatarFile" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+     <div><strong>Foto de encabezado</strong><small>Personaliza la portada de tu perfil</small></div>
+     <button type="button" class="btn secondary" id="armyChooseCover">Cambiar encabezado</button>
+     <input id="armyCoverFile" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+     <p class="army-message" id="armyPhotoMessage" role="status" aria-live="polite"></p>
+    </div>
    </form>
    <p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p>
   </div>
@@ -5344,7 +5357,25 @@ section>p,.section-description,.section-intro{font-size:.9rem;line-height:1.5}
 
 
 <style id="army-section-styles">
-.army-panel{scroll-margin-top:18px}.army-intro{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:16px;border-left:3px solid #8b65b5;background:#f5f0fa;color:#554364;font-size:.84rem}.army-intro span{color:#756b7b;font-size:.78rem}.army-auth,.army-dashboard{padding:18px;border:1px solid #e6dfe2;border-radius:8px;background:#fff}.army-auth-copy h3,.army-block h3,.army-profile-head h3{margin:0 0 5px;color:#38264a;font-size:1.04rem}.army-auth-copy p,.army-block>p,.army-profile-head p{margin:0 0 13px;color:#756b7b;font-size:.82rem;line-height:1.5}.army-form{display:grid;gap:12px;max-width:520px}.army-form label,.army-inline-form label{display:grid;gap:6px;color:#584767;font-size:.8rem;font-weight:800}.army-form input,.army-inline-form input{width:100%;min-height:42px;padding:10px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-actions{display:flex;gap:9px;flex-wrap:wrap}.army-message{min-height:18px;margin:0;color:#8a3450;font-size:.78rem}.army-dashboard[hidden],.army-block[hidden],.army-auth[hidden]{display:none!important}.army-profile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ece5ee}.army-eyebrow{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9277a7}.army-profile-head h3{margin:4px 0}.army-profile-head p{margin:0}.army-voter-accounts{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px 0 4px;padding:10px 12px;border:1px solid #e8e0ed;border-radius:7px;background:#faf8fc;color:#61427f;font-size:.76rem}.army-voter-accounts[hidden]{display:none!important}.army-voter-accounts strong{font-weight:850}.army-voter-tag{display:inline-flex;padding:4px 8px;border-radius:999px;background:#eee5f5;color:#61427f;font-weight:750}.army-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}.army-stats>div{padding:12px;border:1px solid #e8e0ed;border-radius:6px;background:#faf8fc}.army-stats span,.army-daily-target span{display:block;color:#766c7b;font-size:.7rem;font-weight:700}.army-stats strong{display:block;margin-top:5px;color:#61427f;font-size:1.18rem;font-weight:900}.army-block{padding:16px 0;border-top:1px solid #eee8f0}.army-block:first-of-type{border-top:0}.army-inline-form{display:flex;align-items:end;gap:10px;flex-wrap:wrap}.army-inline-form label{flex:1;min-width:150px}.army-inline-form input{max-width:180px}.army-upload{display:flex;align-items:center;gap:12px;padding:14px;border:1px dashed #bda8cf;border-radius:7px;background:#faf7fc;cursor:pointer;color:#63477d}.army-upload>span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#eee5f5;font-size:1.4rem}.army-upload strong,.army-upload small{display:block}.army-upload small{margin-top:3px;color:#81758a;font-size:.7rem}.army-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.army-verify-status{margin-top:10px;padding:10px 12px;border-radius:5px;background:#f5f1f7;color:#6b5c73;font-size:.78rem;line-height:1.5}.army-verify-status.ok{background:#edf7f0;color:#27623c}.army-verify-status.error{background:#fbefef;color:#92394a}.army-daily-target{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0;padding:13px;background:#f5f0fa;border-radius:6px}.army-daily-target strong{font-size:1.25rem;color:#654184}.army-daily-target small{color:#766b7c}.army-confirm{display:flex;align-items:flex-start;gap:9px;margin:12px 0;color:#5d5363;font-size:.82rem;line-height:1.45}.army-confirm input{margin-top:3px;accent-color:#76509b}.army-history{display:grid;gap:7px}.army-history-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;font-size:.78rem}.army-history-item strong{color:#60407e}.army-muted{color:#807684;font-size:.78rem}.army-chart-title{margin:16px 0 8px;color:#655075;font-size:.78rem}.army-weekly-chart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;align-items:end;min-height:116px;padding:12px 8px 8px;border:1px solid #ece6ef;border-radius:6px;background:#fbfafc}.army-chart-day{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:5px;min-width:0;height:100px}.army-chart-bar{width:min(100%,25px);min-height:3px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#b89bd8,#725093)}.army-chart-day strong{font-size:.62rem;color:#665575}.army-chart-day small{font-size:.62rem;color:#84798a}.army-privacy{margin:14px 0 0;color:#7c727e;font-size:.72rem;line-height:1.55}
+.army-panel{scroll-margin-top:18px}.army-intro{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:16px;border-left:3px solid #8b65b5;background:#f5f0fa;color:#554364;font-size:.84rem}.army-intro span{color:#756b7b;font-size:.78rem}.army-auth,.army-dashboard{padding:18px;border:1px solid #e6dfe2;border-radius:8px;background:#fff}.army-auth-copy h3,.army-block h3,.army-profile-head h3{margin:0 0 5px;color:#38264a;font-size:1.04rem}.army-auth-copy p,.army-block>p,.army-profile-head p{margin:0 0 13px;color:#756b7b;font-size:.82rem;line-height:1.5}.army-form{display:grid;gap:12px;max-width:520px}.army-form label,.army-inline-form label{display:grid;gap:6px;color:#584767;font-size:.8rem;font-weight:800}.army-form input,.army-inline-form input{width:100%;min-height:42px;padding:10px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-actions{display:flex;gap:9px;flex-wrap:wrap}.army-message{min-height:18px;margin:0;color:#8a3450;font-size:.78rem}.army-dashboard[hidden],.army-block[hidden],.army-auth[hidden]{display:none!important}.army-profile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ece5ee}.army-eyebrow{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9277a7}.army-profile-head h3{margin:4px 0}.army-profile-head p{margin:0}
+.army-ig-profile{margin:-2px -2px 14px}
+.army-ig-cover{position:relative;height:clamp(118px,24vw,190px);overflow:hidden;border-radius:5px;background:linear-gradient(120deg,#d9c8e9,#a98bc7 55%,#75558f)}
+.army-ig-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(25,15,35,.18))}
+.army-ig-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.army-ig-avatar-row{position:relative;height:62px;padding-left:18px}
+.army-ig-avatar{position:absolute;top:-54px;left:18px;width:112px;height:112px;border:4px solid #fff;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#eee5f5;color:#63477d;font-size:2rem;font-weight:900;box-shadow:0 1px 5px #0002}
+.army-ig-avatar img{width:100%;height:100%;object-fit:cover}
+.army-ig-avatar img[hidden],.army-ig-cover img[hidden]{display:none}
+.army-ig-photo-edit{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid #eee8f0}
+.army-ig-photo-edit strong,.army-ig-photo-edit small{display:block}
+.army-ig-photo-edit strong{color:#584767;font-size:.8rem}
+.army-ig-photo-edit small{margin-top:3px;color:#81758a;font-size:.7rem}
+.army-ig-photo-edit .army-message{grid-column:1/-1}
+@media(max-width:560px){.army-ig-avatar{width:96px;height:96px;top:-46px}.army-ig-avatar-row{height:54px}.army-ig-photo-edit .btn{padding:8px 10px;font-size:.76rem}}
+body.dark-mode .army-ig-avatar{border-color:#211d25;background:#393044;color:#e3d1f2}
+body.dark-mode .army-ig-photo-edit{border-color:#4b4054}
+body.dark-mode .army-ig-photo-edit strong{color:#e6dcec}
+body.dark-mode .army-ig-photo-edit small{color:#bdb0c7}.army-voter-accounts{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px 0 4px;padding:10px 12px;border:1px solid #e8e0ed;border-radius:7px;background:#faf8fc;color:#61427f;font-size:.76rem}.army-voter-accounts[hidden]{display:none!important}.army-voter-accounts strong{font-weight:850}.army-voter-tag{display:inline-flex;padding:4px 8px;border-radius:999px;background:#eee5f5;color:#61427f;font-weight:750}.army-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}.army-stats>div{padding:12px;border:1px solid #e8e0ed;border-radius:6px;background:#faf8fc}.army-stats span,.army-daily-target span{display:block;color:#766c7b;font-size:.7rem;font-weight:700}.army-stats strong{display:block;margin-top:5px;color:#61427f;font-size:1.18rem;font-weight:900}.army-block{padding:16px 0;border-top:1px solid #eee8f0}.army-block:first-of-type{border-top:0}.army-inline-form{display:flex;align-items:end;gap:10px;flex-wrap:wrap}.army-inline-form label{flex:1;min-width:150px}.army-inline-form input{max-width:180px}.army-upload{display:flex;align-items:center;gap:12px;padding:14px;border:1px dashed #bda8cf;border-radius:7px;background:#faf7fc;cursor:pointer;color:#63477d}.army-upload>span{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#eee5f5;font-size:1.4rem}.army-upload strong,.army-upload small{display:block}.army-upload small{margin-top:3px;color:#81758a;font-size:.7rem}.army-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.army-verify-status{margin-top:10px;padding:10px 12px;border-radius:5px;background:#f5f1f7;color:#6b5c73;font-size:.78rem;line-height:1.5}.army-verify-status.ok{background:#edf7f0;color:#27623c}.army-verify-status.error{background:#fbefef;color:#92394a}.army-daily-target{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0;padding:13px;background:#f5f0fa;border-radius:6px}.army-daily-target strong{font-size:1.25rem;color:#654184}.army-daily-target small{color:#766b7c}.army-confirm{display:flex;align-items:flex-start;gap:9px;margin:12px 0;color:#5d5363;font-size:.82rem;line-height:1.45}.army-confirm input{margin-top:3px;accent-color:#76509b}.army-history{display:grid;gap:7px}.army-history-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;font-size:.78rem}.army-history-item strong{color:#60407e}.army-muted{color:#807684;font-size:.78rem}.army-chart-title{margin:16px 0 8px;color:#655075;font-size:.78rem}.army-weekly-chart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;align-items:end;min-height:116px;padding:12px 8px 8px;border:1px solid #ece6ef;border-radius:6px;background:#fbfafc}.army-chart-day{display:flex;flex-direction:column;align-items:center;justify-content:end;gap:5px;min-width:0;height:100px}.army-chart-bar{width:min(100%,25px);min-height:3px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#b89bd8,#725093)}.army-chart-day strong{font-size:.62rem;color:#665575}.army-chart-day small{font-size:.62rem;color:#84798a}.army-privacy{margin:14px 0 0;color:#7c727e;font-size:.72rem;line-height:1.55}
 body.dark-mode .army-intro,body.dark-mode .army-auth,body.dark-mode .army-dashboard,body.dark-mode .army-stats>div,body.dark-mode .army-upload,body.dark-mode .army-history-item{background:#2b2630;border-color:#4b4054;color:#eee7f3}body.dark-mode .army-auth-copy h3,body.dark-mode .army-block h3,body.dark-mode .army-profile-head h3{color:#eee7f3}body.dark-mode .army-form label,body.dark-mode .army-inline-form label,body.dark-mode .army-confirm{color:#ddd2e4}body.dark-mode .army-form input,body.dark-mode .army-inline-form input{background:#211d25;border-color:#5b4d63;color:#fff}body.dark-mode .army-verify-status{background:#342c3a;color:#e6d9ed}body.dark-mode .army-verify-status.ok{background:#203a2b;color:#c6ebd1}body.dark-mode .army-verify-status.error{background:#482c35;color:#ffd9df}body.dark-mode .army-daily-target{background:#342b3b}body.dark-mode .army-stats strong,body.dark-mode .army-history-item strong,body.dark-mode .army-daily-target strong{color:#d9c1f4}body.dark-mode .army-weekly-chart{background:#24202a;border-color:#4b4054}body.dark-mode .army-chart-title{color:#d9c1f4}body.dark-mode .army-chart-day strong,body.dark-mode .army-chart-day small{color:#c8bbd1}body.dark-mode .army-block>p,body.dark-mode .army-profile-head p,body.dark-mode .army-intro span,body.dark-mode .army-privacy,body.dark-mode .army-muted{color:#c7bdcb}
 @media(max-width:560px){.army-stats{grid-template-columns:1fr 1fr}.army-profile-head{align-items:flex-start;flex-wrap:wrap}.army-inline-form{align-items:stretch}.army-inline-form label,.army-inline-form input{max-width:none}.army-inline-form .btn{width:100%}}
 .army-country-form{display:flex;align-items:end;gap:9px;flex-wrap:wrap;margin-top:12px}.army-country-form[hidden]{display:none!important}.army-country-form label{display:grid;gap:6px;min-width:190px;flex:1;color:#584767;font-size:.8rem;font-weight:800}.army-country-form select{min-height:42px;width:100%;padding:9px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-country-current{margin:8px 0 0;color:#756b7b;font-size:.75rem}.army-world-map{margin-top:14px}.army-map-locked{padding:15px;border:1px solid #e8e0ed;border-radius:7px;background:#faf8fc;color:#59476a}.army-map-locked strong{display:block;color:#61427f}.army-map-locked p{margin:7px 0;color:#756b7b;font-size:.78rem}.army-map-progress{height:9px;overflow:hidden;border-radius:99px;background:#e9e1ef}.army-map-progress span{display:block;width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#a98acb,#68438e);transition:width .3s}.army-map-progress-label{display:flex;justify-content:space-between;gap:8px}.army-map-description,.army-map-status{font-size:.76rem;color:#756b7b}.army-globe{width:100%;height:390px;overflow:hidden;border-radius:9px;background:#100d19}.army-map-status{padding:7px 0}.army-country-ranking{display:grid;gap:6px;padding-left:25px}.army-country-ranking li{padding:8px 10px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;color:#59476a;font-size:.78rem}.army-country-ranking li strong{float:right;color:#60407e}.army-country-ranking li::marker{font-weight:900;color:#80609f}body.dark-mode .army-country-form label,body.dark-mode .army-country-current,body.dark-mode .army-map-description,body.dark-mode .army-map-status{color:#d4c8dc}body.dark-mode .army-country-form select{background:#211d25;border-color:#5b4d63;color:#fff}body.dark-mode .army-map-locked,body.dark-mode .army-country-ranking li{background:#2b2630;border-color:#4b4054;color:#eee7f3}body.dark-mode .army-map-locked strong,body.dark-mode .army-country-ranking li strong{color:#d9c1f4}
@@ -5436,15 +5467,55 @@ $("armyEditProfileForm").addEventListener("submit",async(event)=>{
  }catch(error){message("armyCountryMessage",error.message||"No pudimos guardar el país.");}
  finally{$("armySaveCountry").disabled=false;}
 });
+async function loadArmyProfileImages(profile){
+ for(const [pathKey,imageId,fallbackId] of [["avatar_path","armyAvatarImage","armyAvatarFallback"],["cover_path","armyCoverImage",null]]){
+  const path=profile?.[pathKey],img=$(imageId);
+  if(!path){img.hidden=true;if(fallbackId)$(fallbackId).hidden=false;continue;}
+  const {data,error}=await supabase.storage.from("army-profile-photos").createSignedUrl(path,3600);
+  if(error){img.hidden=true;if(fallbackId)$(fallbackId).hidden=false;continue;}
+  img.src=data.signedUrl;img.hidden=false;if(fallbackId)$(fallbackId).hidden=true;
+ }
+}
+async function compressArmyProfileImage(file){
+ if(!file||!file.type.startsWith("image/"))throw new Error("Selecciona una imagen válida.");
+ if(file.size>10*1024*1024)throw new Error("La imagen debe pesar menos de 10 MB.");
+ const bitmap=await createImageBitmap(file),scale=Math.min(1,1600/Math.max(bitmap.width,bitmap.height));
+ const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+ const ctx=canvas.getContext("2d");ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close?.();
+ return await new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("No se pudo procesar la imagen.")),"image/webp",.86));
+}
+async function saveArmyProfileImage(kind,file){
+ const messageId="armyPhotoMessage";message(messageId,"Preparando imagen…");
+ const input=$(kind==="avatar"?"armyAvatarFile":"armyCoverFile");
+ try{
+  const blob=await compressArmyProfileImage(file),path=currentUser.id+"/"+kind+".webp";
+  const {error:uploadError}=await supabase.storage.from("army-profile-photos").upload(path,blob,{contentType:"image/webp",upsert:true,cacheControl:"3600"});
+  if(uploadError)throw uploadError;
+  const column=kind==="avatar"?"avatar_path":"cover_path";
+  const {error:updateError}=await supabase.from("army_profiles").update({[column]:path}).eq("user_id",currentUser.id);
+  if(updateError)throw updateError;
+  const {data,error:urlError}=await supabase.storage.from("army-profile-photos").createSignedUrl(path,3600);
+  if(urlError)throw urlError;
+  if(kind==="avatar"){$("armyAvatarImage").src=data.signedUrl;$("armyAvatarImage").hidden=false;$("armyAvatarFallback").hidden=true;}
+  else{$("armyCoverImage").src=data.signedUrl;$("armyCoverImage").hidden=false;}
+  message(messageId,kind==="avatar"?"Foto de perfil actualizada.":"Encabezado actualizado.","ok");
+ }catch(error){message(messageId,error.message||"No se pudo guardar la imagen.");}
+ finally{input.value="";}
+}
+$("armyChooseAvatar").addEventListener("click",()=>$("armyAvatarFile").click());
+$("armyChooseCover").addEventListener("click",()=>$("armyCoverFile").click());
+$("armyAvatarFile").addEventListener("change",event=>{const file=event.target.files?.[0];if(file)saveArmyProfileImage("avatar",file);});
+$("armyCoverFile").addEventListener("change",event=>{const file=event.target.files?.[0];if(file)saveArmyProfileImage("cover",file);});
 async function loadProfile(){
  const [{data:usernameRow,error:uErr},{data:profile,error:pErr}] = await Promise.all([
   supabase.from("army_usernames").select("username,created_at").eq("user_id",currentUser.id).single(),
-  supabase.from("army_profiles").select("friend_count,country_code,created_at").eq("user_id",currentUser.id).maybeSingle()
+  supabase.from("army_profiles").select("friend_count,country_code,avatar_path,cover_path,created_at").eq("user_id",currentUser.id).maybeSingle()
  ]);
  if(uErr) throw uErr;
  currentUsername=usernameRow.username;
  if(!profile){const {error}=await supabase.from("army_profiles").insert({user_id:currentUser.id,friend_count:0});if(error)throw error;}
  const countryCode=profile?.country_code||"";
+ await loadArmyProfileImages(profile||{});
  $("armyCountrySelect").value=countryCode;
  $("armyCountryCurrent").textContent=countryCode?"País seleccionado: "+(armyCountries.find(x=>x[0]===countryCode)?.[1]||countryCode):"País sin seleccionar.";
  $("armyProfileName").textContent="@"+currentUsername;
