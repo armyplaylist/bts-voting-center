@@ -5753,13 +5753,13 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const months={january:"01",february:"02",march:"03",april:"04",may:"05",june:"06",july:"07",august:"08",september:"09",october:"10",november:"11",december:"12"};
   let certDate=null;
   // Prioriza el texto cercano a "Voting Date" para no confundir la fecha con otras cifras.
-  const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\\s:._-]*d[a4]te|v[o0]ting/i.test(line));
+  const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\s:._-]*d[a4]te|v[o0]ting/i.test(line));
   const dateContext=dateLineIndex>=0?ocrLines.slice(dateLineIndex,dateLineIndex+3).join(" "):ocrText;
-  const normalizedDateText=dateContext.toLowerCase().replace(/[,./_-]+/g," ").replace(/\\s+/g," ").trim();
-  const namedDate=normalizedDateText.match(/(january|february|march|april|may|june|july|august|september|october|november|december)\\s+(\\d{1,2})\\s+(\\d{4})/i);
+  const normalizedDateText=dateContext.toLowerCase().replace(/[,./_-]+/g," ").replace(/\s+/g," ").trim();
+  const namedDate=normalizedDateText.match(/(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})\s+(\d{4})/i);
   if(namedDate)certDate=namedDate[3]+"-"+months[namedDate[1].toLowerCase()]+"-"+String(namedDate[2]).padStart(2,"0");
   if(!certDate){
-   const numericDate=normalizedDateText.match(/\\b(20\\d{2})\\s+(\\d{1,2})\\s+(\\d{1,2})\\b|\\b(\\d{1,2})\\s+(\\d{1,2})\\s+(20\\d{2})\\b/);
+   const numericDate=normalizedDateText.match(/\b(20\d{2})\s+(\d{1,2})\s+(\d{1,2})\b|\b(\d{1,2})\s+(\d{1,2})\s+(20\d{2})\b/);
    if(numericDate){
     const year=Number(numericDate[1]||numericDate[6]);
     const month=Number(numericDate[2]||numericDate[4]);
