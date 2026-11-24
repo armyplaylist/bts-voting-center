@@ -3583,6 +3583,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
   <div id="armyMemberVotes" class="army-member-votes" aria-live="polite"></div>
   <section class="army-block army-world-map" aria-labelledby="armyWorldMapTitle">
    <h3 id="armyWorldMapTitle">ARMYS VOTANTES</h3>
+   <div class="army-daily-reset" role="timer" aria-live="off"><span>⏳ PRÓXIMO REINICIO · 00:00 KST</span><strong id="armyDailyResetCountdown">--:--:--</strong><small>El ranking y los envíos de certificados comienzan un nuevo día. Tu historial se conserva.</small></div>
    <div class="army-map-locked" id="armyMapLocked">
     <strong>Mapa mundial 3D bloqueado</strong>
     <p>Se desbloquea al alcanzar 1000 votos totales.</p>
@@ -5409,6 +5410,7 @@ body.dark-mode .army-intro,body.dark-mode .army-auth,body.dark-mode .army-dashbo
 @media(max-width:560px){.army-stats{grid-template-columns:1fr 1fr}.army-profile-head{align-items:flex-start;flex-wrap:wrap}.army-inline-form{align-items:stretch}.army-inline-form label,.army-inline-form input{max-width:none}.army-inline-form .btn{width:100%}}
 .army-country-form{display:flex;align-items:end;gap:9px;flex-wrap:wrap;margin-top:12px}.army-country-form[hidden]{display:none!important}.army-country-form label{display:grid;gap:6px;min-width:190px;flex:1;color:#584767;font-size:.8rem;font-weight:800}.army-country-form select{min-height:42px;width:100%;padding:9px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-country-current{margin:8px 0 0;color:#756b7b;font-size:.75rem}.army-world-map{margin-top:14px}.army-map-locked{padding:15px;border:1px solid #e8e0ed;border-radius:7px;background:#faf8fc;color:#59476a}.army-map-locked strong{display:block;color:#61427f}.army-map-locked p{margin:7px 0;color:#756b7b;font-size:.78rem}.army-map-progress{height:9px;overflow:hidden;border-radius:99px;background:#e9e1ef}.army-map-progress span{display:block;width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#a98acb,#68438e);transition:width .3s}.army-map-progress-label{display:flex;justify-content:space-between;gap:8px}.army-map-description,.army-map-status{font-size:.76rem;color:#756b7b}.army-globe{width:100%;height:390px;overflow:hidden;border-radius:9px;background:#100d19}.army-map-status{padding:7px 0}.army-country-ranking{display:grid;gap:6px;padding-left:25px}.army-country-ranking li{padding:8px 10px;border:1px solid #ece6ef;border-radius:5px;background:#fbfafc;color:#59476a;font-size:.78rem}.army-country-ranking li strong{float:right;color:#60407e}.army-country-ranking li::marker{font-weight:900;color:#80609f}.army-country-ranking li{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.army-country-name{font-weight:850}.army-country-users{color:#756b7b;font-size:.72rem}.army-country-votes{margin-left:auto}.army-vote-privacy-note{margin:8px 0 0;color:#756b7b;font-size:.72rem}body.dark-mode .army-country-users,body.dark-mode .army-vote-privacy-note{color:#c5b6d0}body.dark-mode .army-country-form label,body.dark-mode .army-country-current,body.dark-mode .army-map-description,body.dark-mode .army-map-status{color:#d4c8dc}body.dark-mode .army-country-form select{background:#211d25;border-color:#5b4d63;color:#fff}body.dark-mode .army-map-locked,body.dark-mode .army-country-ranking li{background:#2b2630;border-color:#4b4054;color:#eee7f3}body.dark-mode .army-map-locked strong,body.dark-mode .army-country-ranking li strong{color:#d9c1f4}
 @media(max-width:560px){.army-country-form{align-items:stretch}.army-country-form label{min-width:100%}.army-country-form .btn{width:100%}.army-globe{height:320px}}
+.army-daily-reset{display:grid;grid-template-columns:1fr auto;gap:5px 12px;align-items:center;margin:10px 0 15px;padding:13px 15px;border:1px solid #e4d9ed;border-left:4px solid #6840a0;border-radius:8px;background:linear-gradient(110deg,#f7f1fc,#fff)}.army-daily-reset span{font-size:.72rem;font-weight:900;letter-spacing:.06em;color:#6840a0}.army-daily-reset strong{grid-column:2;grid-row:1/3;font-size:1.55rem;font-variant-numeric:tabular-nums;color:#49305f;white-space:nowrap}.army-daily-reset small{font-size:.72rem;line-height:1.4;color:#766a80}.army-daily-reset small{grid-column:1}@media(max-width:420px){.army-daily-reset{grid-template-columns:1fr}.army-daily-reset strong{grid-column:1;grid-row:auto;font-size:1.4rem}.army-daily-reset small{grid-column:1}}body.dark-mode .army-daily-reset{background:#302739;border-color:#51445d}body.dark-mode .army-daily-reset span,body.dark-mode .army-daily-reset strong{color:#e2c9f4}body.dark-mode .army-daily-reset small{color:#c5b6d0}
 </style>
 
 <script type="module" id="army-section-app">
@@ -5432,12 +5434,12 @@ function fillCountryOptions(){
  for(const [code,name] of armyCountries){const option=document.createElement("option");option.value=code;option.textContent=name;select.append(option);}
 }
 async function loadCountryMap(){
- const [{data:stats,error:statsError},{data:rows,error:rowsError},{data:myLogs,error:myLogsError}]=await Promise.all([
+ const [{data:stats,error:statsError},{data:myLogs,error:myLogsError},{data:dailyLogs,error:dailyLogsError}]=await Promise.all([
   supabase.from("army_vote_map_stats").select("total_bts_votes").eq("id",1).maybeSingle(),
-  supabase.from("army_country_vote_totals").select("country_code,total_votes").order("total_votes",{ascending:false}),
-  supabase.from("army_heart_daily_logs").select("target_member,voted_hearts").eq("user_id",currentUser.id)
+  supabase.from("army_heart_daily_logs").select("target_member,voted_hearts").eq("user_id",currentUser.id),
+  supabase.from("army_heart_daily_logs").select("user_id,voted_hearts").eq("log_date",kstDate()).gt("voted_hearts",0)
  ]);
- if(statsError)throw statsError;if(rowsError)throw rowsError;if(myLogsError)throw myLogsError;
+ if(statsError)throw statsError;if(myLogsError)throw myLogsError;if(dailyLogsError)throw dailyLogsError;
  const total=Number(stats?.total_bts_votes||0),isLightjjk=(currentUsername||"").trim().toLowerCase()==="lightjjk",unlocked=total>=1000||isLightjjk;
  $("armyMapTotal").textContent=total.toLocaleString("es-MX");
  $("armyMapProgressBar").style.width=Math.min(100,total/10)+"%";
@@ -5449,12 +5451,12 @@ async function loadCountryMap(){
  // Solo cuenta personas que tienen al menos un registro real de votos positivos.
  // Se pagina para no quedar limitado al máximo de filas de Supabase.
  const activeVoterIds=new Set();
- const pageSize=1000;let logOffset=0,hasMoreLogs=true;
- while(hasMoreLogs){
-  const {data:voteLogs,error:voteLogsError}=await supabase.from("army_heart_daily_logs").select("user_id,voted_hearts").gt("voted_hearts",0).range(logOffset,logOffset+pageSize-1);
-  if(voteLogsError)throw new Error("No se pudo verificar qué países tienen votantes activos. Intenta recargar el ranking.");
-  for(const log of voteLogs||[])if(log.user_id)activeVoterIds.add(log.user_id);
-  hasMoreLogs=(voteLogs||[]).length===pageSize;logOffset+=pageSize;
+ const votesByCountry=new Map();
+ for(const log of dailyLogs||[]){
+  if(!log.user_id)continue;
+  activeVoterIds.add(log.user_id);
+  const code=profilesByUser.get(log.user_id);
+  if(code)votesByCountry.set(code,(votesByCountry.get(code)||0)+Number(log.voted_hearts||0));
  }
  const profilesByUser=new Map();
  let profileOffset=0,hasMoreProfiles=true;
@@ -5469,7 +5471,7 @@ async function loadCountryMap(){
   const code=profilesByUser.get(userId);
   if(code)usersByCountry.set(code,(usersByCountry.get(code)||0)+1);
  }
- const ranking=(rows||[]).filter(row=>(usersByCountry.get(row.country_code)||0)>0).map(row=>({code:row.country_code,total:Number(row.total_votes||0),users:usersByCountry.get(row.country_code)||0,country:armyCountries.find(x=>x[0]===row.country_code)?.[1]||row.country_code}));
+ const ranking=Array.from(usersByCountry.keys()).map(code=>({code,total:Number(votesByCountry.get(code)||0),users:usersByCountry.get(code)||0,country:armyCountries.find(x=>x[0]===code)?.[1]||code})).sort((a,b)=>b.total-a.total||b.users-a.users);
  const rankingEl=$("armyCountryRanking");rankingEl.innerHTML="";
  if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay usuarios asociados a un país. Selecciona tu país en Editar perfil para aparecer en el ranking.";rankingEl.append(li);}
  ranking.forEach((item,index)=>{
@@ -5669,6 +5671,29 @@ async function loadHistory(){
   day.append(value,bar,label);chart.append(day);
  });
 }
+function updateArmyDailyResetCountdown(){
+ const output=$("armyDailyResetCountdown");if(!output)return;
+ const parts=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Seoul",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}).formatToParts(new Date());
+ const get=type=>Number(parts.find(part=>part.type===type)?.value||0);
+ const remaining=Math.max(0,86400-(get("hour")*3600+get("minute")*60+get("second")+((Date.now()%1000)/1000)));
+ const total=Math.ceil(remaining),hours=Math.floor(total/3600),minutes=Math.floor((total%3600)/60),seconds=total%60;
+ output.textContent=[hours,minutes,seconds].map(value=>String(value).padStart(2,"0")).join(":");
+}
+let lastArmyKstDate=kstDate();
+window.__btsRegisterSecondTick?.(()=>{
+ updateArmyDailyResetCountdown();
+ const currentDate=kstDate();
+ if(currentDate===lastArmyKstDate)return;
+ lastArmyKstDate=currentDate;
+ approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;resendLogId=null;resendVoterName=null;
+ $("armyDailyBlock").hidden=true;$("armyCertificate").value="";$("armyWeeklyChart").innerHTML="";
+ $("armyCertificateHeading").textContent="1 · Verifica tu certificado de Choeaedol";$("armySubmitDaily").textContent="Confirmar registro del certificado";
+ message("armyVerifyStatus","Comenzó un nuevo día en Corea (KST). Sube el certificado correspondiente a la nueva fecha.","");
+ if(currentUser){
+  Promise.allSettled([loadHistory(),loadCountryMap()]).then(results=>results.forEach(result=>{if(result.status==="rejected")console.warn("No se pudo actualizar el resumen diario KST:",result.reason);}));
+ }
+});
+updateArmyDailyResetCountdown();
 async function showSession(session){
  currentUser=session.user;approvedForToday=false;
  await loadProfile();
