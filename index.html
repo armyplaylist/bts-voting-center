@@ -5706,7 +5706,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   // Se toleran separaciones, @ y caracteres Unicode en el nombre de usuario.
   const ignoredName=/^(voter|name|votername|voting|date|choeaedol|certificate|bts|hearts|also|votes|from|other|accounts|voted)$/i;
   const extractNameFromText=text=>{
-   const lines=(text||"").split(/\r?\\n/).map(line=>line.trim()).filter(Boolean);
+   const lines=(text||"").split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
    for(let i=0;i<lines.length;i++){
     const windowText=lines.slice(i,i+5).join(" ");
     const label=windowText.match(/v[o0]ter\s*n[a4]me|votername/i);
@@ -5723,7 +5723,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    return compact&&!ignoredName.test(compact[1])?compact[1]:null;
   };
   const extractHeartsFromText=text=>{
-   const lines=(text||"").split(/\r?\\n/).map(line=>line.trim()).filter(Boolean);
+   const lines=(text||"").split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
    for(let i=0;i<lines.length;i++){
     const windowText=lines.slice(i,i+4).join(" ");
     const label=windowText.match(/v[o0]ted\s*he[a4]rts?|votedhearts/i);
