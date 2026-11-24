@@ -5644,29 +5644,42 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   let bitmap=null,bitmapUrl=null;
   try{if(typeof createImageBitmap==="function")bitmap=await createImageBitmap(file);}catch(_){}
   if(!bitmap){bitmapUrl=URL.createObjectURL(file);bitmap=await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve({width:image.naturalWidth,height:image.naturalHeight,image,close(){URL.revokeObjectURL(bitmapUrl);}});image.onerror=()=>reject(new Error("El navegador no pudo abrir esta imagen. Prueba guardarla como JPG o PNG."));image.src=bitmapUrl;});}
-  const ratio=bitmap.width/bitmap.height;
-  if(bitmap.width<600||bitmap.height<800||ratio<0.72||ratio>0.78){bitmap.close?.();throw new Error("La imagen no tiene la proporción del certificado de referencia (aprox. 900 × 1200).");}
+  if(Math.min(bitmap.width,bitmap.height)<500||Math.max(bitmap.width,bitmap.height)<700){bitmap.close?.();throw new Error("La fotografía tiene poca resolución. Toma otra foto nítida y asegúrate de incluir el certificado completo.");}
   if(!tesseractWorker){
-   const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/+esm");
+   const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@7/+esm");
    const createWorker=mod.createWorker||mod.default?.createWorker;
    if(typeof createWorker!=="function")throw new Error("No se pudo cargar el lector del certificado. Recarga la página e inténtalo de nuevo.");
    tesseractWorker=await createWorker("eng");
   }
-  const canvas=document.createElement("canvas");canvas.width=bitmap.width;canvas.height=bitmap.height;
-  const ctx=canvas.getContext("2d",{willReadFrequently:true});ctx.drawImage(bitmap.image||bitmap,0,0);
+  // Normaliza orientación y mejora contraste en el propio navegador; la foto no se envía a un servidor OCR.
+  const source=bitmap.image||bitmap,sourceWidth=bitmap.width,sourceHeight=bitmap.height;
+  const rotateForPortrait=sourceWidth>sourceHeight;
+  const scale=Math.min(2,2600/Math.max(sourceWidth,sourceHeight));
+  const canvas=document.createElement("canvas");
+  canvas.width=Math.max(1,Math.round((rotateForPortrait?sourceHeight:sourceWidth)*scale));
+  canvas.height=Math.max(1,Math.round((rotateForPortrait?sourceWidth:sourceHeight)*scale));
+  const ctx=canvas.getContext("2d",{willReadFrequently:true});
+  if(!ctx)throw new Error("Tu navegador no pudo preparar la fotografía. Intenta con otro navegador.");
+  ctx.filter="grayscale(1) contrast(1.25) brightness(1.04)";
+  if(rotateForPortrait){ctx.translate(canvas.width,0);ctx.rotate(Math.PI/2);ctx.drawImage(source,0,0,canvas.height,canvas.width);}
+  else ctx.drawImage(source,0,0,canvas.width,canvas.height);
+  ctx.filter="none";
   bitmap.close?.();
   const result=await tesseractWorker.recognize(canvas);
-  const raw=(result.data.text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
+  const ocrText=(result.data.text||"").trim();
+  const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
+  // Corrige confusiones habituales del OCR en etiquetas impresas.
+  const normalizedRaw=raw.replace(/0/g,"o").replace(/[|1]/g,"l").replace(/\b8ts\b/g,"bts").replace(/\s+/g," ");
   const required=["voting certificate","voter name","voting date","voted hearts","choeaedol","bts"];
-  const missing=required.filter(token=>!raw.includes(token));
-  const ocrLines=(result.data.text||"").split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
-  const voterLineIndex=ocrLines.findIndex(line=>/voter\s*name/i.test(line));
-  const voterLine=voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*voter\s*name\s*[:：]?/i,"").trim():"";
+  const missing=required.filter(token=>!normalizedRaw.includes(token));
+  const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
+  const voterLineIndex=ocrLines.findIndex(line=>/v[o0]ter\s*name/i.test(line));
+  const voterLine=voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*v[o0]ter\s*name\s*[:：]?/i,"").trim():"";
   const voterRaw=voterLine||(voterLineIndex>=0?ocrLines[voterLineIndex+1]||"":"");
   const voterNameMatch=voterRaw.match(/[A-Za-z0-9][A-Za-z0-9_.-]{1,30}/);
   const certificateVoterName=voterNameMatch?voterNameMatch[0].trim():null;
   if(!certificateVoterName)throw new Error("No pudimos leer el usuario de “Voter Name”. Intenta subir una imagen más nítida.");
-  const votedHeartsMatch=(result.data.text||"").match(/voted\s*hearts\s*[:=\-]?\s*([0-9][0-9,]*)/i);
+  const votedHeartsMatch=ocrText.match(/v[o0]ted\s*hearts\s*[:=–-]?\s*([0-9][0-9,]*)/i);
   const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN;
   if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos leer la cantidad exacta de “Voted Hearts”. Intenta subir una imagen más nítida.");
   if(missing.length)throw new Error("No coincide con el certificado de referencia. Faltan textos: "+missing.join(", ")+".");
