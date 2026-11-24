@@ -5718,9 +5718,15 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   for(let i=0;i<ocrLines.length&&!votedHeartsMatch;i++){
    if(!heartLabel.test(ocrLines[i])&&!( /v[o0]ted/i.test(ocrLines[i])&&/he[a4]rts/i.test(ocrLines[i+1]||"")))continue;
    const labelIndex=ocrLines[i].search(/he[a4]rts/i);
-   const afterLabel=labelIndex>=0?ocrLines[i].slice(labelIndex+5):"";
+   const afterLabel=labelIndex>=0?ocrLines[i].slice(labelIndex+6):"";
    let digits=afterLabel.match(/[0-9][0-9,\s]*/)?.[0]?.replace(/[\s,]/g,"")||"";
-   if(!digits&&i+1<ocrLines.length){digits=ocrLines[i+1].match(/^\s*([0-9][0-9,\s]*)\s*$/)?.[1]?.replace(/[\s,]/g,"")||"";}
+   if(!digits&&i+1<ocrLines.length){
+    const nextLine=ocrLines[i+1];
+    const nextHearts=nextLine.search(/he[a4]rts/i);
+    const nextValue=nextHearts>=0?nextLine.slice(nextHearts+6):nextLine;
+    digits=nextValue.match(/[0-9][0-9,\s]*/)?.[0]?.replace(/[\s,]/g,"")||"";
+   }
+   if(!digits&&i+2<ocrLines.length){digits=ocrLines[i+2].match(/^\s*([0-9][0-9,\s]*)\s*$/)?.[1]?.replace(/[\s,]/g,"")||"";}
    if(digits&&/^\d{1,15}$/.test(digits))votedHeartsMatch=[null,digits];
   }
   if(!votedHeartsMatch){
