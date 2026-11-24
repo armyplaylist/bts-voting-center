@@ -5693,5 +5693,58 @@ if(session){try{await showSession(session);}catch(e){await supabase.auth.signOut
  syncArmyProfileView();
 })();
 </script>
+
+<style id="army-profile-polish">
+/* Estética exclusiva de Mi perfil ARMY */
+#army.army-panel{padding:clamp(14px,2.5vw,26px);border:1px solid #e8def1;border-radius:22px;background:linear-gradient(145deg,#fff 0%,#fbf8ff 58%,#f5effb 100%);box-shadow:0 14px 38px rgba(74,45,122,.09)}
+#army .section-head{margin-bottom:18px;padding:4px 2px 15px;border-bottom:1px solid #e9e0f0}
+#army .section-head h2{color:#4a2d7a;letter-spacing:.035em}
+#army .section-head p{color:#796b86}
+#army .army-intro{padding:13px 16px;border:1px solid #e8ddf2;border-left:4px solid #9270b7;border-radius:14px;background:linear-gradient(110deg,#f6f0fc,#fff);color:#55416d}
+#army .army-auth,#army .army-dashboard{padding:clamp(14px,2.5vw,22px);border:1px solid #e8def0;border-radius:18px;background:rgba(255,255,255,.88);box-shadow:0 8px 24px rgba(74,45,122,.06)}
+#army .army-auth-copy h3,#army .army-block h3,#army .army-profile-head h3{color:#4a2d7a}
+#army .army-form input,#army .army-inline-form input,#army .army-country-form select{border-radius:11px;border-color:#d9cbe7;background:#fff}
+#army .army-form input:focus,#army .army-inline-form input:focus,#army .army-country-form select:focus{outline:2px solid #b99bd5;outline-offset:2px}
+#army .army-ig-profile{margin:0 0 14px;overflow:visible}
+#army .army-ig-cover{height:clamp(132px,28vw,210px);border-radius:16px;background:linear-gradient(120deg,#e7d9f4,#bda4d8 52%,#765a98);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+#army .army-ig-cover:after{border-radius:16px;background:linear-gradient(180deg,transparent 50%,rgba(35,20,49,.25))}
+#army .army-ig-avatar-row{height:68px;padding-left:20px}
+#army .army-ig-avatar{top:-58px;left:20px;width:116px;height:116px;border:5px solid #fff;background:#eee5f7;box-shadow:0 5px 18px rgba(53,31,75,.2)}
+#army .army-profile-head{padding:4px 2px 17px;border-bottom:1px solid #eee6f3}
+#army .army-eyebrow{color:#8866a9}
+#army .army-profile-head h3{font-size:1.22rem;letter-spacing:.01em}
+#army .army-profile-actions .btn{border-radius:999px}
+#army .army-country-form{padding:16px;border:1px solid #e8ddf0;border-radius:15px;background:#faf7fd}
+#army .army-ig-photo-edit{border-color:#e9e0ef}
+#army .army-stats{grid-template-columns:1fr;margin:16px 0}
+#army .army-stats>div{padding:15px 17px;border:1px solid #e6d9f0;border-radius:15px;background:linear-gradient(120deg,#f8f3fc,#fff)}
+#army .army-stats strong{color:#65438b;font-size:1.45rem}
+#army .army-block{padding:18px 2px;border-color:#eee6f3}
+#army .army-upload{border:1px dashed #bca5d2;border-radius:14px;background:#faf7fd}
+#army .army-daily-target{border:1px solid #e8def1;border-radius:14px;background:#f6f0fb}
+#army .army-history-item,#army .army-weekly-chart{border-color:#e9e1ef;border-radius:12px;background:#fbf9fd}
+#army .army-map-locked{border:1px solid #e6d9f0;border-radius:15px;background:linear-gradient(135deg,#faf6fd,#f2eafa)}
+#army .army-globe{border:1px solid #d9c9e8;border-radius:16px;box-shadow:0 8px 22px rgba(38,24,55,.12)}
+#army .army-country-ranking li{border-radius:10px}
+body.dark-mode #army.army-panel{border-color:#4b3d59;background:linear-gradient(145deg,#211c28,#292231 65%,#30253a);box-shadow:0 14px 38px rgba(0,0,0,.2)}
+body.dark-mode #army .section-head{border-color:#493d53}
+body.dark-mode #army .section-head h2,body.dark-mode #army .army-auth-copy h3,body.dark-mode #army .army-block h3,body.dark-mode #army .army-profile-head h3{color:#eadcf6}
+body.dark-mode #army .section-head p{color:#c5b6d0}
+body.dark-mode #army .army-intro{border-color:#51425f;background:linear-gradient(110deg,#34283f,#2b2433);color:#eee3f6}
+body.dark-mode #army .army-auth,body.dark-mode #army .army-dashboard{border-color:#51445d;background:rgba(43,36,51,.94)}
+body.dark-mode #army .army-form input,body.dark-mode #army .army-inline-form input,body.dark-mode #army .army-country-form select{border-color:#64536f;background:#211c28;color:#f7f0fb}
+body.dark-mode #army .army-profile-head{border-color:#51445d}
+body.dark-mode #army .army-eyebrow{color:#c7a9e2}
+body.dark-mode #army .army-country-form{border-color:#51445d;background:#302739}
+body.dark-mode #army .army-ig-avatar{border-color:#302739;background:#40334c}
+body.dark-mode #army .army-stats>div{border-color:#51445d;background:linear-gradient(120deg,#352a40,#2c2534)}
+body.dark-mode #army .army-stats strong{color:#ddc4f5}
+body.dark-mode #army .army-block,body.dark-mode #army .army-ig-photo-edit{border-color:#51445d}
+body.dark-mode #army .army-upload,body.dark-mode #army .army-daily-target,body.dark-mode #army .army-history-item,body.dark-mode #army .army-weekly-chart{border-color:#51445d;background:#302739}
+body.dark-mode #army .army-map-locked{border-color:#51445d;background:linear-gradient(135deg,#352a40,#2b2433);color:#eee3f6}
+body.dark-mode #army .army-map-locked strong{color:#e4cff5}
+@media(max-width:560px){#army.army-panel{padding:13px;border-radius:17px}#army .army-auth,#army .army-dashboard{padding:13px;border-radius:15px}#army .army-profile-actions{width:100%;justify-content:flex-start}#army .army-profile-actions .btn{flex:1}#army .army-ig-cover{height:138px}#army .army-ig-avatar{width:98px;height:98px;top:-48px}#army .army-ig-avatar-row{height:58px}}
+</style>
+
 </body>
 </html>
