@@ -3601,7 +3601,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    <h3 id="armyCertificateHeading">1 · Verifica tu certificado de Choeaedol</h3>
    <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
    <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
-   <label class="army-voter-fallback" for="armyManualVoterName">Usuario de Choeaedol (solo si el lector no lo detecta)<input id="armyManualVoterName" type="text" maxlength="31" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Escribe tu usuario exacto"></label>
+   <label class="army-voter-fallback" for="armyManualVoterName">Usuario de Choeaedol (si el lector falla o lo lee mal)<input id="armyManualVoterName" type="text" maxlength="31" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Escribe tu usuario exacto"></label>
    <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
   </div>
   <div class="army-block" id="armyDailyBlock" hidden>
@@ -5665,9 +5665,8 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const manualVoterName=($("armyManualVoterName")?.value||"").trim().replace(/^@/,"");
   const validManualVoterName=/^[A-Za-z0-9][A-Za-z0-9_.-]{1,30}$/.test(manualVoterName)?manualVoterName:null;
   const unusableOcrName=!ocrVoterName||/^(voter|name|votername)$/i.test(ocrVoterName);
-  const certificateVoterName=unusableOcrName?validManualVoterName:ocrVoterName;
+  const certificateVoterName=validManualVoterName||(!unusableOcrName?ocrVoterName:null);
   if(!certificateVoterName)throw new Error("No pudimos leer el usuario de “Voter Name”. Escribe tu usuario exacto en el campo inferior y vuelve a seleccionar el certificado.");
-  if(validManualVoterName&&ocrVoterName&&!unusableOcrName&&validManualVoterName.toLowerCase()!==ocrVoterName.toLowerCase())throw new Error("El usuario escrito no coincide con el usuario leído en el certificado. Revisa el nombre e inténtalo de nuevo.");
   const votedHeartsMatch=(result.data.text||"").match(/voted\s*hearts\s*[:=\-]?\s*([0-9][0-9,]*)/i);
   const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN;
   const memberPatterns=[["Jin",/\b(jin|kim\s*seokjin|seokjin)\b/i],["SUGA",/\b(suga|agust\s*d|yoongi|min\s*yoongi)\b/i],["j-hope",/\b(j[\s-]*hope|hoseok|jung\s*hoseok)\b/i],["RM",/\b(rm|rap\s*monster|kim\s*namjoon|namjoon)\b/i],["Jimin",/\b(jimin|park\s*jimin)\b/i],["V",/\b(v|taehyung|kim\s*taehyung)\b/i],["Jungkook",/\b(jungkook|jeon\s*jungkook)\b/i]];
