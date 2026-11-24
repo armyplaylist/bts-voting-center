@@ -5552,13 +5552,21 @@ $("armyChooseCover").addEventListener("click",()=>$("armyCoverFile").click());
 $("armyAvatarFile").addEventListener("change",event=>previewArmyProfileImage("avatar",event.target.files?.[0]));
 $("armyCoverFile").addEventListener("change",event=>previewArmyProfileImage("cover",event.target.files?.[0]));
 async function loadProfile(){
- const [{data:usernameRow,error:uErr},{data:profile,error:pErr}] = await Promise.all([
+ const [{data:usernameRow,error:uErr},{data:existingProfile,error:pErr}] = await Promise.all([
   supabase.from("army_usernames").select("username,created_at").eq("user_id",currentUser.id).single(),
   supabase.from("army_profiles").select("friend_count,country_code,avatar_path,cover_path,created_at").eq("user_id",currentUser.id).maybeSingle()
  ]);
  if(uErr) throw uErr;
+ if(pErr) throw pErr;
  currentUsername=usernameRow.username;
- if(!profile){const {error}=await supabase.from("army_profiles").insert({user_id:currentUser.id,friend_count:0});if(error)throw error;}
+ let profile=existingProfile;
+ if(!profile){
+  const {error:insertError}=await supabase.from("army_profiles").upsert({user_id:currentUser.id,friend_count:0},{onConflict:"user_id",ignoreDuplicates:true});
+  if(insertError) throw new Error("Tu sesión inició, pero no pudimos preparar tu perfil. Intenta actualizar la página.");
+  const {data:createdProfile,error:reloadError}=await supabase.from("army_profiles").select("friend_count,country_code,avatar_path,cover_path,created_at").eq("user_id",currentUser.id).maybeSingle();
+  if(reloadError||!createdProfile) throw new Error("Tu sesión inició, pero no pudimos cargar tu perfil. Intenta actualizar la página.");
+  profile=createdProfile;
+ }
  const countryCode=profile?.country_code||"";
  await loadArmyProfileImages(profile||{});
  $("armyCountrySelect").value=countryCode;
@@ -5566,8 +5574,8 @@ async function loadProfile(){
  $("armyProfileName").textContent="@"+currentUsername;
  $("armyMemberSince").textContent="Miembro desde "+new Intl.DateTimeFormat("es-MX",{dateStyle:"medium"}).format(new Date(usernameRow.created_at));
  await loadHistory();
- await loadCountryMap();
  dashboard.hidden=false;authBox.hidden=true;
+ try{await loadCountryMap();}catch(mapError){console.warn("No se pudo cargar el mapa de países:",mapError);}
 }
 async function loadHistory(){
  const [{data:profile,error:pErr},{data:logs,error:lErr}] = await Promise.all([
@@ -5638,7 +5646,7 @@ $("armySignupButton").addEventListener("click",async()=>{
    try{detail=await error.context?.clone?.().json();}catch(_){}
    throw new Error(detail?.error||error.message||"No pudimos crear la cuenta.");
   }
-  if(data?.error)throw new Error(data.error);
+  if(data?.ok!==true)throw new Error(data?.error||"No pudimos completar el registro. Inténtalo de nuevo.");
   const login=await supabase.auth.signInWithPassword({email:usernameEmail(username),password});
   if(login.error)throw login.error;await showSession(login.data.session);
  }catch(e){message("armyAuthMessage",e.message||"No pudimos crear la cuenta.");}
