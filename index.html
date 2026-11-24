@@ -5625,7 +5625,12 @@ $("armySignupButton").addEventListener("click",async()=>{
  setAuthMode(true);message("armyAuthMessage","Creando tu cuenta…");
  try{
   const {data,error}=await supabase.functions.invoke("army-username-signup",{body:{username,password}});
-  if(error)throw error;if(data?.error)throw new Error(data.error);
+  if(error){
+   let detail=null;
+   try{detail=await error.context?.clone?.().json();}catch(_){}
+   throw new Error(detail?.error||error.message||"No pudimos crear la cuenta.");
+  }
+  if(data?.error)throw new Error(data.error);
   const login=await supabase.auth.signInWithPassword({email:usernameEmail(username),password});
   if(login.error)throw login.error;await showSession(login.data.session);
  }catch(e){message("armyAuthMessage",e.message||"No pudimos crear la cuenta.");}
