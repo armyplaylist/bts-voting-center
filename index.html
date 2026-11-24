@@ -3584,12 +3584,6 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
   <section class="army-block army-world-map" aria-labelledby="armyWorldMapTitle">
    <h3 id="armyWorldMapTitle">ARMYS VOTANTES</h3>
    <div class="army-daily-reset" role="timer" aria-live="off"><span>⏳ PRÓXIMO REINICIO · 00:00 KST</span><strong id="armyDailyResetCountdown">--:--:--</strong><small>El ranking y los envíos de certificados comienzan un nuevo día. Tu historial se conserva.</small></div>
-   <div class="army-map-locked" id="armyMapLocked">
-    <strong>Mapa mundial 3D bloqueado</strong>
-    <p>Se desbloquea al alcanzar 1000 votos totales.</p>
-    <div class="army-map-progress"><span id="armyMapProgressBar"></span></div>
-    <p class="army-map-progress-label"><strong id="armyMapTotal">0</strong> / 1,000 votos para BTS</p>
-   </div>
    <div id="armyMapUnlocked" hidden>
     <p class="army-map-description">Participación por país según los votos registrados en certificados ARMY.</p>
     <div id="armyGlobeStatus" class="army-map-status" role="status">Preparando el mapa mundial…</div>
@@ -5444,9 +5438,6 @@ async function loadCountryMap(){
  if(myVoteLogsError)throw new Error("No se pudo comprobar tu progreso personal para desbloquear el ranking.");
  const myVotes=(myVoteLogs||[]).filter(x=>!x.target_member||x.target_member==="BTS").reduce((sum,x)=>sum+Number(x.voted_hearts||0),0);
  const unlocked=myVotes>=20000;
- $("armyMapTotal").textContent=myVotes.toLocaleString("es-MX");
- $("armyMapProgressBar").style.width=Math.min(100,myVotes/200)+"%";
- $("armyMapLocked").hidden=unlocked;
  $("armyMapUnlocked").hidden=false;
  const voteMap=new Map((voteRows||[]).map(row=>[row.country_code,Number(row.total_votes||0)]));
  const userMap=new Map((participantRows||[]).map(row=>[row.country_code,Number(row.total_users||0)]));
