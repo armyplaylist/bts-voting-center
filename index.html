@@ -5559,14 +5559,10 @@ async function loadProfile(){
  if(uErr) throw uErr;
  if(pErr) throw pErr;
  currentUsername=usernameRow.username;
- let profile=existingProfile;
- if(!profile){
-  const {error:insertError}=await supabase.from("army_profiles").upsert({user_id:currentUser.id,friend_count:0},{onConflict:"user_id",ignoreDuplicates:true});
-  if(insertError) throw new Error("Tu sesión inició, pero no pudimos preparar tu perfil. Intenta actualizar la página.");
-  const {data:createdProfile,error:reloadError}=await supabase.from("army_profiles").select("friend_count,country_code,avatar_path,cover_path,created_at").eq("user_id",currentUser.id).maybeSingle();
-  if(reloadError||!createdProfile) throw new Error("Tu sesión inició, pero no pudimos cargar tu perfil. Intenta actualizar la página.");
-  profile=createdProfile;
- }
+ // No intentar crear el perfil durante el inicio de sesión: algunas cuentas
+ // ya tienen su fila creada y el upsert puede ser rechazado por RLS.
+ // El panel puede abrirse con valores predeterminados y cargar el historial aparte.
+ const profile=existingProfile||{friend_count:0,country_code:null,avatar_path:null,cover_path:null};
  const countryCode=profile?.country_code||"";
  $("armyCountrySelect").value=countryCode;
  $("armyCountryCurrent").textContent=countryCode?"País seleccionado: "+(armyCountries.find(x=>x[0]===countryCode)?.[1]||countryCode):"País sin seleccionar.";
