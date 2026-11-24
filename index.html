@@ -5678,7 +5678,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    if(/voter\s*name/i.test(line)||(/voter/i.test(line)&&/name/i.test((line+" "+(ocrLines[i+1]||""))))){
     const sameLine=line.replace(/.*?voter\s*name\s*[:：]?/i,"").trim();
     const nextLine=ocrLines[i+1]||"";
-    const candidates=[sameLine,nextLine.replace(/^(?:name|[:：\-])\s*/i,"")];
+    const candidates=[sameLine,nextLine.replace(/^(?:name|[:：\-])\s*/i,""),ocrLines[i+2]||""];
     for(const candidate of candidates){
      const match=candidate.match(/@?([A-Za-z0-9][A-Za-z0-9_.-]{1,30})/);
      if(match&&!/^(voter|name|votername|voting|date)$/i.test(match[1])){ocrVoterName=match[1].replace(/^@/,"");break;}
