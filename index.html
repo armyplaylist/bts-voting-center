@@ -5702,22 +5702,30 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   bitmap.close?.();
   const result=await tesseractWorker.recognize(canvas);
   const ocrText=(result.data.text||"").trim();
-  const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
-  // Corrige confusiones habituales del OCR en etiquetas impresas.
-  const normalizedRaw=raw.replace(/0/g,"o").replace(/[|1]/g,"l").replace(/\b8ts\b/g,"bts").replace(/\s+/g," ");
-  const required=["voting certificate","voter name","voting date","voted hearts","choeaedol","bts"];
-  const missing=required.filter(token=>!normalizedRaw.includes(token));
+  const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s@._,-]/g," ").replace(/\s+/g," ");
   const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
+  // Primero intenta leer etiquetas si existen; si no, usa la posición visual:
+  // el nombre está encima y la cantidad de votos aparece debajo.
   const voterLineIndex=ocrLines.findIndex(line=>/v[o0]ter\s*name/i.test(line));
-  const voterLine=voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*v[o0]ter\s*name\s*[:：]?/i,"").trim():"";
-  const voterRaw=voterLine||(voterLineIndex>=0?ocrLines[voterLineIndex+1]||"":"");
-  const voterNameMatch=voterRaw.match(/[A-Za-z0-9][A-Za-z0-9_.-]{1,30}/);
-  const certificateVoterName=voterNameMatch?voterNameMatch[0].trim():null;
-  if(!certificateVoterName)throw new Error("No pudimos leer el usuario de “Voter Name”. Intenta subir una imagen más nítida.");
-  const votedHeartsMatch=ocrText.match(/v[o0]ted\s*hearts\s*[:=–-]?\s*([0-9][0-9,]*)/i);
-  const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN;
-  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos leer la cantidad exacta de “Voted Hearts”. Intenta subir una imagen más nítida.");
-  if(missing.length)throw new Error("No coincide con el certificado de referencia. Faltan textos: "+missing.join(", ")+".");
+  let voterRaw=voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*v[o0]ter\s*name\s*[:：]?/i,"").trim():"";
+  if(!voterRaw&&voterLineIndex>=0)voterRaw=ocrLines[voterLineIndex+1]||"";
+  const numberLinePattern=/^\s*([0-9][0-9,]*)\s*$/;
+  const numericLines=ocrLines.map((line,index)=>({line,index,match:numberLinePattern.exec(line.replace(/[：:]$/,"").trim())})).filter(x=>x.match&&!/^20\d{2}$/.test(x.match[1]));
+  const bottomVoteLine=numericLines.length?numericLines[numericLines.length-1]:null;
+  const certificateVotedHearts=bottomVoteLine?Number(bottomVoteLine.match[1].replace(/,/g,"")):(ocrText.match(/v[o0]ted\s*hearts\s*[:=–-]?\s*([0-9][0-9,]*)/i)?Number(ocrText.match(/v[o0]ted\s*hearts\s*[:=–-]?\s*([0-9][0-9,]*)/i)[1].replace(/,/g,"")):NaN);
+  if(!voterRaw&&bottomVoteLine){
+   const ignored=/^(voter\s*name|voting|voted|hearts?|choeaedol|bts|voting\s*certificate|certificate|date|member|artist|category|for)$/i;
+   for(let i=bottomVoteLine.index-1;i>=0&&!voterRaw;i--){
+    const candidate=ocrLines[i].replace(/^@/,"").trim();
+    const tokens=candidate.match(/[A-Za-z0-9][A-Za-z0-9_.-]{1,30}/g)||[];
+    const valid=tokens.find(token=>!ignored.test(token)&&!/^(20\d{2}|\d{1,2})$/.test(token)&&!/^(january|february|march|april|may|june|july|august|september|october|november|december)$/i.test(token));
+    if(valid)voterRaw=valid;
+   }
+  }
+  const voterNameMatch=voterRaw.match(/@?([A-Za-z0-9][A-Za-z0-9_.-]{1,30})/);
+  const certificateVoterName=voterNameMatch?voterNameMatch[1].trim():null;
+  if(!certificateVoterName)throw new Error("No pudimos identificar el usuario que aparece encima de la cantidad de votos. Sube el certificado completo y nítido.");
+  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos identificar el número de votos que aparece debajo del usuario. Sube el certificado completo y nítido.");
 
   const memberPatterns=[["Jin",/\b(jin|kim\s*seokjin|seokjin)\b/i],["SUGA",/\b(suga|agust\s*d|yoongi|min\s*yoongi)\b/i],["j-hope",/\b(j[\s-]*hope|hoseok|jung\s*hoseok)\b/i],["RM",/\b(rm|rap\s*monster|kim\s*namjoon|namjoon)\b/i],["Jimin",/\b(jimin|park\s*jimin)\b/i],["V",/\b(v|taehyung|kim\s*taehyung)\b/i],["Jungkook",/\b(jungkook|jeon\s*jungkook)\b/i]];
   const memberLines=ocrLines.filter(line=>/vot(e|ing)|member|artist|category|for:/i.test(line));
