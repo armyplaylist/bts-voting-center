@@ -4577,9 +4577,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
  const index={es:0,en:1,ko:2,ja:3,pt:4,th:5,ru:6};
  const originals=new WeakMap();
  let observer=null, activeLang='es', translating=false, pending=new Set(), scheduled=false, generation=0;
- const splitMark='
-|||BTS_VOTING_TRANSLATION_BOUNDARY_8492|||
-';
+ const splitMark='\n|||BTS_VOTING_TRANSLATION_BOUNDARY_8492|||\n';
  function detect(){
   const prefs=[...(navigator.languages||[]),navigator.language||''];
   for(const pref of prefs){const p=(pref||'').toLowerCase(),lang=p.split('-')[0],region=(p.split('-')[1]||'').toUpperCase();if(supported.includes(lang))return lang;if(region==='BR')return 'pt';}
