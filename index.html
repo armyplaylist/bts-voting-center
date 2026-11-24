@@ -5750,23 +5750,29 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   if(matchedMembers.length>1)throw new Error("El certificado menciona más de un miembro y no podemos asignar el recuento con seguridad.");
   if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos leer la cantidad exacta de “Voted Hearts”. Escríbela en «Cantidad de Voted Hearts» y vuelve a seleccionar el certificado.");
 
-  const months={january:"01",february:"02",march:"03",april:"04",may:"05",june:"06",july:"07",august:"08",september:"09",october:"10",november:"11",december:"12"};
+  const months={january:"01",jan:"01",february:"02",feb:"02",march:"03",mar:"03",april:"04",apr:"04",may:"05",june:"06",jun:"06",july:"07",jul:"07",august:"08",aug:"08",september:"09",sep:"09",sept:"09",october:"10",oct:"10",november:"11",nov:"11",december:"12",dec:"12"};
   let certDate=null;
-  // Prioriza el texto cercano a "Voting Date" para no confundir la fecha con otras cifras.
+  // Admite fechas en inglés con mes antes o después del día, además de formatos numéricos.
   const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\s:._-]*d[a4]te|v[o0]ting/i.test(line));
-  const dateContext=dateLineIndex>=0?ocrLines.slice(dateLineIndex,dateLineIndex+3).join(" "):ocrText;
-  const normalizedDateText=dateContext.toLowerCase().replace(/[,./_-]+/g," ").replace(/\s+/g," ").trim();
-  const namedDate=normalizedDateText.match(/(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})\s+(\d{4})/i);
-  if(namedDate)certDate=namedDate[3]+"-"+months[namedDate[1].toLowerCase()]+"-"+String(namedDate[2]).padStart(2,"0");
-  if(!certDate){
-   const numericDate=normalizedDateText.match(/\b(20\d{2})\s+(\d{1,2})\s+(\d{1,2})\b|\b(\d{1,2})\s+(\d{1,2})\s+(20\d{2})\b/);
-   if(numericDate){
-    const year=Number(numericDate[1]||numericDate[6]);
-    const month=Number(numericDate[2]||numericDate[4]);
-    const day=Number(numericDate[3]||numericDate[5]);
-    if(month>=1&&month<=12&&day>=1&&day<=31)certDate=String(year).padStart(4,"0")+"-"+String(month).padStart(2,"0")+"-"+String(day).padStart(2,"0");
+  const dateContext=dateLineIndex>=0?ocrLines.slice(dateLineIndex,dateLineIndex+4).join(" "):ocrText;
+  const normalizeDateText=value=>value.toLowerCase().replace(/[,./_-]+/g," ").replace(/\s+/g," ").trim();
+  const monthNames="january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec";
+  const parseCertificateDate=value=>{
+   const normalized=normalizeDateText(value);
+   const named=new RegExp("\\b("+monthNames+")\\s+(\\d{1,2})\\s+(20\\d{2})\\b|\\b(\\d{1,2})\\s+("+monthNames+")\\s+(20\\d{2})\\b","i").exec(normalized);
+   if(named){
+    const month=months[(named[1]||named[5]).toLowerCase()];
+    const day=Number(named[2]||named[4]),year=Number(named[3]||named[6]);
+    if(month&&day>=1&&day<=31)return String(year).padStart(4,"0")+"-"+month+"-"+String(day).padStart(2,"0");
    }
-  }
+   const numeric=/\b(20\d{2})\s+(\d{1,2})\s+(\d{1,2})\b|\b(\d{1,2})\s+(\d{1,2})\s+(20\d{2})\b/.exec(normalized);
+   if(numeric){
+    const year=Number(numeric[1]||numeric[6]),month=Number(numeric[2]||numeric[4]),day=Number(numeric[3]||numeric[5]);
+    if(month>=1&&month<=12&&day>=1&&day<=31)return String(year).padStart(4,"0")+"-"+String(month).padStart(2,"0")+"-"+String(day).padStart(2,"0");
+   }
+   return null;
+  };
+  certDate=parseCertificateDate(dateContext)||parseCertificateDate(ocrText);
   if(!certDate||certDate!==kstDate())throw new Error("La fecha del certificado debe ser la fecha de hoy en Corea (KST): "+kstDate()+".");
   const {data:todayVoters,error:todayVotersError}=await supabase.from("army_heart_daily_logs").select("id,voter_name").eq("user_id",currentUser.id).eq("log_date",certDate);
   if(todayVotersError)throw todayVotersError;
