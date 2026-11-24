@@ -5709,10 +5709,29 @@ $("armySignupButton").addEventListener("click",async()=>{
  finally{setAuthMode(false);}
 });
 $("armyLogoutButton").addEventListener("click",async()=>{await supabase.auth.signOut();currentUser=null;currentUsername="";approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;resendLogId=null;resendVoterName=null;dashboard.hidden=true;authBox.hidden=false;message("armyAuthMessage","Has cerrado sesión.");});
+async function requireArmyCountryForCertificate(){
+ if(!currentUser)throw new Error("Inicia sesión para registrar tu certificado.");
+ const {data:profile,error}=await supabase.from("army_profiles").select("country_code").eq("user_id",currentUser.id).maybeSingle();
+ if(error)throw error;
+ const countryCode=profile?.country_code||"";
+ $("armyCountrySelect").value=countryCode;
+ $("armyCountryCurrent").textContent=countryCode?"País seleccionado: "+(armyCountries.find(x=>x[0]===countryCode)?.[1]||countryCode):"País sin seleccionar.";
+ if(countryCode)return true;
+ approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;
+ $("armyDailyBlock").hidden=true;
+ const form=$("armyEditProfileForm");
+ form.hidden=false;
+ $("armyEditProfileToggle").setAttribute("aria-expanded","true");
+ message("armyVerifyStatus","Antes de registrar tu certificado, es necesario seleccionar tu país en tu perfil: Editar perfil > País. Guarda los cambios y vuelve a subir tu certificado.","error");
+ form.scrollIntoView({behavior:"smooth",block:"center"});
+ $("armyCountrySelect").focus({preventScroll:true});
+ return false;
+}
 $("armyCertificate").addEventListener("change",async(event)=>{
  const input=event.target,file=input.files?.[0];if(!file)return;
  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;$("armyDailyBlock").hidden=true;
  const clear=()=>{input.value="";};
+ try{if(!(await requireArmyCountryForCertificate())){clear();return;}}catch(countryError){message("armyVerifyStatus",countryError.message||"No se pudo comprobar el país de tu perfil. Intenta de nuevo.","error");clear();return;}
  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>8*1024*1024){message("armyVerifyStatus","Formato no admitido. Usa JPG, PNG o WEBP de máximo 8 MB.","error");clear();return;}
  message("armyVerifyStatus","Revisando formato, fecha KST y duplicados… Esto puede tardar unos segundos.");
  try{
@@ -5840,6 +5859,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
 });
 $("armyDailyForm").addEventListener("submit",async(event)=>{
  event.preventDefault();if(!currentUser||!approvedForToday||!approvedCertificateHash||approvedVotedHearts===null){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}
+ try{if(!(await requireArmyCountryForCertificate())){message("armyDailyMessage","Selecciona tu país en Editar perfil > País antes de registrar el certificado.");return;}}catch(countryError){message("armyDailyMessage",countryError.message||"No se pudo comprobar tu país. Intenta de nuevo.");return;}
  if(approvedCertificateDate!==kstDate()){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;$("armyDailyBlock").hidden=true;message("armyVerifyStatus","El día KST cambió. Sube el certificado correspondiente al nuevo día.","error");return;}
  $("armySubmitDaily").disabled=true;message("armyDailyMessage","Guardando registro…");
  try{
