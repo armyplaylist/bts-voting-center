@@ -4590,8 +4590,12 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
   for(const source of Object.keys(extraTranslations)){if(value.includes(source)){const translated=extraTranslations[source][index[lang]-1];if(translated)value=value.split(source).join(translated);}}
   return value;
  }
- const attributeNodes=new WeakMap();
+ const attributeNodes=new WeakMap(),appliedAttributes=new WeakMap();
  const translatableAttributes=['placeholder','title','aria-label','aria-description','alt'];
+ function writeAttribute(meta,value){
+  let attrs=appliedAttributes.get(meta.element);if(!attrs){attrs=new Map();appliedAttributes.set(meta.element,attrs);}
+  attrs.set(meta.attribute,value);meta.element.setAttribute(meta.attribute,value);
+ }
  function collect(root){
   const out=[];
   const addText=n=>{if(n.nodeValue.trim()&&!(n.parentElement&&n.parentElement.closest('[data-countdown],[data-reset-countdown],.bday-countdown,[data-birthday],#gdaCollectionCountdown')))out.push(n);};
@@ -4611,7 +4615,7 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
  }
  async function translateBatch(nodes,lang,version){
   const originalsList=nodes.map(originalOf);
-  if(lang==='es'){nodes.forEach((n,i)=>{n.nodeValue=originalsList[i];const meta=attributeNodes.get(n);if(meta&&meta.element.isConnected)meta.element.setAttribute(meta.attribute,n.nodeValue);});return;}
+  if(lang==='es'){nodes.forEach((n,i)=>{n.nodeValue=originalsList[i];const meta=attributeNodes.get(n);if(meta&&meta.element.isConnected)writeAttribute(meta,n.nodeValue);});return;}
   const joined=originalsList.join(splitMark);
   const url='https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl='+encodeURIComponent(lang)+'&dt=t&q='+encodeURIComponent(joined);
   try{
@@ -4622,10 +4626,10 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
    const pieces=translated.split(splitMark);
    if(pieces.length!==nodes.length)throw new Error('translation boundary mismatch');
    if(version!==generation||lang!==activeLang)return;
-   nodes.forEach((n,i)=>{n.nodeValue=pieces[i].replace(/\bbts\b/gi,'BTS');const meta=attributeNodes.get(n);if(meta&&meta.element.isConnected)meta.element.setAttribute(meta.attribute,n.nodeValue);});
+   nodes.forEach((n,i)=>{n.nodeValue=pieces[i].replace(/\bbts\b/gi,'BTS');const meta=attributeNodes.get(n);if(meta&&meta.element.isConnected)writeAttribute(meta,n.nodeValue);});
   }catch(error){
    if(version!==generation)return;
-   nodes.forEach((n,i)=>{n.nodeValue=fallbackTranslate(originalsList[i],lang);const meta=attributeNodes.get(n);if(meta&&meta.element.isConnected)meta.element.setAttribute(meta.attribute,n.nodeValue);});
+   nodes.forEach((n,i)=>{n.nodeValue=fallbackTranslate(originalsList[i],lang);const meta=attributeNodes.get(n);if(meta&&meta.element.isConnected)writeAttribute(meta,n.nodeValue);});
    document.documentElement.dataset.translationFallback='true';
   }
  }
@@ -4675,7 +4679,8 @@ window.addEventListener('bts-language-change',()=>{updateVoteCountdowns();update
    }
    if(record.type==='attributes'&&record.target.nodeType===Node.ELEMENT_NODE){
     const attr=record.attributeName;
-    if(translatableAttributes.includes(attr)||(attr==='value'&&record.target.matches('input[type="button"],input[type="submit"],input[type="reset"]'))){
+    const lastApplied=appliedAttributes.get(record.target)?.get(attr);
+    if(lastApplied!==record.target.getAttribute(attr)&&(translatableAttributes.includes(attr)||(attr==='value'&&record.target.matches('input[type="button"],input[type="submit"],input[type="reset"]')))){
      const value=record.target.getAttribute(attr);
      if(value&&value.trim()){const node=document.createTextNode(value);attributeNodes.set(node,{element:record.target,attribute:attr});originalOf(node);pending.add(node);}
     }
