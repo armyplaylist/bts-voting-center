@@ -2512,7 +2512,7 @@ body.dark-mode .birthday-filters .birthday-filter[aria-pressed="true"]{
 .hub-card strong{color:#49305f;font:700 1.05rem 'Space Grotesk',sans-serif}
 .hub-card small{color:#716a79;font-size:.8rem;line-height:1.5}
 .hub-card.collection-hub{border-color:#e8c7d0;background:linear-gradient(145deg,#fff,#fff5f7)}
-@media(max-width:560px){.hub-grid{grid-template-columns:1fr}.hub-card{min-height:110px}}
+@media(max-width:560px){.army-profile-head{align-items:flex-start}.army-profile-actions{justify-content:flex-end}.army-profile-actions .btn{padding:9px 10px;font-size:.75rem}.hub-grid{grid-template-columns:1fr}.hub-card{min-height:110px}}
 
 /* El aviso de etapa de recolección queda sin fondo ni borde */
 .gda-collection-alert{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
@@ -3557,9 +3557,8 @@ body.army-profile-view #army.army-panel{display:block!important}
   <div class="army-ig-cover" id="armyCoverFrame"><img id="armyCoverImage" alt="Encabezado del perfil" hidden></div>
   <div class="army-ig-avatar-row"><div class="army-ig-avatar"><span id="armyAvatarFallback">A</span><img id="armyAvatarImage" alt="Foto de perfil" hidden></div></div>
  </div>
- <div class="army-profile-head"><div><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p></div><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div>
+ <div class="army-profile-head"><div class="army-profile-identity"><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p><p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p></div><div class="army-profile-actions"><button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div></div>
   <div class="army-block army-edit-profile">
-   <button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button>
    <form id="armyEditProfileForm" class="army-country-form" hidden>
     <label for="armyCountrySelect">Seleccionar país</label>
     <select id="armyCountrySelect" required><option value="">Selecciona tu país</option></select>
@@ -3575,7 +3574,6 @@ body.army-profile-view #army.army-panel{display:block!important}
      <p class="army-message" id="armyPhotoMessage" role="status" aria-live="polite"></p>
     </div>
    </form>
-   <p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p>
   </div>
    <div class="army-stats"><div><span>Votos para BTS registrados</span><strong id="armyBtsVotesStat">0</strong></div></div>
   <div id="armyMemberVotes" class="army-member-votes" aria-live="polite"></div>
@@ -5357,7 +5355,7 @@ section>p,.section-description,.section-intro{font-size:.9rem;line-height:1.5}
 
 
 <style id="army-section-styles">
-.army-panel{scroll-margin-top:18px}.army-intro{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:16px;border-left:3px solid #8b65b5;background:#f5f0fa;color:#554364;font-size:.84rem}.army-intro span{color:#756b7b;font-size:.78rem}.army-auth,.army-dashboard{padding:18px;border:1px solid #e6dfe2;border-radius:8px;background:#fff}.army-auth-copy h3,.army-block h3,.army-profile-head h3{margin:0 0 5px;color:#38264a;font-size:1.04rem}.army-auth-copy p,.army-block>p,.army-profile-head p{margin:0 0 13px;color:#756b7b;font-size:.82rem;line-height:1.5}.army-form{display:grid;gap:12px;max-width:520px}.army-form label,.army-inline-form label{display:grid;gap:6px;color:#584767;font-size:.8rem;font-weight:800}.army-form input,.army-inline-form input{width:100%;min-height:42px;padding:10px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-actions{display:flex;gap:9px;flex-wrap:wrap}.army-message{min-height:18px;margin:0;color:#8a3450;font-size:.78rem}.army-dashboard[hidden],.army-block[hidden],.army-auth[hidden]{display:none!important}.army-profile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ece5ee}.army-eyebrow{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9277a7}.army-profile-head h3{margin:4px 0}.army-profile-head p{margin:0}
+.army-panel{scroll-margin-top:18px}.army-intro{display:flex;flex-direction:column;gap:4px;padding:14px 16px;margin-bottom:16px;border-left:3px solid #8b65b5;background:#f5f0fa;color:#554364;font-size:.84rem}.army-intro span{color:#756b7b;font-size:.78rem}.army-auth,.army-dashboard{padding:18px;border:1px solid #e6dfe2;border-radius:8px;background:#fff}.army-auth-copy h3,.army-block h3,.army-profile-head h3{margin:0 0 5px;color:#38264a;font-size:1.04rem}.army-auth-copy p,.army-block>p,.army-profile-head p{margin:0 0 13px;color:#756b7b;font-size:.82rem;line-height:1.5}.army-form{display:grid;gap:12px;max-width:520px}.army-form label,.army-inline-form label{display:grid;gap:6px;color:#584767;font-size:.8rem;font-weight:800}.army-form input,.army-inline-form input{width:100%;min-height:42px;padding:10px 12px;border:1px solid #d9cfdf;border-radius:5px;background:#fff;color:#302536;font:inherit}.army-actions{display:flex;gap:9px;flex-wrap:wrap}.army-message{min-height:18px;margin:0;color:#8a3450;font-size:.78rem}.army-dashboard[hidden],.army-block[hidden],.army-auth[hidden]{display:none!important}.army-profile-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:1px solid #ece5ee}.army-eyebrow{font-size:.66rem;font-weight:900;letter-spacing:.12em;color:#9277a7}.army-profile-head h3{margin:4px 0}.army-profile-head p{margin:0}.army-profile-identity{min-width:0}.army-profile-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.army-profile-actions .btn{min-height:42px}.army-profile-head .army-country-current{margin-top:6px;color:#765b8d;font-size:.82rem;font-weight:700}.army-edit-profile{margin-top:12px}.army-country-form{display:grid;gap:10px;max-width:520px;padding:14px;border:1px solid #e8deee;border-radius:8px;background:rgba(145,111,173,.06)}
 .army-ig-profile{margin:-2px -2px 14px}
 .army-ig-cover{position:relative;height:clamp(118px,24vw,190px);overflow:hidden;border-radius:5px;background:linear-gradient(120deg,#d9c8e9,#a98bc7 55%,#75558f)}
 .army-ig-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(25,15,35,.18))}
