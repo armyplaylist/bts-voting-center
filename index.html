@@ -5434,44 +5434,20 @@ function fillCountryOptions(){
  for(const [code,name] of armyCountries){const option=document.createElement("option");option.value=code;option.textContent=name;select.append(option);}
 }
 async function loadCountryMap(){
- const [{data:stats,error:statsError},{data:voteRows,error:voteRowsError}]=await Promise.all([
+ const [{data:stats,error:statsError},{data:participantRows,error:participantError}]=await Promise.all([
   supabase.from("army_vote_map_stats").select("total_bts_votes").eq("id",1).maybeSingle(),
-  supabase.from("army_heart_daily_logs").select("user_id").eq("confirmed_all_friends",true).gt("voted_hearts",0).order("submitted_at",{ascending:true}).order("id",{ascending:true}).range(0,999)
+  supabase.from("army_country_participant_ranking").select("country_code,total_users").order("total_users",{ascending:false}).order("country_code",{ascending:true})
  ]);
  if(statsError)throw statsError;
- if(voteRowsError)throw voteRowsError;
+ if(participantError)throw new Error("No se pudo cargar el ranking global de participantes. Intenta recargar la página.");
  const total=Number(stats?.total_bts_votes||0),isLightjjk=(currentUsername||"").trim().toLowerCase()==="lightjjk",unlocked=total>=1000||isLightjjk;
  $("armyMapTotal").textContent=total.toLocaleString("es-MX");
  $("armyMapProgressBar").style.width=Math.min(100,total/10)+"%";
  $("armyMapLocked").hidden=unlocked;
  $("armyMapUnlocked").hidden=!unlocked;
  if(!unlocked)return;
- // Se consideran todos los certificados confirmados del historial, no solo los del día KST actual.
- // La paginación evita omitir participantes cuando hay más de 1,000 registros.
- const pageSize=1000,profilesByUser=new Map();
- let profileOffset=0,hasMoreProfiles=true;
- while(hasMoreProfiles){
-  const {data:profileRows,error:profileRowsError}=await supabase.from("army_profiles").select("user_id,country_code").not("country_code","is",null).range(profileOffset,profileOffset+pageSize-1);
-  if(profileRowsError)throw new Error("No se pudieron verificar los países de los votantes. Intenta recargar el ranking.");
-  for(const profile of profileRows||[])if(profile.user_id&&profile.country_code)profilesByUser.set(profile.user_id,profile.country_code);
-  hasMoreProfiles=(profileRows||[]).length===pageSize;profileOffset+=pageSize;
- }
- const confirmedRows=[...(voteRows||[])];
- let voteOffset=confirmedRows.length,hasMoreVotes=confirmedRows.length===pageSize;
- while(hasMoreVotes){
-  const {data:nextRows,error:nextRowsError}=await supabase.from("army_heart_daily_logs").select("user_id").eq("confirmed_all_friends",true).gt("voted_hearts",0).order("submitted_at",{ascending:true}).order("id",{ascending:true}).range(voteOffset,voteOffset+pageSize-1);
-  if(nextRowsError)throw new Error("No se pudieron cargar todos los registros confirmados. Intenta recargar el ranking.");
-  confirmedRows.push(...(nextRows||[]));voteOffset+=(nextRows||[]).length;hasMoreVotes=(nextRows||[]).length===pageSize;
- }
- const votersByCountry=new Map();
- const countedUsers=new Set();
- for(const record of confirmedRows){
-  if(!record.user_id||countedUsers.has(record.user_id))continue;
-  countedUsers.add(record.user_id);
-  const code=profilesByUser.get(record.user_id);
-  if(code)votersByCountry.set(code,(votersByCountry.get(code)||0)+1);
- }
- const ranking=Array.from(votersByCountry.keys()).map(code=>({code,users:votersByCountry.get(code)||0,country:armyCountries.find(x=>x[0]===code)?.[1]||code})).sort((a,b)=>b.users-a.users||a.country.localeCompare(b.country));
+ // Fuente compartida: la vista devuelve solo totales agregados, iguales para todas las cuentas.
+ const ranking=(participantRows||[]).map(row=>({code:row.country_code,users:Number(row.total_users||0),country:armyCountries.find(x=>x[0]===row.country_code)?.[1]||row.country_code}));
  const rankingEl=$("armyCountryRanking");rankingEl.innerHTML="";
  if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay usuarios con votos confirmados asociados a un país.";rankingEl.append(li);}
  ranking.forEach(item=>{
@@ -5488,7 +5464,7 @@ async function loadCountryMap(){
  document.querySelectorAll(".army-vote-privacy-note").forEach(note=>note.remove());
  const visibilityNote=document.createElement("p");
  visibilityNote.className="army-vote-privacy-note";
- visibilityNote.textContent="Se cuentan usuarios únicos con al menos un certificado de votación confirmado. Cada usuario cuenta una sola vez en el país de su perfil.";
+ visibilityNote.textContent="Ranking global compartido: usuarios únicos con al menos un certificado de votación confirmado. Cada usuario cuenta una sola vez en el país de su perfil.";
  rankingEl.after(visibilityNote);
  await renderArmyGlobe(ranking);
 }
