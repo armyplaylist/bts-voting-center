@@ -5700,10 +5700,30 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   else ctx.drawImage(source,0,0,canvas.width,canvas.height);
   ctx.filter="none";
   bitmap.close?.();
-  const result=await tesseractWorker.recognize(canvas);
-  const ocrText=(result.data.text||"").trim();
+  let result=await tesseractWorker.recognize(canvas);
+  let ocrText=(result.data.text||"").trim();
+  // Segundo intento con contraste y umbral adaptativo sencillo para fotos con sombras o fondo gris.
+  if(!/(?:v[o0]ted\\s*hearts|corazones\\s+votados)/i.test(ocrText)||!/[0-9]{2,}/.test(ocrText)){
+   const retryCanvas=document.createElement("canvas");
+   retryCanvas.width=canvas.width;retryCanvas.height=canvas.height;
+   const retryCtx=retryCanvas.getContext("2d",{willReadFrequently:true});
+   if(retryCtx){
+    retryCtx.drawImage(canvas,0,0);
+    const pixels=retryCtx.getImageData(0,0,retryCanvas.width,retryCanvas.height);
+    for(let p=0;p<pixels.data.length;p+=4){
+     const gray=(pixels.data[p]*0.299+pixels.data[p+1]*0.587+pixels.data[p+2]*0.114);
+     const value=gray>160?255:0;
+     pixels.data[p]=pixels.data[p+1]=pixels.data[p+2]=value;
+    }
+    retryCtx.putImageData(pixels,0,0);
+    const retry=await tesseractWorker.recognize(retryCanvas);
+    const retryText=(retry.data.text||"").trim();
+    const score=text=>((/\\b\\d{2,}\\b/.test(text)?2:0)+(/v[o0]ter|nombre/i.test(text)?2:0)+(/v[o0]ting|fecha|date/i.test(text)?1:0)+(/hearts|corazones/i.test(text)?2:0));
+    if(score(retryText)>score(ocrText)){result=retry;ocrText=retryText;}
+   }
+  }
   const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s@._,-]/g," ").replace(/\s+/g," ");
-  if(!/\bbts\b/i.test(ocrText))throw new Error("No identificamos BTS en el certificado. Sube el certificado correspondiente a BTS.");
+  // No exigimos que el OCR detecte las palabras BTS o CHOEAEDOL: algunos certificados o fotos recortadas no muestran esas etiquetas. La validación usa usuario, cantidad de corazones y fecha.
   const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
   // Primero intenta leer etiquetas si existen; si no, usa la posición visual:
   // el nombre está encima y la cantidad de votos aparece debajo.
