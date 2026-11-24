@@ -5568,13 +5568,31 @@ async function loadProfile(){
   profile=createdProfile;
  }
  const countryCode=profile?.country_code||"";
- await loadArmyProfileImages(profile||{});
  $("armyCountrySelect").value=countryCode;
  $("armyCountryCurrent").textContent=countryCode?"País seleccionado: "+(armyCountries.find(x=>x[0]===countryCode)?.[1]||countryCode):"País sin seleccionar.";
  $("armyProfileName").textContent="@"+currentUsername;
  $("armyMemberSince").textContent="Miembro desde "+new Intl.DateTimeFormat("es-MX",{dateStyle:"medium"}).format(new Date(usernameRow.created_at));
- await loadHistory();
+
+ // El acceso y el perfil no deben depender de servicios secundarios.
  dashboard.hidden=false;authBox.hidden=true;
+ const dashboardNotice=()=>{
+  let notice=$("armyDashboardMessage");
+  if(!notice){
+   notice=document.createElement("p");
+   notice.id="armyDashboardMessage";
+   notice.className="army-message";
+   notice.setAttribute("role","status");
+   notice.setAttribute("aria-live","polite");
+   dashboard.insertBefore(notice,dashboard.firstChild);
+  }
+  return notice;
+ };
+ try{await loadArmyProfileImages(profile||{});}catch(imageError){console.warn("No se pudieron cargar las imágenes del perfil:",imageError);}
+ try{await loadHistory();}catch(historyError){
+  console.error("No se pudo cargar el historial ARMY:",historyError);
+  $("armyBtsVotesStat").textContent="—";
+  dashboardNotice().textContent="Tu sesión está activa. No pudimos cargar el historial de votos; puedes volver a intentarlo actualizando la página.";
+ }
  try{await loadCountryMap();}catch(mapError){console.warn("No se pudo cargar el mapa de países:",mapError);}
 }
 async function loadHistory(){
