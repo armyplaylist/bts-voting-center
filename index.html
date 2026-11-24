@@ -5447,7 +5447,7 @@ async function loadCountryMap(){
  $("armyMapUnlocked").hidden=!unlocked;
  if(!unlocked)return;
  const myBtsVotes=(myLogs||[]).filter(x=>!x.target_member||x.target_member==="BTS").reduce((sum,x)=>sum+Number(x.voted_hearts||0),0);
- const canSeeVoteCounts=myBtsVotes>=20000;
+ const canSeeVoteCounts=true; // El total diario por país es público; no depende de los votos de la cuenta que consulta.
  // La clasificación se calcula solo con los registros del día KST actual.
  // Se pagina para incluir a todos los participantes sin tocar ni borrar el historial.
  const pageSize=1000,profilesByUser=new Map();
@@ -5494,7 +5494,7 @@ async function loadCountryMap(){
  document.querySelectorAll(".army-vote-privacy-note").forEach(note=>note.remove());
  const visibilityNote=document.createElement("p");
  visibilityNote.className="army-vote-privacy-note";
- visibilityNote.textContent=canSeeVoteCounts?"Cifras de votos desbloqueadas para tu cuenta (20,000 votos acumulados).":"Las cifras de votos están ocultas. Se desbloquean al acumular 20,000 votos en tu cuenta.";
+ visibilityNote.textContent="Los votos muestran la suma diaria de los certificados registrados por usuarios de cada país. El conteo se reinicia a las 00:00 KST y el historial se conserva.";
  rankingEl.after(visibilityNote);
  await renderArmyGlobe(ranking);
 }
