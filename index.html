@@ -5743,7 +5743,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const matchedMembers=memberPatterns.filter(([,pattern])=>pattern.test(memberText));
   const certificateTargetMember=matchedMembers.length===1?matchedMembers[0][0]:"BTS";
   if(matchedMembers.length>1)throw new Error("El certificado menciona más de un miembro y no podemos asignar el recuento con seguridad.");
-  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos leer la cantidad exacta de “Voted Hearts”. Escríbela en «Cantidad de Voted Hearts» y vuelve a seleccionar el certificado.");
+  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos reconocer automáticamente la cantidad exacta de “Voted Hearts”. No se guardó ningún voto.");
 
   const months={january:"01",jan:"01",february:"02",feb:"02",march:"03",mar:"03",april:"04",apr:"04",may:"05",june:"06",jun:"06",july:"07",jul:"07",august:"08",aug:"08",september:"09",sep:"09",sept:"09",october:"10",oct:"10",november:"11",nov:"11",december:"12",dec:"12"};
   let certDate=null;
