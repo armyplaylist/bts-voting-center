@@ -5440,9 +5440,13 @@ async function loadCountryMap(){
  ]);
  if(statsError)throw statsError;
  if(voteRowsError)throw new Error("No se pudo cargar el ranking global de votos. Intenta recargar la página.");
- const total=Number(stats?.total_bts_votes||0),isLightjjk=(currentUsername||"").trim().toLowerCase()==="lightjjk",unlocked=total>=1000||isLightjjk;
- $("armyMapTotal").textContent=total.toLocaleString("es-MX");
- $("armyMapProgressBar").style.width=Math.min(100,total/10)+"%";
+ const total=Number(stats?.total_bts_votes||0);
+ const {data:myVoteLogs,error:myVoteLogsError}=await supabase.from("army_heart_daily_logs").select("voted_hearts,target_member").eq("user_id",currentUser.id).limit(500);
+ if(myVoteLogsError)throw new Error("No se pudo comprobar tu progreso personal para desbloquear el ranking.");
+ const myVotes=(myVoteLogs||[]).filter(x=>!x.target_member||x.target_member==="BTS").reduce((sum,x)=>sum+Number(x.voted_hearts||0),0);
+ const unlocked=myVotes>=20000;
+ $("armyMapTotal").textContent=myVotes.toLocaleString("es-MX");
+ $("armyMapProgressBar").style.width=Math.min(100,myVotes/200)+"%";
  $("armyMapLocked").hidden=unlocked;
  $("armyMapUnlocked").hidden=!unlocked;
  if(!unlocked)return;
