@@ -5703,8 +5703,8 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const result=await tesseractWorker.recognize(canvas);
   const ocrText=(result.data.text||"").trim();
   const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s@._,-]/g," ").replace(/\s+/g," ");
-  if(!/\\bchoeaedol\\b/i.test(ocrText))throw new Error("No identificamos la marca CHOEAEDOL en el certificado. Sube una imagen completa y nítida.");
-  if(!/\\bbts\\b/i.test(ocrText))throw new Error("No identificamos BTS en el certificado. Sube el certificado correspondiente a BTS.");
+  if(!/\bchoeaedol\b/i.test(ocrText))throw new Error("No identificamos la marca CHOEAEDOL en el certificado. Sube una imagen completa y nítida.");
+  if(!/\bbts\b/i.test(ocrText))throw new Error("No identificamos BTS en el certificado. Sube el certificado correspondiente a BTS.");
   const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
   // Primero intenta leer etiquetas si existen; si no, usa la posición visual:
   // el nombre está encima y la cantidad de votos aparece debajo.
