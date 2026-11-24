@@ -5434,37 +5434,37 @@ function fillCountryOptions(){
  for(const [code,name] of armyCountries){const option=document.createElement("option");option.value=code;option.textContent=name;select.append(option);}
 }
 async function loadCountryMap(){
- const [{data:stats,error:statsError},{data:participantRows,error:participantError}]=await Promise.all([
+ const [{data:stats,error:statsError},{data:voteRows,error:voteRowsError}]=await Promise.all([
   supabase.from("army_vote_map_stats").select("total_bts_votes").eq("id",1).maybeSingle(),
-  supabase.from("army_country_participant_ranking").select("country_code,total_users").order("total_users",{ascending:false}).order("country_code",{ascending:true})
+  supabase.from("army_country_vote_totals").select("country_code,total_votes").gt("total_votes",0).order("total_votes",{ascending:false}).order("country_code",{ascending:true})
  ]);
  if(statsError)throw statsError;
- if(participantError)throw new Error("No se pudo cargar el ranking global de participantes. Intenta recargar la página.");
+ if(voteRowsError)throw new Error("No se pudo cargar el ranking global de votos. Intenta recargar la página.");
  const total=Number(stats?.total_bts_votes||0),isLightjjk=(currentUsername||"").trim().toLowerCase()==="lightjjk",unlocked=total>=1000||isLightjjk;
  $("armyMapTotal").textContent=total.toLocaleString("es-MX");
  $("armyMapProgressBar").style.width=Math.min(100,total/10)+"%";
  $("armyMapLocked").hidden=unlocked;
  $("armyMapUnlocked").hidden=!unlocked;
  if(!unlocked)return;
- // Fuente compartida: la vista devuelve solo totales agregados, iguales para todas las cuentas.
- const ranking=(participantRows||[]).map(row=>({code:row.country_code,users:Number(row.total_users||0),country:armyCountries.find(x=>x[0]===row.country_code)?.[1]||row.country_code}));
+ // Fuente pública compartida: totales de votos agregados por país, iguales para todas las cuentas.
+ const ranking=(voteRows||[]).map(row=>({code:row.country_code,votes:Number(row.total_votes||0),country:armyCountries.find(x=>x[0]===row.country_code)?.[1]||row.country_code}));
  const rankingEl=$("armyCountryRanking");rankingEl.innerHTML="";
- if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay usuarios con votos confirmados asociados a un país.";rankingEl.append(li);}
+ if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay votos registrados por país.";rankingEl.append(li);}
  ranking.forEach(item=>{
   const li=document.createElement("li");
   const country=document.createElement("span");
   country.className="army-country-name";
   country.textContent=String.fromCodePoint(...item.code.toUpperCase().split("").map(char=>127397+char.charCodeAt(0)))+" "+item.country;
-  const users=document.createElement("small");
-  users.className="army-country-users";
-  users.textContent=item.users.toLocaleString("es-MX")+" usuarios";
-  li.append(country,users);
+  const votes=document.createElement("small");
+  votes.className="army-country-users";
+  votes.textContent=item.votes.toLocaleString("es-MX")+" votos";
+  li.append(country,votes);
   rankingEl.append(li);
  });
  document.querySelectorAll(".army-vote-privacy-note").forEach(note=>note.remove());
  const visibilityNote=document.createElement("p");
  visibilityNote.className="army-vote-privacy-note";
- visibilityNote.textContent="Ranking global compartido: usuarios únicos con al menos un certificado de votación confirmado. Cada usuario cuenta una sola vez en el país de su perfil.";
+ visibilityNote.textContent="Ranking global compartido: total de votos registrados por país, ordenados de mayor a menor.";
  rankingEl.after(visibilityNote);
  await renderArmyGlobe(ranking);
 }
