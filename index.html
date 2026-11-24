@@ -5464,7 +5464,7 @@ $("armyEditProfileForm").addEventListener("submit",async(event)=>{
   for(const [kind,file] of [["avatar",pendingArmyAvatarFile],["cover",pendingArmyCoverFile]]){
    if(!file)continue;
    const blob=await compressArmyProfileImage(file),path=currentUser.id+"/"+kind+".webp";
-   const {error:uploadError}=await supabase.from("army-profile-photos").upload(path,blob,{contentType:"image/webp",upsert:true,cacheControl:"3600"});
+   const {error:uploadError}=await supabase.storage.from("army-profile-photos").upload(path,blob,{contentType:"image/webp",upsert:true,cacheControl:"3600"});
    if(uploadError)throw uploadError;
    updates[kind==="avatar"?"avatar_path":"cover_path"]=path;
   }
