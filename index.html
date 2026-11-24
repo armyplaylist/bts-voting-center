@@ -5467,6 +5467,7 @@ async function loadCountryMap(){
   if(canSeeVoteCounts){const votes=document.createElement("strong");votes.className="army-country-votes";votes.textContent=item.total.toLocaleString("es-MX")+" votos";li.append(votes);}
   rankingEl.append(li);
  });
+ document.querySelectorAll(".army-vote-privacy-note").forEach(note=>note.remove());
  const visibilityNote=document.createElement("p");
  visibilityNote.className="army-vote-privacy-note";
  visibilityNote.textContent=canSeeVoteCounts?"Cifras de votos desbloqueadas para tu cuenta (20,000 votos acumulados).":"Las cifras de votos están ocultas. Se desbloquean al acumular 20,000 votos en tu cuenta.";
