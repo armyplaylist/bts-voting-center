@@ -3596,15 +3596,15 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    <h3 id="armyCertificateHeading">1 · Verifica tu certificado de Choeaedol</h3>
    <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
    <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
+   <div class="army-block" id="armyDailyBlock" hidden>
+    <h3>2 · Confirma el registro de tu certificado</h3>
+    <div class="army-daily-target"><span>Votos según tu certificado</span><strong id="armyVotedHeartsValue">0</strong><small>Se registra la cantidad exacta indicada en “Voted Hearts”.</small></div>
+    <form id="armyDailyForm">
+     <button class="btn" type="submit" id="armySubmitDaily">Confirmar registro del certificado</button>
+     <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
+    </form>
+   </div>
    <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
-  </div>
-  <div class="army-block" id="armyDailyBlock" hidden>
-   <h3>2 · Confirma el registro de tu certificado</h3>
-   <div class="army-daily-target"><span>Votos según tu certificado</span><strong id="armyVotedHeartsValue">0</strong><small>Se registra la cantidad exacta indicada en “Voted Hearts”.</small></div>
-   <form id="armyDailyForm">
-    <button class="btn" type="submit" id="armySubmitDaily">Confirmar registro del certificado</button>
-    <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
-   </form>
   </div>
   <div class="army-block">
    <h3>Historial diario</h3><p>Los registros se guardan por fecha de Corea del Sur (KST). Se permite un registro por día por certificado; cada certificado solo puede utilizarse una vez.</p>
