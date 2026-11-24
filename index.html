@@ -5428,30 +5428,13 @@ function fillCountryOptions(){
 }
 async function loadCountryMap(){
  const today=kstDate();
- const dailyRows=[];
- for(let from=0; ; from+=1000){
-  const {data,error}=await supabase.from("army_heart_daily_logs").select("user_id,voted_hearts,target_member").eq("log_date",today).gt("voted_hearts",0).range(from,from+999);
-  if(error)throw new Error("No se pudieron cargar los certificados del día actual para el ranking. Intenta recargar la página.");
-  dailyRows.push(...(data||[]));
-  if(!data||data.length<1000)break;
- }
- const todaysBtsRows=dailyRows.filter(row=>!row.target_member||row.target_member==="BTS");
- const userIds=[...new Set(todaysBtsRows.map(row=>row.user_id).filter(Boolean))];
- const profiles=[];
- for(let from=0;from<userIds.length;from+=400){
-  const batch=userIds.slice(from,from+400);
-  const {data,error}=await supabase.from("army_profiles").select("user_id,country_code").in("user_id",batch);
-  if(error)throw new Error("No se pudieron consultar los países de los usuarios que votaron hoy.");
-  profiles.push(...(data||[]));
- }
- const countryByUser=new Map(profiles.filter(row=>row.country_code).map(row=>[row.user_id,row.country_code]));
+ const {data:countryTotals,error:countryTotalsError}=await supabase.rpc("get_army_daily_country_ranking");
+ if(countryTotalsError)throw new Error("No se pudo cargar el ranking global por países. Intenta recargar la página.");
  const votesByCountry=new Map(),usersByCountry=new Map();
- for(const row of todaysBtsRows){
-  const code=countryByUser.get(row.user_id);
-  if(!code)continue;
-  votesByCountry.set(code,(votesByCountry.get(code)||0)+Number(row.voted_hearts||0));
-  if(!usersByCountry.has(code))usersByCountry.set(code,new Set());
-  usersByCountry.get(code).add(row.user_id);
+ for(const row of countryTotals||[]){
+  if(!row.country_code)continue;
+  votesByCountry.set(row.country_code,Number(row.total_votes||0));
+  usersByCountry.set(row.country_code,{size:Number(row.participant_count||0)});
  }
  const {data:myVoteLogs,error:myVoteLogsError}=await supabase.from("army_heart_daily_logs").select("voted_hearts,target_member").eq("user_id",currentUser.id).eq("log_date",today).limit(500);
  if(myVoteLogsError)throw new Error("No se pudo comprobar tu progreso personal para desbloquear el ranking.");
