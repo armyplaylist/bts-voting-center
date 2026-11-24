@@ -5432,14 +5432,12 @@ function fillCountryOptions(){
  for(const [code,name] of armyCountries){const option=document.createElement("option");option.value=code;option.textContent=name;select.append(option);}
 }
 async function loadCountryMap(){
- const [{data:stats,error:statsError},{data:rows,error:rowsError},{data:profiles,error:profilesError},{data:myLogs,error:myLogsError}]=await Promise.all([
+ const [{data:stats,error:statsError},{data:rows,error:rowsError},{data:myLogs,error:myLogsError}]=await Promise.all([
   supabase.from("army_vote_map_stats").select("total_bts_votes").eq("id",1).maybeSingle(),
   supabase.from("army_country_vote_totals").select("country_code,total_votes").order("total_votes",{ascending:false}),
-  supabase.from("army_profiles").select("country_code").not("country_code","is",null),
   supabase.from("army_heart_daily_logs").select("target_member,voted_hearts").eq("user_id",currentUser.id)
  ]);
- if(statsError)throw statsError;if(rowsError)throw rowsError;
- if(profilesError)throw profilesError;if(myLogsError)throw myLogsError;
+ if(statsError)throw statsError;if(rowsError)throw rowsError;if(myLogsError)throw myLogsError;
  const total=Number(stats?.total_bts_votes||0),isLightjjk=(currentUsername||"").trim().toLowerCase()==="lightjjk",unlocked=total>=1000||isLightjjk;
  $("armyMapTotal").textContent=total.toLocaleString("es-MX");
  $("armyMapProgressBar").style.width=Math.min(100,total/10)+"%";
@@ -5448,11 +5446,30 @@ async function loadCountryMap(){
  if(!unlocked)return;
  const myBtsVotes=(myLogs||[]).filter(x=>!x.target_member||x.target_member==="BTS").reduce((sum,x)=>sum+Number(x.voted_hearts||0),0);
  const canSeeVoteCounts=myBtsVotes>=20000;
- const usersByCountry=new Map();
- for(const profile of profiles||[]){
-  if(profile.country_code)usersByCountry.set(profile.country_code,(usersByCountry.get(profile.country_code)||0)+1);
+ // Solo cuenta personas que tienen al menos un registro real de votos positivos.
+ // Se pagina para no quedar limitado al máximo de filas de Supabase.
+ const activeVoterIds=new Set();
+ const pageSize=1000;let logOffset=0,hasMoreLogs=true;
+ while(hasMoreLogs){
+  const {data:voteLogs,error:voteLogsError}=await supabase.from("army_heart_daily_logs").select("user_id,voted_hearts").gt("voted_hearts",0).range(logOffset,logOffset+pageSize-1);
+  if(voteLogsError)throw new Error("No se pudo verificar qué países tienen votantes activos. Intenta recargar el ranking.");
+  for(const log of voteLogs||[])if(log.user_id)activeVoterIds.add(log.user_id);
+  hasMoreLogs=(voteLogs||[]).length===pageSize;logOffset+=pageSize;
  }
- const ranking=(rows||[]).map(row=>({code:row.country_code,total:Number(row.total_votes||0),users:usersByCountry.get(row.country_code)||0,country:armyCountries.find(x=>x[0]===row.country_code)?.[1]||row.country_code}));
+ const profilesByUser=new Map();
+ let profileOffset=0,hasMoreProfiles=true;
+ while(hasMoreProfiles){
+  const {data:profileRows,error:profileRowsError}=await supabase.from("army_profiles").select("user_id,country_code").not("country_code","is",null).range(profileOffset,profileOffset+pageSize-1);
+  if(profileRowsError)throw new Error("No se pudieron verificar los países de los votantes activos. Intenta recargar el ranking.");
+  for(const profile of profileRows||[])if(profile.user_id&&profile.country_code)profilesByUser.set(profile.user_id,profile.country_code);
+  hasMoreProfiles=(profileRows||[]).length===pageSize;profileOffset+=pageSize;
+ }
+ const usersByCountry=new Map();
+ for(const userId of activeVoterIds){
+  const code=profilesByUser.get(userId);
+  if(code)usersByCountry.set(code,(usersByCountry.get(code)||0)+1);
+ }
+ const ranking=(rows||[]).filter(row=>(usersByCountry.get(row.country_code)||0)>0).map(row=>({code:row.country_code,total:Number(row.total_votes||0),users:usersByCountry.get(row.country_code)||0,country:armyCountries.find(x=>x[0]===row.country_code)?.[1]||row.country_code}));
  const rankingEl=$("armyCountryRanking");rankingEl.innerHTML="";
  if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay usuarios asociados a un país. Selecciona tu país en Editar perfil para aparecer en el ranking.";rankingEl.append(li);}
  ranking.forEach((item,index)=>{
