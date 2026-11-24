@@ -3598,7 +3598,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    </div>
   </section>
   <div class="army-block army-certificate-block">
-   <h3>1 · Verifica tu certificado de Choeaedol</h3>
+   <h3 id="armyCertificateHeading">1 · Verifica tu certificado de Choeaedol</h3>
    <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
    <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
    <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
@@ -5418,7 +5418,7 @@ const SUPABASE_KEY = "sb_publishable_YcuXmeEyELRoHV8AFdwi2A_AYfDDPKC";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = (id) => document.getElementById(id);
 const authBox=$("armyAuth"), dashboard=$("armyDashboard"), authForm=$("armyAuthForm");
-let currentUser=null, currentUsername="", approvedForToday=false, approvedCertificateHash=null, approvedCertificateDate=null, approvedVotedHearts=null, approvedVoterName=null, approvedTargetMember=null, tesseractWorker=null;
+let currentUser=null, currentUsername="", approvedForToday=false, approvedCertificateHash=null, approvedCertificateDate=null, approvedVotedHearts=null, approvedVoterName=null, approvedTargetMember=null, tesseractWorker=null, resendLogId=null, resendVoterName=null;
 const armyCountries=[["AF","Afganistán"],["AL","Albania"],["DZ","Argelia"],["AD","Andorra"],["AO","Angola"],["AG","Antigua y Barbuda"],["AR","Argentina"],["AM","Armenia"],["AU","Australia"],["AT","Austria"],["AZ","Azerbaiyán"],["BS","Bahamas"],["BH","Baréin"],["BD","Bangladés"],["BB","Barbados"],["BY","Bielorrusia"],["BE","Bélgica"],["BZ","Belice"],["BJ","Benín"],["BT","Bután"],["BO","Bolivia"],["BA","Bosnia y Herzegovina"],["BW","Botsuana"],["BR","Brasil"],["BN","Brunéi"],["BG","Bulgaria"],["BF","Burkina Faso"],["BI","Burundi"],["CV","Cabo Verde"],["KH","Camboya"],["CM","Camerún"],["CA","Canadá"],["CF","República Centroafricana"],["TD","Chad"],["CL","Chile"],["CN","China"],["CO","Colombia"],["KM","Comoras"],["CG","Congo"],["CD","República Democrática del Congo"],["CR","Costa Rica"],["CI","Costa de Marfil"],["HR","Croacia"],["CU","Cuba"],["CY","Chipre"],["CZ","Chequia"],["DK","Dinamarca"],["DJ","Yibuti"],["DM","Dominica"],["DO","República Dominicana"],["EC","Ecuador"],["EG","Egipto"],["SV","El Salvador"],["GQ","Guinea Ecuatorial"],["ER","Eritrea"],["EE","Estonia"],["SZ","Esuatini"],["ET","Etiopía"],["FJ","Fiyi"],["FI","Finlandia"],["FR","Francia"],["GA","Gabón"],["GM","Gambia"],["GE","Georgia"],["DE","Alemania"],["GH","Ghana"],["GR","Grecia"],["GD","Granada"],["GT","Guatemala"],["GN","Guinea"],["GW","Guinea-Bisáu"],["GY","Guyana"],["HT","Haití"],["HN","Honduras"],["HU","Hungría"],["IS","Islandia"],["IN","India"],["ID","Indonesia"],["IR","Irán"],["IQ","Irak"],["IE","Irlanda"],["IL","Israel"],["IT","Italia"],["JM","Jamaica"],["JP","Japón"],["JO","Jordania"],["KZ","Kazajistán"],["KE","Kenia"],["KI","Kiribati"],["KP","Corea del Norte"],["KR","Corea del Sur"],["KW","Kuwait"],["KG","Kirguistán"],["LA","Laos"],["LV","Letonia"],["LB","Líbano"],["LS","Lesoto"],["LR","Liberia"],["LY","Libia"],["LI","Liechtenstein"],["LT","Lituania"],["LU","Luxemburgo"],["MG","Madagascar"],["MW","Malaui"],["MY","Malasia"],["MV","Maldivas"],["ML","Malí"],["MT","Malta"],["MH","Islas Marshall"],["MR","Mauritania"],["MU","Mauricio"],["MX","México"],["FM","Micronesia"],["MD","Moldavia"],["MC","Mónaco"],["MN","Mongolia"],["ME","Montenegro"],["MA","Marruecos"],["MZ","Mozambique"],["MM","Myanmar"],["NA","Namibia"],["NR","Nauru"],["NP","Nepal"],["NL","Países Bajos"],["NZ","Nueva Zelanda"],["NI","Nicaragua"],["NE","Níger"],["NG","Nigeria"],["MK","Macedonia del Norte"],["NO","Noruega"],["OM","Omán"],["PK","Pakistán"],["PW","Palaos"],["PA","Panamá"],["PG","Papúa Nueva Guinea"],["PY","Paraguay"],["PE","Perú"],["PH","Filipinas"],["PL","Polonia"],["PT","Portugal"],["QA","Catar"],["RO","Rumanía"],["RU","Rusia"],["RW","Ruanda"],["KN","San Cristóbal y Nieves"],["LC","Santa Lucía"],["VC","San Vicente y las Granadinas"],["WS","Samoa"],["SM","San Marino"],["ST","Santo Tomé y Príncipe"],["SA","Arabia Saudita"],["SN","Senegal"],["RS","Serbia"],["SC","Seychelles"],["SL","Sierra Leona"],["SG","Singapur"],["SK","Eslovaquia"],["SI","Eslovenia"],["SB","Islas Salomón"],["SO","Somalia"],["ZA","Sudáfrica"],["SS","Sudán del Sur"],["ES","España"],["LK","Sri Lanka"],["SD","Sudán"],["SR","Surinam"],["SE","Suecia"],["CH","Suiza"],["SY","Siria"],["TW","Taiwán"],["TJ","Tayikistán"],["TZ","Tanzania"],["TH","Tailandia"],["TL","Timor Oriental"],["TG","Togo"],["TO","Tonga"],["TT","Trinidad y Tobago"],["TN","Túnez"],["TR","Turquía"],["TM","Turkmenistán"],["TV","Tuvalu"],["UG","Uganda"],["UA","Ucrania"],["AE","Emiratos Árabes Unidos"],["GB","Reino Unido"],["US","Estados Unidos"],["UY","Uruguay"],["UZ","Uzbekistán"],["VU","Vanuatu"],["VA","Ciudad del Vaticano"],["VE","Venezuela"],["VN","Vietnam"],["YE","Yemen"],["ZM","Zambia"],["ZW","Zimbabue"],["XK","Kosovo"]];
 const usernameEmail = (name) => "army_"+name.trim().toLowerCase()+"@accounts.invalid";
 function kstDate(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
@@ -5572,7 +5572,7 @@ async function loadProfile(){
 async function loadHistory(){
  const [{data:profile,error:pErr},{data:logs,error:lErr}] = await Promise.all([
   supabase.from("army_profiles").select("friend_count").eq("user_id",currentUser.id).single(),
-  supabase.from("army_heart_daily_logs").select("log_date,friend_count,hearts_required,voted_hearts,voter_name,target_member,submitted_at").eq("user_id",currentUser.id).order("log_date",{ascending:false}).limit(500)
+  supabase.from("army_heart_daily_logs").select("id,log_date,friend_count,hearts_required,voted_hearts,voter_name,target_member,submitted_at").eq("user_id",currentUser.id).order("log_date",{ascending:false}).limit(500)
  ]);
  if(pErr)throw pErr;if(lErr)throw lErr;
 
@@ -5588,7 +5588,9 @@ async function loadHistory(){
   const row=document.createElement("div");row.className="army-history-item";
   const left=document.createElement("span");left.textContent=prettyKstDate(log.log_date)+(log.voter_name?" · @"+log.voter_name:"")+" · "+(log.target_member||"BTS");
   const right=document.createElement("strong");right.textContent=(log.voted_hearts||0).toLocaleString("es-MX")+" votos";
-  row.append(left,right);$("armyHistory").append(row);
+  row.append(left,right);
+  if(log.log_date===today&&log.voter_name){const resend=document.createElement("button");resend.type="button";resend.className="btn secondary army-resend-certificate";resend.textContent="Reenviar certificado";resend.addEventListener("click",()=>{resendLogId=log.id;resendVoterName=log.voter_name;approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;$("armyDailyBlock").hidden=true;$("armyCertificateHeading").textContent="1 · Reenvía tu certificado corregido";$("armySubmitDaily").textContent="Actualizar registro";message("armyVerifyStatus","Sube el certificado corregido de @"+resendVoterName+". Se actualizará únicamente este registro de tu cuenta.","ok");$("armyCertificate").value="";$("armyCertificate").closest(".army-upload").scrollIntoView({behavior:"smooth",block:"center"});});row.append(resend);}
+  $("armyHistory").append(row);
  }
  const chart=$("armyWeeklyChart");chart.innerHTML="";
  const todayDate=new Date(today+"T12:00:00Z"), week=[];
@@ -5629,7 +5631,7 @@ $("armySignupButton").addEventListener("click",async()=>{
  }catch(e){message("armyAuthMessage",e.message||"No pudimos crear la cuenta.");}
  finally{setAuthMode(false);}
 });
-$("armyLogoutButton").addEventListener("click",async()=>{await supabase.auth.signOut();currentUser=null;currentUsername="";approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;dashboard.hidden=true;authBox.hidden=false;message("armyAuthMessage","Has cerrado sesión.");});
+$("armyLogoutButton").addEventListener("click",async()=>{await supabase.auth.signOut();currentUser=null;currentUsername="";approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;resendLogId=null;resendVoterName=null;dashboard.hidden=true;authBox.hidden=false;message("armyAuthMessage","Has cerrado sesión.");});
 $("armyCertificate").addEventListener("change",async(event)=>{
  const input=event.target,file=input.files?.[0];if(!file)return;
  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;$("armyDailyBlock").hidden=true;
@@ -5676,9 +5678,11 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const dm=raw.match(dateRegex);
   if(dm)certDate=dm[3]+"-"+months[dm[1].toLowerCase()]+"-"+String(dm[2]).padStart(2,"0");
   if(!certDate||certDate!==kstDate())throw new Error("La fecha del certificado debe ser la fecha de hoy en Corea (KST): "+kstDate()+".");
-  const {data:todayVoters,error:todayVotersError}=await supabase.from("army_heart_daily_logs").select("voter_name").eq("user_id",currentUser.id).eq("log_date",certDate);
+  const {data:todayVoters,error:todayVotersError}=await supabase.from("army_heart_daily_logs").select("id,voter_name").eq("user_id",currentUser.id).eq("log_date",certDate);
   if(todayVotersError)throw todayVotersError;
-  if((todayVoters||[]).some(x=>(x.voter_name||"").trim().toLowerCase()===certificateVoterName.toLowerCase()))throw new Error("Ya registraste un certificado de @"+certificateVoterName+" para hoy. Puedes subir otro si pertenece a un usuario distinto de Choeaedol.");
+  const sameVoterRecord=(todayVoters||[]).find(x=>(x.voter_name||"").trim().toLowerCase()===certificateVoterName.toLowerCase());
+  if(resendLogId){if(!resendVoterName||certificateVoterName.toLowerCase()!==resendVoterName.trim().toLowerCase())throw new Error("El certificado corregido debe pertenecer al mismo usuario de Choeaedol: @"+resendVoterName+".");if(!sameVoterRecord||sameVoterRecord.id!==resendLogId)throw new Error("No encontramos el registro original para reenviarlo. Actualiza tu historial e inténtalo otra vez.");}
+  else if(sameVoterRecord)throw new Error("Ya registraste un certificado de @"+certificateVoterName+" para hoy. Usa “Reenviar certificado” en ese registro para corregirlo.");
   bitmap.close();
   $("armyVotedHeartsValue").textContent=certificateVotedHearts.toLocaleString("es-MX")+" · "+certificateTargetMember;
   approvedTargetMember=certificateTargetMember;
@@ -5694,9 +5698,9 @@ $("armyDailyForm").addEventListener("submit",async(event)=>{
  if(approvedCertificateDate!==kstDate()){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;$("armyDailyBlock").hidden=true;message("armyVerifyStatus","El día KST cambió. Sube el certificado correspondiente al nuevo día.","error");return;}
  $("armySubmitDaily").disabled=true;message("armyDailyMessage","Guardando registro…");
  try{
-  const {error}=await supabase.from("army_heart_daily_logs").insert({user_id:currentUser.id,log_date:kstDate(),friend_count:0,confirmed_all_friends:true,certificate_sha256:approvedCertificateHash,voted_hearts:approvedVotedHearts,voter_name:approvedVoterName,target_member:approvedTargetMember||"BTS"});
-  if(error){if(error.code==="23505"){const detail=[error.message,error.details,error.hint].join(" ");if(detail.includes("army_heart_daily_logs_certificate_sha256_uidx"))throw new Error("Este certificado ya fue registrado. No se puede reutilizar, aunque se cambie el nombre del archivo.");throw new Error("Ya registraste tus corazones de hoy (KST).");}throw error;}
-  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;await loadHistory();message("armyDailyMessage","¡Certificado registrado correctamente!");
+  if(resendLogId){const {data:updated,error}=await supabase.from("army_heart_daily_logs").update({certificate_sha256:approvedCertificateHash,voted_hearts:approvedVotedHearts,voter_name:approvedVoterName,target_member:approvedTargetMember||"BTS"}).eq("id",resendLogId).eq("user_id",currentUser.id).eq("log_date",kstDate()).select("id").maybeSingle();if(error){if(error.code==="23505")throw new Error("Este certificado ya fue utilizado en otro registro.");throw error;}if(!updated)throw new Error("No se pudo actualizar el registro. Comprueba que siga siendo el día actual en KST.");resendLogId=null;resendVoterName=null;$("armyCertificateHeading").textContent="1 · Verifica tu certificado de Choeaedol";$("armySubmitDaily").textContent="Confirmar registro del certificado";await loadHistory();message("armyDailyMessage","¡Certificado corregido y reenviado! Se actualizó el mismo registro de tu cuenta.");}
+  else{const {error}=await supabase.from("army_heart_daily_logs").insert({user_id:currentUser.id,log_date:kstDate(),friend_count:0,confirmed_all_friends:true,certificate_sha256:approvedCertificateHash,voted_hearts:approvedVotedHearts,voter_name:approvedVoterName,target_member:approvedTargetMember||"BTS"});if(error){if(error.code==="23505"){const detail=[error.message,error.details,error.hint].join(" ");if(detail.includes("army_heart_daily_logs_certificate_sha256_uidx"))throw new Error("Este certificado ya fue registrado. No se puede reutilizar, aunque se cambie el nombre del archivo.");throw new Error("Ya registraste tus corazones de hoy (KST).");}throw error;}await loadHistory();message("armyDailyMessage","¡Certificado registrado correctamente!");}
+  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;
  }catch(e){message("armyDailyMessage",e.message||"No pudimos guardar el registro.");}
  finally{$("armySubmitDaily").disabled=false;}
 });
