@@ -5636,7 +5636,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
  const input=event.target,file=input.files?.[0];if(!file)return;
  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;$("armyDailyBlock").hidden=true;
  const clear=()=>{input.value="";};
- if(!file.type.startsWith("image/")||file.size>15*1024*1024){message("armyVerifyStatus","Selecciona una imagen compatible de máximo 15 MB.","error");clear();return;}
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>8*1024*1024){message("armyVerifyStatus","Formato no admitido. Usa JPG, PNG o WEBP de máximo 8 MB.","error");clear();return;}
  message("armyVerifyStatus","Revisando formato, fecha KST y duplicados… Esto puede tardar unos segundos.");
  try{
   const digest=await crypto.subtle.digest("SHA-256",await file.arrayBuffer());
@@ -5644,10 +5644,8 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   let bitmap=null,bitmapUrl=null;
   try{if(typeof createImageBitmap==="function")bitmap=await createImageBitmap(file);}catch(_){}
   if(!bitmap){bitmapUrl=URL.createObjectURL(file);bitmap=await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve({width:image.naturalWidth,height:image.naturalHeight,image,close(){URL.revokeObjectURL(bitmapUrl);}});image.onerror=()=>reject(new Error("El navegador no pudo abrir esta imagen. Prueba guardarla como JPG o PNG."));image.src=bitmapUrl;});}
-  // Se aceptan capturas, recortes y resoluciones variadas; se limita solo el
-  // tamaño extremo para proteger la memoria de los teléfonos.
-  if(bitmap.width<160||bitmap.height<160){bitmap.close?.();throw new Error("La imagen es demasiado pequeña para distinguir el texto del certificado.");}
-  if(bitmap.width*bitmap.height>60000000){bitmap.close?.();throw new Error("La imagen supera el límite de resolución del teléfono. Envía una captura reducida.");}
+  const ratio=bitmap.width/bitmap.height;
+  if(bitmap.width<600||bitmap.height<800||ratio<0.72||ratio>0.78){bitmap.close?.();throw new Error("La imagen no tiene la proporción del certificado de referencia (aprox. 900 × 1200).");}
   if(!tesseractWorker){
    const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/+esm");
    const createWorker=mod.createWorker||mod.default?.createWorker;
@@ -5657,95 +5655,21 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const canvas=document.createElement("canvas");canvas.width=bitmap.width;canvas.height=bitmap.height;
   const ctx=canvas.getContext("2d",{willReadFrequently:true});ctx.drawImage(bitmap.image||bitmap,0,0);
   bitmap.close?.();
-  // OCR en varias versiones: original, escala de grises y alto contraste.
-  // Limitamos la resolución procesada para evitar bloqueos en teléfonos.
-  // OCR con distintos modos de segmentación: los certificados tienen bloques
-  // de texto separados y el modo automático suele mezclar el nombre con los campos.
-  const recognizeWithMode=async(source,mode)=>{
-   try{await tesseractWorker.setParameters({tessedit_pageseg_mode:String(mode),preserve_interword_spaces:"1"});}catch(_){}
-   const result=await tesseractWorker.recognize(source);
-   return result?.data||{};
-  };
-  const firstData=await recognizeWithMode(canvas,3);
-  const enhanced=document.createElement("canvas");
-  const scale=Math.max(1,Math.min(2,3200/Math.max(canvas.width,canvas.height),Math.sqrt(12000000/(canvas.width*canvas.height))));
-  enhanced.width=Math.max(1,Math.round(canvas.width*scale));enhanced.height=Math.max(1,Math.round(canvas.height*scale));
-  const ectx=enhanced.getContext("2d",{willReadFrequently:true});
-  ectx.imageSmoothingEnabled=true;ectx.imageSmoothingQuality="high";
-  ectx.filter="grayscale(1) contrast(1.8) brightness(1.08)";
-  ectx.drawImage(canvas,0,0,enhanced.width,enhanced.height);
-  let secondData={},thirdData={},binaryData={};
-  try{secondData=await recognizeWithMode(enhanced,6);}catch(_){}
-  try{thirdData=await recognizeWithMode(enhanced,11);}catch(_){}
-  // Umbral binario: recupera letras grises sobre fondos pastel.
-  try{
-   const thresholdCanvas=document.createElement("canvas");thresholdCanvas.width=enhanced.width;thresholdCanvas.height=enhanced.height;
-   const tctx=thresholdCanvas.getContext("2d",{willReadFrequently:true});tctx.drawImage(enhanced,0,0);
-   const pixels=tctx.getImageData(0,0,thresholdCanvas.width,thresholdCanvas.height);
-   for(let i=0;i<pixels.data.length;i+=4){const value=(pixels.data[i]*.299+pixels.data[i+1]*.587+pixels.data[i+2]*.114)>158?255:0;pixels.data[i]=pixels.data[i+1]=pixels.data[i+2]=value;}
-   tctx.putImageData(pixels,0,0);
-   binaryData=await recognizeWithMode(thresholdCanvas,11);
-  }catch(_){}
-  try{await tesseractWorker.setParameters({tessedit_pageseg_mode:"3"});}catch(_){}
-  const ocrPasses=[firstData.text||"",secondData.text||"",thirdData.text||"",binaryData.text||""].filter(Boolean);
-  const ocrText=ocrPasses.join("\n");
-  const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
-  const compactOcr=ocrText.replace(/[\r\n]+/g," ").replace(/\s+/g," ").trim();
-  const normalizeOcr=value=>(value||"").toLowerCase().replace(/[|!]/g,"i").replace(/[0]/g,"o").replace(/[^\p{L}\p{N}]+/gu,"");
-  const normalizedOcr=normalizeOcr(compactOcr);
-  const hasVoterLabel=/v[o0]ter[\s:._-]*n[a4]me/i.test(compactOcr)||normalizedOcr.includes("votername");
-  const hasDateLabel=/v[o0]ting[\s:._-]*d[a4]te/i.test(compactOcr)||normalizedOcr.includes("votingdate");
-  const hasHeartsLabel=/v[o0]ted[\s:._-]*he[a4]rts/i.test(compactOcr)||normalizedOcr.includes("votedhearts");
-  const hasCertificateMark=/choeaed[o0]l|v[o0]ting\s*certificate|\bBTS\b/i.test(ocrText);
-  const recognizedLabels=[hasVoterLabel,hasDateLabel,hasHeartsLabel].filter(Boolean).length;
-  if(!hasCertificateMark&&recognizedLabels<2){
-   throw new Error("No pudimos identificar los campos del certificado. Comprueba que la imagen corresponda al certificado de Choeaedol.");
-  }
-
-  // Los valores pueden aparecer debajo del rótulo o en la misma línea.
-  // Se toleran separaciones, @ y caracteres Unicode en el nombre de usuario.
-  const ignoredName=/^(voter|name|votername|voting|date|choeaedol|certificate|bts|hearts|also|votes|from|other|accounts|voted)$/i;
-  const extractNameFromText=text=>{
-   const lines=(text||"").split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
-   for(let i=0;i<lines.length;i++){
-    const windowText=lines.slice(i,i+5).join(" ");
-    const label=windowText.match(/v[o0]ter\s*n[a4]me|votername/i);
-    if(!label)continue;
-    const tail=windowText.slice(label.index+label[0].length).replace(/^[\s:：=@#-]+/,"");
-    const candidates=tail.match(/@?[\p{L}\p{N}][\p{L}\p{N}_.-]{1,39}/gu)||[];
-    for(const candidate of candidates){
-     const name=candidate.replace(/^@/,"").replace(/[.,:;]+$/,"");
-     if(!ignoredName.test(name)&&!/^(20\d{2}|\d{1,2})$/.test(name))return name;
-    }
-   }
-   const flat=(text||"").replace(/\s+/g," ");
-   const compact=flat.match(/v[o0]ter\s*n[a4]me\s*[:：=@#-]*\s*@?([\p{L}\p{N}][\p{L}\p{N}_.-]{1,39})/iu);
-   return compact&&!ignoredName.test(compact[1])?compact[1]:null;
-  };
-  const extractHeartsFromText=text=>{
-   const lines=(text||"").split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
-   for(let i=0;i<lines.length;i++){
-    const windowText=lines.slice(i,i+4).join(" ");
-    const label=windowText.match(/v[o0]ted\s*he[a4]rts?|votedhearts/i);
-    if(!label)continue;
-    const tail=windowText.slice(label.index+label[0].length).replace(/^[\s:：=#-]+/,"");
-    const match=tail.match(/\b([0-9][0-9,.' ]{0,20})\b/);
-    if(match){const digits=match[1].replace(/[,.' ]/g,"");if(/^\d{1,15}$/.test(digits))return digits;}
-   }
-   const flat=(text||"").replace(/\s+/g," ");
-   const compact=flat.match(/v[o0]ted\s*he[a4]rts?\s*[:：=#-]*\s*([0-9][0-9,.' ]{0,20})/i);
-   if(compact){const digits=compact[1].replace(/[,.' ]/g,"");if(/^\d{1,15}$/.test(digits))return digits;}
-   return null;
-  };
-  let ocrVoterName=null,votedHeartsDigits=null;
-  for(const pass of ocrPasses){
-   if(!ocrVoterName)ocrVoterName=extractNameFromText(pass);
-   if(!votedHeartsDigits)votedHeartsDigits=extractHeartsFromText(pass);
-  }
-  const certificateVoterName=ocrVoterName;
-  if(!certificateVoterName)throw new Error("No pudimos reconocer automáticamente el usuario de Choeaedol en el certificado. No se guardó ningún voto.");
-  const certificateVotedHearts=votedHeartsDigits!==null?Number(votedHeartsDigits):NaN;
-  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos reconocer automáticamente la cantidad exacta de “Voted Hearts”. No se guardó ningún voto.");
+  const result=await tesseractWorker.recognize(canvas);
+  const raw=(result.data.text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
+  const required=["voting certificate","voter name","voting date","voted hearts","choeaedol","bts"];
+  const missing=required.filter(token=>!raw.includes(token));
+  const ocrLines=(result.data.text||"").split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
+  const voterLineIndex=ocrLines.findIndex(line=>/voter\s*name/i.test(line));
+  const voterLine=voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*voter\s*name\s*[:：]?/i,"").trim():"";
+  const voterRaw=voterLine||(voterLineIndex>=0?ocrLines[voterLineIndex+1]||"":"");
+  const voterNameMatch=voterRaw.match(/[A-Za-z0-9][A-Za-z0-9_.-]{1,30}/);
+  const certificateVoterName=voterNameMatch?voterNameMatch[0].trim():null;
+  if(!certificateVoterName)throw new Error("No pudimos leer el usuario de “Voter Name”. Intenta subir una imagen más nítida.");
+  const votedHeartsMatch=(result.data.text||"").match(/voted\s*hearts\s*[:=\-]?\s*([0-9][0-9,]*)/i);
+  const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN;
+  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos leer la cantidad exacta de “Voted Hearts”. Intenta subir una imagen más nítida.");
+  if(missing.length)throw new Error("No coincide con el certificado de referencia. Faltan textos: "+missing.join(", ")+".");
 
   const memberPatterns=[["Jin",/\b(jin|kim\s*seokjin|seokjin)\b/i],["SUGA",/\b(suga|agust\s*d|yoongi|min\s*yoongi)\b/i],["j-hope",/\b(j[\s-]*hope|hoseok|jung\s*hoseok)\b/i],["RM",/\b(rm|rap\s*monster|kim\s*namjoon|namjoon)\b/i],["Jimin",/\b(jimin|park\s*jimin)\b/i],["V",/\b(v|taehyung|kim\s*taehyung)\b/i],["Jungkook",/\b(jungkook|jeon\s*jungkook)\b/i]];
   const memberLines=ocrLines.filter(line=>/vot(e|ing)|member|artist|category|for:/i.test(line));
