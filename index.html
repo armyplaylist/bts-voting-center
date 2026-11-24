@@ -3551,7 +3551,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
   <form id="armyAuthForm" class="army-form">
    <label>Nombre de usuario<input id="armyUsername" name="username" autocomplete="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9][A-Za-z0-9._-]{2,19}" required placeholder="Ej. purplearmy"></label>
    <label>Contraseña<input id="armyPassword" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" required placeholder="Mínimo 8 caracteres"></label>
-   <div class="army-actions"><button class="btn" type="submit" id="armyLoginButton">Iniciar sesión</button><button class="btn secondary" type="button" id="armySignupButton">Crear cuenta</button></div>
+   <div class="army-actions"><button class="btn" type="button" id="armyLoginButton">Iniciar sesión</button><button class="btn secondary" type="button" id="armySignupButton">Crear cuenta</button></div>
    <p class="army-message" id="armyAuthMessage" role="status" aria-live="polite"></p>
   </form>
  </div>
@@ -5609,14 +5609,22 @@ async function showSession(session){
  currentUser=session.user;approvedForToday=false;
  await loadProfile();
 }
-authForm.addEventListener("submit",async(event)=>{
- event.preventDefault();setAuthMode(true);message("armyAuthMessage","Iniciando sesión…");
+async function runArmyLogin(){
+ if($("armyLoginButton").disabled)return;
+ setAuthMode(true);message("armyAuthMessage","Iniciando sesión…");
  const username=$("armyUsername").value.trim(),password=$("armyPassword").value;
  try{
   const {data,error}=await supabase.auth.signInWithPassword({email:usernameEmail(username),password});
-  if(error)throw error;await showSession(data.session);
+  if(error)throw error;
+  if(!data.session)throw new Error("No se pudo iniciar la sesión. Comprueba tus datos.");
+  await showSession(data.session);
  }catch(e){message("armyAuthMessage",e.message||"No pudimos iniciar sesión.");}
  finally{setAuthMode(false);}
+}
+$("armyLoginButton").addEventListener("click",runArmyLogin);
+authForm.addEventListener("submit",async(event)=>{
+ event.preventDefault();
+ await runArmyLogin();
 });
 $("armySignupButton").addEventListener("click",async()=>{
  const username=$("armyUsername").value.trim(),password=$("armyPassword").value;
