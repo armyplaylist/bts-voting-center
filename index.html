@@ -5688,15 +5688,15 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    }
   }
   const manualVoterName=($("armyManualVoterName")?.value||"").trim().replace(/^@/,"");
-  const validManualVoterName=/^[A-Za-z0-9][A-Za-z0-9_.-]{1,30}$/.test(manualVoterN  const votedHeartsMatch=ocrText.match(/voted\s*hearts[\s:：=#-]*([0-9][0-9,]*)/i)||ocrText.match(/voted[\s\S]{0,24}?hearts[\s:：=#-]*([0-9][0-9,]*)/i);
-  const manualHeartsRaw=($("armyManualVotedHearts")?.value||"").trim();
-  const manualHeartsDigits=manualHeartsRaw.replace(/[\s,]/g,"");
-  if(manualHeartsRaw&&!/^\d+$/.test(manualHeartsDigits))throw new Error("Escribe solo la cantidad numérica exacta de “Voted Hearts”.");
-  const certificateVotedHearts=manualHeartsRaw?Number(manualHeartsDigits):(votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN);
-crVoterName:null);
+  const validManualVoterName=/^[A-Za-z0-9][A-Za-z0-9_.-]{1,30}$/.test(manualVoterName)?manualVoterName:null;
+  const unusableOcrName=!ocrVoterName||/^(voter|name|votername)$/i.test(ocrVoterName);
+  const certificateVoterName=validManualVoterName||(!unusableOcrName?ocrVoterName:null);
   if(!certificateVoterName)throw new Error("No pudimos identificar el usuario automáticamente. Escríbelo en el campo «Usuario de Choeaedol» y vuelve a seleccionar el certificado.");
-  const votedHeartsMatch=ocrText.match(/voted\s*hearts\s*[:=\-]?\s*([0-9][0-9,]*)/i);
-  const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN;
+  const votedHeartsMatch=ocrText.match(/voted\\s*hearts[\\s:：=#-]*([0-9][0-9,]*)/i)||ocrText.match(/voted[\\s\\S]{0,24}?hearts[\\s:：=#-]*([0-9][0-9,]*)/i);
+  const manualHeartsRaw=($("armyManualVotedHearts")?.value||"").trim();
+  const manualHeartsDigits=manualHeartsRaw.replace(/[\\s,]/g,"");
+  if(manualHeartsRaw&&!/^\\d+$/.test(manualHeartsDigits))throw new Error("Escribe solo la cantidad numérica exacta de “Voted Hearts”.");
+  const certificateVotedHearts=manualHeartsRaw?Number(manualHeartsDigits):(votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN);
   const memberPatterns=[["Jin",/\b(jin|kim\s*seokjin|seokjin)\b/i],["SUGA",/\b(suga|agust\s*d|yoongi|min\s*yoongi)\b/i],["j-hope",/\b(j[\s-]*hope|hoseok|jung\s*hoseok)\b/i],["RM",/\b(rm|rap\s*monster|kim\s*namjoon|namjoon)\b/i],["Jimin",/\b(jimin|park\s*jimin)\b/i],["V",/\b(v|taehyung|kim\s*taehyung)\b/i],["Jungkook",/\b(jungkook|jeon\s*jungkook)\b/i]];
   const memberLines=ocrLines.filter(line=>/vot(e|ing)|member|artist|category|for:/i.test(line));
   const memberText=memberLines.join(" ");
