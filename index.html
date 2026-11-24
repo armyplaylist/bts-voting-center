@@ -5448,23 +5448,28 @@ async function loadCountryMap(){
  if(!unlocked)return;
  const myBtsVotes=(myLogs||[]).filter(x=>!x.target_member||x.target_member==="BTS").reduce((sum,x)=>sum+Number(x.voted_hearts||0),0);
  const canSeeVoteCounts=myBtsVotes>=20000;
- // Solo cuenta personas que tienen al menos un registro real de votos positivos.
- // Se pagina para no quedar limitado al máximo de filas de Supabase.
- const activeVoterIds=new Set();
- const votesByCountry=new Map();
- for(const log of dailyLogs||[]){
-  if(!log.user_id)continue;
-  activeVoterIds.add(log.user_id);
-  const code=profilesByUser.get(log.user_id);
-  if(code)votesByCountry.set(code,(votesByCountry.get(code)||0)+Number(log.voted_hearts||0));
- }
- const profilesByUser=new Map();
+ // La clasificación se calcula solo con los registros del día KST actual.
+ // Se pagina para incluir a todos los participantes sin tocar ni borrar el historial.
+ const pageSize=1000,profilesByUser=new Map();
  let profileOffset=0,hasMoreProfiles=true;
  while(hasMoreProfiles){
   const {data:profileRows,error:profileRowsError}=await supabase.from("army_profiles").select("user_id,country_code").not("country_code","is",null).range(profileOffset,profileOffset+pageSize-1);
   if(profileRowsError)throw new Error("No se pudieron verificar los países de los votantes activos. Intenta recargar el ranking.");
   for(const profile of profileRows||[])if(profile.user_id&&profile.country_code)profilesByUser.set(profile.user_id,profile.country_code);
   hasMoreProfiles=(profileRows||[]).length===pageSize;profileOffset+=pageSize;
+ }
+ const todayLogs=[...(dailyLogs||[])];let dailyOffset=todayLogs.length,hasMoreDaily=todayLogs.length===pageSize;
+ while(hasMoreDaily){
+  const {data:nextLogs,error:nextLogsError}=await supabase.from("army_heart_daily_logs").select("user_id,voted_hearts").eq("log_date",kstDate()).gt("voted_hearts",0).range(dailyOffset,dailyOffset+pageSize-1);
+  if(nextLogsError)throw new Error("No se pudo verificar la participación diaria. Intenta recargar el ranking.");
+  todayLogs.push(...(nextLogs||[]));dailyOffset+=(nextLogs||[]).length;hasMoreDaily=(nextLogs||[]).length===pageSize;
+ }
+ const activeVoterIds=new Set(),votesByCountry=new Map();
+ for(const log of todayLogs){
+  if(!log.user_id)continue;
+  activeVoterIds.add(log.user_id);
+  const code=profilesByUser.get(log.user_id);
+  if(code)votesByCountry.set(code,(votesByCountry.get(code)||0)+Number(log.voted_hearts||0));
  }
  const usersByCountry=new Map();
  for(const userId of activeVoterIds){
