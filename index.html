@@ -5423,7 +5423,7 @@ const authBox=$("armyAuth"), dashboard=$("armyDashboard"), authForm=$("armyAuthF
 let currentUser=null, currentUsername="", approvedForToday=false, approvedCertificateHash=null, approvedCertificateDate=null, approvedVotedHearts=null, approvedVoterName=null, approvedTargetMember=null, tesseractWorker=null, resendLogId=null, resendVoterName=null;
 const armyCountries=[["AF","Afganistán"],["AL","Albania"],["DZ","Argelia"],["AD","Andorra"],["AO","Angola"],["AG","Antigua y Barbuda"],["AR","Argentina"],["AM","Armenia"],["AU","Australia"],["AT","Austria"],["AZ","Azerbaiyán"],["BS","Bahamas"],["BH","Baréin"],["BD","Bangladés"],["BB","Barbados"],["BY","Bielorrusia"],["BE","Bélgica"],["BZ","Belice"],["BJ","Benín"],["BT","Bután"],["BO","Bolivia"],["BA","Bosnia y Herzegovina"],["BW","Botsuana"],["BR","Brasil"],["BN","Brunéi"],["BG","Bulgaria"],["BF","Burkina Faso"],["BI","Burundi"],["CV","Cabo Verde"],["KH","Camboya"],["CM","Camerún"],["CA","Canadá"],["CF","República Centroafricana"],["TD","Chad"],["CL","Chile"],["CN","China"],["CO","Colombia"],["KM","Comoras"],["CG","Congo"],["CD","República Democrática del Congo"],["CR","Costa Rica"],["CI","Costa de Marfil"],["HR","Croacia"],["CU","Cuba"],["CY","Chipre"],["CZ","Chequia"],["DK","Dinamarca"],["DJ","Yibuti"],["DM","Dominica"],["DO","República Dominicana"],["EC","Ecuador"],["EG","Egipto"],["SV","El Salvador"],["GQ","Guinea Ecuatorial"],["ER","Eritrea"],["EE","Estonia"],["SZ","Esuatini"],["ET","Etiopía"],["FJ","Fiyi"],["FI","Finlandia"],["FR","Francia"],["GA","Gabón"],["GM","Gambia"],["GE","Georgia"],["DE","Alemania"],["GH","Ghana"],["GR","Grecia"],["GD","Granada"],["GT","Guatemala"],["GN","Guinea"],["GW","Guinea-Bisáu"],["GY","Guyana"],["HT","Haití"],["HN","Honduras"],["HU","Hungría"],["IS","Islandia"],["IN","India"],["ID","Indonesia"],["IR","Irán"],["IQ","Irak"],["IE","Irlanda"],["IL","Israel"],["IT","Italia"],["JM","Jamaica"],["JP","Japón"],["JO","Jordania"],["KZ","Kazajistán"],["KE","Kenia"],["KI","Kiribati"],["KP","Corea del Norte"],["KR","Corea del Sur"],["KW","Kuwait"],["KG","Kirguistán"],["LA","Laos"],["LV","Letonia"],["LB","Líbano"],["LS","Lesoto"],["LR","Liberia"],["LY","Libia"],["LI","Liechtenstein"],["LT","Lituania"],["LU","Luxemburgo"],["MG","Madagascar"],["MW","Malaui"],["MY","Malasia"],["MV","Maldivas"],["ML","Malí"],["MT","Malta"],["MH","Islas Marshall"],["MR","Mauritania"],["MU","Mauricio"],["MX","México"],["FM","Micronesia"],["MD","Moldavia"],["MC","Mónaco"],["MN","Mongolia"],["ME","Montenegro"],["MA","Marruecos"],["MZ","Mozambique"],["MM","Myanmar"],["NA","Namibia"],["NR","Nauru"],["NP","Nepal"],["NL","Países Bajos"],["NZ","Nueva Zelanda"],["NI","Nicaragua"],["NE","Níger"],["NG","Nigeria"],["MK","Macedonia del Norte"],["NO","Noruega"],["OM","Omán"],["PK","Pakistán"],["PW","Palaos"],["PA","Panamá"],["PG","Papúa Nueva Guinea"],["PY","Paraguay"],["PE","Perú"],["PH","Filipinas"],["PL","Polonia"],["PT","Portugal"],["QA","Catar"],["RO","Rumanía"],["RU","Rusia"],["RW","Ruanda"],["KN","San Cristóbal y Nieves"],["LC","Santa Lucía"],["VC","San Vicente y las Granadinas"],["WS","Samoa"],["SM","San Marino"],["ST","Santo Tomé y Príncipe"],["SA","Arabia Saudita"],["SN","Senegal"],["RS","Serbia"],["SC","Seychelles"],["SL","Sierra Leona"],["SG","Singapur"],["SK","Eslovaquia"],["SI","Eslovenia"],["SB","Islas Salomón"],["SO","Somalia"],["ZA","Sudáfrica"],["SS","Sudán del Sur"],["ES","España"],["LK","Sri Lanka"],["SD","Sudán"],["SR","Surinam"],["SE","Suecia"],["CH","Suiza"],["SY","Siria"],["TW","Taiwán"],["TJ","Tayikistán"],["TZ","Tanzania"],["TH","Tailandia"],["TL","Timor Oriental"],["TG","Togo"],["TO","Tonga"],["TT","Trinidad y Tobago"],["TN","Túnez"],["TR","Turquía"],["TM","Turkmenistán"],["TV","Tuvalu"],["UG","Uganda"],["UA","Ucrania"],["AE","Emiratos Árabes Unidos"],["GB","Reino Unido"],["US","Estados Unidos"],["UY","Uruguay"],["UZ","Uzbekistán"],["VU","Vanuatu"],["VA","Ciudad del Vaticano"],["VE","Venezuela"],["VN","Vietnam"],["YE","Yemen"],["ZM","Zambia"],["ZW","Zimbabue"],["XK","Kosovo"]];
 const usernameEmail = (name) => "army_"+name.trim().toLowerCase()+"@accounts.invalid";
-function kstDate(){return new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());}
+function kstDate(){const parts=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const part=type=>parts.find(x=>x.type===type)?.value||"";return part("year")+"-"+part("month")+"-"+part("day");}
 function prettyKstDate(date){return new Intl.DateTimeFormat("es-MX",{timeZone:"Asia/Seoul",day:"numeric",month:"long",year:"numeric"}).format(new Date(date+"T12:00:00+09:00"));}
 function message(id,text,type=""){const el=$(id);el.textContent=text;el.className=(el.id==="armyVerifyStatus"?"army-verify-status":"army-message")+(type?" "+type:"");}
 function setAuthMode(loading){$("armyLoginButton").disabled=loading;$("armySignupButton").disabled=loading;}
@@ -5638,16 +5638,18 @@ $("armyCertificate").addEventListener("change",async(event)=>{
  const input=event.target,file=input.files?.[0];if(!file)return;
  approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;$("armyDailyBlock").hidden=true;
  const clear=()=>{input.value="";};
- if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>8*1024*1024){message("armyVerifyStatus","Formato no admitido. Usa JPG, PNG o WEBP de máximo 8 MB.","error");clear();return;}
+ if(!file.type.startsWith("image/")||file.size>15*1024*1024){message("armyVerifyStatus","Selecciona una imagen compatible de máximo 15 MB.","error");clear();return;}
  message("armyVerifyStatus","Revisando formato, fecha KST y duplicados… Esto puede tardar unos segundos.");
  try{
   const digest=await crypto.subtle.digest("SHA-256",await file.arrayBuffer());
   const candidateCertificateHash=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,"0")).join("");
-  const bitmap=await createImageBitmap(file);
-  // Acepta capturas de pantalla y recortes de distintos teléfonos; solo se
-  // rechazan imágenes demasiado pequeñas o enormes para procesar con seguridad.
-  if(bitmap.width<320||bitmap.height<320){bitmap.close();throw new Error("La imagen es demasiado pequeña. Sube una captura más nítida del certificado completo.");}
-  if(bitmap.width*bitmap.height>40000000){bitmap.close();throw new Error("La imagen tiene demasiados píxeles. Reduce su tamaño o envía una captura de pantalla.");}
+  let bitmap=null,bitmapUrl=null;
+  try{if(typeof createImageBitmap==="function")bitmap=await createImageBitmap(file);}catch(_){}
+  if(!bitmap){bitmapUrl=URL.createObjectURL(file);bitmap=await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve({width:image.naturalWidth,height:image.naturalHeight,image,close(){URL.revokeObjectURL(bitmapUrl);}});image.onerror=()=>reject(new Error("El navegador no pudo abrir esta imagen. Prueba guardarla como JPG o PNG."));image.src=bitmapUrl;});}
+  // Se aceptan capturas, recortes y resoluciones variadas; se limita solo el
+  // tamaño extremo para proteger la memoria de los teléfonos.
+  if(bitmap.width<160||bitmap.height<160){bitmap.close?.();throw new Error("La imagen es demasiado pequeña para distinguir el texto del certificado.");}
+  if(bitmap.width*bitmap.height>60000000){bitmap.close?.();throw new Error("La imagen supera el límite de resolución del teléfono. Envía una captura reducida.");}
   if(!tesseractWorker){
    const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@5/+esm");
    const createWorker=mod.createWorker||mod.default?.createWorker;
@@ -5655,8 +5657,8 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    tesseractWorker=await createWorker("eng");
   }
   const canvas=document.createElement("canvas");canvas.width=bitmap.width;canvas.height=bitmap.height;
-  const ctx=canvas.getContext("2d",{willReadFrequently:true});ctx.drawImage(bitmap,0,0);
-  bitmap.close();
+  const ctx=canvas.getContext("2d",{willReadFrequently:true});ctx.drawImage(bitmap.image||bitmap,0,0);
+  bitmap.close?.();
   // OCR en varias versiones: original, escala de grises y alto contraste.
   // Limitamos la resolución procesada para evitar bloqueos en teléfonos.
   const firstOcr=await tesseractWorker.recognize(canvas);
@@ -5687,8 +5689,9 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const hasDateLabel=/v[o0]ting[\s:._-]*d[a4]te/i.test(compactOcr)||/v[o0]ting[\s\S]{0,28}d[a4]te/i.test(ocrText);
   const hasHeartsLabel=/v[o0]ted[\s:._-]*he[a4]rts/i.test(compactOcr)||/v[o0]ted[\s\S]{0,28}he[a4]rts/i.test(ocrText);
   const hasCertificateMark=/choeaed[o0]l|v[o0]ting\s*certificate|\bBTS\b/i.test(ocrText);
-  if(!hasCertificateMark&&!(hasVoterLabel&&hasDateLabel&&hasHeartsLabel)){
-   throw new Error("No pudimos confirmar que sea un certificado de Choeaedol. Sube la captura completa y nítida.");
+  const recognizedLabels=[hasVoterLabel,hasDateLabel,hasHeartsLabel].filter(Boolean).length;
+  if(!hasCertificateMark&&recognizedLabels<2){
+   throw new Error("No pudimos identificar los campos del certificado. Comprueba que la imagen corresponda al certificado de Choeaedol.");
   }
   // Busca el usuario junto al rótulo; nunca toma palabras de otras secciones.
   const ignoredName=/^(voter|name|votername|voting|date|choeaedol|certificate|bts|hearts)$/i;
@@ -5749,9 +5752,21 @@ $("armyCertificate").addEventListener("change",async(event)=>{
 
   const months={january:"01",february:"02",march:"03",april:"04",may:"05",june:"06",july:"07",august:"08",september:"09",october:"10",november:"11",december:"12"};
   let certDate=null;
-  const dateRegex=new RegExp("("+Object.keys(months).join("|")+")\\s+(\\d{1,2})[,]?\\s+(\\d{4})","i");
-  const dm=raw.match(dateRegex);
-  if(dm)certDate=dm[3]+"-"+months[dm[1].toLowerCase()]+"-"+String(dm[2]).padStart(2,"0");
+  // Prioriza el texto cercano a "Voting Date" para no confundir la fecha con otras cifras.
+  const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\\s:._-]*d[a4]te|v[o0]ting/i.test(line));
+  const dateContext=dateLineIndex>=0?ocrLines.slice(dateLineIndex,dateLineIndex+3).join(" "):ocrText;
+  const normalizedDateText=dateContext.toLowerCase().replace(/[,./_-]+/g," ").replace(/\\s+/g," ").trim();
+  const namedDate=normalizedDateText.match(/(january|february|march|april|may|june|july|august|september|october|november|december)\\s+(\\d{1,2})\\s+(\\d{4})/i);
+  if(namedDate)certDate=namedDate[3]+"-"+months[namedDate[1].toLowerCase()]+"-"+String(namedDate[2]).padStart(2,"0");
+  if(!certDate){
+   const numericDate=normalizedDateText.match(/\\b(20\\d{2})\\s+(\\d{1,2})\\s+(\\d{1,2})\\b|\\b(\\d{1,2})\\s+(\\d{1,2})\\s+(20\\d{2})\\b/);
+   if(numericDate){
+    const year=Number(numericDate[1]||numericDate[6]);
+    const month=Number(numericDate[2]||numericDate[4]);
+    const day=Number(numericDate[3]||numericDate[5]);
+    if(month>=1&&month<=12&&day>=1&&day<=31)certDate=String(year).padStart(4,"0")+"-"+String(month).padStart(2,"0")+"-"+String(day).padStart(2,"0");
+   }
+  }
   if(!certDate||certDate!==kstDate())throw new Error("La fecha del certificado debe ser la fecha de hoy en Corea (KST): "+kstDate()+".");
   const {data:todayVoters,error:todayVotersError}=await supabase.from("army_heart_daily_logs").select("id,voter_name").eq("user_id",currentUser.id).eq("log_date",certDate);
   if(todayVotersError)throw todayVotersError;
