@@ -5651,22 +5651,46 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    tesseractWorker=await createWorker("eng");
   }
   const canvas=document.createElement("canvas");canvas.width=bitmap.width;canvas.height=bitmap.height;
-  canvas.getContext("2d").drawImage(bitmap,0,0);bitmap.close();
-  const result=await tesseractWorker.recognize(canvas);
-  const raw=(result.data.text||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
+  const ctx=canvas.getContext("2d",{willReadFrequently:true});ctx.drawImage(bitmap,0,0);
+  bitmap.close();
+  // OCR en dos pasadas: imagen original y versión ampliada/contrastada para
+  // recuperar nombres pequeños o separados del rótulo "Voter Name".
+  const firstOcr=await tesseractWorker.recognize(canvas);
+  const enhanced=document.createElement("canvas");
+  const scale=Math.max(2,Math.min(3,Math.ceil(1800/canvas.width)));
+  enhanced.width=canvas.width*scale;enhanced.height=canvas.height*scale;
+  const ectx=enhanced.getContext("2d",{willReadFrequently:true});
+  ectx.imageSmoothingEnabled=true;ectx.imageSmoothingQuality="high";
+  ectx.filter="grayscale(1) contrast(1.65) brightness(1.08)";
+  ectx.drawImage(canvas,0,0,enhanced.width,enhanced.height);
+  let secondText="";
+  try{const secondOcr=await tesseractWorker.recognize(enhanced);secondText=secondOcr.data.text||"";}catch(_){}
+  const ocrText=[firstOcr.data.text||"",secondText].filter(Boolean).join("\n");
+  const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ");
   const required=["voting certificate","voter name","voting date","voted hearts","choeaedol","bts"];
   const missing=required.filter(token=>!raw.includes(token));
-  const ocrLines=(result.data.text||"").split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
-  const voterLineIndex=ocrLines.findIndex(line=>/voter\s*name/i.test(line));
-  const voterLine=voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*voter\s*name\s*[:：]?/i,"").trim():"";
-  const voterRaw=voterLine||(voterLineIndex>=0?ocrLines[voterLineIndex+1]||"":"");
-  const voterNameMatch=voterRaw.match(/[A-Za-z0-9][A-Za-z0-9_.-]{1,30}/);
-  const ocrVoterName=voterNameMatch?voterNameMatch[0].trim():null;
+  const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
+  // Acepta "Voter Name" en una línea o partido en dos, y lee el valor
+  // inmediatamente después del rótulo sin confundirlo con la palabra Voter.
+  let ocrVoterName=null;
+  for(let i=0;i<ocrLines.length;i++){
+   const line=ocrLines[i];
+   if(/voter\s*name/i.test(line)||(/voter/i.test(line)&&/name/i.test((line+" "+(ocrLines[i+1]||""))))){
+    const sameLine=line.replace(/.*?voter\s*name\s*[:：]?/i,"").trim();
+    const nextLine=ocrLines[i+1]||"";
+    const candidates=[sameLine,nextLine.replace(/^(?:name|[:：\-])\s*/i,"")];
+    for(const candidate of candidates){
+     const match=candidate.match(/@?([A-Za-z0-9][A-Za-z0-9_.-]{1,30})/);
+     if(match&&!/^(voter|name|votername|voting|date)$/i.test(match[1])){ocrVoterName=match[1].replace(/^@/,"");break;}
+    }
+    if(ocrVoterName)break;
+   }
+  }
   const manualVoterName=($("armyManualVoterName")?.value||"").trim().replace(/^@/,"");
   const validManualVoterName=/^[A-Za-z0-9][A-Za-z0-9_.-]{1,30}$/.test(manualVoterName)?manualVoterName:null;
   const unusableOcrName=!ocrVoterName||/^(voter|name|votername)$/i.test(ocrVoterName);
   const certificateVoterName=validManualVoterName||(!unusableOcrName?ocrVoterName:null);
-  if(!certificateVoterName)throw new Error("No pudimos leer el usuario de “Voter Name”. Escribe tu usuario exacto en el campo inferior y vuelve a seleccionar el certificado.");
+  if(!certificateVoterName)throw new Error("No pudimos identificar el usuario automáticamente. Escríbelo en el campo «Usuario de Choeaedol» y vuelve a seleccionar el certificado.");
   const votedHeartsMatch=(result.data.text||"").match(/voted\s*hearts\s*[:=\-]?\s*([0-9][0-9,]*)/i);
   const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN;
   const memberPatterns=[["Jin",/\b(jin|kim\s*seokjin|seokjin)\b/i],["SUGA",/\b(suga|agust\s*d|yoongi|min\s*yoongi)\b/i],["j-hope",/\b(j[\s-]*hope|hoseok|jung\s*hoseok)\b/i],["RM",/\b(rm|rap\s*monster|kim\s*namjoon|namjoon)\b/i],["Jimin",/\b(jimin|park\s*jimin)\b/i],["V",/\b(v|taehyung|kim\s*taehyung)\b/i],["Jungkook",/\b(jungkook|jeon\s*jungkook)\b/i]];
@@ -5688,7 +5712,6 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const sameVoterRecord=(todayVoters||[]).find(x=>(x.voter_name||"").trim().toLowerCase()===certificateVoterName.toLowerCase());
   if(resendLogId){if(!resendVoterName||certificateVoterName.toLowerCase()!==resendVoterName.trim().toLowerCase())throw new Error("El certificado corregido debe pertenecer al mismo usuario de Choeaedol: @"+resendVoterName+".");if(!sameVoterRecord||sameVoterRecord.id!==resendLogId)throw new Error("No encontramos el registro original para reenviarlo. Actualiza tu historial e inténtalo otra vez.");}
   else if(sameVoterRecord)throw new Error("Ya registraste un certificado de @"+certificateVoterName+" para hoy. Usa “Reenviar certificado” en ese registro para corregirlo.");
-  bitmap.close();
   $("armyVotedHeartsValue").textContent=certificateVotedHearts.toLocaleString("es-MX")+" · "+certificateTargetMember;
   approvedTargetMember=certificateTargetMember;
   approvedVotedHearts=certificateVotedHearts;approvedVoterName=certificateVoterName;approvedTargetMember=certificateTargetMember;
