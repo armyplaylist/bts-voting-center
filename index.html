@@ -3486,6 +3486,9 @@ body.dark-mode #channel-r-awards-2026 .channelr-date-countdown{background:#30263
 /* Mi perfil es una vista independiente: no forma parte del recorrido de las demás secciones. */
 #army.army-panel{display:none!important}
 body.army-profile-view #army.army-panel{display:block!important}
+/* Al abrir Mi perfil, se convierte en una vista propia y no queda mezclado con Inicio ni con otras secciones. */
+body.army-profile-view main.wrap > section:not(#army){display:none!important}
+body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;min-height:60vh}
 </style>
 </head>
 <body>
