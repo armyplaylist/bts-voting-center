@@ -5453,7 +5453,7 @@ async function loadCountryMap(){
   if(!usersByCountry.has(code))usersByCountry.set(code,new Set());
   usersByCountry.get(code).add(row.user_id);
  }
- const {data:myVoteLogs,error:myVoteLogsError}=await supabase.from("army_heart_daily_logs").select("voted_hearts,target_member").eq("user_id",currentUser.id).limit(500);
+ const {data:myVoteLogs,error:myVoteLogsError}=await supabase.from("army_heart_daily_logs").select("voted_hearts,target_member").eq("user_id",currentUser.id).eq("log_date",today).limit(500);
  if(myVoteLogsError)throw new Error("No se pudo comprobar tu progreso personal para desbloquear el ranking.");
  const myVotes=(myVoteLogs||[]).filter(x=>!x.target_member||x.target_member==="BTS").reduce((sum,x)=>sum+Number(x.voted_hearts||0),0);
  const unlocked=myVotes>=20000;
@@ -5476,7 +5476,7 @@ async function loadCountryMap(){
  document.querySelectorAll(".army-vote-privacy-note").forEach(note=>note.remove());
  const visibilityNote=document.createElement("p");
  visibilityNote.className="army-vote-privacy-note";
- visibilityNote.textContent=unlocked?"Ranking diario ordenado por los votos registrados desde el último reinicio de CHOEAEDOL (00:00 KST).":"El ranking muestra los votos del día actual (KST). El número exacto de votos se desbloquea cuando alcances la cifra de 20,000 votos registrados en tu cuenta.";
+ visibilityNote.textContent=unlocked?"Ranking diario ordenado por los votos registrados desde el último reinicio de CHOEAEDOL (00:00 KST).":"El ranking muestra los votos del día actual (KST). El número exacto de votos se desbloquea cuando alcances 20,000 votos en tu cuenta durante este mismo día.";
  rankingEl.after(visibilityNote);
  await renderArmyGlobe(ranking);
 }
