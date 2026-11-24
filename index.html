@@ -5787,11 +5787,14 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const voterLabelMatch=ocrText.match(/(?:v[o0]ter\s*name|nombre\s+del\s+votante)\s*[:：]?\s*(@?[A-Za-z0-9][A-Za-z0-9_.-]{1,30})/i);
   let voterRaw=voterLabelMatch?voterLabelMatch[1].trim():(voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*(?:v[o0]ter\s*name|nombre\s+del\s+votante)\s*[:：]?/i,"").trim():"");
   if(!voterRaw&&voterLineIndex>=0)voterRaw=ocrLines[voterLineIndex+1]||"";
-  const numberLinePattern=/^\s*([0-9][0-9,]*)\s*$/;
-  const numericLines=ocrLines.map((line,index)=>({line,index,match:numberLinePattern.exec(line.replace(/[：:]$/,"").trim())})).filter(x=>x.match&&!/^20\d{2}$/.test(x.match[1]));
+  // Choeaedol puede mostrar miles con punto (2.033) o coma (2,033).
+  // Como "Voted Hearts" siempre es un recuento entero, quitamos separadores de miles antes de convertir.
+  const parseCertificateCount=value=>{const digits=String(value||"").replace(/[.,\s\u00a0]/g,"");return /^\d+$/.test(digits)?Number(digits):NaN;};
+  const numberLinePattern=/^\s*([0-9][0-9.,\s\u00a0]*)\s*$/;
+  const numericLines=ocrLines.map((line,index)=>({line,index,match:numberLinePattern.exec(line.replace(/[：:]$/,"").trim())})).filter(x=>x.match&&!/^20\d{2}$/.test(x.match[1].replace(/[.,\s\u00a0]/g,"")));
   const bottomVoteLine=numericLines.length?numericLines[numericLines.length-1]:null;
-  const votedHeartsMatch=ocrText.match(/(?:v[o0]ted\s*hearts|corazones\s+votados)\s*[:=–-]?\s*([0-9][0-9,]*)/i);
-  const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):(bottomVoteLine?Number(bottomVoteLine.match[1].replace(/,/g,"")):NaN);
+  const votedHeartsMatch=ocrText.match(/(?:v[o0]ted\s*hearts|corazones\s+votados)\s*[:=–-]?\s*([0-9][0-9.,\s\u00a0]*)/i);
+  const certificateVotedHearts=votedHeartsMatch?parseCertificateCount(votedHeartsMatch[1]):(bottomVoteLine?parseCertificateCount(bottomVoteLine.match[1]):NaN);
   if(!voterRaw&&bottomVoteLine){
    const ignored=/^(voter\s*name|voting|voted|hearts?|choeaedol|bts|voting\s*certificate|certificate|date|member|artist|category|for)$/i;
    for(let i=bottomVoteLine.index-1;i>=0&&!voterRaw;i--){
