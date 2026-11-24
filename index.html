@@ -3602,6 +3602,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    <p>Sube el certificado del día. Se comprobarán el formato vertical, los textos del certificado, BTS, Choeaedol, tu usuario y la fecha KST actual. La imagen se procesa localmente y se elimina al terminar.</p>
    <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
    <label class="army-voter-fallback" for="armyManualVoterName">Usuario de Choeaedol (si el lector falla o lo lee mal)<input id="armyManualVoterName" type="text" maxlength="31" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Escribe tu usuario exacto"></label>
+    <label class="army-voter-fallback" for="armyManualVotedHearts">Cantidad de Voted Hearts (si el lector falla)<input id="armyManualVotedHearts" type="text" inputmode="numeric" maxlength="16" autocomplete="off" spellcheck="false" placeholder="Escribe la cifra exacta"><small>Si no se reconoce, escribe el número que aparece en tu certificado y vuelve a seleccionarlo.</small></label>
    <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
   </div>
   <div class="army-block" id="armyDailyBlock" hidden>
@@ -5687,9 +5688,12 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    }
   }
   const manualVoterName=($("armyManualVoterName")?.value||"").trim().replace(/^@/,"");
-  const validManualVoterName=/^[A-Za-z0-9][A-Za-z0-9_.-]{1,30}$/.test(manualVoterName)?manualVoterName:null;
-  const unusableOcrName=!ocrVoterName||/^(voter|name|votername)$/i.test(ocrVoterName);
-  const certificateVoterName=validManualVoterName||(!unusableOcrName?ocrVoterName:null);
+  const validManualVoterName=/^[A-Za-z0-9][A-Za-z0-9_.-]{1,30}$/.test(manualVoterN  const votedHeartsMatch=ocrText.match(/voted\s*hearts[\s:：=#-]*([0-9][0-9,]*)/i)||ocrText.match(/voted[\s\S]{0,24}?hearts[\s:：=#-]*([0-9][0-9,]*)/i);
+  const manualHeartsRaw=($("armyManualVotedHearts")?.value||"").trim();
+  const manualHeartsDigits=manualHeartsRaw.replace(/[\s,]/g,"");
+  if(manualHeartsRaw&&!/^\d+$/.test(manualHeartsDigits))throw new Error("Escribe solo la cantidad numérica exacta de “Voted Hearts”.");
+  const certificateVotedHearts=manualHeartsRaw?Number(manualHeartsDigits):(votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN);
+crVoterName:null);
   if(!certificateVoterName)throw new Error("No pudimos identificar el usuario automáticamente. Escríbelo en el campo «Usuario de Choeaedol» y vuelve a seleccionar el certificado.");
   const votedHeartsMatch=ocrText.match(/voted\s*hearts\s*[:=\-]?\s*([0-9][0-9,]*)/i);
   const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):NaN;
@@ -5699,7 +5703,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const matchedMembers=memberPatterns.filter(([,pattern])=>pattern.test(memberText));
   const certificateTargetMember=matchedMembers.length===1?matchedMembers[0][0]:"BTS";
   if(matchedMembers.length>1)throw new Error("El certificado menciona más de un miembro y no podemos asignar el recuento con seguridad.");
-  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos leer la cantidad exacta de “Voted Hearts”. Intenta subir una imagen más nítida.");
+  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos leer la cantidad exacta de “Voted Hearts”. Escríbela en «Cantidad de Voted Hearts» y vuelve a seleccionar el certificado.");
   if(missing.length)throw new Error("No coincide con el certificado de referencia. Faltan textos: "+missing.join(", ")+".");
   const months={january:"01",february:"02",march:"03",april:"04",may:"05",june:"06",july:"07",august:"08",september:"09",october:"10",november:"11",december:"12"};
   let certDate=null;
