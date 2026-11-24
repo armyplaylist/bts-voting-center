@@ -5691,12 +5691,12 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const ocrText=ocrPasses.join("\n");
   const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
   const compactOcr=ocrText.replace(/[\r\n]+/g," ").replace(/\s+/g," ").trim();
-  const normalizeOcr=value=>(value||"").toLowerCase().replace(/[|!]/g,"i").replace(/[0]/g,"o").replace(/[^\\p{L}\\p{N}]+/gu,"");
+  const normalizeOcr=value=>(value||"").toLowerCase().replace(/[|!]/g,"i").replace(/[0]/g,"o").replace(/[^\p{L}\p{N}]+/gu,"");
   const normalizedOcr=normalizeOcr(compactOcr);
-  const hasVoterLabel=/v[o0]ter[\\s:._-]*n[a4]me/i.test(compactOcr)||normalizedOcr.includes("votername");
-  const hasDateLabel=/v[o0]ting[\\s:._-]*d[a4]te/i.test(compactOcr)||normalizedOcr.includes("votingdate");
-  const hasHeartsLabel=/v[o0]ted[\\s:._-]*he[a4]rts/i.test(compactOcr)||normalizedOcr.includes("votedhearts");
-  const hasCertificateMark=/choeaed[o0]l|v[o0]ting\\s*certificate|\\bBTS\\b/i.test(ocrText);
+  const hasVoterLabel=/v[o0]ter[\s:._-]*n[a4]me/i.test(compactOcr)||normalizedOcr.includes("votername");
+  const hasDateLabel=/v[o0]ting[\s:._-]*d[a4]te/i.test(compactOcr)||normalizedOcr.includes("votingdate");
+  const hasHeartsLabel=/v[o0]ted[\s:._-]*he[a4]rts/i.test(compactOcr)||normalizedOcr.includes("votedhearts");
+  const hasCertificateMark=/choeaed[o0]l|v[o0]ting\s*certificate|\bBTS\b/i.test(ocrText);
   const recognizedLabels=[hasVoterLabel,hasDateLabel,hasHeartsLabel].filter(Boolean).length;
   if(!hasCertificateMark&&recognizedLabels<2){
    throw new Error("No pudimos identificar los campos del certificado. Comprueba que la imagen corresponda al certificado de Choeaedol.");
@@ -5706,35 +5706,35 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   // Se toleran separaciones, @ y caracteres Unicode en el nombre de usuario.
   const ignoredName=/^(voter|name|votername|voting|date|choeaedol|certificate|bts|hearts|also|votes|from|other|accounts|voted)$/i;
   const extractNameFromText=text=>{
-   const lines=(text||"").split(/\\r?\\n/).map(line=>line.trim()).filter(Boolean);
+   const lines=(text||"").split(/\r?\\n/).map(line=>line.trim()).filter(Boolean);
    for(let i=0;i<lines.length;i++){
     const windowText=lines.slice(i,i+5).join(" ");
-    const label=windowText.match(/v[o0]ter\\s*n[a4]me|votername/i);
+    const label=windowText.match(/v[o0]ter\s*n[a4]me|votername/i);
     if(!label)continue;
-    const tail=windowText.slice(label.index+label[0].length).replace(/^[\\s:：=@#-]+/,"");
-    const candidates=tail.match(/@?[\\p{L}\\p{N}][\\p{L}\\p{N}_.-]{1,39}/gu)||[];
+    const tail=windowText.slice(label.index+label[0].length).replace(/^[\s:：=@#-]+/,"");
+    const candidates=tail.match(/@?[\p{L}\p{N}][\p{L}\p{N}_.-]{1,39}/gu)||[];
     for(const candidate of candidates){
      const name=candidate.replace(/^@/,"").replace(/[.,:;]+$/,"");
-     if(!ignoredName.test(name)&&!/^(20\\d{2}|\\d{1,2})$/.test(name))return name;
+     if(!ignoredName.test(name)&&!/^(20\d{2}|\d{1,2})$/.test(name))return name;
     }
    }
-   const flat=(text||"").replace(/\\s+/g," ");
-   const compact=flat.match(/v[o0]ter\\s*n[a4]me\\s*[:：=@#-]*\\s*@?([\\p{L}\\p{N}][\\p{L}\\p{N}_.-]{1,39})/iu);
+   const flat=(text||"").replace(/\s+/g," ");
+   const compact=flat.match(/v[o0]ter\s*n[a4]me\s*[:：=@#-]*\s*@?([\p{L}\p{N}][\p{L}\p{N}_.-]{1,39})/iu);
    return compact&&!ignoredName.test(compact[1])?compact[1]:null;
   };
   const extractHeartsFromText=text=>{
-   const lines=(text||"").split(/\\r?\\n/).map(line=>line.trim()).filter(Boolean);
+   const lines=(text||"").split(/\r?\\n/).map(line=>line.trim()).filter(Boolean);
    for(let i=0;i<lines.length;i++){
     const windowText=lines.slice(i,i+4).join(" ");
-    const label=windowText.match(/v[o0]ted\\s*he[a4]rts?|votedhearts/i);
+    const label=windowText.match(/v[o0]ted\s*he[a4]rts?|votedhearts/i);
     if(!label)continue;
-    const tail=windowText.slice(label.index+label[0].length).replace(/^[\\s:：=#-]+/,"");
-    const match=tail.match(/\\b([0-9][0-9,.' ]{0,20})\\b/);
-    if(match){const digits=match[1].replace(/[,.' ]/g,"");if(/^\\d{1,15}$/.test(digits))return digits;}
+    const tail=windowText.slice(label.index+label[0].length).replace(/^[\s:：=#-]+/,"");
+    const match=tail.match(/\b([0-9][0-9,.' ]{0,20})\b/);
+    if(match){const digits=match[1].replace(/[,.' ]/g,"");if(/^\d{1,15}$/.test(digits))return digits;}
    }
-   const flat=(text||"").replace(/\\s+/g," ");
-   const compact=flat.match(/v[o0]ted\\s*he[a4]rts?\\s*[:：=#-]*\\s*([0-9][0-9,.' ]{0,20})/i);
-   if(compact){const digits=compact[1].replace(/[,.' ]/g,"");if(/^\\d{1,15}$/.test(digits))return digits;}
+   const flat=(text||"").replace(/\s+/g," ");
+   const compact=flat.match(/v[o0]ted\s*he[a4]rts?\s*[:：=#-]*\s*([0-9][0-9,.' ]{0,20})/i);
+   if(compact){const digits=compact[1].replace(/[,.' ]/g,"");if(/^\d{1,15}$/.test(digits))return digits;}
    return null;
   };
   let ocrVoterName=null,votedHeartsDigits=null;
