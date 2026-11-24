@@ -5545,12 +5545,12 @@ $("armyEditProfileForm").addEventListener("submit",async(event)=>{
    if(uploadError)throw uploadError;
    updates[kind==="avatar"?"avatar_path":"cover_path"]=path;
   }
-  const {error}=await supabase.from("army_profiles").update(updates).eq("user_id",currentUser.id);
+  const {error}=await supabase.from("army_profiles").upsert({user_id:currentUser.id,...updates},{onConflict:"user_id"});
   if(error)throw error;
   pendingArmyAvatarFile=null;pendingArmyCoverFile=null;
   $("armyAvatarFile").value="";$("armyCoverFile").value="";
   $("armyCountryCurrent").textContent="País seleccionado: "+(armyCountries.find(x=>x[0]===countryCode)?.[1]||countryCode);
-  const {data:profile,error:profileError}=await supabase.from("army_profiles").select("avatar_path,cover_path").eq("user_id",currentUser.id).single();
+  const {data:profile,error:profileError}=await supabase.from("army_profiles").select("avatar_path,cover_path").eq("user_id",currentUser.id).maybeSingle();
   if(profileError)throw profileError;
   await loadArmyProfileImages(profile);
   message("armyCountryMessage","Cambios guardados correctamente.","ok");
