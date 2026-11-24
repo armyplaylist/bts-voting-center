@@ -5434,13 +5434,12 @@ function fillCountryOptions(){
  for(const [code,name] of armyCountries){const option=document.createElement("option");option.value=code;option.textContent=name;select.append(option);}
 }
 async function loadCountryMap(){
- const [{data:stats,error:statsError},{data:voteRows,error:voteRowsError}]=await Promise.all([
-  supabase.from("army_vote_map_stats").select("total_bts_votes").eq("id",1).maybeSingle(),
-  supabase.from("army_country_vote_totals").select("country_code,total_votes").gt("total_votes",0).order("total_votes",{ascending:false}).order("country_code",{ascending:true})
+ const [{data:voteRows,error:voteRowsError},{data:participantRows,error:participantError}]=await Promise.all([
+  supabase.from("army_country_vote_totals").select("country_code,total_votes").order("total_votes",{ascending:false}).order("country_code",{ascending:true}),
+  supabase.from("army_country_participant_ranking").select("country_code,total_users")
  ]);
- if(statsError)throw statsError;
  if(voteRowsError)throw new Error("No se pudo cargar el ranking global de votos. Intenta recargar la página.");
- const total=Number(stats?.total_bts_votes||0);
+ if(participantError)throw new Error("No se pudo cargar la cantidad de usuarios por país. Intenta recargar la página.");
  const {data:myVoteLogs,error:myVoteLogsError}=await supabase.from("army_heart_daily_logs").select("voted_hearts,target_member").eq("user_id",currentUser.id).limit(500);
  if(myVoteLogsError)throw new Error("No se pudo comprobar tu progreso personal para desbloquear el ranking.");
  const myVotes=(myVoteLogs||[]).filter(x=>!x.target_member||x.target_member==="BTS").reduce((sum,x)=>sum+Number(x.voted_hearts||0),0);
@@ -5448,27 +5447,28 @@ async function loadCountryMap(){
  $("armyMapTotal").textContent=myVotes.toLocaleString("es-MX");
  $("armyMapProgressBar").style.width=Math.min(100,myVotes/200)+"%";
  $("armyMapLocked").hidden=unlocked;
- $("armyMapUnlocked").hidden=!unlocked;
- if(!unlocked)return;
- // Fuente pública compartida: totales de votos agregados por país, iguales para todas las cuentas.
- const ranking=(voteRows||[]).map(row=>({code:row.country_code,votes:Number(row.total_votes||0),country:armyCountries.find(x=>x[0]===row.country_code)?.[1]||row.country_code}));
+ $("armyMapUnlocked").hidden=false;
+ const voteMap=new Map((voteRows||[]).map(row=>[row.country_code,Number(row.total_votes||0)]));
+ const userMap=new Map((participantRows||[]).map(row=>[row.country_code,Number(row.total_users||0)]));
+ const countryCodes=new Set([...voteMap.keys(),...userMap.keys()]);
+ const ranking=[...countryCodes].map(code=>({code,votes:voteMap.get(code)||0,users:userMap.get(code)||0,country:armyCountries.find(x=>x[0]===code)?.[1]||code})).sort((a,b)=>b.votes-a.votes||b.users-a.users||a.country.localeCompare(b.country));
  const rankingEl=$("armyCountryRanking");rankingEl.innerHTML="";
  if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay votos registrados por país.";rankingEl.append(li);}
- ranking.forEach(item=>{
+ ranking.forEach((item,index)=>{
   const li=document.createElement("li");
   const country=document.createElement("span");
   country.className="army-country-name";
-  country.textContent=String.fromCodePoint(...item.code.toUpperCase().split("").map(char=>127397+char.charCodeAt(0)))+" "+item.country;
-  const votes=document.createElement("small");
-  votes.className="army-country-users";
-  votes.textContent=item.votes.toLocaleString("es-MX")+" votos";
-  li.append(country,votes);
+  country.textContent="#"+(index+1)+" "+String.fromCodePoint(...item.code.toUpperCase().split("").map(char=>127397+char.charCodeAt(0)))+" "+item.country;
+  const details=document.createElement("small");
+  details.className="army-country-users";
+  details.textContent=(unlocked?item.votes.toLocaleString("es-MX")+" votos · ":"")+item.users.toLocaleString("es-MX")+" usuarios";
+  li.append(country,details);
   rankingEl.append(li);
  });
  document.querySelectorAll(".army-vote-privacy-note").forEach(note=>note.remove());
  const visibilityNote=document.createElement("p");
  visibilityNote.className="army-vote-privacy-note";
- visibilityNote.textContent="Ranking global compartido: total de votos registrados por país, ordenados de mayor a menor.";
+ visibilityNote.textContent=unlocked?"Ranking global ordenado de mayor a menor cantidad de votos.":"El número exacto de votos se desbloquea cuando alcances la cifra de 20,000 votos registrados en tu cuenta.";
  rankingEl.after(visibilityNote);
  await renderArmyGlobe(ranking);
 }
