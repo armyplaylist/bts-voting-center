@@ -5702,17 +5702,17 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   bitmap.close?.();
   const result=await tesseractWorker.recognize(canvas);
   const ocrText=(result.data.text||"").trim();
-  const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s@._,-]/g," ").replace(/\s+/g," ");
+  const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s@._,-]/g," ").replace(/\s+/g," ");\n  if(!/\\bchoeaedol\\b/i.test(ocrText))throw new Error("No identificamos la marca CHOEAEDOL en el certificado. Sube una imagen completa y nítida.");\n  if(!/\\bbts\\b/i.test(ocrText))throw new Error("No identificamos BTS en el certificado. Sube el certificado correspondiente a BTS.");
   const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
   // Primero intenta leer etiquetas si existen; si no, usa la posición visual:
   // el nombre está encima y la cantidad de votos aparece debajo.
-  const voterLineIndex=ocrLines.findIndex(line=>/v[o0]ter\s*name/i.test(line));
-  let voterRaw=voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*v[o0]ter\s*name\s*[:：]?/i,"").trim():"";
+  const voterLineIndex=ocrLines.findIndex(line=>/v[o0]ter\s*name|nombre\s+del\s+votante/i.test(line));
+  const voterLabelMatch=ocrText.match(/(?:v[o0]ter\s*name|nombre\s+del\s+votante)\s*[:：]?\s*(@?[A-Za-z0-9][A-Za-z0-9_.-]{1,30})/i);\n  let voterRaw=voterLabelMatch?voterLabelMatch[1].trim():(voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*(?:v[o0]ter\s*name|nombre\s+del\s+votante)\s*[:：]?/i,"").trim():"");
   if(!voterRaw&&voterLineIndex>=0)voterRaw=ocrLines[voterLineIndex+1]||"";
   const numberLinePattern=/^\s*([0-9][0-9,]*)\s*$/;
   const numericLines=ocrLines.map((line,index)=>({line,index,match:numberLinePattern.exec(line.replace(/[：:]$/,"").trim())})).filter(x=>x.match&&!/^20\d{2}$/.test(x.match[1]));
   const bottomVoteLine=numericLines.length?numericLines[numericLines.length-1]:null;
-  const certificateVotedHearts=bottomVoteLine?Number(bottomVoteLine.match[1].replace(/,/g,"")):(ocrText.match(/v[o0]ted\s*hearts\s*[:=–-]?\s*([0-9][0-9,]*)/i)?Number(ocrText.match(/v[o0]ted\s*hearts\s*[:=–-]?\s*([0-9][0-9,]*)/i)[1].replace(/,/g,"")):NaN);
+  const votedHeartsMatch=ocrText.match(/(?:v[o0]ted\s*hearts|corazones\s+votados)\s*[:=–-]?\s*([0-9][0-9,]*)/i);\n  const certificateVotedHearts=votedHeartsMatch?Number(votedHeartsMatch[1].replace(/,/g,"")):(bottomVoteLine?Number(bottomVoteLine.match[1].replace(/,/g,"")):NaN);
   if(!voterRaw&&bottomVoteLine){
    const ignored=/^(voter\s*name|voting|voted|hearts?|choeaedol|bts|voting\s*certificate|certificate|date|member|artist|category|for)$/i;
    for(let i=bottomVoteLine.index-1;i>=0&&!voterRaw;i--){
@@ -5735,16 +5735,16 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   if(matchedMembers.length>1)throw new Error("El certificado menciona más de un miembro y no podemos asignar el recuento con seguridad.");
   if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos reconocer automáticamente la cantidad exacta de “Voted Hearts”. No se guardó ningún voto.");
 
-  const months={january:"01",jan:"01",february:"02",feb:"02",march:"03",mar:"03",april:"04",apr:"04",may:"05",june:"06",jun:"06",july:"07",jul:"07",august:"08",aug:"08",september:"09",sep:"09",sept:"09",october:"10",oct:"10",november:"11",nov:"11",december:"12",dec:"12"};
+  const months={january:"01",jan:"01",february:"02",feb:"02",march:"03",mar:"03",april:"04",apr:"04",may:"05",june:"06",jun:"06",july:"07",jul:"07",august:"08",aug:"08",september:"09",sep:"09",sept:"09",october:"10",oct:"10",november:"11",nov:"11",december:"12",dec:"12",enero:"01",ene:"01",febrero:"02",marzo:"03",abril:"04",mayo:"05",junio:"06",julio:"07",agosto:"08",septiembre:"09",setiembre:"09",octubre:"10",noviembre:"11",diciembre:"12"};
   let certDate=null;
   // Admite fechas en inglés con mes antes o después del día, además de formatos numéricos.
   const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\s:._-]*d[a4]te|v[o0]ting/i.test(line));
   const dateContext=dateLineIndex>=0?ocrLines.slice(dateLineIndex,dateLineIndex+4).join(" "):ocrText;
   const normalizeDateText=value=>value.toLowerCase().replace(/[,./_-]+/g," ").replace(/\s+/g," ").trim();
-  const monthNames="january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec";
+  const monthNames="january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec|enero|ene|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|setiembre|octubre|noviembre|diciembre";
   const parseCertificateDate=value=>{
    const normalized=normalizeDateText(value);
-   const named=new RegExp("\\b("+monthNames+")\\s+(\\d{1,2})\\s+(20\\d{2})\\b|\\b(\\d{1,2})\\s+("+monthNames+")\\s+(20\\d{2})\\b","i").exec(normalized);
+   const named=new RegExp("\\b("+monthNames+")\\s+(\\d{1,2})\\s+(20\\d{2})\\b|\\b(\\d{1,2})\\s+(?:de\\s+)?("+monthNames+")(?:\\s+de)?\\s+(20\\d{2})\\b","i").exec(normalized);
    if(named){
     const month=months[(named[1]||named[5]).toLowerCase()];
     const day=Number(named[2]||named[4]),year=Number(named[3]||named[6]);
