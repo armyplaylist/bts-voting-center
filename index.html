@@ -5434,52 +5434,47 @@ function fillCountryOptions(){
  for(const [code,name] of armyCountries){const option=document.createElement("option");option.value=code;option.textContent=name;select.append(option);}
 }
 async function loadCountryMap(){
- const [{data:stats,error:statsError},{data:myLogs,error:myLogsError},{data:dailyLogs,error:dailyLogsError}]=await Promise.all([
+ const [{data:stats,error:statsError},{data:voteRows,error:voteRowsError}]=await Promise.all([
   supabase.from("army_vote_map_stats").select("total_bts_votes").eq("id",1).maybeSingle(),
-  supabase.from("army_heart_daily_logs").select("target_member,voted_hearts").eq("user_id",currentUser.id),
-  supabase.from("army_heart_daily_logs").select("user_id,voted_hearts").eq("log_date",kstDate()).gt("voted_hearts",0)
+  supabase.from("army_heart_daily_logs").select("user_id").eq("confirmed_all_friends",true).gt("voted_hearts",0).order("submitted_at",{ascending:true}).order("id",{ascending:true}).range(0,999)
  ]);
- if(statsError)throw statsError;if(myLogsError)throw myLogsError;if(dailyLogsError)throw dailyLogsError;
+ if(statsError)throw statsError;
+ if(voteRowsError)throw voteRowsError;
  const total=Number(stats?.total_bts_votes||0),isLightjjk=(currentUsername||"").trim().toLowerCase()==="lightjjk",unlocked=total>=1000||isLightjjk;
  $("armyMapTotal").textContent=total.toLocaleString("es-MX");
  $("armyMapProgressBar").style.width=Math.min(100,total/10)+"%";
  $("armyMapLocked").hidden=unlocked;
  $("armyMapUnlocked").hidden=!unlocked;
  if(!unlocked)return;
- const myBtsVotes=(myLogs||[]).filter(x=>!x.target_member||x.target_member==="BTS").reduce((sum,x)=>sum+Number(x.voted_hearts||0),0);
- const canSeeVoteCounts=true; // El total diario por país es público; no depende de los votos de la cuenta que consulta.
- // La clasificación se calcula solo con los registros del día KST actual.
- // Se pagina para incluir a todos los participantes sin tocar ni borrar el historial.
+ // Se consideran todos los certificados confirmados del historial, no solo los del día KST actual.
+ // La paginación evita omitir participantes cuando hay más de 1,000 registros.
  const pageSize=1000,profilesByUser=new Map();
  let profileOffset=0,hasMoreProfiles=true;
  while(hasMoreProfiles){
   const {data:profileRows,error:profileRowsError}=await supabase.from("army_profiles").select("user_id,country_code").not("country_code","is",null).range(profileOffset,profileOffset+pageSize-1);
-  if(profileRowsError)throw new Error("No se pudieron verificar los países de los votantes activos. Intenta recargar el ranking.");
+  if(profileRowsError)throw new Error("No se pudieron verificar los países de los votantes. Intenta recargar el ranking.");
   for(const profile of profileRows||[])if(profile.user_id&&profile.country_code)profilesByUser.set(profile.user_id,profile.country_code);
   hasMoreProfiles=(profileRows||[]).length===pageSize;profileOffset+=pageSize;
  }
- const todayLogs=[...(dailyLogs||[])];let dailyOffset=todayLogs.length,hasMoreDaily=todayLogs.length===pageSize;
- while(hasMoreDaily){
-  const {data:nextLogs,error:nextLogsError}=await supabase.from("army_heart_daily_logs").select("user_id,voted_hearts").eq("log_date",kstDate()).gt("voted_hearts",0).range(dailyOffset,dailyOffset+pageSize-1);
-  if(nextLogsError)throw new Error("No se pudo verificar la participación diaria. Intenta recargar el ranking.");
-  todayLogs.push(...(nextLogs||[]));dailyOffset+=(nextLogs||[]).length;hasMoreDaily=(nextLogs||[]).length===pageSize;
+ const confirmedRows=[...(voteRows||[])];
+ let voteOffset=confirmedRows.length,hasMoreVotes=confirmedRows.length===pageSize;
+ while(hasMoreVotes){
+  const {data:nextRows,error:nextRowsError}=await supabase.from("army_heart_daily_logs").select("user_id").eq("confirmed_all_friends",true).gt("voted_hearts",0).order("submitted_at",{ascending:true}).order("id",{ascending:true}).range(voteOffset,voteOffset+pageSize-1);
+  if(nextRowsError)throw new Error("No se pudieron cargar todos los registros confirmados. Intenta recargar el ranking.");
+  confirmedRows.push(...(nextRows||[]));voteOffset+=(nextRows||[]).length;hasMoreVotes=(nextRows||[]).length===pageSize;
  }
- const activeVoterIds=new Set(),votesByCountry=new Map();
- for(const log of todayLogs){
-  if(!log.user_id)continue;
-  activeVoterIds.add(log.user_id);
-  const code=profilesByUser.get(log.user_id);
-  if(code)votesByCountry.set(code,(votesByCountry.get(code)||0)+Number(log.voted_hearts||0));
+ const votersByCountry=new Map();
+ const countedUsers=new Set();
+ for(const record of confirmedRows){
+  if(!record.user_id||countedUsers.has(record.user_id))continue;
+  countedUsers.add(record.user_id);
+  const code=profilesByUser.get(record.user_id);
+  if(code)votersByCountry.set(code,(votersByCountry.get(code)||0)+1);
  }
- const usersByCountry=new Map();
- for(const userId of activeVoterIds){
-  const code=profilesByUser.get(userId);
-  if(code)usersByCountry.set(code,(usersByCountry.get(code)||0)+1);
- }
- const ranking=Array.from(usersByCountry.keys()).map(code=>({code,total:Number(votesByCountry.get(code)||0),users:usersByCountry.get(code)||0,country:armyCountries.find(x=>x[0]===code)?.[1]||code})).sort((a,b)=>b.total-a.total||b.users-a.users);
+ const ranking=Array.from(votersByCountry.keys()).map(code=>({code,users:votersByCountry.get(code)||0,country:armyCountries.find(x=>x[0]===code)?.[1]||code})).sort((a,b)=>b.users-a.users||a.country.localeCompare(b.country));
  const rankingEl=$("armyCountryRanking");rankingEl.innerHTML="";
- if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay usuarios asociados a un país. Selecciona tu país en Editar perfil para aparecer en el ranking.";rankingEl.append(li);}
- ranking.forEach((item,index)=>{
+ if(!ranking.length){const li=document.createElement("li");li.textContent="Aún no hay usuarios con votos confirmados asociados a un país.";rankingEl.append(li);}
+ ranking.forEach(item=>{
   const li=document.createElement("li");
   const country=document.createElement("span");
   country.className="army-country-name";
@@ -5488,13 +5483,12 @@ async function loadCountryMap(){
   users.className="army-country-users";
   users.textContent=item.users.toLocaleString("es-MX")+" usuarios";
   li.append(country,users);
-  if(canSeeVoteCounts){const votes=document.createElement("strong");votes.className="army-country-votes";votes.textContent=item.total.toLocaleString("es-MX")+" votos";li.append(votes);}
   rankingEl.append(li);
  });
  document.querySelectorAll(".army-vote-privacy-note").forEach(note=>note.remove());
  const visibilityNote=document.createElement("p");
  visibilityNote.className="army-vote-privacy-note";
- visibilityNote.textContent="Los votos muestran la suma diaria de los certificados registrados por usuarios de cada país. El conteo se reinicia a las 00:00 KST y el historial se conserva.";
+ visibilityNote.textContent="Se cuentan usuarios únicos con al menos un certificado de votación confirmado. Cada usuario cuenta una sola vez en el país de su perfil.";
  rankingEl.after(visibilityNote);
  await renderArmyGlobe(ranking);
 }
