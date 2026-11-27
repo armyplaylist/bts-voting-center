@@ -5778,35 +5778,8 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   bitmap.close?.();
   let result=await tesseractWorker.recognize(canvas);
   let ocrText=(result.data.text||"").trim();
-  // Segundo análisis SIEMPRE: el original conserva detalles y el umbral ayuda con sombras.
-  // Se elige el resultado que encuentre las etiquetas y una cifra asociada, no cualquier número.
-  {
-   const retryCanvas=document.createElement("canvas");
-   retryCanvas.width=canvas.width;retryCanvas.height=canvas.height;
-   const retryCtx=retryCanvas.getContext("2d",{willReadFrequently:true});
-   if(retryCtx){
-    retryCtx.drawImage(canvas,0,0);
-    const pixels=retryCtx.getImageData(0,0,retryCanvas.width,retryCanvas.height);
-    for(let p=0;p<pixels.data.length;p+=4){
-     const gray=pixels.data[p]*0.299+pixels.data[p+1]*0.587+pixels.data[p+2]*0.114;
-     const value=gray>168?255:0;
-     pixels.data[p]=pixels.data[p+1]=pixels.data[p+2]=value;
-    }
-    retryCtx.putImageData(pixels,0,0);
-    const retryResult=await tesseractWorker.recognize(retryCanvas);
-    const retryText=(retryResult.data.text||"").trim();
-    const score=text=>{
-     const lines=text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
-     const label=lines.findIndex(x=>/(?:v[o0]ted\s*hearts|corazones\s+votados)/i.test(x));
-     const adjacent=label>=0&&lines.slice(label,label+3).some(x=>/\d[\d.,\s\u00a0]*/.test(x));
-     return (/(?:v[o0]ted\s*hearts|corazones\s+votados)/i.test(text)?8:0)
-       +(adjacent?12:0)
-       +(/(?:v[o0]ter\s*name|nombre\s+del\s+votante)/i.test(text)?3:0)
-       +(/(?:v[o0]ting\s*date|fecha\s*(?:de\s*)?votaci[oó]n)/i.test(text)?2:0);
-    };
-    if(score(retryText)>score(ocrText)){result=retryResult;ocrText=retryText;}
-   }
-  }
+  // Una sola pasada OCR sobre la imagen optimizada: evita repetir el análisis
+  // completo (la segunda pasada anterior duplicaba buena parte del tiempo).
   const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s@._,-]/g," ").replace(/\s+/g," ");
   // No exigimos que el OCR detecte las palabras BTS o CHOEAEDOL: algunos certificados o fotos recortadas no muestran esas etiquetas. La validación usa usuario, cantidad de corazones y fecha.
   const ocrLines=ocrText.split(/\r?\n/).map(line=>line.trim()).filter(Boolean);
