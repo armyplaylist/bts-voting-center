@@ -3597,7 +3597,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    <p>Sube tu certificado del día.</p>
    <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
    <div class="army-block" id="armyDailyBlock" hidden>
-    <div class="army-daily-target"><span>Votos según tu certificado</span><strong id="armyVotedHeartsValue">0</strong><small>Se registra la cantidad exacta indicada en “Voted Hearts”.</small></div>
+    <div class="army-daily-target"><label for="armyVotedHeartsInput">Votos según tu certificado</label><input id="armyVotedHeartsInput" type="number" inputmode="numeric" min="0" step="1" value="0" aria-describedby="armyVotedHeartsHelp"><small id="armyVotedHeartsHelp">Revisa que la cantidad coincida con “Voted Hearts”. Puedes corregirla antes de confirmar.</small></div>
     <form id="armyDailyForm">
      <button class="btn" type="submit" id="armySubmitDaily">Confirmar registro del certificado</button>
      <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
@@ -5848,7 +5848,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const sameVoterRecord=(todayVoters||[]).find(x=>(x.voter_name||"").trim().toLowerCase()===certificateVoterName.toLowerCase());
   if(resendLogId){if(!resendVoterName||certificateVoterName.toLowerCase()!==resendVoterName.trim().toLowerCase())throw new Error("El certificado corregido debe pertenecer al mismo usuario de Choeaedol: @"+resendVoterName+".");if(!sameVoterRecord||sameVoterRecord.id!==resendLogId)throw new Error("No encontramos el registro original para reenviarlo. Actualiza tu historial e inténtalo otra vez.");}
   else if(sameVoterRecord)throw new Error("Ya registraste un certificado de @"+certificateVoterName+" para hoy. Usa “Reenviar certificado” en ese registro para corregirlo.");
-  $("armyVotedHeartsValue").textContent=certificateVotedHearts.toLocaleString("es-MX")+" · "+certificateTargetMember;
+  $("armyVotedHeartsInput").value=String(certificateVotedHearts);$("armyVotedHeartsHelp").textContent="Certificado de "+certificateTargetMember+". Comprueba la cifra antes de confirmar; puedes corregirla si el OCR confundió algún dígito.";
   approvedTargetMember=certificateTargetMember;
   approvedVotedHearts=certificateVotedHearts;approvedVoterName=certificateVoterName;approvedTargetMember=certificateTargetMember;
   approvedCertificateHash=candidateCertificateHash;approvedCertificateDate=certDate;approvedForToday=true;
@@ -5858,7 +5858,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
  finally{clear();}
 });
 $("armyDailyForm").addEventListener("submit",async(event)=>{
- event.preventDefault();if(!currentUser||!approvedForToday||!approvedCertificateHash||approvedVotedHearts===null){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}
+ event.preventDefault();if(!currentUser||!approvedForToday||!approvedCertificateHash||approvedVotedHearts===null){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}const correctedCount=Number($("armyVotedHeartsInput").value);if(!Number.isSafeInteger(correctedCount)||correctedCount<0){message("armyDailyMessage","Escribe una cantidad válida de corazones.");return;}approvedVotedHearts=correctedCount;
  try{if(!(await requireArmyCountryForCertificate())){message("armyDailyMessage","Selecciona tu país en Editar perfil > País antes de registrar el certificado.");return;}}catch(countryError){message("armyDailyMessage",countryError.message||"No se pudo comprobar tu país. Intenta de nuevo.");return;}
  if(approvedCertificateDate!==kstDate()){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;$("armyDailyBlock").hidden=true;message("armyVerifyStatus","El día KST cambió. Sube el certificado correspondiente al nuevo día.","error");return;}
  $("armySubmitDaily").disabled=true;message("armyDailyMessage","Guardando registro…");
