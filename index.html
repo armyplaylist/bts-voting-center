@@ -5852,7 +5852,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const sameVoterRecord=(todayVoters||[]).find(x=>(x.voter_name||"").trim().toLowerCase()===certificateVoterName.toLowerCase());
   if(resendLogId){if(!resendVoterName||certificateVoterName.toLowerCase()!==resendVoterName.trim().toLowerCase())throw new Error("El certificado corregido debe pertenecer al mismo usuario de Choeaedol: @"+resendVoterName+".");if(!sameVoterRecord||sameVoterRecord.id!==resendLogId)throw new Error("No encontramos el registro original para reenviarlo. Actualiza tu historial e inténtalo otra vez.");}
   else if(sameVoterRecord)throw new Error("Ya registraste un certificado de @"+certificateVoterName+" para hoy. Usa “Reenviar certificado” en ese registro para corregirlo.");
-  $("armyVotedHeartsInput").textContent=certificateVotedHearts.toLocaleString("es-MX");$("armyVotedHeartsHelp").textContent="Lectura automática del certificado de "+certificateTargetMember+". Esta cantidad no se puede editar."
+  $("armyVotedHeartsInput").textContent=certificateVotedHearts.toLocaleString("es-MX");$("armyVotedHeartsHelp").textContent=""
   approvedTargetMember=certificateTargetMember;
   approvedVotedHearts=certificateVotedHearts;approvedVoterName=certificateVoterName;approvedTargetMember=certificateTargetMember;
   approvedCertificateHash=candidateCertificateHash;approvedCertificateDate=certDate;approvedForToday=true;
