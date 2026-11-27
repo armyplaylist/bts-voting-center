@@ -5740,7 +5740,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@7/+esm");
    const createWorker=mod.createWorker||mod.default?.createWorker;
    if(typeof createWorker!=="function")throw new Error("No se pudo cargar el lector del certificado. Recarga la página e inténtalo de nuevo.");
-   tesseractWorker=await createWorker("eng");
+   tesseractWorker=await createWorker("spa+eng");
   }
   // Normaliza orientación y mejora contraste en el propio navegador; la foto no se envía a un servidor OCR.
   const source=bitmap.image||bitmap,sourceWidth=bitmap.width,sourceHeight=bitmap.height;
