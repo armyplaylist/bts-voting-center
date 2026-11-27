@@ -5819,10 +5819,12 @@ $("armyCertificate").addEventListener("change",async(event)=>{
 
   const months={january:"01",jan:"01",february:"02",feb:"02",march:"03",mar:"03",april:"04",apr:"04",may:"05",june:"06",jun:"06",july:"07",jul:"07",august:"08",aug:"08",september:"09",sep:"09",sept:"09",october:"10",oct:"10",november:"11",nov:"11",december:"12",dec:"12",enero:"01",ene:"01",febrero:"02",marzo:"03",abril:"04",mayo:"05",junio:"06",julio:"07",agosto:"08",septiembre:"09",setiembre:"09",octubre:"10",noviembre:"11",diciembre:"12"};
   let certDate=null;
-  // Admite fechas en inglés con mes antes o después del día, además de formatos numéricos.
-  const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\s:._-]*d[a4]te|v[o0]ting/i.test(line));
-  const dateContext=dateLineIndex>=0?ocrLines.slice(dateLineIndex,dateLineIndex+4).join(" "):ocrText;
-  const normalizeDateText=value=>value.toLowerCase().replace(/[,./_-]+/g," ").replace(/\s+/g," ").trim();
+  // Admite etiquetas en inglés y español. En algunos certificados de iOS la fecha queda
+  // debajo de "Fecha de votación", separada en dos líneas por el OCR.
+  const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\\s:._-]*d[a4]te|fecha[\\s:._-]*(?:de[\\s_-]*)?votaci[oó0]n|\\bfecha\\b|v[o0]ting/i.test(line));
+  const dateContext=dateLineIndex>=0?ocrLines.slice(dateLineIndex,dateLineIndex+5).join(" "):ocrText;
+  // Normaliza tildes, saltos de línea y la etiqueta KST antes de interpretar la fecha.
+  const normalizeDateText=value=>String(value||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().replace(/\\b(?:kst|utc[+-]?\\d*)\\b/g," ").replace(/[,./_-]+/g," ").replace(/\\s+/g," ").trim();
   const monthNames="january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec|enero|ene|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|setiembre|octubre|noviembre|diciembre";
   const parseCertificateDate=value=>{
    const normalized=normalizeDateText(value);
