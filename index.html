@@ -5810,16 +5810,6 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    }
   }
   const certificateVotedHearts=heartCountText?parseCertificateCount(heartCountText):NaN;
-  const bottomVoteLine=null;
-  if(!voterRaw&&voterLineIndex>=0){
-   const ignored=/^(voter\s*name|voting|voted|hearts?|choeaedol|bts|voting\s*certificate|certificate|date|member|artist|category|for)$/i;
-   for(let i=bottomVoteLine.index-1;i>=0&&!voterRaw;i--){
-    const candidate=ocrLines[i].replace(/^@/,"").trim();
-    const tokens=candidate.match(/[A-Za-z0-9][A-Za-z0-9_.-]{1,30}/g)||[];
-    const valid=tokens.find(token=>!ignored.test(token)&&!/^(20\d{2}|\d{1,2})$/.test(token)&&!/^(january|february|march|april|may|june|july|august|september|october|november|december)$/i.test(token));
-    if(valid)voterRaw=valid;
-   }
-  }
   const voterNameMatch=voterRaw.match(/@?([A-Za-z0-9][A-Za-z0-9_.-]{1,30})/);
   const certificateVoterName=voterNameMatch?voterNameMatch[1].trim():null;
   if(!certificateVoterName)throw new Error("No pudimos identificar el usuario que aparece encima de la cantidad de votos. Sube el certificado completo y nítido.");
