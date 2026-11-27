@@ -5740,12 +5740,12 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@7/+esm");
    const createWorker=mod.createWorker||mod.default?.createWorker;
    if(typeof createWorker!=="function")throw new Error("No se pudo cargar el lector del certificado. Recarga la página e inténtalo de nuevo.");
-   tesseractWorker=await createWorker("spa+eng");
+   tesseractWorker=await createWorker("spa");
   }
   // Normaliza orientación y mejora contraste en el propio navegador; la foto no se envía a un servidor OCR.
   const source=bitmap.image||bitmap,sourceWidth=bitmap.width,sourceHeight=bitmap.height;
   const rotateForPortrait=sourceWidth>sourceHeight;
-  const scale=Math.min(2,2600/Math.max(sourceWidth,sourceHeight));
+  const scale=Math.min(2,2200/Math.max(sourceWidth,sourceHeight));
   const canvas=document.createElement("canvas");
   canvas.width=Math.max(1,Math.round((rotateForPortrait?sourceHeight:sourceWidth)*scale));
   canvas.height=Math.max(1,Math.round((rotateForPortrait?sourceWidth:sourceHeight)*scale));
@@ -5759,7 +5759,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   let result=await tesseractWorker.recognize(canvas);
   let ocrText=(result.data.text||"").trim();
   // Segundo intento con contraste y umbral adaptativo sencillo para fotos con sombras o fondo gris.
-  if(!/(?:v[o0]ted\\s*hearts|corazones\\s+votados)/i.test(ocrText)||!/[0-9]{2,}/.test(ocrText)){
+  if(!/[0-9]{2,}/.test(ocrText)){2,}/.test(ocrText)){
    const retryCanvas=document.createElement("canvas");
    retryCanvas.width=canvas.width;retryCanvas.height=canvas.height;
    const retryCtx=retryCanvas.getContext("2d",{willReadFrequently:true});
