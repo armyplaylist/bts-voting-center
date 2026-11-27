@@ -5755,9 +5755,25 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   canvas.height=Math.max(1,Math.round((rotateForPortrait?sourceWidth:sourceHeight)*scale));
   const ctx=canvas.getContext("2d",{willReadFrequently:true});
   if(!ctx)throw new Error("Tu navegador no pudo preparar la fotografía. Intenta con otro navegador.");
+  // Prepara una copia en color y elimina los elementos rojos saturados (como el corazón
+  // decorativo junto a la cifra) antes de pasar a escala de grises. Así no se confunden
+  // con un dígito adicional al final del número.
+  const colorCanvas=document.createElement("canvas");
+  colorCanvas.width=canvas.width;colorCanvas.height=canvas.height;
+  const colorCtx=colorCanvas.getContext("2d",{willReadFrequently:true});
+  if(!colorCtx)throw new Error("No pudimos preparar los colores de la fotografía.");
+  if(rotateForPortrait){colorCtx.translate(colorCanvas.width,0);colorCtx.rotate(Math.PI/2);colorCtx.drawImage(source,0,0,colorCanvas.height,colorCanvas.width);}
+  else colorCtx.drawImage(source,0,0,colorCanvas.width,colorCanvas.height);
+  const colorPixels=colorCtx.getImageData(0,0,colorCanvas.width,colorCanvas.height);
+  for(let p=0;p<colorPixels.data.length;p+=4){
+   const red=colorPixels.data[p],green=colorPixels.data[p+1],blue=colorPixels.data[p+2];
+   if(red>115&&red>green*1.28&&red>blue*1.18&&green<190){
+    colorPixels.data[p]=255;colorPixels.data[p+1]=255;colorPixels.data[p+2]=255;
+   }
+  }
+  colorCtx.putImageData(colorPixels,0,0);
   ctx.filter="grayscale(1) contrast(1.25) brightness(1.04)";
-  if(rotateForPortrait){ctx.translate(canvas.width,0);ctx.rotate(Math.PI/2);ctx.drawImage(source,0,0,canvas.height,canvas.width);}
-  else ctx.drawImage(source,0,0,canvas.width,canvas.height);
+  ctx.drawImage(colorCanvas,0,0);
   ctx.filter="none";
   bitmap.close?.();
   let result=await tesseractWorker.recognize(canvas);
