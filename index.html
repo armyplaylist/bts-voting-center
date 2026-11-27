@@ -5791,15 +5791,27 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const voterLabelMatch=ocrText.match(/(?:v[o0]ter\s*name|nombre\s+del\s+votante)\s*[:：]?\s*(@?[A-Za-z0-9][A-Za-z0-9_.-]{1,30})/i);
   let voterRaw=voterLabelMatch?voterLabelMatch[1].trim():(voterLineIndex>=0?ocrLines[voterLineIndex].replace(/.*(?:v[o0]ter\s*name|nombre\s+del\s+votante)\s*[:：]?/i,"").trim():"");
   if(!voterRaw&&voterLineIndex>=0)voterRaw=ocrLines[voterLineIndex+1]||"";
-  // Choeaedol puede mostrar miles con punto (2.033) o coma (2,033).
-  // Como "Voted Hearts" siempre es un recuento entero, quitamos separadores de miles antes de convertir.
+  // Extrae corazones SOLO junto a su etiqueta. Nunca toma el último número
+  // de la imagen (podría ser el año, una cifra decorativa u otro dato del OCR).
   const parseCertificateCount=value=>{const digits=String(value||"").replace(/[.,\s\u00a0]/g,"");return /^\d+$/.test(digits)?Number(digits):NaN;};
-  const numberLinePattern=/^\s*([0-9][0-9.,\s\u00a0]*)\s*$/;
-  const numericLines=ocrLines.map((line,index)=>({line,index,match:numberLinePattern.exec(line.replace(/[：:]$/,"").trim())})).filter(x=>x.match&&!/^20\d{2}$/.test(x.match[1].replace(/[.,\s\u00a0]/g,"")));
-  const bottomVoteLine=numericLines.length?numericLines[numericLines.length-1]:null;
-  const votedHeartsMatch=ocrText.match(/(?:v[o0]ted\s*hearts|corazones\s+votados)\s*[:=–-]?\s*([0-9][0-9.,\s\u00a0]*)/i);
-  const certificateVotedHearts=votedHeartsMatch?parseCertificateCount(votedHeartsMatch[1]):(bottomVoteLine?parseCertificateCount(bottomVoteLine.match[1]):NaN);
-  if(!voterRaw&&bottomVoteLine){
+  let heartLabelFound=false;
+  let heartCountText="";
+  for(let i=0;i<ocrLines.length&&!heartLabelFound;i++){
+   const pair=ocrLines.slice(i,i+2).join(" ");
+   const label=/(?:v[o0]ted\s*hearts|corazones\s+votados)/i.exec(pair);
+   if(!label)continue;
+   heartLabelFound=true;
+   const remainder=pair.slice(label.index+label[0].length).replace(/^\s*[:=–-]?\s*/,"").replace(/[♥❤]/g,"").trim();
+   if(remainder&&/^\d[\d.,\s\u00a0]*$/.test(remainder)){
+    heartCountText=remainder;
+   }else{
+    const nextLine=(ocrLines[i+2]||"").replace(/[♥❤]/g,"").trim();
+    if(/^\d[\d.,\s\u00a0]*$/.test(nextLine))heartCountText=nextLine;
+   }
+  }
+  const certificateVotedHearts=heartCountText?parseCertificateCount(heartCountText):NaN;
+  const bottomVoteLine=null;
+  if(!voterRaw&&voterLineIndex>=0){
    const ignored=/^(voter\s*name|voting|voted|hearts?|choeaedol|bts|voting\s*certificate|certificate|date|member|artist|category|for)$/i;
    for(let i=bottomVoteLine.index-1;i>=0&&!voterRaw;i--){
     const candidate=ocrLines[i].replace(/^@/,"").trim();
@@ -5811,7 +5823,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const voterNameMatch=voterRaw.match(/@?([A-Za-z0-9][A-Za-z0-9_.-]{1,30})/);
   const certificateVoterName=voterNameMatch?voterNameMatch[1].trim():null;
   if(!certificateVoterName)throw new Error("No pudimos identificar el usuario que aparece encima de la cantidad de votos. Sube el certificado completo y nítido.");
-  if(!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<0)throw new Error("No pudimos identificar el número de votos que aparece debajo del usuario. Sube el certificado completo y nítido.");
+  if(!heartLabelFound||!Number.isSafeInteger(certificateVotedHearts)||certificateVotedHearts<=0)throw new Error("No pudimos leer con seguridad la cifra que aparece junto a “Corazones votados / Voted Hearts”. No se registró ningún voto. Sube una captura completa y nítida.");
 
   const memberPatterns=[["Jin",/\b(jin|kim\s*seokjin|seokjin)\b/i],["SUGA",/\b(suga|agust\s*d|yoongi|min\s*yoongi)\b/i],["j-hope",/\b(j[\s-]*hope|hoseok|jung\s*hoseok)\b/i],["RM",/\b(rm|rap\s*monster|kim\s*namjoon|namjoon)\b/i],["Jimin",/\b(jimin|park\s*jimin)\b/i],["V",/\b(v|taehyung|kim\s*taehyung)\b/i],["Jungkook",/\b(jungkook|jeon\s*jungkook)\b/i]];
   const memberLines=ocrLines.filter(line=>/vot(e|ing)|member|artist|category|for:/i.test(line));
