@@ -5821,10 +5821,10 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   let certDate=null;
   // Admite etiquetas en inglés y español. En algunos certificados de iOS la fecha queda
   // debajo de "Fecha de votación", separada en dos líneas por el OCR.
-  const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\\s:._-]*d[a4]te|fecha[\\s:._-]*(?:de[\\s_-]*)?votaci[oó0]n|\\bfecha\\b|v[o0]ting/i.test(line));
+  const dateLineIndex=ocrLines.findIndex(line=>/v[o0]ting[\s:._-]*d[a4]te|fecha[\s:._-]*(?:de[\s_-]*)?votaci[oó0]n|\bfecha\b|v[o0]ting/i.test(line));
   const dateContext=dateLineIndex>=0?ocrLines.slice(dateLineIndex,dateLineIndex+5).join(" "):ocrText;
   // Normaliza tildes, saltos de línea y la etiqueta KST antes de interpretar la fecha.
-  const normalizeDateText=value=>String(value||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().replace(/\\b(?:kst|utc[+-]?\\d*)\\b/g," ").replace(/[,./_-]+/g," ").replace(/\\s+/g," ").trim();
+  const normalizeDateText=value=>String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\b(?:kst|utc[+-]?\d*)\b/g," ").replace(/[,./_-]+/g," ").replace(/\s+/g," ").trim();
   const monthNames="january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec|enero|ene|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|setiembre|octubre|noviembre|diciembre";
   const parseCertificateDate=value=>{
    const normalized=normalizeDateText(value);
