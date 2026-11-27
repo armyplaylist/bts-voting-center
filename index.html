@@ -3597,7 +3597,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    <p>Sube tu certificado del día.</p>
    <label class="army-upload" for="armyCertificate"><span>＋</span><strong>Seleccionar certificado</strong><small>JPG, PNG o WEBP · No se almacena</small><input id="armyCertificate" type="file" accept="image/jpeg,image/png,image/webp"></label>
    <div class="army-block" id="armyDailyBlock" hidden>
-    <div class="army-daily-target"><label for="armyVotedHeartsInput">Votos según tu certificado</label><input id="armyVotedHeartsInput" type="text" inputmode="numeric" autocomplete="off" value="0" aria-describedby="armyVotedHeartsHelp"><small id="armyVotedHeartsHelp">Revisa que la cantidad coincida con “Voted Hearts”. Puedes corregirla antes de confirmar.</small></div>
+    <div class="army-daily-target"><label for="armyVotedHeartsInput">Votos según tu certificado</label><output id="armyVotedHeartsInput" class="army-voted-hearts-readonly" aria-live="polite">—</output><small id="armyVotedHeartsHelp">Revisa que la cantidad coincida con “Voted Hearts”. Puedes corregirla antes de confirmar.</small></div>
     <form id="armyDailyForm">
      <button class="btn" type="submit" id="armySubmitDaily">Confirmar registro del certificado</button>
      <p class="army-message" id="armyDailyMessage" role="status" aria-live="polite"></p>
@@ -5744,7 +5744,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
    const mod=await import("https://cdn.jsdelivr.net/npm/tesseract.js@7/+esm");
    const createWorker=mod.createWorker||mod.default?.createWorker;
    if(typeof createWorker!=="function")throw new Error("No se pudo cargar el lector del certificado. Recarga la página e inténtalo de nuevo.");
-   tesseractWorker=await createWorker("spa");
+   tesseractWorker=await createWorker("spa+eng");
   }
   // Normaliza orientación y mejora contraste en el propio navegador; la foto no se envía a un servidor OCR.
   const source=bitmap.image||bitmap,sourceWidth=bitmap.width,sourceHeight=bitmap.height;
@@ -5762,8 +5762,9 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   bitmap.close?.();
   let result=await tesseractWorker.recognize(canvas);
   let ocrText=(result.data.text||"").trim();
-  // Segundo intento con contraste y umbral adaptativo sencillo para fotos con sombras o fondo gris.
-  if(!/[0-9]{2,}/.test(ocrText)){
+  // Segundo análisis SIEMPRE: el original conserva detalles y el umbral ayuda con sombras.
+  // Se elige el resultado que encuentre las etiquetas y una cifra asociada, no cualquier número.
+  {
    const retryCanvas=document.createElement("canvas");
    retryCanvas.width=canvas.width;retryCanvas.height=canvas.height;
    const retryCtx=retryCanvas.getContext("2d",{willReadFrequently:true});
@@ -5771,15 +5772,23 @@ $("armyCertificate").addEventListener("change",async(event)=>{
     retryCtx.drawImage(canvas,0,0);
     const pixels=retryCtx.getImageData(0,0,retryCanvas.width,retryCanvas.height);
     for(let p=0;p<pixels.data.length;p+=4){
-     const gray=(pixels.data[p]*0.299+pixels.data[p+1]*0.587+pixels.data[p+2]*0.114);
-     const value=gray>160?255:0;
+     const gray=pixels.data[p]*0.299+pixels.data[p+1]*0.587+pixels.data[p+2]*0.114;
+     const value=gray>168?255:0;
      pixels.data[p]=pixels.data[p+1]=pixels.data[p+2]=value;
     }
     retryCtx.putImageData(pixels,0,0);
-    const retry=await tesseractWorker.recognize(retryCanvas);
-    const retryText=(retry.data.text||"").trim();
-    const score=text=>((/\\b\\d{2,}\\b/.test(text)?2:0)+(/v[o0]ter|nombre/i.test(text)?2:0)+(/v[o0]ting|fecha|date/i.test(text)?1:0)+(/hearts|corazones/i.test(text)?2:0));
-    if(score(retryText)>score(ocrText)){result=retry;ocrText=retryText;}
+    const retryResult=await tesseractWorker.recognize(retryCanvas);
+    const retryText=(retryResult.data.text||"").trim();
+    const score=text=>{
+     const lines=text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+     const label=lines.findIndex(x=>/(?:v[o0]ted\s*hearts|corazones\s+votados)/i.test(x));
+     const adjacent=label>=0&&lines.slice(label,label+3).some(x=>/\d[\d.,\s\u00a0]*/.test(x));
+     return (/(?:v[o0]ted\s*hearts|corazones\s+votados)/i.test(text)?8:0)
+       +(adjacent?12:0)
+       +(/(?:v[o0]ter\s*name|nombre\s+del\s+votante)/i.test(text)?3:0)
+       +(/(?:v[o0]ting\s*date|fecha\s*(?:de\s*)?votaci[oó]n)/i.test(text)?2:0);
+    };
+    if(score(retryText)>score(ocrText)){result=retryResult;ocrText=retryText;}
    }
   }
   const raw=ocrText.toLowerCase().replace(/[^a-z0-9\s@._,-]/g," ").replace(/\s+/g," ");
@@ -5854,7 +5863,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
   const sameVoterRecord=(todayVoters||[]).find(x=>(x.voter_name||"").trim().toLowerCase()===certificateVoterName.toLowerCase());
   if(resendLogId){if(!resendVoterName||certificateVoterName.toLowerCase()!==resendVoterName.trim().toLowerCase())throw new Error("El certificado corregido debe pertenecer al mismo usuario de Choeaedol: @"+resendVoterName+".");if(!sameVoterRecord||sameVoterRecord.id!==resendLogId)throw new Error("No encontramos el registro original para reenviarlo. Actualiza tu historial e inténtalo otra vez.");}
   else if(sameVoterRecord)throw new Error("Ya registraste un certificado de @"+certificateVoterName+" para hoy. Usa “Reenviar certificado” en ese registro para corregirlo.");
-  $("armyVotedHeartsInput").value=formatCertificateCount(certificateVotedHearts);$("armyVotedHeartsHelp").textContent="Certificado de "+certificateTargetMember+". Comprueba la cifra antes de confirmar; puedes corregirla si el OCR confundió algún dígito.";
+  $("armyVotedHeartsInput").textContent=certificateVotedHearts.toLocaleString("es-MX");$("armyVotedHeartsHelp").textContent="Lectura automática del certificado de "+certificateTargetMember+". Esta cantidad no se puede editar."
   approvedTargetMember=certificateTargetMember;
   approvedVotedHearts=certificateVotedHearts;approvedVoterName=certificateVoterName;approvedTargetMember=certificateTargetMember;
   approvedCertificateHash=candidateCertificateHash;approvedCertificateDate=certDate;approvedForToday=true;
@@ -5864,7 +5873,7 @@ $("armyCertificate").addEventListener("change",async(event)=>{
  finally{clear();}
 });
 $("armyDailyForm").addEventListener("submit",async(event)=>{
- event.preventDefault();if(!currentUser||!approvedForToday||!approvedCertificateHash||approvedVotedHearts===null){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}const correctedCount=Number(String($("armyVotedHeartsInput").value).replace(/[,\s\u00a0]/g,""));if(!Number.isSafeInteger(correctedCount)||correctedCount<0){message("armyDailyMessage","Escribe una cantidad válida de corazones.");return;}approvedVotedHearts=correctedCount;
+ event.preventDefault();if(!currentUser||!approvedForToday||!approvedCertificateHash||approvedVotedHearts===null){message("armyDailyMessage","Primero verifica tu certificado de hoy.");return;}if(!Number.isSafeInteger(approvedVotedHearts)||approvedVotedHearts<=0){message("armyDailyMessage","La lectura del certificado no es válida. Vuelve a subir la imagen.");return;}
  try{if(!(await requireArmyCountryForCertificate())){message("armyDailyMessage","Selecciona tu país en Editar perfil > País antes de registrar el certificado.");return;}}catch(countryError){message("armyDailyMessage",countryError.message||"No se pudo comprobar tu país. Intenta de nuevo.");return;}
  if(approvedCertificateDate!==kstDate()){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;$("armyDailyBlock").hidden=true;message("armyVerifyStatus","El día KST cambió. Sube el certificado correspondiente al nuevo día.","error");return;}
  $("armySubmitDaily").disabled=true;message("armyDailyMessage","Guardando registro…");
