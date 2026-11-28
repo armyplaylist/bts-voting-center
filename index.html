@@ -5469,6 +5469,7 @@ async function loadCountryMap(){
  await renderArmyGlobe(ranking);
 }
 async function renderArmyGlobe(ranking){
+ const armyRankingCodes=new Set(ranking.map(item=>item.code));
  const container=$("armyGlobe");if(!container)return;
  if(!armyGlobeReady){
   try{
@@ -5486,7 +5487,7 @@ async function renderArmyGlobe(ranking){
     .globeImageUrl("https://unpkg.com/three-globe/example/img/earth-night.jpg")
     .polygonsData(world.features||[])
     .polygonAltitude(0.008)
-    .polygonCapColor(feature=>{const code=feature.properties?.ISO_A2||feature.properties?.iso_a2;return ranking.some(x=>x.code===code)?"rgba(174,132,218,0.72)":"rgba(91,78,110,0.35)";})
+    .polygonCapColor(feature=>{const code=feature.properties?.ISO_A2||feature.properties?.iso_a2;return armyRankingCodes.has(code)?"rgba(174,132,218,0.72)":"rgba(91,78,110,0.35)";})
     .polygonSideColor(()=>"rgba(80,65,100,0.18)")
     .polygonStrokeColor(()=>"rgba(205,185,225,0.45)")
     .polygonLabel(feature=>{const code=feature.properties?.ISO_A2||feature.properties?.iso_a2;const row=ranking.find(x=>x.code===code);return row?row.country:(feature.properties?.ADMIN||"");})
@@ -5496,7 +5497,7 @@ async function renderArmyGlobe(ranking){
    setTimeout(()=>{if(armyGlobeInstance)armyGlobeInstance.width(Math.max(280,container.clientWidth));},120);
   }catch(error){$("armyGlobeStatus").textContent="No se pudo cargar la vista 3D en este momento. El ranking por país sigue disponible.";}
  }else if(armyGlobeInstance){
-  armyGlobeInstance.polygonCapColor(feature=>{const code=feature.properties?.ISO_A2||feature.properties?.iso_a2;return ranking.some(x=>x.code===code)?"rgba(174,132,218,0.72)":"rgba(91,78,110,0.35)";});
+  armyGlobeInstance.polygonCapColor(feature=>{const code=feature.properties?.ISO_A2||feature.properties?.iso_a2;return armyRankingCodes.has(code)?"rgba(174,132,218,0.72)":"rgba(91,78,110,0.35)";});
  }
 }
 $("armyEditProfileToggle").addEventListener("click",()=>{
@@ -5522,12 +5523,14 @@ const friendsCountryFilter=$("armyFriendsCountryFilter"),friendsTimeFilter=$("ar
 armyCountries.forEach(([code,name])=>{const option=document.createElement("option");option.value=code;option.textContent=name;friendsCountryFilter.append(option);});
 let myFriendListing=null,friendListings=[];
 function armyFlag(code){return code&&/^[A-Z]{2}$/.test(code)?String.fromCodePoint(...code.split("").map(char=>127397+char.charCodeAt(0))):"🌐";}
-function choeaedolDayPart(timestamp){if(!timestamp)return "other";const date=new Date(timestamp);const parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",hourCycle:"h23"}).formatToParts(date);const values=Object.fromEntries(parts.map(part=>[part.type,part.value]));const today=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());const recordDay=values.year+"-"+values.month+"-"+values.day;if(recordDay!==today)return "other";return Number(values.hour)<12?"first":"second";}
+const choeaedolDateTimeFormatter=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",hourCycle:"h23"});
+const choeaedolDateFormatter=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"});
+function choeaedolDayPart(timestamp){if(!timestamp)return "other";const date=new Date(timestamp);const parts=choeaedolDateTimeFormatter.formatToParts(date);const values=Object.fromEntries(parts.map(part=>[part.type,part.value]));const today=choeaedolDateFormatter.format(new Date());const recordDay=values.year+"-"+values.month+"-"+values.day;if(recordDay!==today)return "other";return Number(values.hour)<12?"first":"second";}
 function renderArmyFriends(){
- const list=$("armyFriendsList");list.innerHTML="";
+ const list=$("armyFriendsList"),fragment=document.createDocumentFragment();
  const selectedCountry=friendsCountryFilter.value,selectedTime=friendsTimeFilter.value;
  const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&(!selectedTime||(item.choeaedol_period===selectedTime&&choeaedolDayPart(item.updated_at||item.created_at)!=="other")));
- if(!filtered.length){const empty=document.createElement("p");empty.className="army-muted";empty.textContent="Todavía no hay perfiles publicados. Puedes ser la primera persona en aparecer.";list.append(empty);return;}
+ if(!filtered.length){const empty=document.createElement("p");empty.className="army-muted";empty.textContent="Todavía no hay perfiles publicados. Puedes ser la primera persona en aparecer.";list.replaceChildren(empty);return;}
  for(const item of filtered){
   const card=document.createElement("article");card.className="army-friend-card";
   let avatar=null;
@@ -5544,38 +5547,49 @@ function renderArmyFriends(){
   function makeCopyButton(value,label,aria){const button=document.createElement("button");button.type="button";button.className="army-friend-copy";button.textContent=label;button.setAttribute("aria-label",aria);button.addEventListener("click",async()=>{const original=label;try{await navigator.clipboard.writeText(value);button.textContent="¡Copiado!";}catch(error){const temporary=document.createElement("textarea");temporary.value=value;temporary.style.position="fixed";temporary.style.opacity="0";document.body.append(temporary);temporary.select();try{document.execCommand("copy");button.textContent="¡Copiado!";}catch(e){button.textContent="No se pudo copiar";}temporary.remove();}setTimeout(()=>{button.textContent=original;},1600);});return button;}
   copyActions.append(makeCopyButton(item.choeaedol_username,"Copiar usuario","Copiar usuario de Choeaedol @"+item.choeaedol_username));
   if(item.reference_code)copyActions.append(makeCopyButton(item.reference_code,"Copiar código","Copiar código de referencia"));
-  card.append(avatar,main,copyActions);list.append(card);
+  card.append(avatar,main,copyActions);fragment.append(card);
  }
+ list.replaceChildren(fragment);
 }
+let armyFriendsLoadPromise=null;
 async function loadArmyFriends(){
- $("armyFriendsList").innerHTML='<p class="army-muted">Cargando perfiles…</p>';
- const [{data:rows,error:listError},{data:mine,error:mineError}]=await Promise.all([
-  supabase.from("choeaedol_friend_listings").select("id,user_id,display_name,country_code,choeaedol_username,choeaedol_period,reference_code,note,looking_for_exchange,is_active,created_at,updated_at").eq("is_active",true).eq("looking_for_exchange",true).order("created_at",{ascending:false}).limit(100),
-  supabase.from("choeaedol_friend_listings").select("id,display_name,country_code,choeaedol_username,choeaedol_period,reference_code,note,is_active").eq("user_id",currentUser.id).maybeSingle()
- ]);
- if(listError)throw listError;if(mineError)throw mineError;
- friendListings=rows||[];
- if(friendListings.length){
-  const userIds=[...new Set(friendListings.map(item=>item.user_id).filter(Boolean))];
-  const {data:profiles,error:profilesError}=await supabase.from("army_public_avatars").select("user_id,avatar_path").in("user_id",userIds);
-  if(!profilesError&&profiles?.length){
-   const avatarEntries=await Promise.all(profiles.filter(profile=>profile.avatar_path).map(async profile=>{
-    try{
-     const {data,error}=await supabase.storage.from("army-profile-photos").createSignedUrl(profile.avatar_path,3600);
-     return !error&&data?.signedUrl?[profile.user_id,data.signedUrl]:null;
-    }catch(error){return null;}
-   }));
-   const avatarUrls=new Map(avatarEntries.filter(Boolean));
-   friendListings=friendListings.map(item=>({...item,avatar_url:avatarUrls.get(item.user_id)||null}));
+ if(armyFriendsLoadPromise)return armyFriendsLoadPromise;
+ const task=(async()=>{
+  $("armyFriendsList").innerHTML='<p class="army-muted">Cargando perfiles…</p>';
+  const [{data:rows,error:listError},{data:mine,error:mineError}]=await Promise.all([
+   supabase.from("choeaedol_friend_listings").select("id,user_id,display_name,country_code,choeaedol_username,choeaedol_period,reference_code,note,looking_for_exchange,is_active,created_at,updated_at").eq("is_active",true).eq("looking_for_exchange",true).order("created_at",{ascending:false}).limit(100),
+   supabase.from("choeaedol_friend_listings").select("id,display_name,country_code,choeaedol_username,choeaedol_period,reference_code,note,is_active").eq("user_id",currentUser.id).maybeSingle()
+  ]);
+  if(listError)throw listError;if(mineError)throw mineError;
+  friendListings=rows||[];
+  if(friendListings.length){
+   const userIds=[...new Set(friendListings.map(item=>item.user_id).filter(Boolean))];
+   const {data:profiles,error:profilesError}=await supabase.from("army_public_avatars").select("user_id,avatar_path").in("user_id",userIds);
+   if(!profilesError&&profiles?.length){
+    const avatarProfiles=profiles.filter(profile=>profile.avatar_path);
+    if(avatarProfiles.length){
+     const pathToUser=new Map(avatarProfiles.map(profile=>[profile.avatar_path,profile.user_id]));
+     try{
+      const {data:signedUrls,error:signedError}=await supabase.storage.from("army-profile-photos").createSignedUrls(avatarProfiles.map(profile=>profile.avatar_path),3600);
+      if(!signedError&&signedUrls?.length){
+       const avatarUrls=new Map();
+       signedUrls.forEach(item=>{if(item?.path&&item?.signedUrl)avatarUrls.set(item.path,item.signedUrl);});
+       friendListings=friendListings.map(item=>({...item,avatar_url:avatarUrls.get(avatarProfiles.find(profile=>profile.user_id===item.user_id)?.avatar_path)||null}));
+      }
+     }catch(error){/* Los avatares son opcionales; la lista debe seguir disponible aunque Storage falle. */}
+    }
+   }
   }
- }
- myFriendListing=mine||null;
- $("armyFriendsChoeaedol").value=myFriendListing?.choeaedol_username||"";
- $("armyFriendsReference").value=myFriendListing?.reference_code||"";
- $("armyFriendsNote").value=myFriendListing?.note||"";friendsPeriodInput.value=myFriendListing?.choeaedol_period||"";
- $("armyFriendsSave").textContent=myFriendListing?"Actualizar mi perfil":"Publicar mi perfil";
- $("armyFriendsDeactivate").hidden=!myFriendListing?.is_active;
- renderArmyFriends();
+  myFriendListing=mine||null;
+  $("armyFriendsChoeaedol").value=myFriendListing?.choeaedol_username||"";
+  $("armyFriendsReference").value=myFriendListing?.reference_code||"";
+  $("armyFriendsNote").value=myFriendListing?.note||"";friendsPeriodInput.value=myFriendListing?.choeaedol_period||"";
+  $("armyFriendsSave").textContent=myFriendListing?"Actualizar mi perfil":"Publicar mi perfil";
+  $("armyFriendsDeactivate").hidden=!myFriendListing?.is_active;
+  renderArmyFriends();
+ })();
+ armyFriendsLoadPromise=task;
+ try{return await task;}finally{if(armyFriendsLoadPromise===task)armyFriendsLoadPromise=null;}
 }
 $("armyFriendsToggle").addEventListener("click",async()=>{
  const open=friendsPanel.hidden;
