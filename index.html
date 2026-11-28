@@ -3560,7 +3560,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
   <div class="army-ig-cover" id="armyCoverFrame"><img id="armyCoverImage" alt="Encabezado del perfil" hidden></div>
   <div class="army-ig-avatar-row"><div class="army-ig-avatar"><span id="armyAvatarFallback">A</span><img id="armyAvatarImage" alt="Foto de perfil" hidden></div></div>
  </div>
- <div class="army-profile-head"><div class="army-profile-identity"><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p><p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p></div><div class="army-profile-actions"><button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div></div>
+ <div class="army-profile-head"><div class="army-profile-identity"><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p><p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p></div><div class="army-profile-actions"><button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button><button type="button" class="btn secondary cf-open-btn" id="armyChoeaedolFriendsOpen"><span aria-hidden="true">♡</span> Choeaedol Friends</button><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div></div>
   <div class="army-block army-edit-profile">
    <form id="armyEditProfileForm" class="army-country-form" hidden>
     <button type="button" class="army-edit-close" id="armyEditProfileClose" aria-label="Cerrar edición de perfil" title="Cerrar">×</button>
@@ -3612,6 +3612,34 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
  </div>
 </section>
 
+<div id="choeaedolFriendsModal" class="cf-modal" hidden>
+ <div class="cf-backdrop" data-cf-close></div>
+ <section class="cf-dialog" role="dialog" aria-modal="true" aria-labelledby="cfTitle">
+  <header class="cf-dialog-head">
+   <div><span class="cf-eyebrow">COMUNIDAD CHOEAEDOL</span><h2 id="cfTitle">Choeaedol Friends</h2><p>Encuentra ARMY que quieran intercambiar sus 3 votos diarios.</p></div>
+   <button type="button" class="cf-close" id="cfClose" aria-label="Cerrar">×</button>
+  </header>
+  <div class="cf-tools">
+   <input id="cfSearch" type="search" placeholder="Buscar usuario de Choeaedol" aria-label="Buscar usuario">
+   <select id="cfCountryFilter" aria-label="Filtrar por país"><option value="">Todos los países</option></select>
+   <button type="button" class="btn cf-publish-toggle" id="cfPublishToggle">Publicar mi perfil</button>
+  </div>
+  <form id="cfListingForm" class="cf-form" hidden>
+   <div class="cf-form-title"><strong>Tu publicación</strong><span>Tu país y nombre ARMY se toman de tu perfil actual.</span></div>
+   <label>Usuario de Choeaedol<input id="cfChoeaedolUsername" maxlength="50" required placeholder="Tu usuario en Choeaedol"></label>
+   <label>Referencia para nuevos registros <span class="cf-optional">(opcional)</span><input id="cfReferenceCode" maxlength="80" placeholder="Código de referencia de amigo"></label>
+   <label>Captura de tu perfil <span class="cf-optional">(opcional)</span><input id="cfPhoto" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG o WEBP · máximo 5 MB</small></label>
+   <label>Presentación breve <span class="cf-optional">(opcional)</span><textarea id="cfNote" maxlength="220" rows="2" placeholder="Ej. Estoy buscando amistades para intercambiar los 3 votos diarios."></textarea></label>
+   <label class="cf-check"><input id="cfLookingForExchange" type="checkbox" checked><span>Busco amigos responsables para intercambiar mis 3 votos diarios.</span></label>
+   <div class="cf-form-actions"><button class="btn" type="submit" id="cfSaveListing">Guardar publicación</button><button type="button" class="btn secondary" id="cfDeactivateListing" hidden>Dejar de aparecer</button></div>
+   <p id="cfFormMessage" class="cf-message" role="status" aria-live="polite"></p>
+  </form>
+  <div class="cf-list-head"><strong>ARMY disponibles</strong><span id="cfResultsCount">Cargando…</span></div>
+  <p id="cfListMessage" class="cf-message" role="status" aria-live="polite">Cargando publicaciones…</p>
+  <div id="cfListingList" class="cf-listing-list"></div>
+  <p class="cf-footnote">Las publicaciones son compartidas por sus autores. Confirma los acuerdos de intercambio directamente en Choeaedol.</p>
+ </section>
+</div>
 
 
 <section class="panel" id="official-voting">
@@ -5406,6 +5434,66 @@ body.dark-mode .army-intro,body.dark-mode .army-auth,body.dark-mode .army-dashbo
 .army-daily-reset{display:grid;grid-template-columns:1fr auto;gap:5px 12px;align-items:center;margin:10px 0 15px;padding:13px 15px;border:1px solid #e4d9ed;border-left:4px solid #6840a0;border-radius:8px;background:linear-gradient(110deg,#f7f1fc,#fff)}.army-daily-reset span{font-size:.72rem;font-weight:900;letter-spacing:.06em;color:#6840a0}.army-daily-reset strong{grid-column:2;grid-row:1/3;font-size:1.55rem;font-variant-numeric:tabular-nums;color:#49305f;white-space:nowrap}.army-daily-reset small{font-size:.72rem;line-height:1.4;color:#766a80}.army-daily-reset small{grid-column:1}@media(max-width:420px){.army-daily-reset{grid-template-columns:1fr}.army-daily-reset strong{grid-column:1;grid-row:auto;font-size:1.4rem}.army-daily-reset small{grid-column:1}}body.dark-mode .army-daily-reset{background:#302739;border-color:#51445d}body.dark-mode .army-daily-reset span,body.dark-mode .army-daily-reset strong{color:#e2c9f4}body.dark-mode .army-daily-reset small{color:#c5b6d0}
 </style>
 
+
+<style id="choeaedol-friends-styles">
+.cf-open-btn{border-radius:999px!important;white-space:nowrap}
+.cf-open-btn span{font-size:1rem;margin-right:3px}
+.cf-modal[hidden],.cf-form[hidden]{display:none!important}
+.cf-modal{position:fixed;inset:0;z-index:10050;display:grid;place-items:center;padding:16px}
+.cf-backdrop{position:absolute;inset:0;background:rgba(20,13,29,.64);backdrop-filter:blur(5px)}
+.cf-dialog{position:relative;z-index:1;width:min(680px,100%);max-height:min(88vh,900px);overflow:auto;padding:clamp(16px,3vw,25px);border:1px solid #e7deef;border-radius:22px;background:#fff;color:#342842;box-shadow:0 24px 80px #120b1e55}
+.cf-dialog-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
+.cf-eyebrow{font-size:.65rem;letter-spacing:.14em;font-weight:800;color:#8a6aa9}
+.cf-dialog-head h2{margin:4px 0;color:#4a2d7a;font:700 clamp(1.3rem,4vw,1.7rem 'Poppins',sans-serif)}
+.cf-dialog-head p{margin:4px 0 0;color:#756b80;font-size:.86rem}
+.cf-close{flex:0 0 36px;width:36px;height:36px;border:0;border-radius:50%;background:#f2edf7;color:#5b4274;font-size:1.5rem;cursor:pointer}
+.cf-tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,.7fr) auto;gap:9px;margin-bottom:16px}
+.cf-tools input,.cf-tools select,.cf-form input:not([type=checkbox]),.cf-form textarea{width:100%;min-width:0;padding:11px 12px;border:1px solid #e1d8e9;border-radius:11px;background:#fff;color:#382b46;font:inherit;font-size:.86rem}
+.cf-publish-toggle{white-space:nowrap;padding:10px 13px!important}
+.cf-form{padding:15px;margin:0 0 18px;border:1px solid #e5d9ee;border-radius:15px;background:#faf7fd}
+.cf-form-title{display:flex;flex-direction:column;gap:3px;margin-bottom:12px;color:#4a2d7a}
+.cf-form-title span,.cf-form small,.cf-optional{font-size:.74rem;color:#81768c;font-weight:400}
+.cf-form label{display:flex;flex-direction:column;gap:6px;margin:10px 0;color:#49345e;font-size:.82rem;font-weight:650}
+.cf-form input[type=file]{font-size:.8rem}
+.cf-form .cf-check{flex-direction:row;align-items:center;gap:9px;font-weight:500}
+.cf-check input{width:17px;height:17px;accent-color:#7651a8}
+.cf-form-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.cf-message{margin:8px 0;color:#766a80;font-size:.8rem}
+.cf-list-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0 9px;color:#4a2d7a}
+.cf-list-head span{font-size:.74rem;color:#82768e;font-weight:400}
+.cf-listing-list{display:grid;gap:10px}
+.cf-listing-card{padding:14px;border:1px solid #ece5f1;border-radius:14px;background:#fff}
+.cf-card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.cf-card-user{font-weight:750;color:#4a2d7a}
+.cf-card-country{margin-top:3px;color:#80758b;font-size:.75rem}
+.cf-status{display:inline-flex;align-items:center;padding:5px 8px;border-radius:999px;background:#f0eafa;color:#694c8d;font-size:.68rem;font-weight:700}
+.cf-card-meta{margin:10px 0 5px;color:#53445f;font-size:.82rem}
+.cf-card-note{margin:7px 0;color:#70647b;font-size:.82rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.cf-card-photo{display:block;max-width:100%;max-height:220px;margin:10px auto 0;border-radius:10px;object-fit:contain}
+.cf-ref-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding:9px 10px;border-radius:10px;background:#f7f3fa}
+.cf-ref-row span{font-size:.72rem;color:#766a80}
+.cf-ref-row strong{font-size:.88rem;color:#65458a;overflow-wrap:anywhere}
+.cf-copy{border:0;border-radius:9px;padding:7px 10px;background:#7651a8;color:#fff;font-size:.73rem;font-weight:700;cursor:pointer}
+.cf-footnote{margin:16px 0 0;color:#897f92;font-size:.7rem;line-height:1.5}
+body.dark-mode .cf-dialog{background:#211d28;color:#eee7f3;border-color:#4a4055}
+body.dark-mode .cf-dialog-head h2,body.dark-mode .cf-list-head,body.dark-mode .cf-card-user{color:#e4d3f7}
+body.dark-mode .cf-dialog-head p,body.dark-mode .cf-card-country,body.dark-mode .cf-card-note,body.dark-mode .cf-message,body.dark-mode .cf-footnote,body.dark-mode .cf-list-head span{color:#c0b5c9}
+body.dark-mode .cf-tools input,body.dark-mode .cf-tools select,body.dark-mode .cf-form input:not([type=checkbox]),body.dark-mode .cf-form textarea{background:#2c2633;border-color:#51445d;color:#f4edf8}
+body.dark-mode .cf-form,body.dark-mode .cf-ref-row{background:#2b2532;border-color:#51445d}
+body.dark-mode .cf-form-title,body.dark-mode .cf-form label,body.dark-mode .cf-card-meta{color:#e1d5eb}
+body.dark-mode .cf-listing-card{background:#28232e;border-color:#51445d}
+body.dark-mode .cf-close{background:#3a3044;color:#eadcf6}
+@media(max-width:560px){
+ .cf-open-btn{font-size:.72rem!important;padding:9px 10px!important}
+ .cf-tools{grid-template-columns:1fr 1fr}
+ .cf-tools input{grid-column:1/-1}
+ .cf-publish-toggle{grid-column:1/-1;width:100%}
+ .cf-modal{padding:8px}
+ .cf-dialog{max-height:94vh;border-radius:17px;padding:14px}
+ .cf-card-top{align-items:flex-start}
+}
+</style>
+
 <script type="module" id="army-section-app">
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const SUPABASE_URL = "https://kerhrpdrmxkffelufgbh.supabase.co";
@@ -5878,6 +5966,106 @@ $("armyDailyForm").addEventListener("submit",async(event)=>{
 fillCountryOptions();
 const {data:{session}}=await supabase.auth.getSession();
 if(session){try{await showSession(session);}catch(e){await supabase.auth.signOut();message("armyAuthMessage","No pudimos cargar tu perfil. Intenta iniciar sesión otra vez.");}}
+
+/* Choeaedol Friends: módulo aislado, usa la sesión ARMY existente y su tabla dedicada. */
+const cfModal=$("choeaedolFriendsModal"),cfList=$("cfListingList"),cfSearch=$("cfSearch"),cfCountryFilter=$("cfCountryFilter");
+let cfListings=[],cfOwnListing=null,cfLoaded=false;
+const cfBucket="choeaedol-friends-media";
+function cfText(tag,text,className){const el=document.createElement(tag);if(className)el.className=className;el.textContent=text??"";return el;}
+function cfFlag(code){return code?String(code).toUpperCase().replace(/[A-Z]/g,c=>String.fromCodePoint(c.charCodeAt(0)+127397)):"";}
+function cfCountry(code){return armyCountries.find(item=>item[0]===code)?.[1]||"";}
+function cfSetMessage(id,text,isError=false){const el=$(id);if(el){el.textContent=text||"";el.style.color=isError?"#bd5265":"";}}
+function cfCopy(value,label){if(!value)return;const fallback=()=>{const field=document.createElement("textarea");field.value=value;document.body.append(field);field.select();try{document.execCommand("copy");cfSetMessage("cfListMessage",label+" copiado.");}catch(e){cfSetMessage("cfListMessage","No se pudo copiar. Selecciona el texto manualmente.",true);}field.remove();};if(navigator.clipboard?.writeText){navigator.clipboard.writeText(value).then(()=>cfSetMessage("cfListMessage",label+" copiado." )).catch(fallback);}else fallback();}
+function cfRenderListings(){
+ const query=(cfSearch.value||"").trim().toLocaleLowerCase(),country=cfCountryFilter.value;
+ const rows=cfListings.filter(item=>(!country||item.country_code===country)&&(!query||String(item.choeaedol_username||"").toLocaleLowerCase().includes(query)||String(item.display_name||"").toLocaleLowerCase().includes(query)));
+ cfList.replaceChildren();
+ $("cfResultsCount").textContent=rows.length+" "+(rows.length===1?"persona":"personas");
+ if(!rows.length){cfSetMessage("cfListMessage",cfListings.length?"No encontramos perfiles con esos filtros.":"Todavía no hay publicaciones. ¡Puedes ser la primera ARMY en compartir la tuya!");return;}
+ cfSetMessage("cfListMessage","");
+ for(const item of rows){
+  const card=cfText("article","","cf-listing-card"),top=cfText("div","","cf-card-top"),identity=cfText("div",""),user=cfText("div","@"+(item.display_name||"ARMY"),"cf-card-user"),countryLine=cfText("div",(cfFlag(item.country_code)+" "+cfCountry(item.country_code)).trim()||"País no indicado","cf-card-country");
+  identity.append(user,countryLine);top.append(identity,cfText("span",item.looking_for_exchange?"Intercambio diario":"Comparte referencia","cf-status"));card.append(top);
+  card.append(cfText("p","Choeaedol: @"+item.choeaedol_username,"cf-card-meta"));
+  if(item.note)card.append(cfText("p",item.note,"cf-card-note"));
+  if(item.photo_path){const img=document.createElement("img");img.className="cf-card-photo";img.loading="lazy";img.alt="Captura compartida del perfil de Choeaedol";img.src=supabase.storage.from(cfBucket).getPublicUrl(item.photo_path).data.publicUrl;card.append(img);}
+  const usernameRow=cfText("div","","cf-ref-row");const usernameValue=cfText("strong","@"+item.choeaedol_username);const usernameCopy=cfText("button","Copiar usuario","cf-copy");usernameCopy.type="button";usernameCopy.addEventListener("click",()=>cfCopy(item.choeaedol_username,"Usuario"));usernameRow.append(usernameValue,usernameCopy);card.append(usernameRow);
+  if(item.reference_code){const refRow=cfText("div","","cf-ref-row"),refWrap=cfText("div","");refWrap.append(cfText("span","Referencia para nuevos registros"),cfText("strong",item.reference_code));const copy=cfText("button","Copiar código","cf-copy");copy.type="button";copy.addEventListener("click",()=>cfCopy(item.reference_code,"Código"));refRow.append(refWrap,copy);card.append(refRow);}
+  if(item.user_id===currentUser.id)card.append(cfText("div","Esta es tu publicación.","cf-card-country"));
+  cfList.append(card);
+ }
+}
+async function cfLoadListings(){
+ cfSetMessage("cfListMessage","Cargando publicaciones…");
+ const [publicResult,ownResult]=await Promise.all([
+  supabase.from("choeaedol_friend_listings").select("id,user_id,display_name,country_code,choeaedol_username,reference_code,note,photo_path,looking_for_exchange,updated_at").eq("is_active",true).order("updated_at",{ascending:false}).limit(100),
+  supabase.from("choeaedol_friend_listings").select("id,user_id,display_name,country_code,choeaedol_username,reference_code,note,photo_path,looking_for_exchange,is_active").eq("user_id",currentUser.id).maybeSingle()
+ ]);
+ if(publicResult.error)throw publicResult.error;
+ if(ownResult.error)throw ownResult.error;
+ cfListings=publicResult.data||[];cfOwnListing=ownResult.data||null;cfLoaded=true;
+ cfPopulateForm();cfRenderListings();
+}
+function cfPopulateForm(){
+ $("cfChoeaedolUsername").value=cfOwnListing?.choeaedol_username||"";
+ $("cfReferenceCode").value=cfOwnListing?.reference_code||"";
+ $("cfNote").value=cfOwnListing?.note||"";
+ $("cfLookingForExchange").checked=cfOwnListing?.looking_for_exchange!==false;
+ $("cfPhoto").value="";
+ $("cfDeactivateListing").hidden=!cfOwnListing?.is_active;
+ $("cfPublishToggle").textContent=cfOwnListing?"Editar mi publicación":"Publicar mi perfil";
+}
+function cfOpen(){
+ if(!currentUser){cfModal.hidden=true;return;}
+ cfModal.hidden=false;document.body.classList.add("cf-modal-open");
+ $("cfSearch").value="";cfCountryFilter.value="";
+ if(!cfLoaded){cfLoadListings().catch(error=>cfSetMessage("cfListMessage",error.message||"No se pudieron cargar las publicaciones.",true));}
+ else cfRenderListings();
+ $("cfClose").focus();
+}
+function cfClose(){cfModal.hidden=true;document.body.classList.remove("cf-modal-open");}
+armyCountries.forEach(([code,name])=>{const option=document.createElement("option");option.value=code;option.textContent=cfFlag(code)+" "+name;cfCountryFilter.append(option);});
+$("armyChoeaedolFriendsOpen").addEventListener("click",cfOpen);
+$("cfClose").addEventListener("click",cfClose);
+cfModal.querySelector("[data-cf-close]").addEventListener("click",cfClose);
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!cfModal.hidden)cfClose();});
+$("cfPublishToggle").addEventListener("click",()=>{$("cfListingForm").hidden=!$("cfListingForm").hidden;if(!$("cfListingForm").hidden)$("cfChoeaedolUsername").focus();});
+cfSearch.addEventListener("input",cfRenderListings);
+cfCountryFilter.addEventListener("change",cfRenderListings);
+$("cfListingForm").addEventListener("submit",async event=>{
+ event.preventDefault();const save=$("cfSaveListing");if(save.disabled)return;
+ const choeaedolUsername=$("cfChoeaedolUsername").value.trim(),referenceCode=$("cfReferenceCode").value.trim(),note=$("cfNote").value.trim(),file=$("cfPhoto").files?.[0];
+ if(!choeaedolUsername){cfSetMessage("cfFormMessage","Escribe tu usuario de Choeaedol.",true);return;}
+ if(file&&(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024)){cfSetMessage("cfFormMessage","La imagen debe ser JPG, PNG o WEBP y pesar máximo 5 MB.",true);return;}
+ save.disabled=true;save.textContent="Guardando…";cfSetMessage("cfFormMessage","Guardando tu publicación…");
+ let uploadedPath=null;
+ try{
+  let photoPath=cfOwnListing?.photo_path||null;
+  if(file){
+   const ext=file.type==="image/png"?"png":file.type==="image/webp"?"webp":"jpg";
+   uploadedPath=currentUser.id+"/"+Date.now()+"-"+Math.random().toString(36).slice(2,9)+"."+ext;
+   const {error:uploadError}=await supabase.storage.from(cfBucket).upload(uploadedPath,file,{contentType:file.type,upsert:false});
+   if(uploadError)throw uploadError;photoPath=uploadedPath;
+  }
+  const payload={user_id:currentUser.id,display_name:currentUsername,country_code:$("armyCountrySelect").value||null,choeaedol_username:choeaedolUsername,reference_code:referenceCode||null,note:note||null,photo_path:photoPath,looking_for_exchange:$("cfLookingForExchange").checked,is_active:true,updated_at:new Date().toISOString()};
+  const {error}=await supabase.from("choeaedol_friend_listings").upsert(payload,{onConflict:"user_id"});
+  if(error)throw error;
+  if(uploadedPath&&cfOwnListing?.photo_path&&cfOwnListing.photo_path!==uploadedPath){await supabase.storage.from(cfBucket).remove([cfOwnListing.photo_path]);}
+  cfSetMessage("cfFormMessage","¡Tu publicación está actualizada!");
+  await cfLoadListings();$("cfListingForm").hidden=true;
+ }catch(error){
+  if(uploadedPath)await supabase.storage.from(cfBucket).remove([uploadedPath]);
+  cfSetMessage("cfFormMessage",error.message||"No se pudo guardar tu publicación.",true);
+ }finally{save.disabled=false;save.textContent="Guardar publicación";}
+});
+$("cfDeactivateListing").addEventListener("click",async()=>{
+ if(!cfOwnListing?.id)return;
+ const button=$("cfDeactivateListing");button.disabled=true;cfSetMessage("cfFormMessage","Actualizando publicación…");
+ try{const {error}=await supabase.from("choeaedol_friend_listings").update({is_active:false}).eq("user_id",currentUser.id);if(error)throw error;await cfLoadListings();$("cfListingForm").hidden=true;cfSetMessage("cfListMessage","Tu publicación ya no aparece en las búsquedas.");}
+ catch(error){cfSetMessage("cfFormMessage",error.message||"No se pudo ocultar la publicación.",true);}
+ finally{button.disabled=false;}
+});
+
 </script>
 
 
