@@ -5557,7 +5557,7 @@ async function loadArmyFriends(){
  friendListings=rows||[];
  if(friendListings.length){
   const userIds=[...new Set(friendListings.map(item=>item.user_id).filter(Boolean))];
-  const {data:profiles,error:profilesError}=await supabase.from("army_profiles").select("user_id,avatar_path").in("user_id",userIds);
+  const {data:profiles,error:profilesError}=await supabase.from("army_public_avatars").select("user_id,avatar_path").in("user_id",userIds);
   if(!profilesError&&profiles?.length){
    const avatarEntries=await Promise.all(profiles.filter(profile=>profile.avatar_path).map(async profile=>{
     try{
