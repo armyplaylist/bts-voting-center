@@ -5712,8 +5712,8 @@ async function loadHistory(){
  const today=kstDate();
  $("armyDailyBlock").hidden=!approvedForToday;
  $("armyHistory").innerHTML="";
- if(!logs?.length){$("armyHistory").innerHTML='<p class="army-muted">Aún no hay registros.</p>';return;}
- for(const log of logs){
+ if(!logs?.length){$("armyHistory").innerHTML='<p class="army-muted">Aún no hay registros.</p>';}
+ for(const log of logs||[]){
   const row=document.createElement("div");row.className="army-history-item";
   const left=document.createElement("span");left.textContent=prettyKstDate(log.log_date)+(log.voter_name?" · @"+log.voter_name:"")+" · "+(log.target_member||"BTS");
   const right=document.createElement("strong");right.textContent=(log.voted_hearts||0).toLocaleString("es-MX")+" votos";
