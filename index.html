@@ -5529,7 +5529,7 @@ function choeaedolDayPart(timestamp){if(!timestamp)return "other";const date=new
 function renderArmyFriends(){
  const list=$("armyFriendsList"),fragment=document.createDocumentFragment();
  const selectedCountry=friendsCountryFilter.value,selectedTime=friendsTimeFilter.value;
- const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&(!selectedTime||(item.choeaedol_period===selectedTime&&choeaedolDayPart(item.updated_at||item.created_at)!=="other")));
+ const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&(!selectedTime||item.choeaedol_period===selectedTime));
  if(!filtered.length){const empty=document.createElement("p");empty.className="army-muted";empty.textContent="Todavía no hay perfiles publicados. Puedes ser la primera persona en aparecer.";list.replaceChildren(empty);return;}
  for(const item of filtered){
   const card=document.createElement("article");card.className="army-friend-card";
