@@ -5515,7 +5515,7 @@ function choeaedolDayPart(timestamp){if(!timestamp)return "other";const date=new
 function renderArmyFriends(){
  const list=$("armyFriendsList"),term=$("armyFriendsSearch").value.trim().toLowerCase();list.innerHTML="";
  const selectedCountry=friendsCountryFilter.value,selectedTime=friendsTimeFilter.value;
- const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&((!selectedTime||item.choeaedol_period===selectedTime)&&choeaedolDayPart(item.updated_at||item.created_at)!=="other")&&[item.display_name,item.choeaedol_username,item.note,armyCountries.find(x=>x[0]===item.country_code)?.[1]||""].join(" ").toLowerCase().includes(term));
+ const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&(!selectedTime||(item.choeaedol_period===selectedTime&&choeaedolDayPart(item.updated_at||item.created_at)!=="other"))&&[item.display_name,item.choeaedol_username,item.note,armyCountries.find(x=>x[0]===item.country_code)?.[1]||""].join(" ").toLowerCase().includes(term));
  if(!filtered.length){const empty=document.createElement("p");empty.className="army-muted";empty.textContent=term?"No encontramos perfiles con esa búsqueda.":"Todavía no hay perfiles publicados. Puedes ser la primera persona en aparecer.";list.append(empty);return;}
  for(const item of filtered){
   const card=document.createElement("article");card.className="army-friend-card";
