@@ -3560,8 +3560,8 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
   <div class="army-ig-cover" id="armyCoverFrame"><img id="armyCoverImage" alt="Encabezado del perfil" hidden></div>
   <div class="army-ig-avatar-row"><div class="army-ig-avatar"><span id="armyAvatarFallback">A</span><img id="armyAvatarImage" alt="Foto de perfil" hidden></div></div>
  </div>
- <div class="army-profile-head"><div class="army-profile-identity"><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p><p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p></div><div class="army-profile-actions"><button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button><button type="button" class="btn secondary army-friends-trigger" id="armyFriendsToggle" aria-expanded="false">Choeaedol Friends</button><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div></div>
-   <section class="army-friends-panel" id="armyFriendsPanel" hidden aria-labelledby="armyFriendsTitle"><div class="army-friends-heading"><div><h3 id="armyFriendsTitle">Choeaedol Friends</h3><p>Encuentra ARMY para coordinar intercambios de 3 votos.</p></div><button type="button" class="army-edit-close" id="armyFriendsClose" aria-label="Cerrar Choeaedol Friends" title="Cerrar">×</button></div><form id="armyFriendsForm" class="army-friends-form"><label for="armyFriendsChoeaedol">Usuario de Choeaedol</label><input id="armyFriendsChoeaedol" maxlength="40" required placeholder="Tu usuario en Choeaedol"><label for="armyFriendsReference">Código de referencia <span>(opcional)</span></label><input id="armyFriendsReference" maxlength="80" placeholder="Para quienes lo necesiten"><label for="armyFriendsNote">Nota <span>(opcional)</span></label><input id="armyFriendsNote" maxlength="220" placeholder="Ej. Disponible para intercambio diario"><div class="army-friends-form-actions"><button class="btn" type="submit" id="armyFriendsSave">Publicar mi perfil</button><button class="btn secondary" type="button" id="armyFriendsDeactivate" hidden>Dejar de aparecer</button></div><p class="army-message" id="armyFriendsMessage" role="status" aria-live="polite"></p></form><div class="army-friends-list-head"><strong>ARMY disponibles</strong><button type="button" class="btn secondary" id="armyFriendsRefresh">Actualizar</button></div><label class="army-friends-search-label" for="armyFriendsCountryFilter">Filtrar automáticamente por país</label><select id="armyFriendsCountryFilter" class="army-friends-search"><option value="">Todos los países</option></select><label class="army-friends-search-label" for="armyFriendsTimeFilter">Horario del día de Choeaedol (00:00 KST)</label><select id="armyFriendsTimeFilter" class="army-friends-search"><option value="">Todo el día</option><option value="first">Primeras 12 horas (00:00–11:59 KST)</option><option value="second">Después de las primeras 12 horas (12:00–23:59 KST)</option></select><label class="army-friends-search-label" for="armyFriendsSearch">Buscar por usuario</label><input id="armyFriendsSearch" class="army-friends-search" type="search" placeholder="Buscar usuario…"><div id="armyFriendsList" class="army-friends-list" aria-live="polite"><p class="army-muted">Abre esta sección para cargar la lista.</p></div><p class="army-friends-footnote">Los perfiles publicados indican disponibilidad para intercambiar; confirma directamente con cada persona que se completen los 3 votos.</p></section>
+ <div class="army-profile-head"><div class="army-profile-identity"><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p><p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p></div><div class="army-profile-actions"><button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button><button type="button" class="btn secondary army-friends-trigger" id="armyFriendsToggle" aria-expanded="false">Encuentra amigos</button><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button></div></div>
+   <section class="army-friends-panel" id="armyFriendsPanel" hidden aria-labelledby="armyFriendsTitle"><div class="army-friends-heading"><div><h3 id="armyFriendsTitle">Choeaedol Friends</h3><p>Encuentra ARMY para coordinar intercambios de 3 votos.</p></div><button type="button" class="army-edit-close" id="armyFriendsClose" aria-label="Cerrar Choeaedol Friends" title="Cerrar">×</button></div><form id="armyFriendsForm" class="army-friends-form"><label for="armyFriendsChoeaedol">Usuario de Choeaedol</label><input id="armyFriendsChoeaedol" maxlength="40" required placeholder="Tu usuario en Choeaedol"><label for="armyFriendsPeriod">¿En qué horario enviaste tus votos hoy?</label><select id="armyFriendsPeriod" class="army-friends-search" required><option value="">Selecciona el horario</option><option value="first">Primeras 12 horas (00:00–11:59 KST)</option><option value="second">Después de las 12 horas (12:00–23:59 KST)</option></select><label for="armyFriendsReference">Código de referencia <span>(opcional)</span></label><input id="armyFriendsReference" maxlength="80" placeholder="Para quienes lo necesiten"><label for="armyFriendsNote">Nota <span>(opcional)</span></label><input id="armyFriendsNote" maxlength="220" placeholder="Ej. Disponible para intercambio diario"><div class="army-friends-form-actions"><button class="btn" type="submit" id="armyFriendsSave">Publicar mi perfil</button><button class="btn secondary" type="button" id="armyFriendsDeactivate" hidden>Dejar de aparecer</button></div><p class="army-message" id="armyFriendsMessage" role="status" aria-live="polite"></p></form><div class="army-friends-list-head"><strong>ARMY disponibles</strong><button type="button" class="btn secondary" id="armyFriendsRefresh">Actualizar</button></div><label class="army-friends-search-label" for="armyFriendsCountryFilter">Filtrar automáticamente por país</label><select id="armyFriendsCountryFilter" class="army-friends-search"><option value="">Todos los países</option></select><label class="army-friends-search-label" for="armyFriendsTimeFilter">Horario del día de Choeaedol (00:00 KST)</label><select id="armyFriendsTimeFilter" class="army-friends-search"><option value="">Todo el día</option><option value="first">Primeras 12 horas (00:00–11:59 KST)</option><option value="second">Después de las primeras 12 horas (12:00–23:59 KST)</option></select><label class="army-friends-search-label" for="armyFriendsSearch">Buscar por usuario</label><input id="armyFriendsSearch" class="army-friends-search" type="search" placeholder="Buscar usuario…"><div id="armyFriendsList" class="army-friends-list" aria-live="polite"><p class="army-muted">Abre esta sección para cargar la lista.</p></div><p class="army-friends-footnote">Los perfiles publicados indican disponibilidad para intercambiar; confirma directamente con cada persona que se completen los 3 votos.</p></section>
   <div class="army-block army-edit-profile">
    <form id="armyEditProfileForm" class="army-country-form" hidden>
     <button type="button" class="army-edit-close" id="armyEditProfileClose" aria-label="Cerrar edición de perfil" title="Cerrar">×</button>
@@ -5507,7 +5507,7 @@ $("armyEditProfileClose").addEventListener("click",()=>{
  $("armyEditProfileForm").hidden=true;$("armyEditProfileToggle").setAttribute("aria-expanded","false");
 });
 const friendsPanel=$("armyFriendsPanel"),friendsForm=$("armyFriendsForm");
-const friendsCountryFilter=$("armyFriendsCountryFilter"),friendsTimeFilter=$("armyFriendsTimeFilter");
+const friendsCountryFilter=$("armyFriendsCountryFilter"),friendsTimeFilter=$("armyFriendsTimeFilter"),friendsPeriodInput=$("armyFriendsPeriod");
 armyCountries.forEach(([code,name])=>{const option=document.createElement("option");option.value=code;option.textContent=name;friendsCountryFilter.append(option);});
 let myFriendListing=null,friendListings=[];
 function armyFlag(code){return code&&/^[A-Z]{2}$/.test(code)?String.fromCodePoint(...code.split("").map(char=>127397+char.charCodeAt(0))):"🌐";}
@@ -5515,31 +5515,31 @@ function choeaedolDayPart(timestamp){if(!timestamp)return "other";const date=new
 function renderArmyFriends(){
  const list=$("armyFriendsList"),term=$("armyFriendsSearch").value.trim().toLowerCase();list.innerHTML="";
  const selectedCountry=friendsCountryFilter.value,selectedTime=friendsTimeFilter.value;
- const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&(!selectedTime||choeaedolDayPart(item.updated_at||item.created_at)===selectedTime)&&[item.display_name,item.choeaedol_username,item.note,armyCountries.find(x=>x[0]===item.country_code)?.[1]||""].join(" ").toLowerCase().includes(term));
+ const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&((!selectedTime||item.choeaedol_period===selectedTime)&&choeaedolDayPart(item.updated_at||item.created_at)!=="other")&&[item.display_name,item.choeaedol_username,item.note,armyCountries.find(x=>x[0]===item.country_code)?.[1]||""].join(" ").toLowerCase().includes(term));
  if(!filtered.length){const empty=document.createElement("p");empty.className="army-muted";empty.textContent=term?"No encontramos perfiles con esa búsqueda.":"Todavía no hay perfiles publicados. Puedes ser la primera persona en aparecer.";list.append(empty);return;}
  for(const item of filtered){
   const card=document.createElement("article");card.className="army-friend-card";
   const avatar=document.createElement("span");avatar.className="army-friend-avatar";avatar.textContent=(item.display_name||item.choeaedol_username||"A").trim().charAt(0).toUpperCase();
   const main=document.createElement("div");main.className="army-friend-main";
   const name=document.createElement("strong");name.textContent=(item.country_code?armyFlag(item.country_code)+" ":"")+"@"+(item.display_name||"ARMY");
-  const detail=document.createElement("small");detail.textContent="Choeaedol: @"+item.choeaedol_username+(item.note?" · "+item.note:"");
+  const detail=document.createElement("small");detail.textContent="Choeaedol: @"+item.choeaedol_username+" · "+(item.choeaedol_period==="first"?"Primeras 12 horas":item.choeaedol_period==="second"?"Después de las 12 horas":"Horario sin indicar")+(item.note?" · "+item.note:"");
   main.append(name,detail);
   if(item.reference_code){const ref=document.createElement("div");ref.className="army-friend-reference";ref.textContent="Código de referencia: "+item.reference_code;main.append(ref);}
-  const copy=document.createElement("button");copy.type="button";copy.className="army-friend-copy";copy.textContent="Copiar usuario";copy.setAttribute("aria-label","Copiar usuario de Choeaedol @"+item.choeaedol_username);copy.addEventListener("click",async()=>{const value="@"+item.choeaedol_username;try{await navigator.clipboard.writeText(value);copy.textContent="¡Copiado!";}catch(error){const temporary=document.createElement("textarea");temporary.value=value;temporary.style.position="fixed";temporary.style.opacity="0";document.body.append(temporary);temporary.select();try{document.execCommand("copy");copy.textContent="¡Copiado!";}catch(e){copy.textContent="No se pudo copiar";}temporary.remove();}setTimeout(()=>{copy.textContent="Copiar usuario";},1600);});
+  const copy=document.createElement("button");copy.type="button";copy.className="army-friend-copy";copy.textContent="Copiar usuario";copy.setAttribute("aria-label","Copiar usuario de Choeaedol @"+item.choeaedol_username);copy.addEventListener("click",async()=>{const value=item.choeaedol_username;try{await navigator.clipboard.writeText(value);copy.textContent="¡Copiado!";}catch(error){const temporary=document.createElement("textarea");temporary.value=value;temporary.style.position="fixed";temporary.style.opacity="0";document.body.append(temporary);temporary.select();try{document.execCommand("copy");copy.textContent="¡Copiado!";}catch(e){copy.textContent="No se pudo copiar";}temporary.remove();}setTimeout(()=>{copy.textContent="Copiar usuario";},1600);});
   card.append(avatar,main,copy);list.append(card);
  }
 }
 async function loadArmyFriends(){
  $("armyFriendsList").innerHTML='<p class="army-muted">Cargando perfiles…</p>';
  const [{data:rows,error:listError},{data:mine,error:mineError}]=await Promise.all([
-  supabase.from("choeaedol_friend_listings").select("id,user_id,display_name,country_code,choeaedol_username,reference_code,note,looking_for_exchange,is_active,created_at").eq("is_active",true).eq("looking_for_exchange",true).order("created_at",{ascending:false}).limit(100),
-  supabase.from("choeaedol_friend_listings").select("id,display_name,country_code,choeaedol_username,reference_code,note,is_active").eq("user_id",currentUser.id).maybeSingle()
+  supabase.from("choeaedol_friend_listings").select("id,user_id,display_name,country_code,choeaedol_username,choeaedol_period,reference_code,note,looking_for_exchange,is_active,created_at,updated_at").eq("is_active",true).eq("looking_for_exchange",true).order("created_at",{ascending:false}).limit(100),
+  supabase.from("choeaedol_friend_listings").select("id,display_name,country_code,choeaedol_username,choeaedol_period,reference_code,note,is_active").eq("user_id",currentUser.id).maybeSingle()
  ]);
  if(listError)throw listError;if(mineError)throw mineError;
  friendListings=rows||[];myFriendListing=mine||null;
  $("armyFriendsChoeaedol").value=myFriendListing?.choeaedol_username||"";
  $("armyFriendsReference").value=myFriendListing?.reference_code||"";
- $("armyFriendsNote").value=myFriendListing?.note||"";
+ $("armyFriendsNote").value=myFriendListing?.note||"";friendsPeriodInput.value=myFriendListing?.choeaedol_period||"";
  $("armyFriendsSave").textContent=myFriendListing?"Actualizar mi perfil":"Publicar mi perfil";
  $("armyFriendsDeactivate").hidden=!myFriendListing?.is_active;
  renderArmyFriends();
@@ -5555,13 +5555,13 @@ friendsCountryFilter.addEventListener("change",renderArmyFriends);
 friendsTimeFilter.addEventListener("change",renderArmyFriends);
 friendsForm.addEventListener("submit",async event=>{
  event.preventDefault();if(!currentUser)return;
- const username=$("armyFriendsChoeaedol").value.trim(),reference=$("armyFriendsReference").value.trim(),note=$("armyFriendsNote").value.trim();
- if(!username){message("armyFriendsMessage","Escribe tu usuario de Choeaedol.");return;}
+ const username=$("armyFriendsChoeaedol").value.trim(),period=friendsPeriodInput.value,reference=$("armyFriendsReference").value.trim(),note=$("armyFriendsNote").value.trim();
+ if(!username){message("armyFriendsMessage","Escribe tu usuario de Choeaedol.");return;}if(!["first","second"].includes(period)){message("armyFriendsMessage","Selecciona si enviaste tus votos durante las primeras 12 horas o después.");return;}
  const save=$("armyFriendsSave");save.disabled=true;message("armyFriendsMessage","Guardando tu perfil…");
  try{
   const {data:profile,error:profileError}=await supabase.from("army_profiles").select("country_code").eq("user_id",currentUser.id).maybeSingle();
   if(profileError)throw profileError;
-  const payload={user_id:currentUser.id,display_name:currentUsername,country_code:profile?.country_code||null,choeaedol_username:username,reference_code:reference||null,note:note||null,looking_for_exchange:true,is_active:true,updated_at:new Date().toISOString()};
+  const payload={user_id:currentUser.id,display_name:currentUsername,country_code:profile?.country_code||null,choeaedol_username:username,choeaedol_period:period,reference_code:reference||null,note:note||null,looking_for_exchange:true,is_active:true,updated_at:new Date().toISOString()};
   const {error}=await supabase.from("choeaedol_friend_listings").upsert(payload,{onConflict:"user_id"});
   if(error)throw error;
   await loadArmyFriends();message("armyFriendsMessage","Tu perfil está publicado en Choeaedol Friends.","ok");
@@ -6018,6 +6018,13 @@ body.dark-mode #army .army-upload,body.dark-mode #army .army-daily-target,body.d
 body.dark-mode #army .army-map-locked{border-color:#51445d;background:linear-gradient(135deg,#352a40,#2b2433);color:#eee3f6}
 body.dark-mode #army .army-map-locked strong{color:#e4cff5}
 @media(max-width:560px){#army.army-panel{padding:13px;border-radius:17px}#army .army-auth,#army .army-dashboard{padding:13px;border-radius:15px}#army .army-profile-actions{width:100%;justify-content:flex-start}#army .army-profile-actions .btn{flex:1}#army .army-ig-cover{height:138px}#army .army-ig-avatar{width:98px;height:98px;top:-48px}#army .army-ig-avatar-row{height:58px}}
+</style>
+
+
+<style id="army-friends-profile-layout">
+#army .army-profile-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;max-width:680px}
+#army .army-profile-actions .btn{display:flex;align-items:center;justify-content:center;min-width:0;min-height:44px;width:100%;padding:10px 12px;text-align:center;white-space:normal;line-height:1.2}
+@media(max-width:560px){#army .army-profile-actions{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}#army .army-profile-actions .btn{flex:initial;padding:10px 8px;font-size:.76rem}}
 </style>
 
 </body>
