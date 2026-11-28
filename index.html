@@ -3560,7 +3560,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
   <div class="army-ig-cover" id="armyCoverFrame"><img id="armyCoverImage" alt="Encabezado del perfil" hidden></div>
   <div class="army-ig-avatar-row"><div class="army-ig-avatar"><span id="armyAvatarFallback">A</span><img id="armyAvatarImage" alt="Foto de perfil" hidden></div></div>
  </div>
- <div class="army-profile-head"><div class="army-profile-identity"><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p><p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p></div><div class="army-profile-actions"><button type="button" class="btn secondary" id="armyHomeToggle">Inicio</button><button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button><button type="button" class="btn secondary" id="armyHistoryToggle" aria-expanded="false">Historial</button><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button><button type="button" class="btn secondary army-friends-trigger" id="armyFriendsToggle" aria-expanded="false">Encontrar amigos para intercambiar ♥️</button></div></div>
+ <div class="army-profile-head"><div class="army-profile-identity"><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p><p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p></div><div class="army-profile-actions" role="group" aria-label="Navegación del perfil"><button type="button" class="btn secondary" id="armyHomeToggle">Inicio</button><button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button><button type="button" class="btn secondary" id="armyHistoryToggle" aria-expanded="false">Historial</button><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button><button type="button" class="btn secondary army-friends-trigger" id="armyFriendsToggle" aria-expanded="false">Encontrar amigos para intercambiar ♥️</button></div></div>
    <section class="army-friends-panel" id="armyFriendsPanel" hidden aria-labelledby="armyFriendsTitle"><div class="army-friends-heading"><div><h3 id="armyFriendsTitle">Choeaedol Friends</h3><p>Encuentra ARMY para coordinar intercambios de 3 votos.</p></div><button type="button" class="army-edit-close" id="armyFriendsClose" aria-label="Cerrar Choeaedol Friends" title="Cerrar">×</button></div><form id="armyFriendsForm" class="army-friends-form"><label for="armyFriendsChoeaedol">Usuario de Choeaedol</label><input id="armyFriendsChoeaedol" maxlength="40" required placeholder="Tu usuario en Choeaedol"><label for="armyFriendsPeriod">Selecciona en qué horario envías tus corazones ♥️</label><select id="armyFriendsPeriod" class="army-friends-search" required><option value="">Selecciona el horario</option><option value="first">Primeras 12 horas (00:00–11:59 KST)</option><option value="second">Después de las 12 horas (12:00–23:59 KST)</option></select><label for="armyFriendsReference">Código de referencia <span>(opcional)</span></label><input id="armyFriendsReference" maxlength="80" placeholder="Para quienes lo necesiten"><label for="armyFriendsNote">Nota <span>(opcional)</span></label><input id="armyFriendsNote" maxlength="220" placeholder="Ej. Disponible para intercambio diario"><div class="army-friends-form-actions"><button class="btn" type="submit" id="armyFriendsSave">Publicar mi perfil</button><button class="btn secondary" type="button" id="armyFriendsDeactivate" hidden>Dejar de aparecer</button></div><p class="army-message" id="armyFriendsMessage" role="status" aria-live="polite"></p></form><div class="army-friends-list-head"><strong>ARMY disponibles</strong><button type="button" class="btn secondary" id="armyFriendsRefresh">Actualizar</button></div><label class="army-friends-search-label" for="armyFriendsCountryFilter">Filtrar automáticamente por país</label><select id="armyFriendsCountryFilter" class="army-friends-search"><option value="">Todos los países</option></select><label class="army-friends-search-label" for="armyFriendsTimeFilter">Específica qué horario quieres recibir tus corazones ♥️</label><select id="armyFriendsTimeFilter" class="army-friends-search"><option value="">Todo el día</option><option value="first">Primeras 12 horas (00:00–11:59 KST)</option><option value="second">Después de las primeras 12 horas (12:00–23:59 KST)</option></select><div id="armyFriendsList" class="army-friends-list" aria-live="polite"><p class="army-muted">Abre esta sección para cargar la lista.</p></div><p class="army-friends-footnote">Los perfiles publicados indican disponibilidad para intercambiar; confirma directamente con cada persona que se completen los 3 votos.</p></section>
   <div class="army-block army-edit-profile">
    <form id="armyEditProfileForm" class="army-country-form" hidden>
@@ -6072,15 +6072,42 @@ body.dark-mode #army .army-history-panel .army-friends-heading p{color:#c5b6d0}
 })();
 </script>
 <style id="army-profile-home-button-polish">
-/* Cinco accesos compactos: cuatro en la primera fila y Amigos en una fila propia */
-#army .army-profile-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;width:100%;max-width:680px}
-#army .army-profile-actions .btn{display:flex;align-items:center;justify-content:center;min-width:0;min-height:38px;width:100%;padding:6px 3px;text-align:center;white-space:normal;line-height:1.12;border-radius:9px;font-size:.65rem;letter-spacing:-.025em;box-shadow:none}
-#army .army-profile-actions #armyFriendsToggle{grid-column:1/-1;grid-row:2;min-height:38px;font-size:.7rem}
+/* Barra de navegación deslizante para Mi perfil */
+#army .army-profile-actions{
+ display:flex!important;align-items:center;gap:7px;width:100%;max-width:100%;
+ overflow-x:auto;overflow-y:hidden;padding:3px 2px 9px;
+ scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+ scrollbar-width:none;overscroll-behavior-x:contain;
+}
+#army .army-profile-actions::-webkit-scrollbar{display:none}
+#army .army-profile-actions .btn{
+ display:inline-flex!important;align-items:center;justify-content:center;
+ flex:0 0 auto!important;width:auto!important;min-width:max-content;
+ min-height:34px!important;padding:7px 12px!important;
+ border-radius:999px!important;white-space:nowrap!important;
+ font-size:.72rem!important;line-height:1!important;letter-spacing:0!important;
+ scroll-snap-align:start;box-shadow:none;transition:background .18s,border-color .18s,color .18s;
+}
+#army .army-profile-actions .btn.is-selected{
+ background:#7048ad!important;border-color:#7048ad!important;color:#fff!important;
+}
+#army .army-profile-actions #armyFriendsToggle{min-height:34px!important;font-size:.72rem!important}
 @media(max-width:560px){
- #army .army-profile-actions{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
- #army .army-profile-actions .btn{min-height:38px;padding:5px 2px;font-size:.61rem;letter-spacing:-.035em}
- #army .army-profile-actions #armyFriendsToggle{grid-column:1/-1;grid-row:2;min-height:38px;font-size:.68rem}
+ #army .army-profile-actions{gap:6px;padding-bottom:8px}
+ #army .army-profile-actions .btn{min-height:32px!important;padding:6px 10px!important;font-size:.68rem!important}
+ #army .army-profile-actions #armyFriendsToggle{font-size:.68rem!important}
 }
 </style>
+<script id="army-profile-sliding-nav-state">
+(function(){
+ const nav=document.querySelector("#army .army-profile-actions");
+ if(!nav)return;
+ const buttons=[...nav.querySelectorAll("button")];
+ buttons.forEach(button=>button.addEventListener("click",()=>{
+  buttons.forEach(item=>item.classList.toggle("is-selected",item===button));
+  if(button===document.getElementById("armyHomeToggle"))nav.scrollTo({left:0,behavior:"smooth"});
+ }));
+})();
+</script>
 </body>
 </html>
