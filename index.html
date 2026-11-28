@@ -5568,13 +5568,13 @@ async function loadArmyFriends(){
    if(!profilesError&&profiles?.length){
     const avatarProfiles=profiles.filter(profile=>profile.avatar_path);
     if(avatarProfiles.length){
-     const pathToUser=new Map(avatarProfiles.map(profile=>[profile.avatar_path,profile.user_id]));
+     const userToPath=new Map(avatarProfiles.map(profile=>[profile.user_id,profile.avatar_path]));
      try{
       const {data:signedUrls,error:signedError}=await supabase.storage.from("army-profile-photos").createSignedUrls(avatarProfiles.map(profile=>profile.avatar_path),3600);
       if(!signedError&&signedUrls?.length){
        const avatarUrls=new Map();
        signedUrls.forEach(item=>{if(item?.path&&item?.signedUrl)avatarUrls.set(item.path,item.signedUrl);});
-       friendListings=friendListings.map(item=>({...item,avatar_url:avatarUrls.get(avatarProfiles.find(profile=>profile.user_id===item.user_id)?.avatar_path)||null}));
+       friendListings=friendListings.map(item=>({...item,avatar_url:avatarUrls.get(userToPath.get(item.user_id))||null}));
       }
      }catch(error){/* Los avatares son opcionales; la lista debe seguir disponible aunque Storage falle. */}
     }
