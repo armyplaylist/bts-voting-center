@@ -6236,5 +6236,55 @@ body.dark-mode #army .army-history-item{background:#2b2630!important;border-colo
 #army img.army-friend-avatar{display:block;width:44px;height:44px;flex:0 0 44px;object-fit:cover;object-position:center;border-radius:50%;background:#eee5f5;border:1px solid #e5dbea}
 body.dark-mode #army img.army-friend-avatar{background:#51405f;border-color:#685873}
 </style>
+
+<style id="army-friends-scroll-performance">
+/* Desplazamiento ligero en Choeaedol Friends; no cambia contenido ni funciones. */
+#army #armyFriendsPanel {
+  scroll-margin-top: 12px;
+  overscroll-behavior-y: auto;
+}
+#army #armyFriendsList {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  overflow-anchor: auto;
+  contain: layout style;
+}
+#army #armyFriendsList > .army-friend-card {
+  min-width: 0;
+  contain: layout paint style;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 76px;
+  -webkit-tap-highlight-color: transparent;
+}
+#army #armyFriendsList .army-friend-avatar {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+}
+#army #armyFriendsList .army-friend-main {
+  min-width: 0;
+}
+@media (max-width: 768px) and (pointer: coarse) {
+  #army #armyFriendsPanel,
+  #army #armyFriendsList,
+  #army #armyFriendsList .army-friend-card {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #army #armyFriendsPanel,
+  #army #armyFriendsList,
+  #army #armyFriendsList .army-friend-card {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+</style>
+
 </body>
 </html>
