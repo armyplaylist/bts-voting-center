@@ -6135,5 +6135,46 @@ body.dark-mode #army .army-history-item{background:#2b2630!important;border-colo
  sync();
 })();
 </script>
+
+<style id="bts-mobile-performance">
+/* Optimización de desplazamiento en móviles: conserva contenido y funciones. */
+@media (max-width: 768px) and (pointer: coarse) {
+  html { scroll-behavior: auto !important; }
+  nav, .panel, .hero, .vote-card, .birthday-card, .rank,
+  .clock-box, .upcoming-item, .rule-box {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  .bts-reveal,
+  .bts-reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .cards .vote-card { animation: none !important; }
+  .hero h1, .hero .era, .vote-logo-inline,
+  .vote-card .logo-aria, .vote-card .logo-mma,
+  .vote-card .logo-kca, .vote-card .logo-gda,
+  .vote-card .logo-mama, .vote-card .pill.live, .pill.live,
+  .mama-priority-notice {
+    animation: none !important;
+  }
+  .vote-card, .birthday-card, .rank, .clock-box,
+  .upcoming-item, .member, .btn, button, nav a,
+  .hero-share-x, .hero-share-copy {
+    transition: none !important;
+  }
+  .vote-card:hover, .birthday-card:hover, .rank:hover,
+  .clock-box:hover, .upcoming-item:hover, .member:hover,
+  .btn:hover, button:hover {
+    transform: none !important;
+    filter: none !important;
+  }
+  .panel, .vote-card, .birthday-card, .rank,
+  .clock-box, .upcoming-item {
+    box-shadow: 0 4px 12px rgba(40, 25, 55, .07) !important;
+  }
+}
+</style>
 </body>
 </html>
