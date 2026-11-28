@@ -3562,7 +3562,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
  </div>
  <div class="army-profile-head"><div class="army-profile-identity"><span class="army-eyebrow">PERFIL ARMY</span><h3 id="armyProfileName">—</h3><p id="armyMemberSince">Miembro de ARMY</p><p class="army-country-current" id="armyCountryCurrent">País sin seleccionar.</p></div><div class="army-profile-actions" role="group" aria-label="Navegación del perfil"><button type="button" class="btn secondary" id="armyHomeToggle">Inicio</button><button type="button" class="btn secondary" id="armyEditProfileToggle" aria-expanded="false">Editar perfil</button><button type="button" class="btn secondary" id="armyHistoryToggle" aria-expanded="false">Historial</button><button type="button" class="btn secondary" id="armyLogoutButton">Cerrar sesión</button><button type="button" class="btn secondary army-friends-trigger" id="armyFriendsToggle" aria-expanded="false">Encontrar amigos para intercambiar ♥️</button></div></div>
    <section class="army-friends-panel" id="armyFriendsPanel" hidden aria-labelledby="armyFriendsTitle"><div class="army-friends-heading"><div><h3 id="armyFriendsTitle">Choeaedol Friends</h3><p>Encuentra ARMY para coordinar intercambios de 3 votos.</p></div><button type="button" class="army-edit-close" id="armyFriendsClose" aria-label="Cerrar Choeaedol Friends" title="Cerrar">×</button></div><form id="armyFriendsForm" class="army-friends-form"><label for="armyFriendsChoeaedol">Usuario de Choeaedol</label><input id="armyFriendsChoeaedol" maxlength="40" required placeholder="Tu usuario en Choeaedol"><label for="armyFriendsPeriod">Selecciona en qué horario envías tus corazones ♥️</label><select id="armyFriendsPeriod" class="army-friends-search" required><option value="">Selecciona el horario</option><option value="first">Primeras 12 horas (00:00–11:59 KST)</option><option value="second">Después de las 12 horas (12:00–23:59 KST)</option></select><label for="armyFriendsReference">Código de referencia <span>(opcional)</span></label><input id="armyFriendsReference" maxlength="80" placeholder="Para quienes lo necesiten"><label for="armyFriendsNote">Nota <span>(opcional)</span></label><input id="armyFriendsNote" maxlength="220" placeholder="Ej. Disponible para intercambio diario"><div class="army-friends-form-actions"><button class="btn" type="submit" id="armyFriendsSave">Publicar mi perfil</button><button class="btn secondary" type="button" id="armyFriendsDeactivate" hidden>Dejar de aparecer</button></div><p class="army-message" id="armyFriendsMessage" role="status" aria-live="polite"></p></form><div class="army-friends-list-head"><strong>ARMY disponibles</strong><button type="button" class="btn secondary" id="armyFriendsRefresh">Actualizar</button></div><label class="army-friends-search-label" for="armyFriendsCountryFilter">Filtrar automáticamente por país</label><select id="armyFriendsCountryFilter" class="army-friends-search"><option value="">Todos los países</option></select><label class="army-friends-search-label" for="armyFriendsTimeFilter">Específica qué horario quieres recibir tus corazones ♥️</label><select id="armyFriendsTimeFilter" class="army-friends-search"><option value="">Todo el día</option><option value="first">Primeras 12 horas (00:00–11:59 KST)</option><option value="second">Después de las primeras 12 horas (12:00–23:59 KST)</option></select><div id="armyFriendsList" class="army-friends-list" aria-live="polite"><p class="army-muted">Abre esta sección para cargar la lista.</p></div><p class="army-friends-footnote">Los perfiles publicados indican disponibilidad para intercambiar; confirma directamente con cada persona que se completen los 3 votos.</p></section>
-  <div class="army-block army-edit-profile">
+  <div id="armyEditProfilePanel" class="army-block army-edit-profile" hidden>
    <form id="armyEditProfileForm" class="army-country-form" hidden>
     <button type="button" class="army-edit-close" id="armyEditProfileClose" aria-label="Cerrar edición de perfil" title="Cerrar">×</button>
     <label for="armyCountrySelect">País</label>
@@ -3581,7 +3581,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    </form>
   </div>
    <section class="army-history-panel" id="armyHistoryPanel" hidden aria-labelledby="armyHistoryTitle"><div class="army-friends-heading"><div><h3 id="armyHistoryTitle">Historial de votos</h3><p>Registros de certificados y actividad de los últimos 7 días, según el horario de Corea del Sur (KST).</p></div><button type="button" class="army-edit-close" id="armyHistoryClose" aria-label="Cerrar historial" title="Cerrar">×</button></div><div class="army-block army-history-section"><h4>Registro de certificados</h4><p>Se permite un registro por día; cada certificado solo puede utilizarse una vez.</p><div id="armyHistory" class="army-history"><p class="army-muted">Aún no hay registros.</p></div><h4 class="army-chart-title">Actividad de los últimos 7 días</h4><div id="armyWeeklyChart" class="army-weekly-chart" aria-label="Gráfica de corazones registrados en los últimos siete días"></div></div></section>
-   <div class="army-stats"><div><span>Votos para BTS registrados</span><strong id="armyBtsVotesStat">0</strong></div></div>
+   <div id="armyHomePanel">\n   <div class="army-stats"><div><span>Votos para BTS registrados</span><strong id="armyBtsVotesStat">0</strong></div></div>
   <div id="armyMemberVotes" class="army-member-votes" aria-live="polite"></div>
   <section class="army-block army-world-map" aria-labelledby="armyWorldMapTitle">
    <h3 id="armyWorldMapTitle">ARMYS VOTANTES</h3>
@@ -3607,6 +3607,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    </div>
    <div class="army-verify-status" id="armyVerifyStatus" role="status" aria-live="polite">Necesitas aprobar la revisión del certificado para abrir el registro diario.</div>
   </div>
+   </div>
    </div>
 </section>
 
@@ -5499,17 +5500,17 @@ async function renderArmyGlobe(ranking){
 }
 $("armyEditProfileToggle").addEventListener("click",()=>{
  const form=$("armyEditProfileForm"),open=form.hidden;
- if(open){friendsPanel.hidden=true;$("armyFriendsToggle").setAttribute("aria-expanded","false");$("armyHistoryPanel").hidden=true;$("armyHistoryToggle").setAttribute("aria-expanded","false");}
- form.hidden=!open;$("armyEditProfileToggle").setAttribute("aria-expanded",String(open));
+ if(open){friendsPanel.hidden=true;$("armyHomePanel").hidden=false;$("armyFriendsToggle").setAttribute("aria-expanded","false");$("armyHistoryPanel").hidden=true;$("armyHomePanel").hidden=false;$("armyHistoryToggle").setAttribute("aria-expanded","false");}
+ form.hidden=!open;$("armyEditProfilePanel").hidden=!open;$("armyHomePanel").hidden=open;$("armyEditProfileToggle").setAttribute("aria-expanded",String(open));
 });
 $("armyEditProfileClose").addEventListener("click",()=>{
- $("armyEditProfileForm").hidden=true;$("armyEditProfileToggle").setAttribute("aria-expanded","false");
+ $("armyEditProfileForm").hidden=true;$("armyEditProfilePanel").hidden=true;$("armyHomePanel").hidden=false;$("armyEditProfileToggle").setAttribute("aria-expanded","false");
 });
 $("armyHistoryToggle").addEventListener("click",()=>{
  const panel=$("armyHistoryPanel"),open=panel.hidden;
  $("armyEditProfileForm").hidden=true;$("armyEditProfileToggle").setAttribute("aria-expanded","false");
  friendsPanel.hidden=true;$("armyFriendsToggle").setAttribute("aria-expanded","false");
- panel.hidden=!open;$("armyHistoryToggle").setAttribute("aria-expanded",String(open));
+ panel.hidden=!open;$("armyHomePanel").hidden=open;$("armyEditProfilePanel").hidden=true;$("armyEditProfileForm").hidden=true;$("armyHistoryToggle").setAttribute("aria-expanded",String(open));
  if(open)panel.scrollIntoView({behavior:"smooth",block:"start"});
 });
 $("armyHistoryClose").addEventListener("click",()=>{
@@ -5559,7 +5560,7 @@ async function loadArmyFriends(){
 $("armyFriendsToggle").addEventListener("click",async()=>{
  const open=friendsPanel.hidden;
  if(open){$("armyEditProfileForm").hidden=true;$("armyEditProfileToggle").setAttribute("aria-expanded","false");$("armyHistoryPanel").hidden=true;$("armyHistoryToggle").setAttribute("aria-expanded","false");}
- friendsPanel.hidden=!open;$("armyFriendsToggle").setAttribute("aria-expanded",String(open));
+ friendsPanel.hidden=!open;$("armyHomePanel").hidden=open;$("armyEditProfilePanel").hidden=true;$("armyEditProfileForm").hidden=true;$("armyFriendsToggle").setAttribute("aria-expanded",String(open));
  if(open){try{await loadArmyFriends();message("armyFriendsMessage","");friendsPanel.scrollIntoView({behavior:"smooth",block:"start"});}catch(error){message("armyFriendsMessage",error.message||"No se pudo cargar Choeaedol Friends.");}}
 });
 $("armyFriendsClose").addEventListener("click",()=>{friendsPanel.hidden=true;$("armyFriendsToggle").setAttribute("aria-expanded","false");});
@@ -5716,7 +5717,19 @@ async function loadHistory(){
   const left=document.createElement("span");left.textContent=prettyKstDate(log.log_date)+(log.voter_name?" · @"+log.voter_name:"")+" · "+(log.target_member||"BTS");
   const right=document.createElement("strong");right.textContent=(log.voted_hearts||0).toLocaleString("es-MX")+" votos";
   row.append(left,right);
-  if(log.log_date===today&&log.voter_name){const resend=document.createElement("button");resend.type="button";resend.className="btn secondary army-resend-certificate";resend.textContent="Reenviar certificado";resend.addEventListener("click",()=>{resendLogId=log.id;resendVoterName=log.voter_name;approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;$("armyDailyBlock").hidden=true;$("armyCertificateHeading").textContent="1 · Reenvía tu certificado corregido";$("armySubmitDaily").textContent="Actualizar registro";message("armyVerifyStatus","Sube el certificado corregido de @"+resendVoterName+". Se actualizará únicamente este registro de tu cuenta.","ok");$("armyCertificate").value="";$("armyCertificate").closest(".army-upload").scrollIntoView({behavior:"smooth",block:"center"});});row.append(resend);}
+  const actions=document.createElement("div");actions.className="army-history-actions";
+  if(log.log_date===today&&log.voter_name){const resend=document.createElement("button");resend.type="button";resend.className="btn secondary army-resend-certificate";resend.textContent="Reenviar certificado";resend.addEventListener("click",()=>{resendLogId=log.id;resendVoterName=log.voter_name;approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;$("armyDailyBlock").hidden=true;$("armyCertificateHeading").textContent="1 · Reenvía tu certificado corregido";$("armySubmitDaily").textContent="Actualizar registro";message("armyVerifyStatus","Sube el certificado corregido de @"+resendVoterName+". Se actualizará únicamente este registro de tu cuenta.","ok");$("armyCertificate").value="";$("armyCertificate").closest(".army-upload").scrollIntoView({behavior:"smooth",block:"center"});});actions.append(resend);}
+  const remove=document.createElement("button");remove.type="button";remove.className="army-delete-certificate";remove.textContent="Eliminar certificado";remove.addEventListener("click",async()=>{
+   if(!window.confirm("¿Eliminar este certificado del historial? Esta acción no se puede deshacer y los totales se recalcularán sin este registro."))return;
+   remove.disabled=true;remove.textContent="Eliminando…";
+   try{
+    const {data:deleted,error}=await supabase.from("army_heart_daily_logs").delete().eq("id",log.id).eq("user_id",currentUser.id).select("id");
+    if(error)throw error;if(!deleted?.length)throw new Error("No se pudo eliminar el registro. Actualiza el historial e inténtalo de nuevo.");
+    if(log.log_date===today){approvedForToday=false;approvedCertificateHash=null;approvedCertificateDate=null;approvedVotedHearts=null;approvedVoterName=null;approvedTargetMember=null;resendLogId=null;resendVoterName=null;$("armyDailyBlock").hidden=true;$("armyCertificateHeading").textContent="Verifica tu certificado de Choeaedol";$("armySubmitDaily").textContent="Confirmar registro del certificado";$("armyCertificate").value="";message("armyVerifyStatus","El registro de hoy se eliminó. Puedes volver a verificar tu certificado.","ok");}
+    await loadHistory();
+    try{await loadCountryMap();}catch(mapError){console.warn("No se pudo actualizar el ranking tras eliminar el certificado:",mapError);}
+   }catch(error){remove.disabled=false;remove.textContent="Eliminar certificado";window.alert(error.message||"No se pudo eliminar el certificado.");}
+  });actions.append(remove);row.append(actions);
   $("armyHistory").append(row);
  }
  const chart=$("armyWeeklyChart");chart.innerHTML="";
@@ -6057,61 +6070,68 @@ body.dark-mode #army .army-history-panel .army-friends-heading p{color:#c5b6d0}
 
 <script id="army-home-button-navigation">
 (function(){
- const button=document.getElementById("armyHomeToggle");
- if(!button)return;
+ const button=document.getElementById("armyHomeToggle");if(!button)return;
  button.addEventListener("click",function(){
   document.getElementById("armyEditProfileForm").hidden=true;
+  document.getElementById("armyEditProfilePanel").hidden=true;
   document.getElementById("armyFriendsPanel").hidden=true;
   document.getElementById("armyHistoryPanel").hidden=true;
-  document.getElementById("armyEditProfileToggle").setAttribute("aria-expanded","false");
-  document.getElementById("armyFriendsToggle").setAttribute("aria-expanded","false");
-  document.getElementById("armyHistoryToggle").setAttribute("aria-expanded","false");
-  const profile=document.getElementById("army");
-  const profileHead=document.querySelector("#army .army-profile-head");
-  if(window.location.hash!=="#army")window.location.hash="army";
-  if(profileHead)profileHead.scrollIntoView({behavior:"smooth",block:"start"});
-  else if(profile)profile.scrollIntoView({behavior:"smooth",block:"start"});
-  const nav=document.querySelector("#army .army-profile-actions");
-  if(nav){nav.querySelectorAll("button").forEach(item=>item.classList.toggle("is-selected",item===button));nav.scrollTo({left:0,behavior:"smooth"});}
+  document.getElementById("armyHomePanel").hidden=false;
+  ["armyEditProfileToggle","armyFriendsToggle","armyHistoryToggle"].forEach(id=>document.getElementById(id).setAttribute("aria-expanded","false"));
+  const nav=document.querySelector("#army .army-profile-actions");if(nav)nav.scrollTo({left:0,behavior:"smooth"});
+  document.querySelector("#army .army-profile-head")?.scrollIntoView({behavior:"smooth",block:"start"});
  });
 })();
 </script>
 <style id="army-profile-home-button-polish">
-/* Barra de navegación deslizante para Mi perfil */
-#army .army-profile-actions{
- display:flex!important;align-items:center;gap:7px;width:100%;max-width:100%;
- overflow-x:auto;overflow-y:hidden;padding:3px 2px 9px;
- scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
- scrollbar-width:none;overscroll-behavior-x:contain;
-}
+#army .army-profile-actions{display:flex!important;align-items:center;gap:7px;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap!important;padding:4px 2px 9px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
 #army .army-profile-actions::-webkit-scrollbar{display:none}
-#army .army-profile-actions .btn{
- display:inline-flex!important;align-items:center;justify-content:center;
- flex:0 0 auto!important;width:auto!important;min-width:max-content;
- min-height:34px!important;padding:7px 12px!important;
- border-radius:999px!important;white-space:nowrap!important;
- font-size:.72rem!important;line-height:1!important;letter-spacing:0!important;
- scroll-snap-align:start;box-shadow:none;transition:background .18s,border-color .18s,color .18s;
-}
-#army .army-profile-actions .btn.is-selected{
- background:#7048ad!important;border-color:#7048ad!important;color:#fff!important;
-}
+#army .army-profile-actions .btn{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 auto!important;width:auto!important;min-width:max-content;min-height:34px!important;padding:7px 12px!important;border:1px solid #d9cbe7!important;border-radius:999px!important;background:#faf8fc!important;color:#59436e!important;-webkit-text-fill-color:#59436e!important;white-space:nowrap!important;font-size:.72rem!important;line-height:1!important;letter-spacing:0!important;scroll-snap-align:start;box-shadow:none!important}
+#army .army-profile-actions .btn.is-selected{background:#eee7f6!important;border-color:#8b69ae!important;color:#4a2d7a!important;-webkit-text-fill-color:#4a2d7a!important}
 #army .army-profile-actions #armyFriendsToggle{min-height:34px!important;font-size:.72rem!important}
-@media(max-width:560px){
- #army .army-profile-actions{gap:6px;padding-bottom:8px}
- #army .army-profile-actions .btn{min-height:32px!important;padding:6px 10px!important;font-size:.68rem!important}
- #army .army-profile-actions #armyFriendsToggle{font-size:.68rem!important}
-}
+#army #armyHomePanel[hidden],#army #armyEditProfilePanel[hidden],#army #armyFriendsPanel[hidden],#army #armyHistoryPanel[hidden]{display:none!important}
+#army .army-friends-panel{background:#fbf8fd;color:#4a3c53;border-color:#e3d7ed}
+#army .army-friends-heading h3,#army .army-friends-list-head{color:#4a2d7a}
+#army .army-friends-heading p,#army .army-friends-search-label,#army .army-friends-footnote{color:#756b7b}
+#army .army-friends-form>label{color:#584767}
+#army .army-friends-form>label span{color:#887b90}
+#army .army-friends-form input,#army .army-friends-search{background:#fff;color:#302536;border-color:#d9cbe7}
+#army .army-friend-card{background:#fff;border-color:#e4dbea}
+#army .army-friend-avatar{background:#eee5f5;color:#61427f}
+#army .army-friend-main strong{color:#4a2d7a}
+#army .army-friend-main small,#army .army-friend-reference{color:#796b86}
+#army .army-friend-copy{background:#f5effa;color:#5b3b7d;border-color:#d9cbe7}
+#army .army-history-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#army .army-delete-certificate{min-height:32px;padding:6px 10px;border:1px solid #d9aab2;border-radius:8px;background:#fff5f6;color:#963f51;font:inherit;font-size:.7rem;font-weight:800;cursor:pointer}
+#army .army-delete-certificate:disabled{opacity:.55;cursor:wait}
+body.dark-mode #army .army-profile-actions .btn{background:#29232f!important;border-color:#5b4b65!important;color:#eee5f5!important;-webkit-text-fill-color:#eee5f5!important}
+body.dark-mode #army .army-profile-actions .btn.is-selected{background:#40334b!important;border-color:#b99ad5!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+body.dark-mode #army .army-friends-panel{background:#28232e!important;border-color:#5a4b64!important;color:#eee7f3!important}
+body.dark-mode #army .army-friends-heading{border-color:#51445d}
+body.dark-mode #army .army-friends-heading h3,body.dark-mode #army .army-friends-list-head{color:#eadcf6!important}
+body.dark-mode #army .army-friends-heading p,body.dark-mode #army .army-friends-search-label,body.dark-mode #army .army-friends-footnote{color:#cbbfd3!important}
+body.dark-mode #army .army-friends-form{border-color:#51445d}
+body.dark-mode #army .army-friends-form>label{color:#e4d9eb!important}
+body.dark-mode #army .army-friends-form>label span{color:#c2b4cb!important}
+body.dark-mode #army .army-friends-form input,body.dark-mode #army .army-friends-search{background:#1f1b25!important;color:#fff!important;border-color:#685873!important;color-scheme:dark}
+body.dark-mode #army .army-friend-card{background:#302a38!important;border-color:#594b64!important}
+body.dark-mode #army .army-friend-avatar{background:#51405f!important;color:#f3e9fc!important}
+body.dark-mode #army .army-friend-main strong{color:#f0e5fb!important}
+body.dark-mode #army .army-friend-main small,body.dark-mode #army .army-friend-reference{color:#d0c1dc!important}
+body.dark-mode #army .army-friend-copy{background:#493858!important;color:#fff!important;border-color:#806696!important}
+body.dark-mode #army .army-friend-copy:hover{background:#59436b!important}
+body.dark-mode #army .army-delete-certificate{background:#482c35!important;border-color:#a96878!important;color:#ffe4e9!important}
+body.dark-mode #army .army-history-item{background:#2b2630!important;border-color:#4b4054!important}
+@media(max-width:560px){#army .army-profile-actions{gap:6px;padding-bottom:8px}#army .army-profile-actions .btn{min-height:32px!important;padding:6px 10px!important;font-size:.68rem!important}#army .army-profile-actions #armyFriendsToggle{font-size:.68rem!important}}
 </style>
 <script id="army-profile-sliding-nav-state">
 (function(){
- const nav=document.querySelector("#army .army-profile-actions");
- if(!nav)return;
+ const nav=document.querySelector("#army .army-profile-actions");if(!nav)return;
  const buttons=[...nav.querySelectorAll("button")];
- buttons.forEach(button=>button.addEventListener("click",()=>{
-  buttons.forEach(item=>item.classList.toggle("is-selected",item===button));
-  if(button===document.getElementById("armyHomeToggle"))nav.scrollTo({left:0,behavior:"smooth"});
- }));
+ const sync=()=>{const active=buttons.find(button=>button.getAttribute("aria-expanded")==="true")||document.getElementById("armyHomeToggle");buttons.forEach(button=>{const selected=button===active;button.classList.toggle("is-selected",selected);if(button.id!=="armyLogoutButton")button.setAttribute("aria-pressed",String(selected));});};
+ buttons.forEach(button=>button.addEventListener("click",()=>{requestAnimationFrame(sync);}));
+ ["armyFriendsClose","armyHistoryClose","armyEditProfileClose"].forEach(id=>document.getElementById(id)?.addEventListener("click",()=>requestAnimationFrame(sync)));
+ sync();
 })();
 </script>
 </body>
