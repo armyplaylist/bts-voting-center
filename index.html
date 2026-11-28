@@ -3581,7 +3581,8 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
    </form>
   </div>
    <section class="army-history-panel" id="armyHistoryPanel" hidden aria-labelledby="armyHistoryTitle"><div class="army-friends-heading"><div><h3 id="armyHistoryTitle">Historial de votos</h3><p>Registros de certificados y actividad de los últimos 7 días, según el horario de Corea del Sur (KST).</p></div><button type="button" class="army-edit-close" id="armyHistoryClose" aria-label="Cerrar historial" title="Cerrar">×</button></div><div class="army-block army-history-section"><h4>Registro de certificados</h4><p>Se permite un registro por día; cada certificado solo puede utilizarse una vez.</p><div id="armyHistory" class="army-history"><p class="army-muted">Aún no hay registros.</p></div><h4 class="army-chart-title">Actividad de los últimos 7 días</h4><div id="armyWeeklyChart" class="army-weekly-chart" aria-label="Gráfica de corazones registrados en los últimos siete días"></div></div></section>
-   <div id="armyHomePanel">\n   <div class="army-stats"><div><span>Votos para BTS registrados</span><strong id="armyBtsVotesStat">0</strong></div></div>
+   <div id="armyHomePanel">
+   <div class="army-stats"><div><span>Votos para BTS registrados</span><strong id="armyBtsVotesStat">0</strong></div></div>
   <div id="armyMemberVotes" class="army-member-votes" aria-live="polite"></div>
   <section class="army-block army-world-map" aria-labelledby="armyWorldMapTitle">
    <h3 id="armyWorldMapTitle">ARMYS VOTANTES</h3>
@@ -5500,7 +5501,7 @@ async function renderArmyGlobe(ranking){
 }
 $("armyEditProfileToggle").addEventListener("click",()=>{
  const form=$("armyEditProfileForm"),open=form.hidden;
- if(open){friendsPanel.hidden=true;$("armyHomePanel").hidden=false;$("armyFriendsToggle").setAttribute("aria-expanded","false");$("armyHistoryPanel").hidden=true;$("armyHomePanel").hidden=false;$("armyHistoryToggle").setAttribute("aria-expanded","false");}
+ if(open){friendsPanel.hidden=true;$("armyFriendsToggle").setAttribute("aria-expanded","false");$("armyHistoryPanel").hidden=true;$("armyHistoryToggle").setAttribute("aria-expanded","false");}
  form.hidden=!open;$("armyEditProfilePanel").hidden=!open;$("armyHomePanel").hidden=open;$("armyEditProfileToggle").setAttribute("aria-expanded",String(open));
 });
 $("armyEditProfileClose").addEventListener("click",()=>{
@@ -5514,7 +5515,7 @@ $("armyHistoryToggle").addEventListener("click",()=>{
  if(open)panel.scrollIntoView({behavior:"smooth",block:"start"});
 });
 $("armyHistoryClose").addEventListener("click",()=>{
- $("armyHistoryPanel").hidden=true;$("armyHistoryToggle").setAttribute("aria-expanded","false");
+ $("armyHistoryPanel").hidden=true;$("armyHomePanel").hidden=false;$("armyHistoryToggle").setAttribute("aria-expanded","false");
 });
 const friendsPanel=$("armyFriendsPanel"),friendsForm=$("armyFriendsForm");
 const friendsCountryFilter=$("armyFriendsCountryFilter"),friendsTimeFilter=$("armyFriendsTimeFilter"),friendsPeriodInput=$("armyFriendsPeriod");
@@ -5563,7 +5564,7 @@ $("armyFriendsToggle").addEventListener("click",async()=>{
  friendsPanel.hidden=!open;$("armyHomePanel").hidden=open;$("armyEditProfilePanel").hidden=true;$("armyEditProfileForm").hidden=true;$("armyFriendsToggle").setAttribute("aria-expanded",String(open));
  if(open){try{await loadArmyFriends();message("armyFriendsMessage","");friendsPanel.scrollIntoView({behavior:"smooth",block:"start"});}catch(error){message("armyFriendsMessage",error.message||"No se pudo cargar Choeaedol Friends.");}}
 });
-$("armyFriendsClose").addEventListener("click",()=>{friendsPanel.hidden=true;$("armyFriendsToggle").setAttribute("aria-expanded","false");});
+$("armyFriendsClose").addEventListener("click",()=>{friendsPanel.hidden=true;$("armyHomePanel").hidden=false;$("armyFriendsToggle").setAttribute("aria-expanded","false");});
 $("armyFriendsRefresh").addEventListener("click",async()=>{try{await loadArmyFriends();message("armyFriendsMessage","Lista actualizada.","ok");}catch(error){message("armyFriendsMessage",error.message||"No se pudo actualizar la lista.");}});
 
 friendsCountryFilter.addEventListener("change",renderArmyFriends);
