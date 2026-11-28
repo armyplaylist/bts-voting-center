@@ -5529,7 +5529,7 @@ function choeaedolDayPart(timestamp){if(!timestamp)return "other";const date=new
 function renderArmyFriends(){
  const list=$("armyFriendsList"),fragment=document.createDocumentFragment();
  const selectedCountry=friendsCountryFilter.value,selectedTime=friendsTimeFilter.value;
- const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&(!selectedTime||(item.choeaedol_period===selectedTime&&choeaedolDayPart(item.updated_at||item.created_at)!=="other")));
+ const filtered=friendListings.filter(item=>(!selectedCountry||item.country_code===selectedCountry)&&(!selectedTime||item.choeaedol_period===selectedTime));
  if(!filtered.length){const empty=document.createElement("p");empty.className="army-muted";empty.textContent="Todavía no hay perfiles publicados. Puedes ser la primera persona en aparecer.";list.replaceChildren(empty);return;}
  for(const item of filtered){
   const card=document.createElement("article");card.className="army-friend-card";
@@ -5567,18 +5567,19 @@ async function loadArmyFriends(){
    const userIds=[...new Set(friendListings.map(item=>item.user_id).filter(Boolean))];
    const {data:profiles,error:profilesError}=await supabase.from("army_public_avatars").select("user_id,avatar_path").in("user_id",userIds);
    if(!profilesError&&profiles?.length){
-    const avatarProfiles=profiles.filter(profile=>profile.avatar_path);
-    if(avatarProfiles.length){
-     const userToPath=new Map(avatarProfiles.map(profile=>[profile.user_id,profile.avatar_path]));
+    const userToPath=new Map(profiles.filter(profile=>profile.user_id&&profile.avatar_path).map(profile=>[profile.user_id,profile.avatar_path]));
+    const avatarEntries=await Promise.all(friendListings.map(async item=>{
+     const path=userToPath.get(item.user_id);
+     if(!path)return [item.user_id,null];
      try{
-      const {data:signedUrls,error:signedError}=await supabase.storage.from("army-profile-photos").createSignedUrls(avatarProfiles.map(profile=>profile.avatar_path),3600);
-      if(!signedError&&signedUrls?.length){
-       const avatarUrls=new Map();
-       signedUrls.forEach((item,index)=>{const path=avatarProfiles[index]?.avatar_path;if(path&&item?.signedUrl&&!item?.error)avatarUrls.set(path,item.signedUrl);});
-       friendListings=friendListings.map(item=>({...item,avatar_url:avatarUrls.get(userToPath.get(item.user_id))||null}));
-      }
-     }catch(error){/* Los avatares son opcionales; la lista debe seguir disponible aunque Storage falle. */}
-    }
+      const {data,error}=await supabase.storage.from("army-profile-photos").createSignedUrl(path,3600);
+      return [item.user_id,!error&&data?.signedUrl?data.signedUrl:null];
+     }catch(error){return [item.user_id,null];}
+    }));
+    const avatarUrls=new Map(avatarEntries);
+    friendListings=friendListings.map(item=>({...item,avatar_url:avatarUrls.get(item.user_id)||null}));
+   }else{
+    friendListings=friendListings.map(item=>({...item,avatar_url:null}));
    }
   }
   myFriendListing=mine||null;
