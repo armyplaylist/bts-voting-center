@@ -3626,7 +3626,7 @@ body.army-profile-view #army.army-panel{margin:24px auto 48px;max-width:980px;mi
   </div>
   <form id="cfListingForm" class="cf-form" hidden>
    <div class="cf-form-title"><strong>Tu publicación</strong><span>Tu país y nombre ARMY se toman de tu perfil actual.</span></div>
-   <label>Usuario de Choeaedol<input id="cfChoeaedolUsername" maxlength="50" required placeholder="Tu usuario en Choeaedol"></label>
+   <label>Usuario de Choeaedol<input id="cfChoeaedolUsername" maxlength="40" required placeholder="Tu usuario en Choeaedol"></label>
    <label>Referencia para nuevos registros <span class="cf-optional">(opcional)</span><input id="cfReferenceCode" maxlength="80" placeholder="Código de referencia de amigo"></label>
    <label>Captura de tu perfil <span class="cf-optional">(opcional)</span><input id="cfPhoto" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG o WEBP · máximo 5 MB</small></label>
    <label>Presentación breve <span class="cf-optional">(opcional)</span><textarea id="cfNote" maxlength="220" rows="2" placeholder="Ej. Estoy buscando amistades para intercambiar los 3 votos diarios."></textarea></label>
@@ -5439,6 +5439,7 @@ body.dark-mode .army-intro,body.dark-mode .army-auth,body.dark-mode .army-dashbo
 .cf-open-btn{border-radius:999px!important;white-space:nowrap}
 .cf-open-btn span{font-size:1rem;margin-right:3px}
 .cf-modal[hidden],.cf-form[hidden]{display:none!important}
+body.cf-modal-open{overflow:hidden}
 .cf-modal{position:fixed;inset:0;z-index:10050;display:grid;place-items:center;padding:16px}
 .cf-backdrop{position:absolute;inset:0;background:rgba(20,13,29,.64);backdrop-filter:blur(5px)}
 .cf-dialog{position:relative;z-index:1;width:min(680px,100%);max-height:min(88vh,900px);overflow:auto;padding:clamp(16px,3vw,25px);border:1px solid #e7deef;border-radius:22px;background:#fff;color:#342842;box-shadow:0 24px 80px #120b1e55}
