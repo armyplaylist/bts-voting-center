@@ -5530,7 +5530,11 @@ function renderArmyFriends(){
  if(!filtered.length){const empty=document.createElement("p");empty.className="army-muted";empty.textContent="Todavía no hay perfiles publicados. Puedes ser la primera persona en aparecer.";list.append(empty);return;}
  for(const item of filtered){
   const card=document.createElement("article");card.className="army-friend-card";
-  const avatar=document.createElement("span");avatar.className="army-friend-avatar";avatar.textContent=(item.display_name||item.choeaedol_username||"A").trim().charAt(0).toUpperCase();
+  let avatar=null;
+  if(item.avatar_url){
+   avatar=document.createElement("img");avatar.className="army-friend-avatar";avatar.src=item.avatar_url;avatar.alt="Foto de perfil de "+(item.display_name||"ARMY");avatar.loading="lazy";avatar.decoding="async";
+   avatar.addEventListener("error",()=>avatar.remove(),{once:true});
+  }
   const main=document.createElement("div");main.className="army-friend-main";
   const name=document.createElement("strong");name.textContent=(item.country_code?armyFlag(item.country_code)+" ":"")+"@"+(item.display_name||"ARMY");
   const detail=document.createElement("small");detail.textContent="Choeaedol: @"+item.choeaedol_username+" · "+(item.choeaedol_period==="first"?"Primeras 12 horas":item.choeaedol_period==="second"?"Después de las 12 horas":"Horario sin indicar")+(item.note?" · "+item.note:"");
@@ -5550,7 +5554,22 @@ async function loadArmyFriends(){
   supabase.from("choeaedol_friend_listings").select("id,display_name,country_code,choeaedol_username,choeaedol_period,reference_code,note,is_active").eq("user_id",currentUser.id).maybeSingle()
  ]);
  if(listError)throw listError;if(mineError)throw mineError;
- friendListings=rows||[];myFriendListing=mine||null;
+ friendListings=rows||[];
+ if(friendListings.length){
+  const userIds=[...new Set(friendListings.map(item=>item.user_id).filter(Boolean))];
+  const {data:profiles,error:profilesError}=await supabase.from("army_profiles").select("user_id,avatar_path").in("user_id",userIds);
+  if(!profilesError&&profiles?.length){
+   const avatarEntries=await Promise.all(profiles.filter(profile=>profile.avatar_path).map(async profile=>{
+    try{
+     const {data,error}=await supabase.storage.from("army-profile-photos").createSignedUrl(profile.avatar_path,3600);
+     return !error&&data?.signedUrl?[profile.user_id,data.signedUrl]:null;
+    }catch(error){return null;}
+   }));
+   const avatarUrls=new Map(avatarEntries.filter(Boolean));
+   friendListings=friendListings.map(item=>({...item,avatar_url:avatarUrls.get(item.user_id)||null}));
+  }
+ }
+ myFriendListing=mine||null;
  $("armyFriendsChoeaedol").value=myFriendListing?.choeaedol_username||"";
  $("armyFriendsReference").value=myFriendListing?.reference_code||"";
  $("armyFriendsNote").value=myFriendListing?.note||"";friendsPeriodInput.value=myFriendListing?.choeaedol_period||"";
@@ -6175,6 +6194,12 @@ body.dark-mode #army .army-history-item{background:#2b2630!important;border-colo
     box-shadow: 0 4px 12px rgba(40, 25, 55, .07) !important;
   }
 }
+</style>
+
+<style id="army-friend-profile-photos">
+/* Mostrar la foto real del perfil; si no existe, no crear un recuadro vacío. */
+#army img.army-friend-avatar{display:block;width:44px;height:44px;flex:0 0 44px;object-fit:cover;object-position:center;border-radius:50%;background:#eee5f5;border:1px solid #e5dbea}
+body.dark-mode #army img.army-friend-avatar{background:#51405f;border-color:#685873}
 </style>
 </body>
 </html>
