@@ -6066,8 +6066,13 @@ body.dark-mode #army .army-history-panel .army-friends-heading p{color:#c5b6d0}
   document.getElementById("armyEditProfileToggle").setAttribute("aria-expanded","false");
   document.getElementById("armyFriendsToggle").setAttribute("aria-expanded","false");
   document.getElementById("armyHistoryToggle").setAttribute("aria-expanded","false");
-  window.location.hash="top";
-  window.scrollTo({top:0,behavior:"smooth"});
+  const profile=document.getElementById("army");
+  const profileHead=document.querySelector("#army .army-profile-head");
+  if(window.location.hash!=="#army")window.location.hash="army";
+  if(profileHead)profileHead.scrollIntoView({behavior:"smooth",block:"start"});
+  else if(profile)profile.scrollIntoView({behavior:"smooth",block:"start"});
+  const nav=document.querySelector("#army .army-profile-actions");
+  if(nav){nav.querySelectorAll("button").forEach(item=>item.classList.toggle("is-selected",item===button));nav.scrollTo({left:0,behavior:"smooth"});}
  });
 })();
 </script>
